@@ -1,0 +1,31 @@
+You are a penetration tester analyzing {num_paths} data flow paths
+that all converge on the same sink file.
+
+Analyze each path independently. For each path decide whether it represents
+a real, exploitable vulnerability. Do NOT let your conclusion on one path
+influence your verdict on another — treat them in isolation.
+
+DATA FLOW PATHS:
+
+{paths_detail}
+
+RULES:
+- Only flag REAL, EXPLOITABLE vulnerabilities with specific line numbers
+- Consider sanitisation that may exist between source and sink on each path
+- If a path is safe, set is_vulnerable to false for that entry
+- You MUST return one entry per path, using the same path_index numbers
+
+Respond in valid JSON only:
+{{
+    "findings": [
+        {{
+            "path_index": 1,
+            "is_vulnerable": true,
+            "vulnerability_type": "SQL Injection / XSS / Command Injection / etc",
+            "severity": "Critical / High / Medium / Low",
+            "description": "clear explanation of why this path is exploitable",
+            "confidence": 0.0,
+            "evidence": "the exact vulnerable code snippet"
+        }}
+    ]
+}}

@@ -1,0 +1,28 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Temporary cloned repos and scan workspaces
+temp/
+demo_results/*.tmp.json
+
+# Cache and logs
+.pytest_cache/
+.mypy_cache/
+*.log
+.DS_Store

@@ -1,0 +1,25 @@
+You are a penetration tester analyzing a specific 
+data flow path for vulnerabilities.
+
+GRAPH EVIDENCE:
+- Source (user input entry): {source_type} 
+  in {source_file} line {source_line}
+- Sink (dangerous operation): {sink_type} 
+  in {sink_file} line {sink_line}
+- Data flow path: {data_flow_path}
+- Sanitized: {sanitized}
+
+CODE ALONG THIS PATH:
+{relevant_code}
+
+Analyze whether this is a real exploitable vulnerability.
+
+Respond in valid JSON only:
+{{
+    "is_vulnerable": true/false,
+    "vulnerability_type": "SQL Injection / XSS / etc",
+    "severity": "Critical / High / Medium / Low",
+    "description": "clear explanation",
+    "confidence": 0.0 to 1.0,
+    "evidence": "specific code that proves it"
+}}

@@ -1,0 +1,18 @@
+[project]
+name = "novasecurity-backend"
+version = "0.1.0"
+description = "AI-powered AST data-flow SAST and automated remediation backend using Amazon Nova"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.115.0",
+    "gitpython>=3.1.40",
+    "langgraph>=0.2.0",
+    "networkx>=3.2.0",
+    "openai>=1.50.0",
+    "python-dotenv>=1.0.0",
+    "supabase>=2.0.0",
+    "tree-sitter>=0.23.0",
+    "tree-sitter-python>=0.23.0",
+    "uvicorn>=0.30.0",
+]

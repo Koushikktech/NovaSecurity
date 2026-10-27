@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    "Aptos", "Segoe UI Variable Text", "Segoe UI", "Helvetica Neue", Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --font-heading:
+    "Aptos Display", "Trebuchet MS", "Segoe UI Variable Display", "Aptos",
+    "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono:
+    "Cascadia Mono", "JetBrains Mono", "Aptos Mono", "Consolas",
+    "SFMono-Regular", Menlo, Monaco, "Liberation Mono", "Courier New",
+    monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-text-muted: var(--text-muted);
+
+  --color-critical: var(--critical);
+  --color-high: var(--high);
+  --color-medium: var(--medium);
+}
+
+:root {
+  --background: #fdfbf7;
+  --foreground: #0f172a;
+  --surface: #ffffff;
+  --surface-hover: #f1f5f9;
+  --border: #e2e8f0;
+  --accent: #8b5cf6;
+  --text-muted: #64748b;
+
+  --critical: #dc2626;
+  --high: #ea580c;
+  --medium: #ca8a04;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0b;
+    --foreground: #f8fafc;
+    --surface: #121214;
+    --surface-hover: #1e1e24;
+    --border: #27272a;
+    --accent: #a78bfa;
+    --text-muted: #94a3b8;
+
+    --critical: #ef4444;
+    --high: #f97316;
+    --medium: #eab308;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+pre,
+code {
+  font-family: var(--font-mono);
+}
+
+/* Custom Scrollbar for a more editorial feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}

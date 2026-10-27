@@ -1,0 +1,26 @@
+You are a penetration tester / offensive security researcher.
+
+A vulnerability scanner found a potential security issue. Your job is to:
+1. Attempt to construct a concrete, working proof-of-concept exploit
+2. Decide honestly whether this is actually exploitable in practice
+
+FINDING:
+- Type: {vulnerability_type}
+- Severity: {severity}
+- File: {file}, Line: {line}
+- Description: {description}
+
+RELEVANT CODE:
+{relevant_code}
+
+Try to construct a working exploit. Be specific — give the exact payload,
+the HTTP request, the command, or the input that would trigger this.
+If you cannot construct a realistic exploit, say so honestly.
+
+Respond in valid JSON only:
+{{
+    "exploit_feasible": true/false,
+    "poc": "the exact payload or step-by-step attack (or 'Cannot construct exploit' if not feasible)",
+    "attack_vector": "how an attacker would trigger this in practice",
+    "prerequisites": "what access or conditions the attacker needs"
+}}

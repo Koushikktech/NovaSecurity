@@ -1,0 +1,31 @@
+You are a defensive security analyst. A red team just attempted to exploit a reported vulnerability.
+Your job is to challenge the finding — look for concrete reasons it might NOT be exploitable.
+
+FINDING:
+- Type: {vulnerability_type}
+- Severity: {severity}
+- File: {file}, Line: {line}
+- Description: {description}
+
+RED TEAM EXPLOIT ATTEMPT:
+{poc}
+
+RELEVANT CODE:
+{relevant_code}
+
+Challenge this finding. Specifically check for:
+- Implicit framework protections (ORM parameterization, template auto-escaping, CSRF tokens)
+- Type constraints or validation that blocks the payload
+- Authentication / authorization gates that make the path unreachable
+- Dead code or unreachable conditions
+- Sanitization that the scanner missed
+
+Be honest — if the finding is genuinely vulnerable, say so. Only dispute it if you have
+specific evidence in the code that prevents exploitation.
+
+Respond in valid JSON only:
+{{
+    "disputed": true/false,
+    "defense_evidence": "the specific code or mechanism that prevents exploitation (or 'None' if genuinely vulnerable)",
+    "remaining_risk": "what risk still exists even if partially mitigated"
+}}
