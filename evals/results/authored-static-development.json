@@ -1,0 +1,2607 @@
+{
+  "corpus_hash": "b9d4be93d28266423cf3fd3ce11b0283a8d95a90976b39fc382811d8a46c7f33",
+  "variant": "static",
+  "split": "development",
+  "quality_metrics": "not_computed_without_adjudication",
+  "results": [
+    {
+      "case_id": "mutable-default-bug",
+      "variant": "static",
+      "elapsed_seconds": 0.2388427919941023,
+      "run": {
+        "id": "eac9306c-3c1d-47b8-8174-bf628f10e543",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-ei92v1_l",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "1c51873aab20396fadbf6e2dd2608d945dd87b98",
+        "head_sha": "45bceda5673e227a66e6b01cc19d768ee2e19448",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "skipped",
+          "challenge": "skipped",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 1,
+          "security": 0,
+          "bug": 1,
+          "style": 0
+        },
+        "coverage": {
+          "run_config": {
+            "version": "3",
+            "strategy": "verified",
+            "model": null,
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 8,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-ei92v1_l",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-ei92v1_l",
+            "comparison": "exact base to head",
+            "base_sha": "1c51873aab20396fadbf6e2dd2608d945dd87b98",
+            "head_sha": "45bceda5673e227a66e6b01cc19d768ee2e19448",
+            "revision_label": "45bceda5673e227a66e6b01cc19d768ee2e19448"
+          },
+          "snapshot_digest": "7ee8c16e6f4b0e6148297025ff403bb072c206876437c84d5ad86eaa69a86889",
+          "total_files": 1,
+          "source_files": [
+            "src/module.py"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "project_review": {
+            "depth": "quick",
+            "reviewed_files": [],
+            "omitted_files": [
+              "src/module.py"
+            ],
+            "reason": "Model analysis explicitly skipped"
+          },
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 1,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 1,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "skipped",
+            "reason": "No JavaScript/TypeScript files"
+          },
+          "test_gaps": [
+            {
+              "path": "src/module.py",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in src/module.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [
+            "src/module.py"
+          ],
+          "diff": "diff --git a/src/module.py b/src/module.py\n--- a/src/module.py\n+++ b/src/module.py\n@@ -1,4 +1,3 @@\n-def collect(item, items=None):\n-    items = [] if items is None else items\n+def collect(item, items=[]):\n     items.append(item)\n     return items\n",
+          "language_index": {},
+          "python_index_errors": {},
+          "graph_nodes": 1,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.py"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "e45e218d4837f66f5191220ed17b63cf0e51b253f48c4f4434373c208f7620c9",
+            "files": [
+              "src/module.py"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.py:1:collect",
+                "name": "collect",
+                "path": "src/module.py",
+                "start": 1,
+                "end": 3
+              }
+            ],
+            "changed_symbols": [
+              {
+                "id": "src/module.py:1:collect",
+                "name": "collect",
+                "path": "src/module.py",
+                "start": 1,
+                "end": 3
+              }
+            ],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "model_review_error": null,
+          "review_summary": "Static review requested; contextual model analysis was skipped",
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T09:14:51.503120+00:00",
+        "completed_at": "2026-11-01T09:14:51.741870+00:00"
+      },
+      "findings": [
+        {
+          "id": "fd972699-ee86-49bf-bce4-1c3825fc95d4",
+          "run_id": "eac9306c-3c1d-47b8-8174-bf628f10e543",
+          "stable_fingerprint": "4d1793cc73a08b0c25a65db6",
+          "category": "bug",
+          "rule_id": "ruff:B006",
+          "cwe_id": null,
+          "title": "B006: Do not use mutable data structures for argument defaults",
+          "explanation": "Do not use mutable data structures for argument defaults",
+          "user_impact": "Style/lint conformance issue or non-security bug detected by static rule.",
+          "severity": "medium",
+          "primary_location": {
+            "path": "src/module.py",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": "45bceda5673e227a66e6b01cc19d768ee2e19448",
+            "snippet": null
+          },
+          "related_locations": [],
+          "change_relation": "introduced",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "b1896b41-bf51-4465-9877-079ed2758834",
+              "kind": "static_analysis",
+              "tool_or_profile": "ruff",
+              "input_revision": "45bceda5673e227a66e6b01cc19d768ee2e19448",
+              "command": [
+                "/Users/koushikk/Documents/Hackathons/Neural Strom/.venv/bin/ruff",
+                "check",
+                "--output-format=json",
+                "--isolated",
+                "--select",
+                "E,F,B",
+                "."
+              ],
+              "exit_code": 1,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "Do not use mutable data structures for argument defaults",
+              "duration_ms": 0,
+              "created_at": "2026-11-01T09:14:51.566335+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "ruff"
+          ],
+          "assumptions": [],
+          "limitations": [],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "unassessed",
+          "verification_assessment": {},
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Replace with `None`; initialize within function"
+        }
+      ]
+    },
+    {
+      "case_id": "mutable-default-clean",
+      "variant": "static",
+      "elapsed_seconds": 0.22967741599859437,
+      "run": {
+        "id": "22afbb89-3015-459a-b270-54991d859eb7",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-y7khy_0n",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "1c51873aab20396fadbf6e2dd2608d945dd87b98",
+        "head_sha": "e889d1849e32e7734760b65c2c791c25afba77c8",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "skipped",
+          "challenge": "skipped",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 0,
+          "security": 0,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "run_config": {
+            "version": "3",
+            "strategy": "verified",
+            "model": null,
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 8,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-y7khy_0n",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-y7khy_0n",
+            "comparison": "exact base to head",
+            "base_sha": "1c51873aab20396fadbf6e2dd2608d945dd87b98",
+            "head_sha": "e889d1849e32e7734760b65c2c791c25afba77c8",
+            "revision_label": "e889d1849e32e7734760b65c2c791c25afba77c8"
+          },
+          "snapshot_digest": "b658b35c6c51af4e31eb40b54f54889e2bb922ad4167886ab3caa21918d6faa0",
+          "total_files": 1,
+          "source_files": [
+            "src/module.py"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "project_review": {
+            "depth": "quick",
+            "reviewed_files": [],
+            "omitted_files": [
+              "src/module.py"
+            ],
+            "reason": "Model analysis explicitly skipped"
+          },
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 1,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "skipped",
+            "reason": "No JavaScript/TypeScript files"
+          },
+          "test_gaps": [],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {},
+          "python_index_errors": {},
+          "graph_nodes": 1,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.py"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "c716350d5ae8b0a5d4bd7f8a417992ef5cc7ba3428c169f22e34604f827e9700",
+            "files": [
+              "src/module.py"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.py:1:collect",
+                "name": "collect",
+                "path": "src/module.py",
+                "start": 1,
+                "end": 4
+              }
+            ],
+            "changed_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "model_review_error": null,
+          "review_summary": "Static review requested; contextual model analysis was skipped",
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T09:14:51.836323+00:00",
+        "completed_at": "2026-11-01T09:14:52.065917+00:00"
+      },
+      "findings": []
+    },
+    {
+      "case_id": "async-batch-bug",
+      "variant": "static",
+      "elapsed_seconds": 0.7078655419973074,
+      "run": {
+        "id": "b9251ca7-6a24-48e5-a0f2-00f654c64442",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-tit1kqzv",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "8825fb97ca7920e11607529c44fad14d6df77034",
+        "head_sha": "6f643dffaee30eb27d408ca541cf49a429ab32c0",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "skipped",
+          "challenge": "skipped",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 1,
+          "security": 0,
+          "bug": 1,
+          "style": 0
+        },
+        "coverage": {
+          "run_config": {
+            "version": "3",
+            "strategy": "verified",
+            "model": null,
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 8,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-tit1kqzv",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-tit1kqzv",
+            "comparison": "exact base to head",
+            "base_sha": "8825fb97ca7920e11607529c44fad14d6df77034",
+            "head_sha": "6f643dffaee30eb27d408ca541cf49a429ab32c0",
+            "revision_label": "6f643dffaee30eb27d408ca541cf49a429ab32c0"
+          },
+          "snapshot_digest": "3dbc7112d7cc79e20a85c017da59e5bb061c7b5fad0a5b0109cff044c0ff93c6",
+          "total_files": 1,
+          "source_files": [
+            "src/module.js"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "project_review": {
+            "depth": "quick",
+            "reviewed_files": [],
+            "omitted_files": [
+              "src/module.js"
+            ],
+            "reason": "Model analysis explicitly skipped"
+          },
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [
+            {
+              "path": "src/module.js",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in src/module.js, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [
+            "src/module.js"
+          ],
+          "diff": "diff --git a/src/module.js b/src/module.js\n--- a/src/module.js\n+++ b/src/module.js\n@@ -1 +1 @@\n-export async function save(items) { await Promise.all(items.map(i => i.save())); }+export async function save(items) { items.forEach(async i => await i.save()); }",
+          "language_index": {
+            "src/module.js": {
+              "path": "src/module.js",
+              "symbols": [
+                {
+                  "name": "save",
+                  "line": 1,
+                  "end": 1,
+                  "parameters": [
+                    {
+                      "name": "items",
+                      "required": true
+                    }
+                  ],
+                  "exported": true
+                }
+              ],
+              "imports": [],
+              "bindings": [],
+              "calls": [],
+              "resolved_references": [],
+              "findings": [
+                {
+                  "rule": "js:async-foreach",
+                  "category": "bug",
+                  "line": 1,
+                  "message": "forEach discards promises returned by async callbacks. Await Promise.all with map, or use an awaited for\u2026of loop when completion order matters."
+                }
+              ]
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.js"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "6e6c85514653db6521140f37071e3ae5f3e736e52b13b821cb74d24100761500",
+            "files": [
+              "src/module.js"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.js:1:save",
+                "name": "save",
+                "path": "src/module.js",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "changed_symbols": [
+              {
+                "id": "src/module.js:1:save",
+                "name": "save",
+                "path": "src/module.js",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "model_review_error": null,
+          "review_summary": "Static review requested; contextual model analysis was skipped",
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T09:14:52.161460+00:00",
+        "completed_at": "2026-11-01T09:14:52.869194+00:00"
+      },
+      "findings": [
+        {
+          "id": "daffc2aa-1663-4139-83fd-d265ccb7b64d",
+          "run_id": "b9251ca7-6a24-48e5-a0f2-00f654c64442",
+          "stable_fingerprint": "758ade63f62079911e2fa618",
+          "category": "bug",
+          "rule_id": "js:async-foreach",
+          "cwe_id": null,
+          "title": "forEach discards promises returned by async callbacks",
+          "explanation": "forEach discards promises returned by async callbacks. Await Promise.all with map, or use an awaited for\u2026of loop when completion order matters.",
+          "user_impact": "The async function can finish before the operations complete, so failures and completion are not propagated.",
+          "severity": "medium",
+          "primary_location": {
+            "path": "src/module.js",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": "6f643dffaee30eb27d408ca541cf49a429ab32c0",
+            "snippet": null
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "8c05141e-a445-47ab-86f1-4ed0317a99ce",
+              "kind": "static_analysis",
+              "tool_or_profile": "js:async-foreach",
+              "input_revision": "6f643dffaee30eb27d408ca541cf49a429ab32c0",
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "forEach discards promises returned by async callbacks. Await Promise.all with map, or use an awaited for\u2026of loop when completion order matters.",
+              "duration_ms": 0,
+              "created_at": "2026-11-01T09:14:52.639396+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "proofline-language"
+          ],
+          "assumptions": [],
+          "limitations": [],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "unassessed",
+          "verification_assessment": {},
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Use await Promise.all(items.map(async ...)) or an awaited for\u2026of loop, depending on ordering requirements."
+        }
+      ]
+    },
+    {
+      "case_id": "async-batch-clean",
+      "variant": "static",
+      "elapsed_seconds": 0.24698233300296124,
+      "run": {
+        "id": "618d95d4-bec9-4607-b232-881cf84eed5d",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-rw_wsisl",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "8825fb97ca7920e11607529c44fad14d6df77034",
+        "head_sha": "fb61b0ec935c6d0747dc03e7aab462ba869753b8",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "skipped",
+          "challenge": "skipped",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 0,
+          "security": 0,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "run_config": {
+            "version": "3",
+            "strategy": "verified",
+            "model": null,
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 8,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-rw_wsisl",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-rw_wsisl",
+            "comparison": "exact base to head",
+            "base_sha": "8825fb97ca7920e11607529c44fad14d6df77034",
+            "head_sha": "fb61b0ec935c6d0747dc03e7aab462ba869753b8",
+            "revision_label": "fb61b0ec935c6d0747dc03e7aab462ba869753b8"
+          },
+          "snapshot_digest": "2109a4d54d60ccf86b51954e1008e9795a803848dd6839f329ab9266ca836f9d",
+          "total_files": 1,
+          "source_files": [
+            "src/module.js"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "project_review": {
+            "depth": "quick",
+            "reviewed_files": [],
+            "omitted_files": [
+              "src/module.js"
+            ],
+            "reason": "Model analysis explicitly skipped"
+          },
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {
+            "src/module.js": {
+              "path": "src/module.js",
+              "symbols": [
+                {
+                  "name": "save",
+                  "line": 1,
+                  "end": 1,
+                  "parameters": [
+                    {
+                      "name": "items",
+                      "required": true
+                    }
+                  ],
+                  "exported": true
+                }
+              ],
+              "imports": [],
+              "bindings": [],
+              "calls": [],
+              "resolved_references": [],
+              "findings": []
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.js"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "4f9a27d9a595672f528d46eb11489d48cf3b1b07e6612dd2964573964c23698e",
+            "files": [
+              "src/module.js"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.js:1:save",
+                "name": "save",
+                "path": "src/module.js",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "changed_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "model_review_error": null,
+          "review_summary": "Static review requested; contextual model analysis was skipped",
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T09:14:52.974331+00:00",
+        "completed_at": "2026-11-01T09:14:53.221223+00:00"
+      },
+      "findings": []
+    },
+    {
+      "case_id": "argument-contract-bug",
+      "variant": "static",
+      "elapsed_seconds": 0.6765446669960511,
+      "run": {
+        "id": "475bf108-c5aa-448e-8256-efbdf9ea086b",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-xfgiauvh",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "0cdbcb66789ea53534a5af4e0ec1a68bcad18ce4",
+        "head_sha": "bd18530a02bbbb7c4fd03b72bfe7ecb360e07cff",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "skipped",
+          "challenge": "skipped",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 1,
+          "security": 0,
+          "bug": 1,
+          "style": 0
+        },
+        "coverage": {
+          "run_config": {
+            "version": "3",
+            "strategy": "verified",
+            "model": null,
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 8,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-xfgiauvh",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-xfgiauvh",
+            "comparison": "exact base to head",
+            "base_sha": "0cdbcb66789ea53534a5af4e0ec1a68bcad18ce4",
+            "head_sha": "bd18530a02bbbb7c4fd03b72bfe7ecb360e07cff",
+            "revision_label": "bd18530a02bbbb7c4fd03b72bfe7ecb360e07cff"
+          },
+          "snapshot_digest": "dd04dab6fa999061a6fd1857adc0ea71031dec623aefc90803f2a2d268bc575d",
+          "total_files": 1,
+          "source_files": [
+            "src/module.ts"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "project_review": {
+            "depth": "quick",
+            "reviewed_files": [],
+            "omitted_files": [
+              "src/module.ts"
+            ],
+            "reason": "Model analysis explicitly skipped"
+          },
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [
+            {
+              "path": "src/module.ts",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in src/module.ts, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [
+            "src/module.ts"
+          ],
+          "diff": "diff --git a/src/module.ts b/src/module.ts\n--- a/src/module.ts\n+++ b/src/module.ts\n@@ -1,2 +1,2 @@\n-export function load(id: number, page = 1) { return id; }\n+export function load(id: number, page: number) { return id; }\n load(1);",
+          "language_index": {
+            "src/module.ts": {
+              "path": "src/module.ts",
+              "symbols": [
+                {
+                  "name": "load",
+                  "line": 1,
+                  "end": 1,
+                  "parameters": [
+                    {
+                      "name": "id",
+                      "required": true
+                    },
+                    {
+                      "name": "page",
+                      "required": true
+                    }
+                  ],
+                  "exported": true
+                }
+              ],
+              "imports": [],
+              "bindings": [],
+              "calls": [
+                {
+                  "name": "load",
+                  "line": 2,
+                  "arguments": 1,
+                  "spread": false
+                }
+              ],
+              "resolved_references": [
+                {
+                  "name": "load",
+                  "path": "src/module.ts",
+                  "line": 2,
+                  "target_path": "src/module.ts",
+                  "target_line": 1,
+                  "relationship": "compiler_resolved_call"
+                }
+              ],
+              "findings": [
+                {
+                  "rule": "js:type-2554",
+                  "category": "bug",
+                  "line": 2,
+                  "message": "Expected 2 arguments, but got 1."
+                }
+              ]
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.ts"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "46300cca45a9dc88cf07c2353eb5e8d730076a2d798b222b3fa70b34d55553d6",
+            "files": [
+              "src/module.ts"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.ts:1:load",
+                "name": "load",
+                "path": "src/module.ts",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "changed_symbols": [
+              {
+                "id": "src/module.ts:1:load",
+                "name": "load",
+                "path": "src/module.ts",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "references": [
+              {
+                "name": "load",
+                "path": "src/module.ts",
+                "line": 2,
+                "target_path": "src/module.ts",
+                "target_line": 1,
+                "relationship": "compiler_resolved_call"
+              }
+            ],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "model_review_error": null,
+          "review_summary": "Static review requested; contextual model analysis was skipped",
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T09:14:53.318250+00:00",
+        "completed_at": "2026-11-01T09:14:53.994671+00:00"
+      },
+      "findings": [
+        {
+          "id": "e4e58030-a97e-4cc1-9b56-f0685f31adbe",
+          "run_id": "475bf108-c5aa-448e-8256-efbdf9ea086b",
+          "stable_fingerprint": "ac41d81e24ea945e61f31392",
+          "category": "bug",
+          "rule_id": "js:type-2554",
+          "cwe_id": null,
+          "title": "Expected 2 arguments, but got 1.",
+          "explanation": "Expected 2 arguments, but got 1.",
+          "user_impact": "The parser or static rule identifies a concrete syntax or style problem.",
+          "severity": "medium",
+          "primary_location": {
+            "path": "src/module.ts",
+            "start_line": 2,
+            "end_line": 2,
+            "side": "head",
+            "commit_sha": "bd18530a02bbbb7c4fd03b72bfe7ecb360e07cff",
+            "snippet": null
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "b58987aa-4717-4e31-94e8-4b2e31d95bd9",
+              "kind": "static_analysis",
+              "tool_or_profile": "js:type-2554",
+              "input_revision": "bd18530a02bbbb7c4fd03b72bfe7ecb360e07cff",
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "Expected 2 arguments, but got 1.",
+              "duration_ms": 0,
+              "created_at": "2026-11-01T09:14:53.773909+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "proofline-language"
+          ],
+          "assumptions": [],
+          "limitations": [],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "unassessed",
+          "verification_assessment": {},
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Inspect the cited syntax or style rule."
+        }
+      ]
+    },
+    {
+      "case_id": "argument-contract-clean",
+      "variant": "static",
+      "elapsed_seconds": 0.24069204199622618,
+      "run": {
+        "id": "f1ba4d7f-5f5b-4c7f-ac67-ac960b12d707",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-miujpwzi",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "6748c27d3e04359dab1c4bbff9e721a4155b4fac",
+        "head_sha": "66029114d6b186ef4ce3dffd35b1ce79f9ef10cd",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "skipped",
+          "challenge": "skipped",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 0,
+          "security": 0,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "run_config": {
+            "version": "3",
+            "strategy": "verified",
+            "model": null,
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 8,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-miujpwzi",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-miujpwzi",
+            "comparison": "exact base to head",
+            "base_sha": "6748c27d3e04359dab1c4bbff9e721a4155b4fac",
+            "head_sha": "66029114d6b186ef4ce3dffd35b1ce79f9ef10cd",
+            "revision_label": "66029114d6b186ef4ce3dffd35b1ce79f9ef10cd"
+          },
+          "snapshot_digest": "ba04f163735432faee9e46391f8acdb6f79f9113cfbc0b34d1af722d83320a9b",
+          "total_files": 1,
+          "source_files": [
+            "src/module.ts"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "project_review": {
+            "depth": "quick",
+            "reviewed_files": [],
+            "omitted_files": [
+              "src/module.ts"
+            ],
+            "reason": "Model analysis explicitly skipped"
+          },
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {
+            "src/module.ts": {
+              "path": "src/module.ts",
+              "symbols": [
+                {
+                  "name": "load",
+                  "line": 1,
+                  "end": 1,
+                  "parameters": [
+                    {
+                      "name": "id",
+                      "required": true
+                    },
+                    {
+                      "name": "page",
+                      "required": false
+                    }
+                  ],
+                  "exported": true
+                }
+              ],
+              "imports": [],
+              "bindings": [],
+              "calls": [
+                {
+                  "name": "load",
+                  "line": 2,
+                  "arguments": 1,
+                  "spread": false
+                }
+              ],
+              "resolved_references": [
+                {
+                  "name": "load",
+                  "path": "src/module.ts",
+                  "line": 2,
+                  "target_path": "src/module.ts",
+                  "target_line": 1,
+                  "relationship": "compiler_resolved_call"
+                }
+              ],
+              "findings": []
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.ts"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "7ae874e10d176af062b2b4d4b32e2743c1bbb23b99b1858049ec1e2a52870411",
+            "files": [
+              "src/module.ts"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.ts:1:load",
+                "name": "load",
+                "path": "src/module.ts",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "changed_symbols": [],
+            "references": [
+              {
+                "name": "load",
+                "path": "src/module.ts",
+                "line": 2,
+                "target_path": "src/module.ts",
+                "target_line": 1,
+                "relationship": "compiler_resolved_call"
+              }
+            ],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "model_review_error": null,
+          "review_summary": "Static review requested; contextual model analysis was skipped",
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T09:14:54.093225+00:00",
+        "completed_at": "2026-11-01T09:14:54.333824+00:00"
+      },
+      "findings": []
+    },
+    {
+      "case_id": "sql-format-bug",
+      "variant": "static",
+      "elapsed_seconds": 0.23128070799430134,
+      "run": {
+        "id": "268f0b27-7361-4411-8c45-b01dde26ee6c",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-rueonopc",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "82b46ddfa514dedf121059d686a3fbf93c0b52ff",
+        "head_sha": "42ee5abc49dc59320eb9b324bc072a431a56b307",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "skipped",
+          "challenge": "skipped",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 0,
+          "security": 0,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "run_config": {
+            "version": "3",
+            "strategy": "verified",
+            "model": null,
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 8,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-rueonopc",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-rueonopc",
+            "comparison": "exact base to head",
+            "base_sha": "82b46ddfa514dedf121059d686a3fbf93c0b52ff",
+            "head_sha": "42ee5abc49dc59320eb9b324bc072a431a56b307",
+            "revision_label": "42ee5abc49dc59320eb9b324bc072a431a56b307"
+          },
+          "snapshot_digest": "8c78bca4d657ef8eb5cd1c1673e3b133d78cf13327febd36a86efd2699440edc",
+          "total_files": 1,
+          "source_files": [
+            "src/module.py"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "project_review": {
+            "depth": "quick",
+            "reviewed_files": [],
+            "omitted_files": [
+              "src/module.py"
+            ],
+            "reason": "Model analysis explicitly skipped"
+          },
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 1,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 1,
+              "error": null
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "skipped",
+            "reason": "No JavaScript/TypeScript files"
+          },
+          "test_gaps": [
+            {
+              "path": "src/module.py",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in src/module.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [
+            "src/module.py"
+          ],
+          "diff": "diff --git a/src/module.py b/src/module.py\n--- a/src/module.py\n+++ b/src/module.py\n@@ -1,2 +1,2 @@\n def search(cursor, name):\n-    return cursor.execute('SELECT * FROM users WHERE name=?', (name,))\n+    return cursor.execute(f\"SELECT * FROM users WHERE name='{name}'\")\n",
+          "language_index": {},
+          "python_index_errors": {},
+          "graph_nodes": 1,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.py"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "2e6071910589dfdfa62625ad9b82383b739c3badab1496dbedbc680217c4eaa2",
+            "files": [
+              "src/module.py"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.py:1:search",
+                "name": "search",
+                "path": "src/module.py",
+                "start": 1,
+                "end": 2
+              }
+            ],
+            "changed_symbols": [
+              {
+                "id": "src/module.py:1:search",
+                "name": "search",
+                "path": "src/module.py",
+                "start": 1,
+                "end": 2
+              }
+            ],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "model_review_error": null,
+          "review_summary": "Static review requested; contextual model analysis was skipped",
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T09:14:54.429345+00:00",
+        "completed_at": "2026-11-01T09:14:54.660539+00:00"
+      },
+      "findings": []
+    },
+    {
+      "case_id": "sql-format-clean",
+      "variant": "static",
+      "elapsed_seconds": 0.26071412499732105,
+      "run": {
+        "id": "b0422add-986f-4cdc-9511-b4c846b52bbf",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-ipncl99l",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "82b46ddfa514dedf121059d686a3fbf93c0b52ff",
+        "head_sha": "02268ba5d6b448eee06cd0070888f684c7d130e2",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "skipped",
+          "challenge": "skipped",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 0,
+          "security": 0,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "run_config": {
+            "version": "3",
+            "strategy": "verified",
+            "model": null,
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 8,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-ipncl99l",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-ipncl99l",
+            "comparison": "exact base to head",
+            "base_sha": "82b46ddfa514dedf121059d686a3fbf93c0b52ff",
+            "head_sha": "02268ba5d6b448eee06cd0070888f684c7d130e2",
+            "revision_label": "02268ba5d6b448eee06cd0070888f684c7d130e2"
+          },
+          "snapshot_digest": "e422e08475de5c6c63a30622ceb44e8d50483ffb75117785dfc034027f6020fd",
+          "total_files": 1,
+          "source_files": [
+            "src/module.py"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "project_review": {
+            "depth": "quick",
+            "reviewed_files": [],
+            "omitted_files": [
+              "src/module.py"
+            ],
+            "reason": "Model analysis explicitly skipped"
+          },
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 1,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "skipped",
+            "reason": "No JavaScript/TypeScript files"
+          },
+          "test_gaps": [],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {},
+          "python_index_errors": {},
+          "graph_nodes": 1,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.py"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "90cd3d3df0218e5968635d9a19a211178d4c0b6f2b6ce82a3b327004d99021e3",
+            "files": [
+              "src/module.py"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.py:1:search",
+                "name": "search",
+                "path": "src/module.py",
+                "start": 1,
+                "end": 2
+              }
+            ],
+            "changed_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "model_review_error": null,
+          "review_summary": "Static review requested; contextual model analysis was skipped",
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T09:14:54.762063+00:00",
+        "completed_at": "2026-11-01T09:14:55.022694+00:00"
+      },
+      "findings": []
+    },
+    {
+      "case_id": "return-contract-bug",
+      "variant": "static",
+      "elapsed_seconds": 0.670256834004249,
+      "run": {
+        "id": "0d9343aa-68c5-4747-82a7-bc2725f56655",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-pmhzayih",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "001914695d5840e33f827c0be0f65ba4fb716691",
+        "head_sha": "517d7fd0a86152d66e54ae7e7d540d7715a3129f",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "skipped",
+          "challenge": "skipped",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 1,
+          "security": 0,
+          "bug": 1,
+          "style": 0
+        },
+        "coverage": {
+          "run_config": {
+            "version": "3",
+            "strategy": "verified",
+            "model": null,
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 8,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-pmhzayih",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-pmhzayih",
+            "comparison": "exact base to head",
+            "base_sha": "001914695d5840e33f827c0be0f65ba4fb716691",
+            "head_sha": "517d7fd0a86152d66e54ae7e7d540d7715a3129f",
+            "revision_label": "517d7fd0a86152d66e54ae7e7d540d7715a3129f"
+          },
+          "snapshot_digest": "1deed10736a4e5f2f72a6a926936a5a349abb5884e054ecc47b6de699b114134",
+          "total_files": 1,
+          "source_files": [
+            "src/module.ts"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "project_review": {
+            "depth": "quick",
+            "reviewed_files": [],
+            "omitted_files": [
+              "src/module.ts"
+            ],
+            "reason": "Model analysis explicitly skipped"
+          },
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [
+            {
+              "path": "src/module.ts",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in src/module.ts, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [
+            "src/module.ts"
+          ],
+          "diff": "diff --git a/src/module.ts b/src/module.ts\n--- a/src/module.ts\n+++ b/src/module.ts\n@@ -1 +1 @@\n-export function count(): number { return 0; }+export function count(): number { return 'none'; }",
+          "language_index": {
+            "src/module.ts": {
+              "path": "src/module.ts",
+              "symbols": [
+                {
+                  "name": "count",
+                  "line": 1,
+                  "end": 1,
+                  "parameters": [],
+                  "exported": true
+                }
+              ],
+              "imports": [],
+              "bindings": [],
+              "calls": [],
+              "resolved_references": [],
+              "findings": [
+                {
+                  "rule": "js:type-2322",
+                  "category": "bug",
+                  "line": 1,
+                  "message": "Type 'string' is not assignable to type 'number'."
+                }
+              ]
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.ts"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "37c23c784e309da86e018320c4a7f6ed50f602e3e88c58e90aac854cb3968bc3",
+            "files": [
+              "src/module.ts"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.ts:1:count",
+                "name": "count",
+                "path": "src/module.ts",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "changed_symbols": [
+              {
+                "id": "src/module.ts:1:count",
+                "name": "count",
+                "path": "src/module.ts",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "model_review_error": null,
+          "review_summary": "Static review requested; contextual model analysis was skipped",
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T09:14:55.117412+00:00",
+        "completed_at": "2026-11-01T09:14:55.787573+00:00"
+      },
+      "findings": [
+        {
+          "id": "bc108203-99d2-479e-8ff8-eb8cd57f1247",
+          "run_id": "0d9343aa-68c5-4747-82a7-bc2725f56655",
+          "stable_fingerprint": "a3b77a56cd7e55ec388c7ae1",
+          "category": "bug",
+          "rule_id": "js:type-2322",
+          "cwe_id": null,
+          "title": "Type 'string' is not assignable to type 'number'.",
+          "explanation": "Type 'string' is not assignable to type 'number'.",
+          "user_impact": "The parser or static rule identifies a concrete syntax or style problem.",
+          "severity": "medium",
+          "primary_location": {
+            "path": "src/module.ts",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": "517d7fd0a86152d66e54ae7e7d540d7715a3129f",
+            "snippet": null
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "556c4819-49c8-40d5-92cb-e408fb7d258b",
+              "kind": "static_analysis",
+              "tool_or_profile": "js:type-2322",
+              "input_revision": "517d7fd0a86152d66e54ae7e7d540d7715a3129f",
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "Type 'string' is not assignable to type 'number'.",
+              "duration_ms": 0,
+              "created_at": "2026-11-01T09:14:55.575198+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "proofline-language"
+          ],
+          "assumptions": [],
+          "limitations": [],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "unassessed",
+          "verification_assessment": {},
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Inspect the cited syntax or style rule."
+        }
+      ]
+    },
+    {
+      "case_id": "return-contract-clean",
+      "variant": "static",
+      "elapsed_seconds": 0.2345296249986859,
+      "run": {
+        "id": "b7ba96e5-461f-4695-9fc7-9fdc5859e2c6",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-1xme6dmh",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "001914695d5840e33f827c0be0f65ba4fb716691",
+        "head_sha": "5f923b7ba4a77e6bdcabbfc608ce1b74b53e5458",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "skipped",
+          "challenge": "skipped",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 0,
+          "security": 0,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "run_config": {
+            "version": "3",
+            "strategy": "verified",
+            "model": null,
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 8,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-1xme6dmh",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-1xme6dmh",
+            "comparison": "exact base to head",
+            "base_sha": "001914695d5840e33f827c0be0f65ba4fb716691",
+            "head_sha": "5f923b7ba4a77e6bdcabbfc608ce1b74b53e5458",
+            "revision_label": "5f923b7ba4a77e6bdcabbfc608ce1b74b53e5458"
+          },
+          "snapshot_digest": "f4313f17459337c45dcdb54782f4a193a830b2752c08a7b18fa59500f9fd135d",
+          "total_files": 1,
+          "source_files": [
+            "src/module.ts"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "project_review": {
+            "depth": "quick",
+            "reviewed_files": [],
+            "omitted_files": [
+              "src/module.ts"
+            ],
+            "reason": "Model analysis explicitly skipped"
+          },
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {
+            "src/module.ts": {
+              "path": "src/module.ts",
+              "symbols": [
+                {
+                  "name": "count",
+                  "line": 1,
+                  "end": 1,
+                  "parameters": [],
+                  "exported": true
+                }
+              ],
+              "imports": [],
+              "bindings": [],
+              "calls": [],
+              "resolved_references": [],
+              "findings": []
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.ts"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "4b7825167336464fae50a32bd7cda2ed16f36bae36ddfd1979221196f3e26578",
+            "files": [
+              "src/module.ts"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.ts:1:count",
+                "name": "count",
+                "path": "src/module.ts",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "changed_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "model_review_error": null,
+          "review_summary": "Static review requested; contextual model analysis was skipped",
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T09:14:55.880094+00:00",
+        "completed_at": "2026-11-01T09:14:56.114546+00:00"
+      },
+      "findings": []
+    },
+    {
+      "case_id": "shell-format-bug",
+      "variant": "static",
+      "elapsed_seconds": 0.23270266700274078,
+      "run": {
+        "id": "5e110152-b868-424b-a99b-09b414aeeff9",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-lyvn1oy4",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "e0ca9ecb1ce5d0e1023f3fff391eb77ade16c204",
+        "head_sha": "433e6aa34190a10797d9e92ff9f6a291d7b1b84e",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "skipped",
+          "challenge": "skipped",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 0,
+          "security": 0,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "run_config": {
+            "version": "3",
+            "strategy": "verified",
+            "model": null,
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 8,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-lyvn1oy4",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-lyvn1oy4",
+            "comparison": "exact base to head",
+            "base_sha": "e0ca9ecb1ce5d0e1023f3fff391eb77ade16c204",
+            "head_sha": "433e6aa34190a10797d9e92ff9f6a291d7b1b84e",
+            "revision_label": "433e6aa34190a10797d9e92ff9f6a291d7b1b84e"
+          },
+          "snapshot_digest": "2805e9447b095b2582198cfcabadccea1187dc5629d1b080ea2c6c57927369e4",
+          "total_files": 1,
+          "source_files": [
+            "src/module.py"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "project_review": {
+            "depth": "quick",
+            "reviewed_files": [],
+            "omitted_files": [
+              "src/module.py"
+            ],
+            "reason": "Model analysis explicitly skipped"
+          },
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 1,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 2,
+              "error": null
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 3,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "skipped",
+            "reason": "No JavaScript/TypeScript files"
+          },
+          "test_gaps": [
+            {
+              "path": "src/module.py",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in src/module.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [
+            "src/module.py"
+          ],
+          "diff": "diff --git a/src/module.py b/src/module.py\n--- a/src/module.py\n+++ b/src/module.py\n@@ -1,3 +1,3 @@\n import subprocess\n def run(name):\n-    return subprocess.run(['echo', name], check=True)\n+    return subprocess.run(f'echo {name}', shell=True)\n",
+          "language_index": {},
+          "python_index_errors": {},
+          "graph_nodes": 1,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.py"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "89a32e9fad1239d82e8647e08dc1aac49399cf6706fc81730c6d32c9866f4a52",
+            "files": [
+              "src/module.py"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.py:2:run",
+                "name": "run",
+                "path": "src/module.py",
+                "start": 2,
+                "end": 3
+              }
+            ],
+            "changed_symbols": [
+              {
+                "id": "src/module.py:2:run",
+                "name": "run",
+                "path": "src/module.py",
+                "start": 2,
+                "end": 3
+              }
+            ],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "model_review_error": null,
+          "review_summary": "Static review requested; contextual model analysis was skipped",
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T09:14:56.209840+00:00",
+        "completed_at": "2026-11-01T09:14:56.442470+00:00"
+      },
+      "findings": []
+    },
+    {
+      "case_id": "shell-format-clean",
+      "variant": "static",
+      "elapsed_seconds": 0.22973195899976417,
+      "run": {
+        "id": "056c2171-6457-4967-8a89-f07d2b7bd2e9",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-tz3nmk17",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "e0ca9ecb1ce5d0e1023f3fff391eb77ade16c204",
+        "head_sha": "a73b51482b3e84d7655cd7e3139b10ceae67d9db",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "skipped",
+          "challenge": "skipped",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 0,
+          "security": 0,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "run_config": {
+            "version": "3",
+            "strategy": "verified",
+            "model": null,
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 8,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-tz3nmk17",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-tz3nmk17",
+            "comparison": "exact base to head",
+            "base_sha": "e0ca9ecb1ce5d0e1023f3fff391eb77ade16c204",
+            "head_sha": "a73b51482b3e84d7655cd7e3139b10ceae67d9db",
+            "revision_label": "a73b51482b3e84d7655cd7e3139b10ceae67d9db"
+          },
+          "snapshot_digest": "423caa05e52e63d323765a7718b75b865b4b65b6f854e536c5461634ac17b68e",
+          "total_files": 1,
+          "source_files": [
+            "src/module.py"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "project_review": {
+            "depth": "quick",
+            "reviewed_files": [],
+            "omitted_files": [
+              "src/module.py"
+            ],
+            "reason": "Model analysis explicitly skipped"
+          },
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 1,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 3,
+              "error": null
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 3,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "skipped",
+            "reason": "No JavaScript/TypeScript files"
+          },
+          "test_gaps": [],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {},
+          "python_index_errors": {},
+          "graph_nodes": 1,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.py"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "f2096d2534e5d56af581d005ea849a1bb9fc97f45ee404432d5541558ebb9f75",
+            "files": [
+              "src/module.py"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.py:2:run",
+                "name": "run",
+                "path": "src/module.py",
+                "start": 2,
+                "end": 3
+              }
+            ],
+            "changed_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "model_review_error": null,
+          "review_summary": "Static review requested; contextual model analysis was skipped",
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T09:14:56.536713+00:00",
+        "completed_at": "2026-11-01T09:14:56.766360+00:00"
+      },
+      "findings": []
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "scope": "Static dogfood audit of this uncommitted project, including legacy source and intentionally vulnerable fixtures; counts are observations, not validated bugs or accuracy",
+  "runs": {
+    "before": {
+      "run_id": "36cc6148-df08-4aad-8f69-2288564d11c3",
+      "snapshot_digest": "2414d0194698355af4d8c9b0037b1a725db284c377a91d7a9a061d18ecfb30cd",
+      "findings": {
+        "total": 936,
+        "security": 0,
+        "bug": 20,
+        "style": 916
+      },
+      "model_calls": 0,
+      "raw_report_sha256": "866e9771a29419fa8a5bf0650a4d208357658298a5da3758932fb89dd2b28a79"
+    },
+    "after_analyzer_fix": {
+      "run_id": "7372ac80-81f5-462d-b195-7efafb5b2cf4",
+      "snapshot_digest": "3d0098d4ba537c8651dc4f88ec3905f9c7b9fc421fe248fe46d1338eefd9b8e2",
+      "findings": {
+        "total": 1019,
+        "security": 79,
+        "bug": 3,
+        "style": 937
+      },
+      "model_calls": 0,
+      "raw_report_sha256": "8826759ddab1c35fc7eafa448eda7ec84edae76e883eb126fe57625b6f73ceda"
+    }
+  },
+  "resolved_defects": [
+    "Bandit relative findings were resolved against the wrong directory and rejected by citation validation",
+    "Broad Ruff prefixes promoted style conventions to medium correctness findings",
+    "Local source copy could recurse into its own output and include credential files",
+    "Worker result directory was world-writable and output/report handling needed caps"
+  ],
+  "note": "The final worker hardening followed these captured runs; regression and actual Docker checks validate it separately. No claim that all remaining static observations are true defects."
+}

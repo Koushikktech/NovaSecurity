@@ -1,0 +1,35 @@
+{
+  "purpose": "Real ChatGPT subscription CLI transport smoke, not review accuracy",
+  "success": false,
+  "model": "gpt-6.1-sol",
+  "usage": {
+    "thought_tokens": 0,
+    "prompt_tokens": 0,
+    "candidate_tokens": 0,
+    "total_tokens": 0,
+    "cached_content_token_count": 0,
+    "cost_estimated_usd": null
+  },
+  "duration_ms": 99,
+  "error": "Error loading config.toml: model_providers contains reserved built-in provider IDs: `openai`. Built-in providers cannot be overridden. Rename your custom provider (for example, `openai-custom`).\nin `model_providers`\n",
+  "activity": [
+    {
+      "provider": "codex_cli",
+      "api_mode": "codex_cli",
+      "model": "gpt-6.1-sol",
+      "role": "review",
+      "attempt": 1,
+      "state": "requesting"
+    },
+    {
+      "provider": "codex_cli",
+      "api_mode": "codex_cli",
+      "model": "gpt-6.1-sol",
+      "role": "review",
+      "attempt": 1,
+      "state": "failed",
+      "error": "Error loading config.toml: model_providers contains reserved built-in provider IDs: `openai`. Built-in providers cannot be overridden. Rename your custom provider (for example, `openai-custom`).\nin `model_providers`\n",
+      "retryable": false
+    }
+  ]
+}

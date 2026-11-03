@@ -1,0 +1,3134 @@
+{
+  "configuration": {
+    "provider": "codex_cli",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "max_calls": 4,
+    "deadline": 600,
+    "attempts": 1
+  },
+  "corpus_hash": "bb4bd888d92cf8be48185028d269270bb79e6c4d0cba7932dcfd829f8ec59ef3",
+  "variant": "verified",
+  "split": "heldout",
+  "quality_metrics": "not_computed_without_adjudication",
+  "results": [
+    {
+      "case_id": "reject-propagation-bug",
+      "variant": "verified",
+      "elapsed_seconds": 45.788249291988905,
+      "run": {
+        "id": "eea2fd4e-0186-4996-860c-fb4b8e59219a",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-j1236lzy",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "9dab3099a0b76ea59a170c2dda026bd5d6624e3a",
+        "head_sha": "eab5db74b935c9fdaf3563dee26093097ece6bef",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "codex_cli",
+        "model_id": "gpt-5.6-sol",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "succeeded",
+          "challenge": "succeeded",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 2,
+          "security": 0,
+          "bug": 2,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "5",
+            "provider": "codex_cli",
+            "codex_reasoning": "high",
+            "api_mode": "auto",
+            "models": {
+              "review": "gpt-5.6-sol",
+              "patch": "gpt-5.6-sol",
+              "verify_reasoning": "gpt-5.6-sol"
+            },
+            "strategy": "verified",
+            "model": "gpt-5.6-sol",
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 4,
+            "max_tool_calls": 24,
+            "deadline_seconds": 600,
+            "investigation_rounds": 1
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-j1236lzy",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-j1236lzy",
+            "comparison": "exact base to head",
+            "source_exclusions": [],
+            "base_sha": "9dab3099a0b76ea59a170c2dda026bd5d6624e3a",
+            "head_sha": "eab5db74b935c9fdaf3563dee26093097ece6bef",
+            "revision_label": "eab5db74b935c9fdaf3563dee26093097ece6bef",
+            "run_config": {
+              "version": "5",
+              "provider": "codex_cli",
+              "codex_reasoning": "high",
+              "api_mode": "auto",
+              "models": {
+                "review": "gpt-5.6-sol",
+                "patch": "gpt-5.6-sol",
+                "verify_reasoning": "gpt-5.6-sol"
+              },
+              "strategy": "verified",
+              "model": "gpt-5.6-sol",
+              "thinking": "low",
+              "max_attempts": 1,
+              "max_model_calls": 4,
+              "max_tool_calls": 24,
+              "deadline_seconds": 600,
+              "investigation_rounds": 1
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "cfd480c6063476bec31dc19edf3b57c1eaa449e74a67f34c26a5e34d72161703",
+          "total_files": 1,
+          "source_files": [
+            "src/module.js"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "repository_policy_source": "base_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "17c72254-eaa2-4b9b-b074-62b2186b51dd"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "17c72254-eaa2-4b9b-b074-62b2186b51dd"
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "17c72254-eaa2-4b9b-b074-62b2186b51dd"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "17c72254-eaa2-4b9b-b074-62b2186b51dd"
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [
+            {
+              "path": "src/module.js",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in src/module.js, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [
+            "src/module.js"
+          ],
+          "diff": "diff --git a/src/module.js b/src/module.js\n--- a/src/module.js\n+++ b/src/module.js\n@@ -1 +1 @@\n-export function save(task) { return task(); }+export function save(task) { task().catch(() => {}); }",
+          "language_index": {
+            "src/module.js": {
+              "path": "src/module.js",
+              "symbols": [
+                {
+                  "name": "save",
+                  "line": 1,
+                  "end": 1,
+                  "parameters": [
+                    {
+                      "name": "task",
+                      "required": true
+                    }
+                  ],
+                  "exported": true
+                }
+              ],
+              "imports": [],
+              "bindings": [],
+              "calls": [
+                {
+                  "name": "task",
+                  "line": 1,
+                  "arguments": 0,
+                  "spread": false
+                }
+              ],
+              "resolved_references": [
+                {
+                  "name": "task",
+                  "export_name": "task",
+                  "local_name": "task",
+                  "path": "src/module.js",
+                  "line": 1,
+                  "target_path": "src/module.js",
+                  "target_line": 1,
+                  "relationship": "compiler_resolved_call"
+                }
+              ],
+              "findings": []
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.js"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "39cc3e822de0d5185f3349856f15ff5288479a55d3cb994eca49101d638fbf36",
+            "files": [
+              "src/module.js"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.js:1:save",
+                "name": "save",
+                "path": "src/module.js",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "changed_symbols": [
+              {
+                "id": "src/module.js:1:save",
+                "name": "save",
+                "path": "src/module.js",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "deleted_symbols": [],
+            "references": [
+              {
+                "name": "task",
+                "export_name": "task",
+                "local_name": "task",
+                "path": "src/module.js",
+                "line": 1,
+                "target_path": "src/module.js",
+                "target_line": 1,
+                "relationship": "compiler_resolved_call"
+              }
+            ],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [
+              {
+                "symbol": {
+                  "id": "src/module.js:1:save",
+                  "name": "save",
+                  "path": "src/module.js",
+                  "start": 1,
+                  "end": 1
+                },
+                "callers": [],
+                "test_hints": []
+              }
+            ],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "model_review_error": null,
+          "review_summary": "The one-line change converts `save` from a transparent task wrapper into fire-and-forget execution: it stops returning the task result, suppresses asynchronous rejections, and newly fails for non-thenable return values. Synchronous exceptions thrown by `task()` remain observable. No matching tests or affected callers were supplied.",
+          "verification_coverage": {
+            "evidence_counts": {
+              "source_supported": 0,
+              "refuted": 0,
+              "insufficient_evidence": 2
+            },
+            "requested": 2,
+            "assessed": 2,
+            "unassessed_ids": [],
+            "batches": 1,
+            "errors": [],
+            "complete": true
+          },
+          "investigation": {
+            "model_calls": 4,
+            "tool_calls": 6,
+            "trace": [
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:30:34.200131+00:00",
+                "stage": "investigate_review",
+                "request_id": "928a8949d1c7a19192ad39d99398502c58eba28bf2244365555c0a8e37aced6d",
+                "call": 1
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:30:41.898511+00:00",
+                "stage": "investigate_review",
+                "request_id": "928a8949d1c7a19192ad39d99398502c58eba28bf2244365555c0a8e37aced6d",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 89,
+                  "prompt_tokens": 11756,
+                  "candidate_tokens": 181,
+                  "total_tokens": 11937,
+                  "cached_content_token_count": 10752
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:30:41.900142+00:00",
+                "stage": "investigate_review",
+                "key": "928a8949d1c7a19192ad39d99398502c58eba28bf2244365555c0a8e37aced6d"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:30:41.900210+00:00",
+                "tool": {
+                  "name": "get_diff",
+                  "query": "",
+                  "path": "",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:30:41.900334+00:00",
+                "observation": {
+                  "snapshot": "39cc3e822de0d5185f3349856f15ff5288479a55d3cb994eca49101d638fbf36",
+                  "tool": {
+                    "name": "get_diff",
+                    "query": "",
+                    "path": "",
+                    "start_line": 1,
+                    "end_line": 1
+                  },
+                  "output": "{\"diff\": \"diff --git a/src/module.js b/src/module.js\\n--- a/src/module.js\\n+++ b/src/module.js\\n@@ -1 +1 @@\\n-export function save(task) { return task(); }+export function save(task) { task().catch(() => {}); }\"}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:30:41.900696+00:00",
+                "tool": {
+                  "name": "find_references",
+                  "query": "save",
+                  "path": "src/module.js",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:30:41.900796+00:00",
+                "observation": {
+                  "snapshot": "39cc3e822de0d5185f3349856f15ff5288479a55d3cb994eca49101d638fbf36",
+                  "tool": {
+                    "name": "find_references",
+                    "query": "save",
+                    "path": "src/module.js",
+                    "start_line": 1,
+                    "end_line": 1
+                  },
+                  "output": "{\"matches\": [{\"path\": \"src/module.js\", \"line\": 1, \"text\": \"export function save(task) { task().catch(() => {}); }\", \"relationship\": \"lexical_hint\"}]}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:30:41.900815+00:00",
+                "tool": {
+                  "name": "find_related_tests",
+                  "query": "save",
+                  "path": "src/module.js",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:30:41.900838+00:00",
+                "observation": {
+                  "snapshot": "39cc3e822de0d5185f3349856f15ff5288479a55d3cb994eca49101d638fbf36",
+                  "tool": {
+                    "name": "find_related_tests",
+                    "query": "save",
+                    "path": "src/module.js",
+                    "start_line": 1,
+                    "end_line": 1
+                  },
+                  "output": "{\"paths\": []}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:30:41.903682+00:00",
+                "stage": "review",
+                "request_id": "5e4bd348ad485808dfda22483998506c1faaec8f6d85b8d57d6928a63d06f825",
+                "call": 2
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:30:59.734077+00:00",
+                "stage": "review",
+                "request_id": "5e4bd348ad485808dfda22483998506c1faaec8f6d85b8d57d6928a63d06f825",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 233,
+                  "prompt_tokens": 12165,
+                  "candidate_tokens": 897,
+                  "total_tokens": 13062,
+                  "cached_content_token_count": 0
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:30:59.735708+00:00",
+                "stage": "review",
+                "key": "5e4bd348ad485808dfda22483998506c1faaec8f6d85b8d57d6928a63d06f825"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:30:59.738141+00:00",
+                "stage": "investigate_verify_reasoning",
+                "request_id": "47490c7028faa9afbe69d6a024f9f1608f6593bc53157cbc54482f905a52c45b",
+                "call": 3
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:31:06.050996+00:00",
+                "stage": "investigate_verify_reasoning",
+                "request_id": "47490c7028faa9afbe69d6a024f9f1608f6593bc53157cbc54482f905a52c45b",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 75,
+                  "prompt_tokens": 11792,
+                  "candidate_tokens": 171,
+                  "total_tokens": 11963,
+                  "cached_content_token_count": 0
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:31:06.052555+00:00",
+                "stage": "investigate_verify_reasoning",
+                "key": "47490c7028faa9afbe69d6a024f9f1608f6593bc53157cbc54482f905a52c45b"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:31:06.052609+00:00",
+                "tool": {
+                  "name": "get_diff",
+                  "query": "",
+                  "path": "src/module.js",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:31:06.052720+00:00",
+                "observation": {
+                  "snapshot": "39cc3e822de0d5185f3349856f15ff5288479a55d3cb994eca49101d638fbf36",
+                  "tool": {
+                    "name": "get_diff",
+                    "query": "",
+                    "path": "src/module.js",
+                    "start_line": 1,
+                    "end_line": 1
+                  },
+                  "output": "{\"diff\": \"diff --git a/src/module.js b/src/module.js\\n--- a/src/module.js\\n+++ b/src/module.js\\n@@ -1 +1 @@\\n-export function save(task) { return task(); }+export function save(task) { task().catch(() => {}); }\"}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:31:06.052755+00:00",
+                "tool": {
+                  "name": "find_references",
+                  "query": "save",
+                  "path": "src/module.js",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:31:06.052845+00:00",
+                "observation": {
+                  "snapshot": "39cc3e822de0d5185f3349856f15ff5288479a55d3cb994eca49101d638fbf36",
+                  "tool": {
+                    "name": "find_references",
+                    "query": "save",
+                    "path": "src/module.js",
+                    "start_line": 1,
+                    "end_line": 1
+                  },
+                  "output": "{\"matches\": [{\"path\": \"src/module.js\", \"line\": 1, \"text\": \"export function save(task) { task().catch(() => {}); }\", \"relationship\": \"lexical_hint\"}]}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:31:06.052862+00:00",
+                "tool": {
+                  "name": "find_related_tests",
+                  "query": "save",
+                  "path": "src/module.js",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:31:06.052884+00:00",
+                "observation": {
+                  "snapshot": "39cc3e822de0d5185f3349856f15ff5288479a55d3cb994eca49101d638fbf36",
+                  "tool": {
+                    "name": "find_related_tests",
+                    "query": "save",
+                    "path": "src/module.js",
+                    "start_line": 1,
+                    "end_line": 1
+                  },
+                  "output": "{\"paths\": []}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:31:06.055367+00:00",
+                "stage": "challenge_1",
+                "request_id": "1c16b77b3db62f792825c181607848e9c8770f5072dfa48b96e80acb8c76221c",
+                "call": 4
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:31:19.935332+00:00",
+                "stage": "challenge_1",
+                "request_id": "1c16b77b3db62f792825c181607848e9c8770f5072dfa48b96e80acb8c76221c",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 246,
+                  "prompt_tokens": 12165,
+                  "candidate_tokens": 743,
+                  "total_tokens": 12908,
+                  "cached_content_token_count": 0
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:31:19.935825+00:00",
+                "stage": "challenge_1",
+                "key": "1c16b77b3db62f792825c181607848e9c8770f5072dfa48b96e80acb8c76221c"
+              }
+            ]
+          }
+        },
+        "usage": {
+          "thought_tokens": 643,
+          "prompt_tokens": 47878,
+          "candidate_tokens": 1992,
+          "total_tokens": 49870,
+          "cached_content_token_count": 10752,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-03T16:30:34.147946+00:00",
+        "completed_at": "2026-11-03T16:31:19.936138+00:00"
+      },
+      "findings": [
+        {
+          "id": "bb85378e-5bb8-42d4-99e7-addd1433cc11",
+          "run_id": "eea2fd4e-0186-4996-860c-fb4b8e59219a",
+          "stable_fingerprint": "7603d240cd7d213ae2baf964",
+          "category": "bug",
+          "rule_id": "proofline:async-return-contract",
+          "cwe_id": null,
+          "title": "Preserve the task promise and rejection contract",
+          "explanation": "The previous implementation returned `task()` directly. The new implementation returns `undefined` and consumes promise rejections with an empty handler. Consequently, callers can no longer await completion or observe asynchronous failures, even though synchronous exceptions from invoking `task()` still propagate.",
+          "user_impact": "A caller awaiting `save(task)` proceeds immediately and may report success or start dependent work before saving finishes. If the task later rejects, the failure is silently hidden.",
+          "severity": "high",
+          "primary_location": {
+            "path": "src/module.js",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": "eab5db74b935c9fdaf3563dee26093097ece6bef",
+            "snippet": "export function save(task) { task().catch(() => {}); }"
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "b86c8ab8-1407-421b-b96a-f0b90094d8cb",
+              "kind": "codex_cli_review",
+              "tool_or_profile": "gpt-5.6-sol",
+              "input_revision": "eab5db74b935c9fdaf3563dee26093097ece6bef",
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "`task()` returns a promise and a caller relies on `save()` returning that promise, particularly when the promise rejects or subsequent work depends on its completion.",
+              "duration_ms": 0,
+              "created_at": "2026-11-03T16:30:59.735828+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "codex_cli_review"
+          ],
+          "assumptions": [
+            "The exported function's prior return value is part of its API contract.",
+            "No supplied caller evidence establishes that fire-and-forget behavior is intentional.",
+            "The returned object follows normal Promise/thenable `.catch()` semantics; a custom implementation could behave differently."
+          ],
+          "limitations": [
+            "No affected callers or matching tests were supplied, so the exact downstream manifestations cannot be enumerated.",
+            "Verifier supplied no valid source quotation; conclusion remains unestablished"
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "contextual_assessment",
+          "evidence_status": "insufficient_evidence",
+          "verification_assessment": {
+            "evidence_status": "source_supported",
+            "citations": [
+              {
+                "path": "src/module.js",
+                "start_line": 1,
+                "quote": "export function save(task) { task().catch(() => {}); }"
+              },
+              {
+                "path": "src/module.js",
+                "start_line": 1,
+                "quote": "-export function save(task) { return task(); }+export function save(task) { task().catch(() => {}); }"
+              }
+            ],
+            "unresolved_assumptions": [
+              "The returned object follows normal Promise/thenable `.catch()` semantics; a custom implementation could behave differently."
+            ],
+            "rule_id": "proofline:async-return-contract",
+            "path": "src/module.js",
+            "start_line": 1,
+            "is_valid": true,
+            "confidence_assessment": "confirmed",
+            "counter_evidence": null,
+            "explanation": "The diff establishes that `save()` previously returned `task()` directly. The new body invokes `task()` but does not return the result of either `task()` or `.catch()`, so normal completion returns `undefined`. For a standard Promise, the attached empty rejection callback handles the task rejection, preventing callers of `save()` from awaiting that task through the former return contract or observing its rejection through `save()`. Because `task()` is invoked synchronously before `.catch()` is attached, a synchronous exception thrown by that invocation still escapes."
+          },
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Return the task result (`return task();`). If local error handling is required, return the chained promise and rethrow after handling rather than swallowing the rejection. Add focused coverage for successful resolution and rejection propagation."
+        },
+        {
+          "id": "d15151e2-f276-40c7-8418-a712e68f0b74",
+          "run_id": "eea2fd4e-0186-4996-860c-fb4b8e59219a",
+          "stable_fingerprint": "98bf453d75d25cfd0f955135",
+          "category": "bug",
+          "rule_id": "proofline:thenable-assumption",
+          "cwe_id": null,
+          "title": "Do not require synchronous task results to expose `.catch()`",
+          "explanation": "Calling `.catch()` unconditionally introduces a new thenable requirement. Previously, a synchronous task could return any value and `save()` returned it; now a non-promise result causes a `TypeError` when its missing `.catch` property is invoked.",
+          "user_impact": "Existing synchronous tasks that previously succeeded now fail after completing their side effects, potentially causing retries or duplicate work.",
+          "severity": "medium",
+          "primary_location": {
+            "path": "src/module.js",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": "eab5db74b935c9fdaf3563dee26093097ece6bef",
+            "snippet": "export function save(task) { task().catch(() => {}); }"
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "25f1a68e-d8fb-4e4e-8a66-31354bfc17c5",
+              "kind": "codex_cli_review",
+              "tool_or_profile": "gpt-5.6-sol",
+              "input_revision": "eab5db74b935c9fdaf3563dee26093097ece6bef",
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "`task()` returns a primitive, `undefined`, or any object without a callable `catch` method.",
+              "duration_ms": 0,
+              "created_at": "2026-11-03T16:30:59.735960+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "codex_cli_review"
+          ],
+          "assumptions": [
+            "The earlier implementation's acceptance of arbitrary task return values was intentional or externally observable."
+          ],
+          "limitations": [
+            "The supplied context contains no type declarations or documentation proving tasks are restricted to promise-returning functions.",
+            "Verifier supplied no valid source quotation; conclusion remains unestablished"
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "contextual_assessment",
+          "evidence_status": "insufficient_evidence",
+          "verification_assessment": {
+            "evidence_status": "source_supported",
+            "citations": [
+              {
+                "path": "src/module.js",
+                "start_line": 1,
+                "quote": "export function save(task) { task().catch(() => {}); }"
+              },
+              {
+                "path": "src/module.js",
+                "start_line": 1,
+                "quote": "-export function save(task) { return task(); }+export function save(task) { task().catch(() => {}); }"
+              }
+            ],
+            "unresolved_assumptions": [],
+            "rule_id": "proofline:thenable-assumption",
+            "path": "src/module.js",
+            "start_line": 1,
+            "is_valid": true,
+            "confidence_assessment": "confirmed",
+            "counter_evidence": null,
+            "explanation": "The current implementation unconditionally accesses and invokes `.catch()` on the result of `task()`. If a valid synchronous task returns a value without a callable `catch` member\u2014including `undefined`, `null`, a number, a string, or an ordinary object\u2014the access or invocation throws a `TypeError`. The prior implementation shown by the diff simply returned that value and imposed no thenable requirement. No supplied guard or API restriction rules out synchronous results."
+          },
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Restore `return task()` if both synchronous and asynchronous tasks are supported. If the API intentionally normalizes to promises, use `return Promise.resolve().then(task)` and preserve rejection propagation; document the changed return contract and test a synchronous successful task."
+        }
+      ]
+    },
+    {
+      "case_id": "reject-propagation-clean",
+      "variant": "verified",
+      "elapsed_seconds": 13.658071917001507,
+      "run": {
+        "id": "7d605667-92fd-47fc-ab39-67093c9affec",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-xbzvc09t",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "d813af9f374dfb1001288666783e7af2fc5fe679",
+        "head_sha": "f217ab4ca84fb0f55a7b7f0ed7d5676c1ce8733b",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "codex_cli",
+        "model_id": "gpt-5.6-sol",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "succeeded",
+          "challenge": "succeeded",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 0,
+          "security": 0,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "5",
+            "provider": "codex_cli",
+            "codex_reasoning": "high",
+            "api_mode": "auto",
+            "models": {
+              "review": "gpt-5.6-sol",
+              "patch": "gpt-5.6-sol",
+              "verify_reasoning": "gpt-5.6-sol"
+            },
+            "strategy": "verified",
+            "model": "gpt-5.6-sol",
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 4,
+            "max_tool_calls": 24,
+            "deadline_seconds": 600,
+            "investigation_rounds": 1
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-xbzvc09t",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-xbzvc09t",
+            "comparison": "exact base to head",
+            "source_exclusions": [],
+            "base_sha": "d813af9f374dfb1001288666783e7af2fc5fe679",
+            "head_sha": "f217ab4ca84fb0f55a7b7f0ed7d5676c1ce8733b",
+            "revision_label": "f217ab4ca84fb0f55a7b7f0ed7d5676c1ce8733b",
+            "run_config": {
+              "version": "5",
+              "provider": "codex_cli",
+              "codex_reasoning": "high",
+              "api_mode": "auto",
+              "models": {
+                "review": "gpt-5.6-sol",
+                "patch": "gpt-5.6-sol",
+                "verify_reasoning": "gpt-5.6-sol"
+              },
+              "strategy": "verified",
+              "model": "gpt-5.6-sol",
+              "thinking": "low",
+              "max_attempts": 1,
+              "max_model_calls": 4,
+              "max_tool_calls": 24,
+              "deadline_seconds": 600,
+              "investigation_rounds": 1
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "500e3a0f4dfee0340c3a0489434b78744010fbbafdc0b0fb960d91859fcc46b1",
+          "total_files": 1,
+          "source_files": [
+            "src/module.js"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "repository_policy_source": "base_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "17c72254-eaa2-4b9b-b074-62b2186b51dd"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "17c72254-eaa2-4b9b-b074-62b2186b51dd"
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "17c72254-eaa2-4b9b-b074-62b2186b51dd"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "17c72254-eaa2-4b9b-b074-62b2186b51dd"
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {
+            "src/module.js": {
+              "path": "src/module.js",
+              "symbols": [
+                {
+                  "name": "save",
+                  "line": 1,
+                  "end": 1,
+                  "parameters": [
+                    {
+                      "name": "task",
+                      "required": true
+                    }
+                  ],
+                  "exported": true
+                }
+              ],
+              "imports": [],
+              "bindings": [],
+              "calls": [
+                {
+                  "name": "task",
+                  "line": 1,
+                  "arguments": 0,
+                  "spread": false
+                }
+              ],
+              "resolved_references": [
+                {
+                  "name": "task",
+                  "export_name": "task",
+                  "local_name": "task",
+                  "path": "src/module.js",
+                  "line": 1,
+                  "target_path": "src/module.js",
+                  "target_line": 1,
+                  "relationship": "compiler_resolved_call"
+                }
+              ],
+              "findings": []
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.js"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "1865563c885fed609211476ae5f0e68370cee729de5e009e2d5ade4720376430",
+            "files": [
+              "src/module.js"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.js:1:save",
+                "name": "save",
+                "path": "src/module.js",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "changed_symbols": [],
+            "deleted_symbols": [],
+            "references": [
+              {
+                "name": "task",
+                "export_name": "task",
+                "local_name": "task",
+                "path": "src/module.js",
+                "line": 1,
+                "target_path": "src/module.js",
+                "target_line": 1,
+                "relationship": "compiler_resolved_call"
+              }
+            ],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "model_review_error": null,
+          "review_summary": "No changes are present in the supplied diff, so there is no changed behavior to review. The snapshot only shows `save(task)` invoking and returning `task()` synchronously.",
+          "verification_coverage": {
+            "complete": true,
+            "requested": 0,
+            "assessed": 0,
+            "unassessed_ids": [],
+            "errors": []
+          },
+          "investigation": {
+            "model_calls": 2,
+            "tool_calls": 1,
+            "trace": [
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:31:20.076163+00:00",
+                "stage": "investigate_review",
+                "request_id": "9085d1d5822c0f587709dcb33acc5c9d5f90a4769aa0e5e34b8b16de9e3cc2ab",
+                "call": 1
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:31:27.772135+00:00",
+                "stage": "investigate_review",
+                "request_id": "9085d1d5822c0f587709dcb33acc5c9d5f90a4769aa0e5e34b8b16de9e3cc2ab",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 60,
+                  "prompt_tokens": 11587,
+                  "candidate_tokens": 100,
+                  "total_tokens": 11687,
+                  "cached_content_token_count": 10752
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:31:27.773594+00:00",
+                "stage": "investigate_review",
+                "key": "9085d1d5822c0f587709dcb33acc5c9d5f90a4769aa0e5e34b8b16de9e3cc2ab"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:31:27.773640+00:00",
+                "tool": {
+                  "name": "get_diff",
+                  "query": "",
+                  "path": "",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:31:27.773702+00:00",
+                "observation": {
+                  "snapshot": "1865563c885fed609211476ae5f0e68370cee729de5e009e2d5ade4720376430",
+                  "tool": {
+                    "name": "get_diff",
+                    "query": "",
+                    "path": "",
+                    "start_line": 1,
+                    "end_line": 1
+                  },
+                  "output": "{\"diff\": \"\"}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:31:27.776846+00:00",
+                "stage": "review",
+                "request_id": "0726b13d195240e7f6591b4fad5d0827cc46be59e7f8f445b8e7d6d300d6c606",
+                "call": 2
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:31:33.684357+00:00",
+                "stage": "review",
+                "request_id": "0726b13d195240e7f6591b4fad5d0827cc46be59e7f8f445b8e7d6d300d6c606",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 31,
+                  "prompt_tokens": 11755,
+                  "candidate_tokens": 87,
+                  "total_tokens": 11842,
+                  "cached_content_token_count": 11008
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:31:33.685711+00:00",
+                "stage": "review",
+                "key": "0726b13d195240e7f6591b4fad5d0827cc46be59e7f8f445b8e7d6d300d6c606"
+              }
+            ]
+          }
+        },
+        "usage": {
+          "thought_tokens": 91,
+          "prompt_tokens": 23342,
+          "candidate_tokens": 187,
+          "total_tokens": 23529,
+          "cached_content_token_count": 21760,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-03T16:31:20.028087+00:00",
+        "completed_at": "2026-11-03T16:31:33.685876+00:00"
+      },
+      "findings": []
+    },
+    {
+      "case_id": "assignment-contract-bug",
+      "variant": "verified",
+      "elapsed_seconds": 35.96097479198943,
+      "run": {
+        "id": "ef8e28c8-8cce-45c8-a809-9936c997a76b",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-iif7t4e7",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "9ac2e181225e56e650b3a5322ae35090e12f5a3a",
+        "head_sha": "6490f8b13425350172dbf5218dd72937417712d5",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "codex_cli",
+        "model_id": "gpt-5.6-sol",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "succeeded",
+          "challenge": "succeeded",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 2,
+          "security": 0,
+          "bug": 2,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "5",
+            "provider": "codex_cli",
+            "codex_reasoning": "high",
+            "api_mode": "auto",
+            "models": {
+              "review": "gpt-5.6-sol",
+              "patch": "gpt-5.6-sol",
+              "verify_reasoning": "gpt-5.6-sol"
+            },
+            "strategy": "verified",
+            "model": "gpt-5.6-sol",
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 4,
+            "max_tool_calls": 24,
+            "deadline_seconds": 600,
+            "investigation_rounds": 1
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-iif7t4e7",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-iif7t4e7",
+            "comparison": "exact base to head",
+            "source_exclusions": [],
+            "base_sha": "9ac2e181225e56e650b3a5322ae35090e12f5a3a",
+            "head_sha": "6490f8b13425350172dbf5218dd72937417712d5",
+            "revision_label": "6490f8b13425350172dbf5218dd72937417712d5",
+            "run_config": {
+              "version": "5",
+              "provider": "codex_cli",
+              "codex_reasoning": "high",
+              "api_mode": "auto",
+              "models": {
+                "review": "gpt-5.6-sol",
+                "patch": "gpt-5.6-sol",
+                "verify_reasoning": "gpt-5.6-sol"
+              },
+              "strategy": "verified",
+              "model": "gpt-5.6-sol",
+              "thinking": "low",
+              "max_attempts": 1,
+              "max_model_calls": 4,
+              "max_tool_calls": 24,
+              "deadline_seconds": 600,
+              "investigation_rounds": 1
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "82a5ab1d47815ac5f6cdac9bfe659cc7f6a45e684058018d6cb59ed4000494ca",
+          "total_files": 1,
+          "source_files": [
+            "src/module.ts"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "repository_policy_source": "base_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "8e798c08-0c67-4f68-865d-d910f2259553"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "8e798c08-0c67-4f68-865d-d910f2259553"
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "8e798c08-0c67-4f68-865d-d910f2259553"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "8e798c08-0c67-4f68-865d-d910f2259553"
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [
+            {
+              "path": "src/module.ts",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in src/module.ts, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [
+            "src/module.ts"
+          ],
+          "diff": "diff --git a/src/module.ts b/src/module.ts\n--- a/src/module.ts\n+++ b/src/module.ts\n@@ -1 +1 @@\n-export const retries: number = 3;+export const retries: number = 'three';",
+          "language_index": {
+            "src/module.ts": {
+              "path": "src/module.ts",
+              "symbols": [],
+              "imports": [],
+              "bindings": [],
+              "calls": [],
+              "resolved_references": [],
+              "findings": [
+                {
+                  "rule": "js:type-2322",
+                  "category": "bug",
+                  "line": 1,
+                  "message": "Type 'string' is not assignable to type 'number'."
+                }
+              ]
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.ts"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "7ecbf06bc45d7d5aee934138c82e8907047bb9c034f07d7f9b43c40e9de96a52",
+            "files": [
+              "src/module.ts"
+            ],
+            "symbols": [],
+            "changed_symbols": [],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "model_review_error": null,
+          "review_summary": "The sole change replaces the numeric retry value with a word while retaining the exported `number` type. This introduces a direct TypeScript type error and, if emitted anyway, breaks the runtime API contract. No other reviewable changes were supplied.",
+          "verification_coverage": {
+            "evidence_counts": {
+              "source_supported": 2,
+              "refuted": 0,
+              "insufficient_evidence": 0
+            },
+            "requested": 2,
+            "assessed": 2,
+            "unassessed_ids": [],
+            "batches": 1,
+            "errors": [],
+            "complete": true
+          },
+          "investigation": {
+            "model_calls": 4,
+            "tool_calls": 3,
+            "trace": [
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:31:33.848033+00:00",
+                "stage": "investigate_review",
+                "request_id": "5a472e0f7f17c4e04ba6e13a2ab41f732ede931badff9ce1faf4f9864553c570",
+                "call": 1
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:31:41.098283+00:00",
+                "stage": "investigate_review",
+                "request_id": "5a472e0f7f17c4e04ba6e13a2ab41f732ede931badff9ce1faf4f9864553c570",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 91,
+                  "prompt_tokens": 11623,
+                  "candidate_tokens": 111,
+                  "total_tokens": 11734,
+                  "cached_content_token_count": 10752
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:31:41.099795+00:00",
+                "stage": "investigate_review",
+                "key": "5a472e0f7f17c4e04ba6e13a2ab41f732ede931badff9ce1faf4f9864553c570"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:31:41.102138+00:00",
+                "stage": "review",
+                "request_id": "691994529cc8c066e4541c4ea4c1c2866cde46f114148e6a8ce26f4b77844db6",
+                "call": 2
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:31:52.548009+00:00",
+                "stage": "review",
+                "request_id": "691994529cc8c066e4541c4ea4c1c2866cde46f114148e6a8ce26f4b77844db6",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 0,
+                  "prompt_tokens": 11803,
+                  "candidate_tokens": 387,
+                  "total_tokens": 12190,
+                  "cached_content_token_count": 11008
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:31:52.549522+00:00",
+                "stage": "review",
+                "key": "691994529cc8c066e4541c4ea4c1c2866cde46f114148e6a8ce26f4b77844db6"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:31:52.551659+00:00",
+                "stage": "investigate_verify_reasoning",
+                "request_id": "7702588d2ccd04a3c2644ded617a70b0c8048e49886d2dc15934b67c399b54f7",
+                "call": 3
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:31:59.153566+00:00",
+                "stage": "investigate_verify_reasoning",
+                "request_id": "7702588d2ccd04a3c2644ded617a70b0c8048e49886d2dc15934b67c399b54f7",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 33,
+                  "prompt_tokens": 11633,
+                  "candidate_tokens": 172,
+                  "total_tokens": 11805,
+                  "cached_content_token_count": 10752
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:31:59.155006+00:00",
+                "stage": "investigate_verify_reasoning",
+                "key": "7702588d2ccd04a3c2644ded617a70b0c8048e49886d2dc15934b67c399b54f7"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:31:59.155070+00:00",
+                "tool": {
+                  "name": "get_diff",
+                  "query": "src/module.ts",
+                  "path": "src/module.ts",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:31:59.155174+00:00",
+                "observation": {
+                  "snapshot": "7ecbf06bc45d7d5aee934138c82e8907047bb9c034f07d7f9b43c40e9de96a52",
+                  "tool": {
+                    "name": "get_diff",
+                    "query": "src/module.ts",
+                    "path": "src/module.ts",
+                    "start_line": 1,
+                    "end_line": 1
+                  },
+                  "output": "{\"diff\": \"diff --git a/src/module.ts b/src/module.ts\\n--- a/src/module.ts\\n+++ b/src/module.ts\\n@@ -1 +1 @@\\n-export const retries: number = 3;+export const retries: number = 'three';\"}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:31:59.155226+00:00",
+                "tool": {
+                  "name": "read_file",
+                  "query": "7ecbf06bc45d7d5aee934138c82e8907047bb9c034f07d7f9b43c40e9de96a52",
+                  "path": "src/module.ts",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:31:59.155289+00:00",
+                "observation": {
+                  "snapshot": "7ecbf06bc45d7d5aee934138c82e8907047bb9c034f07d7f9b43c40e9de96a52",
+                  "tool": {
+                    "name": "read_file",
+                    "query": "7ecbf06bc45d7d5aee934138c82e8907047bb9c034f07d7f9b43c40e9de96a52",
+                    "path": "src/module.ts",
+                    "start_line": 1,
+                    "end_line": 1
+                  },
+                  "output": "{\"path\": \"src/module.ts\", \"start\": 1, \"text\": \"1: export const retries: number = 'three';\"}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:31:59.155305+00:00",
+                "tool": {
+                  "name": "find_related_tests",
+                  "query": "retries",
+                  "path": "src/module.ts",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:31:59.155336+00:00",
+                "observation": {
+                  "snapshot": "7ecbf06bc45d7d5aee934138c82e8907047bb9c034f07d7f9b43c40e9de96a52",
+                  "tool": {
+                    "name": "find_related_tests",
+                    "query": "retries",
+                    "path": "src/module.ts",
+                    "start_line": 1,
+                    "end_line": 1
+                  },
+                  "output": "{\"paths\": []}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:31:59.158442+00:00",
+                "stage": "challenge_1",
+                "request_id": "1afff3ad6591a0930a0aec05bf482bfdc1dd0ca3f55ec47496ce3bc1ad63acfd",
+                "call": 4
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:32:09.759929+00:00",
+                "stage": "challenge_1",
+                "request_id": "1afff3ad6591a0930a0aec05bf482bfdc1dd0ca3f55ec47496ce3bc1ad63acfd",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 133,
+                  "prompt_tokens": 12173,
+                  "candidate_tokens": 454,
+                  "total_tokens": 12627,
+                  "cached_content_token_count": 10880
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:32:09.761540+00:00",
+                "stage": "challenge_1",
+                "key": "1afff3ad6591a0930a0aec05bf482bfdc1dd0ca3f55ec47496ce3bc1ad63acfd"
+              }
+            ]
+          }
+        },
+        "usage": {
+          "thought_tokens": 257,
+          "prompt_tokens": 47232,
+          "candidate_tokens": 1124,
+          "total_tokens": 48356,
+          "cached_content_token_count": 43392,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-03T16:31:33.801144+00:00",
+        "completed_at": "2026-11-03T16:32:09.761975+00:00"
+      },
+      "findings": [
+        {
+          "id": "99a0c193-59a8-4eff-9ed3-0bfb5b094227",
+          "run_id": "ef8e28c8-8cce-45c8-a809-9936c997a76b",
+          "stable_fingerprint": "c9aa3bd26eca64745bddc507",
+          "category": "bug",
+          "rule_id": "proofline:ts-type-mismatch",
+          "cwe_id": null,
+          "title": "String initializer violates the exported number contract",
+          "explanation": "The changed declaration annotates `retries` as a `number` but initializes it with the string `'three'`. TypeScript reports this assignment as incompatible during type checking, so builds that run `tsc` or equivalent checking will fail. If emitted despite errors, callers receive a string instead of the promised numeric retry count.",
+          "user_impact": "The project may fail to compile; configurations that still emit JavaScript can cause retry arithmetic or comparisons in affected callers to behave incorrectly.",
+          "severity": "high",
+          "primary_location": {
+            "path": "src/module.ts",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": "6490f8b13425350172dbf5218dd72937417712d5",
+            "snippet": "export const retries: number = 'three';"
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "f90e6a96-e5e2-4967-baa3-4c471c225631",
+              "kind": "codex_cli_review",
+              "tool_or_profile": "gpt-5.6-sol",
+              "input_revision": "6490f8b13425350172dbf5218dd72937417712d5",
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "Any TypeScript type-checking build processes this module, or runtime code imports `retries` and uses it as a number after emission with type errors allowed.",
+              "duration_ms": 0,
+              "created_at": "2026-11-03T16:31:52.549619+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "codex_cli_review",
+            "codex_cli_challenge"
+          ],
+          "assumptions": [
+            "The supplied source is compiled or type-checked as TypeScript.",
+            "The explicit `number` annotation reflects the intended public API contract.",
+            "Whether the project\u2019s build pipeline performs TypeScript type checking and treats diagnostics as failures.",
+            "Whether JavaScript is emitted despite type errors and the exported value is consumed at runtime."
+          ],
+          "limitations": [
+            "No compiler configuration or affected callers were supplied, so the exact build command and downstream runtime behavior cannot be established.",
+            "No matching test was retrieved, but that gap does not prove tests are absent."
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "contextual_assessment",
+          "evidence_status": "source_supported",
+          "verification_assessment": {
+            "evidence_status": "source_supported",
+            "citations": [
+              {
+                "path": "src/module.ts",
+                "start_line": 1,
+                "quote": "export const retries: number = 'three';"
+              }
+            ],
+            "unresolved_assumptions": [
+              "Whether the project\u2019s build pipeline performs TypeScript type checking and treats diagnostics as failures.",
+              "Whether JavaScript is emitted despite type errors and the exported value is consumed at runtime."
+            ],
+            "rule_id": "proofline:ts-type-mismatch",
+            "path": "src/module.ts",
+            "start_line": 1,
+            "is_valid": true,
+            "confidence_assessment": "confirmed",
+            "counter_evidence": null,
+            "explanation": "The declaration explicitly promises a number while assigning the string literal `'three'`. TypeScript reports this assignment as incompatible. If the module is emitted or transpiled despite that diagnostic, the annotation has no runtime coercion effect, so `retries` is exported as a string rather than a number."
+          },
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Restore a numeric initializer, minimally `export const retries: number = 3;`. Only change the exported type to `string` if a deliberate API migration is intended and all callers are updated."
+        },
+        {
+          "id": "80676b77-7a52-4242-8f22-eabadbfd5d21",
+          "run_id": "ef8e28c8-8cce-45c8-a809-9936c997a76b",
+          "stable_fingerprint": "98a462ab122383ced3956d95",
+          "category": "bug",
+          "rule_id": "js:type-2322",
+          "cwe_id": null,
+          "title": "Type 'string' is not assignable to type 'number'.",
+          "explanation": "Type 'string' is not assignable to type 'number'.",
+          "user_impact": "The parser or static rule identifies a concrete syntax or style problem.",
+          "severity": "medium",
+          "primary_location": {
+            "path": "src/module.ts",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": "6490f8b13425350172dbf5218dd72937417712d5",
+            "snippet": null
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "5d9e00d3-7ee8-4186-9d2e-0c93e405d3bf",
+              "kind": "static_analysis",
+              "tool_or_profile": "js:type-2322",
+              "input_revision": "6490f8b13425350172dbf5218dd72937417712d5",
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "Type 'string' is not assignable to type 'number'.",
+              "duration_ms": 0,
+              "created_at": "2026-11-03T16:31:33.847053+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "proofline-language",
+            "codex_cli_challenge"
+          ],
+          "assumptions": [],
+          "limitations": [],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "contextual_assessment",
+          "evidence_status": "source_supported",
+          "verification_assessment": {
+            "evidence_status": "source_supported",
+            "citations": [
+              {
+                "path": "src/module.ts",
+                "start_line": 1,
+                "quote": "export const retries: number = 'three';"
+              }
+            ],
+            "unresolved_assumptions": [],
+            "rule_id": "js:type-2322",
+            "path": "src/module.ts",
+            "start_line": 1,
+            "is_valid": true,
+            "confidence_assessment": "confirmed",
+            "counter_evidence": null,
+            "explanation": "The annotated target type is `number`, but its initializer is the string literal `'three'`, whose type is not assignable to `number`. This directly supports the reported TS2322-style type error."
+          },
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Inspect the cited syntax or style rule."
+        }
+      ]
+    },
+    {
+      "case_id": "assignment-contract-clean",
+      "variant": "verified",
+      "elapsed_seconds": 12.875328334004735,
+      "run": {
+        "id": "c1b44c6e-377b-4740-a71a-37aa85e8f296",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-cugi2sk0",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "9438a79eb2a097398d2e7440b19bc8434af8f4a9",
+        "head_sha": "683cc7345dda3fabf7d27049bcb9f7d5b289a435",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "codex_cli",
+        "model_id": "gpt-5.6-sol",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "succeeded",
+          "challenge": "succeeded",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 0,
+          "security": 0,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "5",
+            "provider": "codex_cli",
+            "codex_reasoning": "high",
+            "api_mode": "auto",
+            "models": {
+              "review": "gpt-5.6-sol",
+              "patch": "gpt-5.6-sol",
+              "verify_reasoning": "gpt-5.6-sol"
+            },
+            "strategy": "verified",
+            "model": "gpt-5.6-sol",
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 4,
+            "max_tool_calls": 24,
+            "deadline_seconds": 600,
+            "investigation_rounds": 1
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-cugi2sk0",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-cugi2sk0",
+            "comparison": "exact base to head",
+            "source_exclusions": [],
+            "base_sha": "9438a79eb2a097398d2e7440b19bc8434af8f4a9",
+            "head_sha": "683cc7345dda3fabf7d27049bcb9f7d5b289a435",
+            "revision_label": "683cc7345dda3fabf7d27049bcb9f7d5b289a435",
+            "run_config": {
+              "version": "5",
+              "provider": "codex_cli",
+              "codex_reasoning": "high",
+              "api_mode": "auto",
+              "models": {
+                "review": "gpt-5.6-sol",
+                "patch": "gpt-5.6-sol",
+                "verify_reasoning": "gpt-5.6-sol"
+              },
+              "strategy": "verified",
+              "model": "gpt-5.6-sol",
+              "thinking": "low",
+              "max_attempts": 1,
+              "max_model_calls": 4,
+              "max_tool_calls": 24,
+              "deadline_seconds": 600,
+              "investigation_rounds": 1
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "3f05fff36d51e46d4e7b486614eaa6825989cb698526118ef9373430e9743003",
+          "total_files": 1,
+          "source_files": [
+            "src/module.ts"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "repository_policy_source": "base_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "8e798c08-0c67-4f68-865d-d910f2259553"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "8e798c08-0c67-4f68-865d-d910f2259553"
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "8e798c08-0c67-4f68-865d-d910f2259553"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "8e798c08-0c67-4f68-865d-d910f2259553"
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {
+            "src/module.ts": {
+              "path": "src/module.ts",
+              "symbols": [],
+              "imports": [],
+              "bindings": [],
+              "calls": [],
+              "resolved_references": [],
+              "findings": []
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.ts"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "a09339582f1d7eee35b82f33ab800b890202d54e60e475b739345cfb475eab23",
+            "files": [
+              "src/module.ts"
+            ],
+            "symbols": [],
+            "changed_symbols": [],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "model_review_error": null,
+          "review_summary": "No working changes were supplied: the Git diff is empty. The snapshot contains only `src/module.ts` exporting `retries` as `3`, so there is no changed behavior to review and no supported findings.",
+          "verification_coverage": {
+            "complete": true,
+            "requested": 0,
+            "assessed": 0,
+            "unassessed_ids": [],
+            "errors": []
+          },
+          "investigation": {
+            "model_calls": 2,
+            "tool_calls": 1,
+            "trace": [
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:32:09.928768+00:00",
+                "stage": "investigate_review",
+                "request_id": "2881c7b75e8f6da6a941b70615521cc4cc63d166b8223fdbdac6d08dce61b6a8",
+                "call": 1
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:32:15.839595+00:00",
+                "stage": "investigate_review",
+                "request_id": "2881c7b75e8f6da6a941b70615521cc4cc63d166b8223fdbdac6d08dce61b6a8",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 46,
+                  "prompt_tokens": 11491,
+                  "candidate_tokens": 86,
+                  "total_tokens": 11577,
+                  "cached_content_token_count": 10752
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:32:15.840955+00:00",
+                "stage": "investigate_review",
+                "key": "2881c7b75e8f6da6a941b70615521cc4cc63d166b8223fdbdac6d08dce61b6a8"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:32:15.841021+00:00",
+                "tool": {
+                  "name": "get_diff",
+                  "query": "",
+                  "path": "",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:32:15.841101+00:00",
+                "observation": {
+                  "snapshot": "a09339582f1d7eee35b82f33ab800b890202d54e60e475b739345cfb475eab23",
+                  "tool": {
+                    "name": "get_diff",
+                    "query": "",
+                    "path": "",
+                    "start_line": 1,
+                    "end_line": 1
+                  },
+                  "output": "{\"diff\": \"\"}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:32:15.843620+00:00",
+                "stage": "review",
+                "request_id": "9a28004ff6c1c340ccb39ac0b0687fbe10a458d0a4538d8a7452c119b42d8a45",
+                "call": 2
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:32:22.755948+00:00",
+                "stage": "review",
+                "request_id": "9a28004ff6c1c340ccb39ac0b0687fbe10a458d0a4538d8a7452c119b42d8a45",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 0,
+                  "prompt_tokens": 11757,
+                  "candidate_tokens": 62,
+                  "total_tokens": 11819,
+                  "cached_content_token_count": 11008
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:32:22.757216+00:00",
+                "stage": "review",
+                "key": "9a28004ff6c1c340ccb39ac0b0687fbe10a458d0a4538d8a7452c119b42d8a45"
+              }
+            ]
+          }
+        },
+        "usage": {
+          "thought_tokens": 46,
+          "prompt_tokens": 23248,
+          "candidate_tokens": 148,
+          "total_tokens": 23396,
+          "cached_content_token_count": 21760,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-03T16:32:09.882255+00:00",
+        "completed_at": "2026-11-03T16:32:22.757359+00:00"
+      },
+      "findings": []
+    },
+    {
+      "case_id": "precision-money-bug",
+      "variant": "verified",
+      "elapsed_seconds": 47.88848054200935,
+      "run": {
+        "id": "27dc9d63-a2af-4956-b879-8a74fbb1cbee",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-71f10ghz",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "f73bae59e406e8ecf559fa5916afb93b3f2428a8",
+        "head_sha": "93bfbb5c755087f24d3e000eb2fb2a753f8cf0ab",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "codex_cli",
+        "model_id": "gpt-5.6-sol",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "succeeded",
+          "challenge": "succeeded",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 2,
+          "security": 0,
+          "bug": 2,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "5",
+            "provider": "codex_cli",
+            "codex_reasoning": "high",
+            "api_mode": "auto",
+            "models": {
+              "review": "gpt-5.6-sol",
+              "patch": "gpt-5.6-sol",
+              "verify_reasoning": "gpt-5.6-sol"
+            },
+            "strategy": "verified",
+            "model": "gpt-5.6-sol",
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 4,
+            "max_tool_calls": 24,
+            "deadline_seconds": 600,
+            "investigation_rounds": 1
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-71f10ghz",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-71f10ghz",
+            "comparison": "exact base to head",
+            "source_exclusions": [],
+            "base_sha": "f73bae59e406e8ecf559fa5916afb93b3f2428a8",
+            "head_sha": "93bfbb5c755087f24d3e000eb2fb2a753f8cf0ab",
+            "revision_label": "93bfbb5c755087f24d3e000eb2fb2a753f8cf0ab",
+            "run_config": {
+              "version": "5",
+              "provider": "codex_cli",
+              "codex_reasoning": "high",
+              "api_mode": "auto",
+              "models": {
+                "review": "gpt-5.6-sol",
+                "patch": "gpt-5.6-sol",
+                "verify_reasoning": "gpt-5.6-sol"
+              },
+              "strategy": "verified",
+              "model": "gpt-5.6-sol",
+              "thinking": "low",
+              "max_attempts": 1,
+              "max_model_calls": 4,
+              "max_tool_calls": 24,
+              "deadline_seconds": 600,
+              "investigation_rounds": 1
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "ee6d7ddc21880fc857520bee7c228a12315a67d10a3eef418fe397d997c7d063",
+          "total_files": 1,
+          "source_files": [
+            "src/module.py"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "repository_policy_source": "base_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 1,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "ce8125f3-23cb-4df2-ba17-fdebfea532a5"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "ce8125f3-23cb-4df2-ba17-fdebfea532a5"
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "ce8125f3-23cb-4df2-ba17-fdebfea532a5"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "ce8125f3-23cb-4df2-ba17-fdebfea532a5"
+            }
+          },
+          "javascript": {
+            "status": "skipped",
+            "reason": "No JavaScript/TypeScript files"
+          },
+          "test_gaps": [
+            {
+              "path": "src/module.py",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in src/module.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [
+            "src/module.py"
+          ],
+          "diff": "diff --git a/src/module.py b/src/module.py\n--- a/src/module.py\n+++ b/src/module.py\n@@ -1,3 +1,2 @@\n-from decimal import Decimal\n def cents(value):\n-    return int(Decimal(str(value)) * 100)\n+    return int(value * 100)\n",
+          "language_index": {},
+          "python_index_errors": {},
+          "graph_nodes": 1,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.py"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "87f9613f79f56d80a9f0d72e448e8a3341e4bb3dc439f14b2a5680aeaed2f2f6",
+            "files": [
+              "src/module.py"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.py:1:cents",
+                "name": "cents",
+                "path": "src/module.py",
+                "start": 1,
+                "end": 2
+              }
+            ],
+            "changed_symbols": [
+              {
+                "id": "src/module.py:1:cents",
+                "name": "cents",
+                "path": "src/module.py",
+                "start": 1,
+                "end": 2
+              }
+            ],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [
+              {
+                "symbol": {
+                  "id": "src/module.py:1:cents",
+                  "name": "cents",
+                  "path": "src/module.py",
+                  "start": 1,
+                  "end": 2
+                },
+                "callers": [],
+                "test_hints": []
+              }
+            ],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "model_review_error": null,
+          "review_summary": "The change replaces decimal arithmetic with native multiplication and truncation. This introduces cent-level errors for some float inputs and breaks the prior acceptance of decimal numeric strings. No matching tests or callers were supplied.",
+          "verification_coverage": {
+            "evidence_counts": {
+              "source_supported": 0,
+              "refuted": 0,
+              "insufficient_evidence": 2
+            },
+            "requested": 2,
+            "assessed": 2,
+            "unassessed_ids": [],
+            "batches": 1,
+            "errors": [],
+            "complete": true
+          },
+          "investigation": {
+            "model_calls": 4,
+            "tool_calls": 6,
+            "trace": [
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:32:22.939234+00:00",
+                "stage": "investigate_review",
+                "request_id": "aa56534a40a8429d8d3cd7932846a02f38220b80334b3c6b610c5c5e40840232",
+                "call": 1
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:32:30.689407+00:00",
+                "stage": "investigate_review",
+                "request_id": "aa56534a40a8429d8d3cd7932846a02f38220b80334b3c6b610c5c5e40840232",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 73,
+                  "prompt_tokens": 11793,
+                  "candidate_tokens": 169,
+                  "total_tokens": 11962,
+                  "cached_content_token_count": 10752
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:32:30.690885+00:00",
+                "stage": "investigate_review",
+                "key": "aa56534a40a8429d8d3cd7932846a02f38220b80334b3c6b610c5c5e40840232"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:32:30.690931+00:00",
+                "tool": {
+                  "name": "get_diff",
+                  "query": "",
+                  "path": "",
+                  "start_line": 1,
+                  "end_line": 2
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:32:30.691045+00:00",
+                "observation": {
+                  "snapshot": "87f9613f79f56d80a9f0d72e448e8a3341e4bb3dc439f14b2a5680aeaed2f2f6",
+                  "tool": {
+                    "name": "get_diff",
+                    "query": "",
+                    "path": "",
+                    "start_line": 1,
+                    "end_line": 2
+                  },
+                  "output": "{\"diff\": \"diff --git a/src/module.py b/src/module.py\\n--- a/src/module.py\\n+++ b/src/module.py\\n@@ -1,3 +1,2 @@\\n-from decimal import Decimal\\n def cents(value):\\n-    return int(Decimal(str(value)) * 100)\\n+    return int(value * 100)\\n\"}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:32:30.691098+00:00",
+                "tool": {
+                  "name": "find_references",
+                  "query": "cents",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 2
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:32:30.691181+00:00",
+                "observation": {
+                  "snapshot": "87f9613f79f56d80a9f0d72e448e8a3341e4bb3dc439f14b2a5680aeaed2f2f6",
+                  "tool": {
+                    "name": "find_references",
+                    "query": "cents",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 2
+                  },
+                  "output": "{\"matches\": [{\"path\": \"src/module.py\", \"line\": 1, \"text\": \"def cents(value):\", \"relationship\": \"lexical_hint\"}]}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:32:30.691197+00:00",
+                "tool": {
+                  "name": "find_related_tests",
+                  "query": "cents",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 2
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:32:30.691219+00:00",
+                "observation": {
+                  "snapshot": "87f9613f79f56d80a9f0d72e448e8a3341e4bb3dc439f14b2a5680aeaed2f2f6",
+                  "tool": {
+                    "name": "find_related_tests",
+                    "query": "cents",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 2
+                  },
+                  "output": "{\"paths\": []}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:32:30.693889+00:00",
+                "stage": "review",
+                "request_id": "25b0c1c56cf974bd2f05130e48083d45cf3ddc945e2a10aefa1ee57700c10375",
+                "call": 2
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:32:46.339278+00:00",
+                "stage": "review",
+                "request_id": "25b0c1c56cf974bd2f05130e48083d45cf3ddc945e2a10aefa1ee57700c10375",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 239,
+                  "prompt_tokens": 12282,
+                  "candidate_tokens": 843,
+                  "total_tokens": 13125,
+                  "cached_content_token_count": 11008
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:32:46.340010+00:00",
+                "stage": "review",
+                "key": "25b0c1c56cf974bd2f05130e48083d45cf3ddc945e2a10aefa1ee57700c10375"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:32:46.341528+00:00",
+                "stage": "investigate_verify_reasoning",
+                "request_id": "834393461528e6b77e7abb3ca9c46992078ac2bbe46b6662898f4f54f813ce89",
+                "call": 3
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:32:52.896077+00:00",
+                "stage": "investigate_verify_reasoning",
+                "request_id": "834393461528e6b77e7abb3ca9c46992078ac2bbe46b6662898f4f54f813ce89",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 76,
+                  "prompt_tokens": 11769,
+                  "candidate_tokens": 178,
+                  "total_tokens": 11947,
+                  "cached_content_token_count": 0
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:32:52.897917+00:00",
+                "stage": "investigate_verify_reasoning",
+                "key": "834393461528e6b77e7abb3ca9c46992078ac2bbe46b6662898f4f54f813ce89"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:32:52.897993+00:00",
+                "tool": {
+                  "name": "get_diff",
+                  "query": "src/module.py",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 2
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:32:52.898137+00:00",
+                "observation": {
+                  "snapshot": "87f9613f79f56d80a9f0d72e448e8a3341e4bb3dc439f14b2a5680aeaed2f2f6",
+                  "tool": {
+                    "name": "get_diff",
+                    "query": "src/module.py",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 2
+                  },
+                  "output": "{\"diff\": \"diff --git a/src/module.py b/src/module.py\\n--- a/src/module.py\\n+++ b/src/module.py\\n@@ -1,3 +1,2 @@\\n-from decimal import Decimal\\n def cents(value):\\n-    return int(Decimal(str(value)) * 100)\\n+    return int(value * 100)\\n\"}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:32:52.898181+00:00",
+                "tool": {
+                  "name": "find_references",
+                  "query": "cents",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 2
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:32:52.898280+00:00",
+                "observation": {
+                  "snapshot": "87f9613f79f56d80a9f0d72e448e8a3341e4bb3dc439f14b2a5680aeaed2f2f6",
+                  "tool": {
+                    "name": "find_references",
+                    "query": "cents",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 2
+                  },
+                  "output": "{\"matches\": [{\"path\": \"src/module.py\", \"line\": 1, \"text\": \"def cents(value):\", \"relationship\": \"lexical_hint\"}]}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:32:52.898298+00:00",
+                "tool": {
+                  "name": "find_related_tests",
+                  "query": "cents",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 2
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:32:52.898320+00:00",
+                "observation": {
+                  "snapshot": "87f9613f79f56d80a9f0d72e448e8a3341e4bb3dc439f14b2a5680aeaed2f2f6",
+                  "tool": {
+                    "name": "find_related_tests",
+                    "query": "cents",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 2
+                  },
+                  "output": "{\"paths\": []}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:32:52.900637+00:00",
+                "stage": "challenge_1",
+                "request_id": "64a4bea6479fb0ad2ebe8ac035e311f128fee8321ed699a42291cd13901b2fdd",
+                "call": 4
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:33:10.772287+00:00",
+                "stage": "challenge_1",
+                "request_id": "64a4bea6479fb0ad2ebe8ac035e311f128fee8321ed699a42291cd13901b2fdd",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 414,
+                  "prompt_tokens": 12230,
+                  "candidate_tokens": 958,
+                  "total_tokens": 13188,
+                  "cached_content_token_count": 10880
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:33:10.773830+00:00",
+                "stage": "challenge_1",
+                "key": "64a4bea6479fb0ad2ebe8ac035e311f128fee8321ed699a42291cd13901b2fdd"
+              }
+            ]
+          }
+        },
+        "usage": {
+          "thought_tokens": 802,
+          "prompt_tokens": 48074,
+          "candidate_tokens": 2148,
+          "total_tokens": 50222,
+          "cached_content_token_count": 32640,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-03T16:32:22.885866+00:00",
+        "completed_at": "2026-11-03T16:33:10.774195+00:00"
+      },
+      "findings": [
+        {
+          "id": "c26a00d7-08c7-4abc-8c1d-905bc32e0da2",
+          "run_id": "27dc9d63-a2af-4956-b879-8a74fbb1cbee",
+          "stable_fingerprint": "6620b585450b857c5a200a80",
+          "category": "bug",
+          "rule_id": "proofline:PY-FLOAT-CURRENCY-TRUNCATION",
+          "cwe_id": null,
+          "title": "Binary floating-point error can undercount cents",
+          "explanation": "The new implementation multiplies float inputs using binary floating-point and then truncates with `int`. Values such as `19.99` can produce a result just below the exact integer boundary, yielding 1998 instead of 1999. The previous `Decimal(str(value))` conversion avoided this representation error.",
+          "user_impact": "Valid monetary values may be converted to one cent less than expected, causing incorrect charges, balances, or totals.",
+          "severity": "high",
+          "primary_location": {
+            "path": "src/module.py",
+            "start_line": 2,
+            "end_line": 2,
+            "side": "head",
+            "commit_sha": "93bfbb5c755087f24d3e000eb2fb2a753f8cf0ab",
+            "snippet": "return int(value * 100)"
+          },
+          "related_locations": [],
+          "change_relation": "changed_context",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "f0d09fc0-dc63-4cbc-8a7b-bfb4ff1c2d22",
+              "kind": "codex_cli_review",
+              "tool_or_profile": "gpt-5.6-sol",
+              "input_revision": "93bfbb5c755087f24d3e000eb2fb2a753f8cf0ab",
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "`cents` receives a float whose multiplication by 100 is represented below the intended integer, such as `19.99`.",
+              "duration_ms": 0,
+              "created_at": "2026-11-03T16:32:46.340079+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "codex_cli_review"
+          ],
+          "assumptions": [
+            "The function is intended to convert decimal currency amounts to integral cents, as indicated by its name and previous implementation.",
+            "The function is expected to convert ordinary float-denominated currency values to cents by truncating only after an exact decimal multiplication.",
+            "No caller validates or converts float inputs to Decimal before calling cents; no callers or tests were supplied."
+          ],
+          "limitations": [
+            "No callers or matching tests were supplied, so the downstream scope cannot be established.",
+            "Verifier supplied no valid source quotation; conclusion remains unestablished"
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "contextual_assessment",
+          "evidence_status": "insufficient_evidence",
+          "verification_assessment": {
+            "evidence_status": "source_supported",
+            "citations": [
+              {
+                "path": "src/module.py",
+                "start_line": 2,
+                "quote": "return int(value * 100)"
+              },
+              {
+                "path": "src/module.py",
+                "start_line": 2,
+                "quote": "-    return int(Decimal(str(value)) * 100)\n+    return int(value * 100)"
+              }
+            ],
+            "unresolved_assumptions": [
+              "The function is expected to convert ordinary float-denominated currency values to cents by truncating only after an exact decimal multiplication.",
+              "No caller validates or converts float inputs to Decimal before calling cents; no callers or tests were supplied."
+            ],
+            "rule_id": "proofline:PY-FLOAT-CURRENCY-TRUNCATION",
+            "path": "src/module.py",
+            "start_line": 2,
+            "is_valid": true,
+            "confidence_assessment": "confirmed",
+            "counter_evidence": null,
+            "explanation": "The changed expression performs multiplication in the input float's binary floating-point type and then passes the potentially inexact result to int, which truncates toward zero. For the concrete float 19.99, binary multiplication by 100 produces a value just below 1999, so the function returns 1998. The supplied diff establishes that the former implementation first converted the float's string representation to Decimal, for which Decimal('19.99') * 100 is exactly 1999 before conversion to int."
+          },
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Restore decimal arithmetic, for example `int(Decimal(str(value)) * 100)`, and add a regression test for `cents(19.99) == 1999`."
+        },
+        {
+          "id": "e94b977f-0c63-49d4-b9e6-63805047a810",
+          "run_id": "27dc9d63-a2af-4956-b879-8a74fbb1cbee",
+          "stable_fingerprint": "49dd2ad97d725fa7e7d0a5f9",
+          "category": "bug",
+          "rule_id": "proofline:PY-NUMERIC-STRING-COMPATIBILITY",
+          "cwe_id": null,
+          "title": "Numeric string inputs no longer work",
+          "explanation": "The previous implementation accepted decimal strings because `Decimal(str(value))` parsed them. The replacement applies string repetition first; for example, `\"1.23\" * 100` creates a repeated non-integer string and `int(...)` raises `ValueError`.",
+          "user_impact": "Existing callers passing serialized numeric values can now fail instead of receiving a cents value.",
+          "severity": "medium",
+          "primary_location": {
+            "path": "src/module.py",
+            "start_line": 2,
+            "end_line": 2,
+            "side": "head",
+            "commit_sha": "93bfbb5c755087f24d3e000eb2fb2a753f8cf0ab",
+            "snippet": "return int(value * 100)"
+          },
+          "related_locations": [],
+          "change_relation": "changed_context",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "9a5d5065-d48a-41a8-8beb-f2e6527bb3db",
+              "kind": "codex_cli_review",
+              "tool_or_profile": "gpt-5.6-sol",
+              "input_revision": "93bfbb5c755087f24d3e000eb2fb2a753f8cf0ab",
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "`cents` is called with a decimal numeric string such as `\"1.23\"`, which previously returned `123`.",
+              "duration_ms": 0,
+              "created_at": "2026-11-03T16:32:46.340139+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "codex_cli_review"
+          ],
+          "assumptions": [
+            "Acceptance of numeric strings was part of the existing behavior rather than accidental coercion.",
+            "Numeric strings are part of the intended or compatibility-sensitive input contract; no explicit API contract, callers, or tests were supplied.",
+            "No wrapper converts numeric strings before they reach cents."
+          ],
+          "limitations": [
+            "The supplied context contains no declared type contract or callers confirming whether string inputs are expected.",
+            "Verifier supplied no valid source quotation; conclusion remains unestablished"
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "contextual_assessment",
+          "evidence_status": "insufficient_evidence",
+          "verification_assessment": {
+            "evidence_status": "source_supported",
+            "citations": [
+              {
+                "path": "src/module.py",
+                "start_line": 2,
+                "quote": "return int(value * 100)"
+              },
+              {
+                "path": "src/module.py",
+                "start_line": 2,
+                "quote": "-    return int(Decimal(str(value)) * 100)\n+    return int(value * 100)"
+              }
+            ],
+            "unresolved_assumptions": [
+              "Numeric strings are part of the intended or compatibility-sensitive input contract; no explicit API contract, callers, or tests were supplied.",
+              "No wrapper converts numeric strings before they reach cents."
+            ],
+            "rule_id": "proofline:PY-NUMERIC-STRING-COMPATIBILITY",
+            "path": "src/module.py",
+            "start_line": 2,
+            "is_valid": true,
+            "confidence_assessment": "confirmed",
+            "counter_evidence": null,
+            "explanation": "For a string input, value * 100 uses Python string repetition rather than numeric multiplication. Thus '1.23' becomes a repeated string containing decimal points, and int(...) raises ValueError. The supplied diff shows that the previous implementation used Decimal(str(value)); Decimal('1.23') parses successfully and yields 123 after multiplication and integer conversion. This establishes a concrete behavioral regression, although the supplied evidence does not establish whether string inputs are an officially supported API contract."
+          },
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Preserve parsing through `Decimal(str(value))`, or explicitly reject strings with a documented validation error if the API is intentionally being narrowed. Add a test covering the chosen contract."
+        }
+      ]
+    },
+    {
+      "case_id": "precision-money-clean",
+      "variant": "verified",
+      "elapsed_seconds": 17.88298725000641,
+      "run": {
+        "id": "f5fab4b8-0f0a-40e3-9c9c-351cf9a7db78",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-oh4dvry2",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "4f646b4d03637876c85a396405cc0e74d0933641",
+        "head_sha": "f9bfd9c4e070e5370bc83c2f8929aba6fbe7beff",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "codex_cli",
+        "model_id": "gpt-5.6-sol",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "succeeded",
+          "challenge": "succeeded",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 0,
+          "security": 0,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "5",
+            "provider": "codex_cli",
+            "codex_reasoning": "high",
+            "api_mode": "auto",
+            "models": {
+              "review": "gpt-5.6-sol",
+              "patch": "gpt-5.6-sol",
+              "verify_reasoning": "gpt-5.6-sol"
+            },
+            "strategy": "verified",
+            "model": "gpt-5.6-sol",
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 4,
+            "max_tool_calls": 24,
+            "deadline_seconds": 600,
+            "investigation_rounds": 1
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-oh4dvry2",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-oh4dvry2",
+            "comparison": "exact base to head",
+            "source_exclusions": [],
+            "base_sha": "4f646b4d03637876c85a396405cc0e74d0933641",
+            "head_sha": "f9bfd9c4e070e5370bc83c2f8929aba6fbe7beff",
+            "revision_label": "f9bfd9c4e070e5370bc83c2f8929aba6fbe7beff",
+            "run_config": {
+              "version": "5",
+              "provider": "codex_cli",
+              "codex_reasoning": "high",
+              "api_mode": "auto",
+              "models": {
+                "review": "gpt-5.6-sol",
+                "patch": "gpt-5.6-sol",
+                "verify_reasoning": "gpt-5.6-sol"
+              },
+              "strategy": "verified",
+              "model": "gpt-5.6-sol",
+              "thinking": "low",
+              "max_attempts": 1,
+              "max_model_calls": 4,
+              "max_tool_calls": 24,
+              "deadline_seconds": 600,
+              "investigation_rounds": 1
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "a14c5ed4e90ad9a51b260a1e72831a5be4c3dfaa6cf939ffcbd44a264ba0beb8",
+          "total_files": 1,
+          "source_files": [
+            "src/module.py"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "repository_policy_source": "base_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 1,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "ce8125f3-23cb-4df2-ba17-fdebfea532a5"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "ce8125f3-23cb-4df2-ba17-fdebfea532a5"
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "ce8125f3-23cb-4df2-ba17-fdebfea532a5"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "ce8125f3-23cb-4df2-ba17-fdebfea532a5"
+            }
+          },
+          "javascript": {
+            "status": "skipped",
+            "reason": "No JavaScript/TypeScript files"
+          },
+          "test_gaps": [],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {},
+          "python_index_errors": {},
+          "graph_nodes": 1,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.py"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "211fa0c7f927fb56980e811d49794b6f2944f3309fa174f359d8fe5441485b9e",
+            "files": [
+              "src/module.py"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.py:2:cents",
+                "name": "cents",
+                "path": "src/module.py",
+                "start": 2,
+                "end": 3
+              }
+            ],
+            "changed_symbols": [],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "model_review_error": null,
+          "review_summary": "No working changes were supplied (the diff is empty), so there are no behavioral changes to review. The provided `cents` implementation truncates sub-cent amounts toward zero, but no API contract or affected caller establishes that another rounding policy is required; therefore this is not reported as a defect.",
+          "verification_coverage": {
+            "complete": true,
+            "requested": 0,
+            "assessed": 0,
+            "unassessed_ids": [],
+            "errors": []
+          },
+          "investigation": {
+            "model_calls": 2,
+            "tool_calls": 4,
+            "trace": [
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:33:10.951702+00:00",
+                "stage": "investigate_review",
+                "request_id": "0b5648d59127d129889c1523ff94c9a03dd96bbdf1623eb169de90bc2656858e",
+                "call": 1
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:33:20.163185+00:00",
+                "stage": "investigate_review",
+                "request_id": "0b5648d59127d129889c1523ff94c9a03dd96bbdf1623eb169de90bc2656858e",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 174,
+                  "prompt_tokens": 11551,
+                  "candidate_tokens": 290,
+                  "total_tokens": 11841,
+                  "cached_content_token_count": 10752
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:33:20.164894+00:00",
+                "stage": "investigate_review",
+                "key": "0b5648d59127d129889c1523ff94c9a03dd96bbdf1623eb169de90bc2656858e"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:33:20.165012+00:00",
+                "tool": {
+                  "name": "get_diff",
+                  "query": "",
+                  "path": "",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:33:20.165100+00:00",
+                "observation": {
+                  "snapshot": "211fa0c7f927fb56980e811d49794b6f2944f3309fa174f359d8fe5441485b9e",
+                  "tool": {
+                    "name": "get_diff",
+                    "query": "",
+                    "path": "",
+                    "start_line": 1,
+                    "end_line": 1
+                  },
+                  "output": "{\"diff\": \"\"}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:33:20.165155+00:00",
+                "tool": {
+                  "name": "get_symbol",
+                  "query": "cents",
+                  "path": "src/module.py",
+                  "start_line": 2,
+                  "end_line": 3
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:33:20.165209+00:00",
+                "observation": {
+                  "snapshot": "211fa0c7f927fb56980e811d49794b6f2944f3309fa174f359d8fe5441485b9e",
+                  "tool": {
+                    "name": "get_symbol",
+                    "query": "cents",
+                    "path": "src/module.py",
+                    "start_line": 2,
+                    "end_line": 3
+                  },
+                  "output": "{\"symbols\": [{\"id\": \"src/module.py:2:cents\", \"name\": \"cents\", \"path\": \"src/module.py\", \"start\": 2, \"end\": 3}], \"match_type\": \"exact_symbol\"}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:33:20.165226+00:00",
+                "tool": {
+                  "name": "find_references",
+                  "query": "cents",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 3
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:33:20.165302+00:00",
+                "observation": {
+                  "snapshot": "211fa0c7f927fb56980e811d49794b6f2944f3309fa174f359d8fe5441485b9e",
+                  "tool": {
+                    "name": "find_references",
+                    "query": "cents",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 3
+                  },
+                  "output": "{\"matches\": [{\"path\": \"src/module.py\", \"line\": 2, \"text\": \"def cents(value):\", \"relationship\": \"lexical_hint\"}]}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:33:20.165319+00:00",
+                "tool": {
+                  "name": "find_related_tests",
+                  "query": "cents",
+                  "path": "",
+                  "start_line": 1,
+                  "end_line": 1
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:33:20.165341+00:00",
+                "observation": {
+                  "snapshot": "211fa0c7f927fb56980e811d49794b6f2944f3309fa174f359d8fe5441485b9e",
+                  "tool": {
+                    "name": "find_related_tests",
+                    "query": "cents",
+                    "path": "",
+                    "start_line": 1,
+                    "end_line": 1
+                  },
+                  "output": "{\"paths\": []}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:33:20.167759+00:00",
+                "stage": "review",
+                "request_id": "262f57705940df79403d816e743ee5d9e1e09b620247b23a2e6e9b5e2291adca",
+                "call": 2
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:33:28.779981+00:00",
+                "stage": "review",
+                "request_id": "262f57705940df79403d816e743ee5d9e1e09b620247b23a2e6e9b5e2291adca",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 135,
+                  "prompt_tokens": 12121,
+                  "candidate_tokens": 215,
+                  "total_tokens": 12336,
+                  "cached_content_token_count": 0
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:33:28.781407+00:00",
+                "stage": "review",
+                "key": "262f57705940df79403d816e743ee5d9e1e09b620247b23a2e6e9b5e2291adca"
+              }
+            ]
+          }
+        },
+        "usage": {
+          "thought_tokens": 309,
+          "prompt_tokens": 23672,
+          "candidate_tokens": 505,
+          "total_tokens": 24177,
+          "cached_content_token_count": 10752,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-03T16:33:10.898929+00:00",
+        "completed_at": "2026-11-03T16:33:28.781569+00:00"
+      },
+      "findings": []
+    }
+  ],
+  "original_corpus_hash": "b9d4be93d28266423cf3fd3ce11b0283a8d95a90976b39fc382811d8a46c7f33",
+  "original_report_sha256": "10a7956439667ae3c7627c1528b3dd8e5679fc1faf6624e7ec485f82f4c438a2",
+  "purpose": "Known-case recovery/regression retest; not an untouched heldout estimate"
+}

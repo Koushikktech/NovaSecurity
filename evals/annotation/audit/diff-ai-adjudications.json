@@ -1,0 +1,104 @@
+[
+  {
+    "finding_id": "5811e634-b36c-42a9-bac4-be304870c5cf",
+    "issue_id": "empty-list",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "first([]) raises IndexError after removal of the empty-list guard; the base returns None. src/module.py:2. This comment identifies empty-list. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "372554f9-4c55-4b2d-be85-c8bd32fb5c2a",
+    "issue_id": "zero-total",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "average([]) computes 0/0 and returns NaN; the base explicitly returns 0 for empty input. src/module.ts:1. This comment identifies zero-total. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "d06eff47-0a96-4028-9765-3069fdedd3a3",
+    "issue_id": "sort-return",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "sorted_items([2,1]) returns None because list.sort mutates its receiver and returns None. The base returns [1,2] without mutating the input. src/module.py:2. Secondary issue: The base accepts tuple/generator inputs; replacing sorted with .sort raises AttributeError for these inputs. This comment identifies sort-return. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "9821ce22-f9df-4e24-984e-9cc25a7fcc92",
+    "issue_id": "sort-iterable-input",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "sorted_items([2,1]) returns None because list.sort mutates its receiver and returns None. The base returns [1,2] without mutating the input. src/module.py:2. Secondary issue: The base accepts tuple/generator inputs; replacing sorted with .sort raises AttributeError for these inputs. This comment identifies sort-iterable-input. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "41b0f176-331d-4984-b285-812f351eed8c",
+    "issue_id": "missing-await",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "For a fetcher returning a Promise of a response, response is the Promise and lacks json(); load rejects with TypeError. The base awaits the response before invoking json. src/module.js:1. This comment identifies missing-await. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "d113e332-d869-4f69-af5c-f6a761cdca90",
+    "issue_id": "null-input",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "label(null) calls toUpperCase on null and throws; the base returns the empty string. The declared string|null argument explicitly admits this input. src/module.ts:1. This comment identifies null-input. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "86533d82-f37b-43c8-b7e5-7565edc7949a",
+    "issue_id": "null-input",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "label(null) calls toUpperCase on null and throws; the base returns the empty string. The declared string|null argument explicitly admits this input. src/module.ts:1. This comment identifies null-input. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "79690f5c-5f5d-41b0-af2f-d4840408b24c",
+    "issue_id": "boolean-string",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "enabled('false') becomes True because a nonempty Python string is truthy; the base returns False. src/module.py:2. This is a change from the baseline string-parsing behavior. This comment identifies boolean-string. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "91ca5693-7941-4ba5-9a59-a63d565f5add",
+    "issue_id": "slice-boundary",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "page([0,1,2,3],2,2) returns [] because size is used as the absolute end index; the base returns [2,3]. src/module.js:1. This comment identifies slice-boundary. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "c691d8c7-ec45-4d7f-b45b-bcc1b57fa214",
+    "issue_id": "falsy-default",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "timeout(0) returns 30 after replacing ?? with ||; the base preserves 0. src/module.ts:1. This demonstrates a behavioral change for an admitted numeric input; external requirements could choose to forbid zero but no such restriction is declared. This comment identifies falsy-default. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "5d853646-8095-437f-9b90-ee00eb3d51ae",
+    "issue_id": "dict-delete",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "prune({'a':None}) deletes a dictionary key while iterating that dictionary and raises RuntimeError on iteration advancement. The base iterates a list of keys and completes. src/module.py:2-4. This comment identifies dict-delete. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "e90c7e64-3a6a-4f53-9e4e-6f282763a4a7",
+    "issue_id": "reject-propagation",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "save now returns undefined and suppresses rejection of a task promise, whereas the base returns that promise to the caller. src/module.js:1. Loss of return/propagation is established relative to the base; no external persistence contract is assumed. Secondary issue: The base returns a synchronous task value; unconditionally calling .catch on a normal value raises TypeError. This comment identifies reject-propagation. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "5e92606b-1596-46c0-85bc-22d21d65f5ce",
+    "issue_id": "synchronous-task-input",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "save now returns undefined and suppresses rejection of a task promise, whereas the base returns that promise to the caller. src/module.js:1. Loss of return/propagation is established relative to the base; no external persistence contract is assumed. Secondary issue: The base returns a synchronous task value; unconditionally calling .catch on a normal value raises TypeError. This comment identifies synchronous-task-input. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "7b8559e7-0e2a-4bee-9cab-07ac7fe0a4da",
+    "issue_id": "assignment-contract",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "retries is explicitly typed number but assigned string 'three', violating TypeScript assignment compatibility and changing its runtime type. src/module.ts:1. This comment identifies assignment-contract. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "4cfb8ffd-988a-4532-8b29-88ef7bf121cf",
+    "issue_id": "assignment-contract",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "retries is explicitly typed number but assigned string 'three', violating TypeScript assignment compatibility and changing its runtime type. src/module.ts:1. This comment identifies assignment-contract. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "f089a4ae-5050-4428-9511-6fea0465f6e0",
+    "issue_id": "precision-money",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "For numeric input 0.29, int(value*100) truncates the binary float product 28.999999999999996 to 28; the base Decimal(str(value))*100 returns 29. src/module.py:2. This establishes a baseline regression for that concrete float, not all monetary requirements. Secondary issue: The base accepts decimal strings; repeating a dotted string then passing it to int raises ValueError. This comment identifies precision-money. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "9a100d8a-fdbd-4f83-8c7d-05c50a91f14a",
+    "issue_id": "numeric-string-input",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "For numeric input 0.29, int(value*100) truncates the binary float product 28.999999999999996 to 28; the base Decimal(str(value))*100 returns 29. src/module.py:2. This establishes a baseline regression for that concrete float, not all monetary requirements. Secondary issue: The base accepts decimal strings; repeating a dotted string then passing it to int raises ValueError. This comment identifies numeric-string-input. Additional comments about that same expected issue count as duplicate noise."
+  }
+]

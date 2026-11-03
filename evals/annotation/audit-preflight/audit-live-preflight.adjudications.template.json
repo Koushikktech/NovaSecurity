@@ -1,0 +1,193 @@
+[
+  {
+    "finding_id": "d381937c-e3b9-4787-9316-80d27f422ef6",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "mutable-default-bug",
+    "finding": {
+      "id": "d381937c-e3b9-4787-9316-80d27f422ef6",
+      "run_id": "53028dd6-48a0-43ec-8b38-951c18baf6af",
+      "stable_fingerprint": "d65d108abe987f8e5d96df5b",
+      "category": "bug",
+      "rule_id": "ruff:B006",
+      "cwe_id": null,
+      "title": "B006: Do not use mutable data structures for argument defaults",
+      "explanation": "Do not use mutable data structures for argument defaults",
+      "user_impact": "The cited rule identifies a potential correctness defect; inspect its trigger and affected callers.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "src/module.py",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "44068afc6a36c851e0eb7b4089c0c18b8b197317",
+        "snippet": null
+      },
+      "related_locations": [],
+      "change_relation": "introduced",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "0ff0dde4-d2b4-41f3-9232-533702d4729d",
+          "kind": "cached_static_analysis",
+          "tool_or_profile": "ruff",
+          "input_revision": "44068afc6a36c851e0eb7b4089c0c18b8b197317",
+          "command": [
+            "/Users/koushikk/Documents/Hackathons/Neural Strom/.venv/bin/ruff",
+            "check",
+            "--output-format=json",
+            "--isolated",
+            "--ignore-noqa",
+            "--no-respect-gitignore",
+            "--select",
+            "E,F,B",
+            "."
+          ],
+          "exit_code": 1,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Do not use mutable data structures for argument defaults",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T13:49:15.156263+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "ruff",
+        "codex_cli_challenge"
+      ],
+      "assumptions": [],
+      "limitations": [],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "source_supported",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "src/module.py",
+            "start_line": 1,
+            "quote": "def collect(item, items=[]):"
+          },
+          {
+            "path": "src/module.py",
+            "start_line": 2,
+            "quote": "    items.append(item)"
+          },
+          {
+            "path": "src/module.py",
+            "start_line": 3,
+            "quote": "    return items"
+          }
+        ],
+        "unresolved_assumptions": [],
+        "rule_id": "ruff:B006",
+        "path": "src/module.py",
+        "start_line": 1,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The default value is a mutable list created when the function definition is evaluated. Calls that omit `items` therefore receive the same list, and line 2 mutates that shared object before line 3 returns it. This directly violates B006."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Replace with `None`; initialize within function"
+    }
+  },
+  {
+    "finding_id": "6d3f621b-03b5-4c8c-b76b-626122f9756c",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "mutable-default-bug",
+    "finding": {
+      "id": "6d3f621b-03b5-4c8c-b76b-626122f9756c",
+      "run_id": "53028dd6-48a0-43ec-8b38-951c18baf6af",
+      "stable_fingerprint": "22b65b03f7471036c8db0588",
+      "category": "bug",
+      "rule_id": "proofline:PY-MUTABLE-DEFAULT",
+      "cwe_id": null,
+      "title": "Default calls share accumulated state",
+      "explanation": "The new default list is created once when the function is defined. Because line 2 mutates it, successive calls that omit `items` reuse the same list; for example, `collect('a')` followed by `collect('b')` returns a list containing both values on the second call. The previous `None` sentinel created a fresh list for every omitted argument.",
+      "user_impact": "Independent calls can leak and accumulate values across requests or operations, producing incorrect results and retaining objects unexpectedly.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "src/module.py",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "44068afc6a36c851e0eb7b4089c0c18b8b197317",
+        "snippet": "def collect(item, items=[]):"
+      },
+      "related_locations": [],
+      "change_relation": "changed_context",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "6657b14d-56f0-43e5-9e8b-110d2999f4d4",
+          "kind": "codex_cli_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "44068afc6a36c851e0eb7b4089c0c18b8b197317",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Call `collect` more than once without passing `items`.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T13:51:07.458178+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "codex_cli_review",
+        "codex_cli_challenge"
+      ],
+      "assumptions": [
+        "Calls that omit `items` are intended to produce independent lists, as established by the removed sentinel implementation.",
+        "Whether persistent accumulation across calls was intentionally introduced is not documented in the supplied scope."
+      ],
+      "limitations": [
+        "No callers or matching tests were supplied, so the frequency of omitted-argument calls is unknown."
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "source_supported",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "src/module.py",
+            "start_line": 1,
+            "quote": "def collect(item, items=[]):"
+          },
+          {
+            "path": "src/module.py",
+            "start_line": 2,
+            "quote": "    items.append(item)"
+          },
+          {
+            "path": "src/module.py",
+            "start_line": 3,
+            "quote": "    return items"
+          }
+        ],
+        "unresolved_assumptions": [
+          "Whether persistent accumulation across calls was intentionally introduced is not documented in the supplied scope."
+        ],
+        "rule_id": "proofline:PY-MUTABLE-DEFAULT",
+        "path": "src/module.py",
+        "start_line": 1,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "For any caller omitting `items`, Python reuses the list stored in the function default. `collect('a')` appends to that object and returns `['a']`; a subsequent `collect('b')` appends to the same object and returns `['a', 'b']`. The supplied diff also shows that the prior `None` sentinel initialized a new list for each omitted argument, so the change introduced shared state across defaulted calls."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Restore a non-mutable sentinel default, such as `def collect(item, items=None):` followed by `items = [] if items is None else items`, then append as before."
+    }
+  }
+]

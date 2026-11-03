@@ -1,18 +1,38 @@
 [project]
-name = "novasecurity-backend"
-version = "0.1.0"
-description = "AI-powered AST data-flow SAST and automated remediation backend using Amazon Nova"
+name = "proofline-backend"
+version = "1.0.0"
+description = "Evidence-backed AI pull request code reviewer using Google Gemini — Neural Storm 2026 / FT-05"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.115.0",
     "gitpython>=3.1.40",
-    "langgraph>=0.2.0",
+    "google-genai==2.34.0",
+    "httpx>=0.28.0",
     "networkx>=3.2.0",
-    "openai>=1.50.0",
+    "pydantic>=2.0.0",
     "python-dotenv>=1.0.0",
-    "supabase>=2.0.0",
+    "PyYAML>=6.0.3",
     "tree-sitter>=0.23.0",
     "tree-sitter-python>=0.23.0",
     "uvicorn>=0.30.0",
+    "ruff>=0.5.0",
+    "bandit>=1.7.0",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
 ]
+
+[project.scripts]
+proofline = "cli:main"
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+extend-exclude = ["data", "data/*", "data/workspaces/*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501", "E402"]
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "function"

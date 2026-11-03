@@ -1,0 +1,22 @@
+{
+  "scope": "Actual single-process API crash/restart and static-only concurrent jobs; no Gemini/GitHub calls",
+  "requested_jobs": 12,
+  "restart": {
+    "passed": true,
+    "active_before_crash": "running",
+    "after_restart": "interrupted",
+    "completed_report_preserved": true,
+    "progress_stream_closed": true
+  },
+  "concurrency": {
+    "passed": true,
+    "repeated_completed_reviews": 20,
+    "repeat_rounds": 10,
+    "accepted": 2,
+    "queue_rejections": 10,
+    "completed_static_reviews": 2,
+    "followup_after_release": "passed"
+  },
+  "passed": true,
+  "duration_seconds": 2.06
+}

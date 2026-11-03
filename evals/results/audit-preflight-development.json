@@ -1,0 +1,418 @@
+{
+  "configuration": {
+    "provider": "codex_cli",
+    "model": null,
+    "reasoning": "high",
+    "max_calls": 4,
+    "deadline": 600,
+    "attempts": 1
+  },
+  "corpus_hash": "b9d4be93d28266423cf3fd3ce11b0283a8d95a90976b39fc382811d8a46c7f33",
+  "variant": "verified",
+  "split": "development",
+  "quality_metrics": "not_computed_without_adjudication",
+  "results": [
+    {
+      "case_id": "mutable-default-bug",
+      "variant": "verified",
+      "elapsed_seconds": 0.3354010839975672,
+      "run": {
+        "id": "8b6f64e7-9ac9-49f6-8106-b1cf35ebd99a",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-td_b2jik",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "95e1c62d2037a045676342804b00a8e63f0e6e68",
+        "head_sha": "f2f9fab1369f284cd2ff91652eaf1e191d43d795",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "codex_cli",
+        "model_id": "account-default-unavailable",
+        "status": "partial",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "failed",
+          "challenge": "failed",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 1,
+          "security": 0,
+          "bug": 1,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "5",
+            "provider": "codex_cli",
+            "codex_reasoning": "high",
+            "api_mode": "auto",
+            "models": {
+              "review": "account-default-unavailable",
+              "patch": "account-default-unavailable",
+              "verify_reasoning": "account-default-unavailable"
+            },
+            "strategy": "verified",
+            "model": null,
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 4,
+            "max_tool_calls": 24,
+            "deadline_seconds": 600,
+            "investigation_rounds": 1
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-td_b2jik",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-td_b2jik",
+            "comparison": "exact base to head",
+            "source_exclusions": [],
+            "base_sha": "95e1c62d2037a045676342804b00a8e63f0e6e68",
+            "head_sha": "f2f9fab1369f284cd2ff91652eaf1e191d43d795",
+            "revision_label": "f2f9fab1369f284cd2ff91652eaf1e191d43d795",
+            "run_config": {
+              "version": "5",
+              "provider": "codex_cli",
+              "codex_reasoning": "high",
+              "api_mode": "auto",
+              "models": {
+                "review": "account-default-unavailable",
+                "patch": "account-default-unavailable",
+                "verify_reasoning": "account-default-unavailable"
+              },
+              "strategy": "verified",
+              "model": null,
+              "thinking": "low",
+              "max_attempts": 1,
+              "max_model_calls": 4,
+              "max_tool_calls": 24,
+              "deadline_seconds": 600,
+              "investigation_rounds": 1
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "3cef968ff33f0dd61b859550806e2bda92a02f09be52f3bbe2693dea4afa3af0",
+          "total_files": 1,
+          "source_files": [
+            "src/module.py"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "repository_policy_source": "base_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 1,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 1,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "skipped",
+            "reason": "No JavaScript/TypeScript files"
+          },
+          "test_gaps": [
+            {
+              "path": "src/module.py",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in src/module.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [
+            "src/module.py"
+          ],
+          "diff": "diff --git a/src/module.py b/src/module.py\n--- a/src/module.py\n+++ b/src/module.py\n@@ -1,4 +1,3 @@\n-def collect(item, items=None):\n-    items = [] if items is None else items\n+def collect(item, items=[]):\n     items.append(item)\n     return items\n",
+          "language_index": {},
+          "python_index_errors": {},
+          "graph_nodes": 1,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.py"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "e45e218d4837f66f5191220ed17b63cf0e51b253f48c4f4434373c208f7620c9",
+            "files": [
+              "src/module.py"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.py:1:collect",
+                "name": "collect",
+                "path": "src/module.py",
+                "start": 1,
+                "end": 3
+              }
+            ],
+            "changed_symbols": [
+              {
+                "id": "src/module.py:1:collect",
+                "name": "collect",
+                "path": "src/module.py",
+                "start": 1,
+                "end": 3
+              }
+            ],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [
+              {
+                "symbol": {
+                  "id": "src/module.py:1:collect",
+                  "name": "collect",
+                  "path": "src/module.py",
+                  "start": 1,
+                  "end": 3
+                },
+                "callers": [],
+                "test_hints": []
+              }
+            ],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "model_review_error": "Local Codex requires server enablement, an installed Codex CLI, a discoverable or explicitly selected model, and `codex login` using ChatGPT. API-key fallback is disabled.",
+          "review_summary": "Static-only review: model analysis unavailable",
+          "challenge_error": "Local Codex requires server enablement, an installed Codex CLI, a discoverable or explicitly selected model, and `codex login` using ChatGPT. API-key fallback is disabled.",
+          "verification_coverage": {
+            "evidence_counts": {
+              "source_supported": 0,
+              "refuted": 0,
+              "insufficient_evidence": 1
+            },
+            "requested": 1,
+            "assessed": 0,
+            "unassessed_ids": [
+              "abcc5a91-38b8-4300-8dad-45f577e0c488"
+            ],
+            "batches": 1,
+            "errors": [
+              "Local Codex requires server enablement, an installed Codex CLI, a discoverable or explicitly selected model, and `codex login` using ChatGPT. API-key fallback is disabled."
+            ],
+            "complete": false
+          },
+          "investigation": {
+            "model_calls": 4,
+            "tool_calls": 0,
+            "trace": [
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T13:49:15.367902+00:00",
+                "stage": "investigate_review",
+                "request_id": "6b956db21350be5cef7774f72adb0bae4104bbe76d19355427c738c6a6c8717a",
+                "call": 1
+              },
+              {
+                "event_type": "model_request_failed",
+                "timestamp": "2026-11-03T13:49:15.392510+00:00",
+                "stage": "investigate_review",
+                "request_id": "6b956db21350be5cef7774f72adb0bae4104bbe76d19355427c738c6a6c8717a",
+                "model": "account-default-unavailable",
+                "usage": {
+                  "thought_tokens": 0,
+                  "prompt_tokens": 0,
+                  "candidate_tokens": 0,
+                  "total_tokens": 0,
+                  "cached_content_token_count": 0
+                },
+                "retries": 0,
+                "error": "Local Codex requires server enablement, an installed Codex CLI, a discoverable or explicitly selected model, and `codex login` using ChatGPT. API-key fallback is disabled."
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T13:49:15.393686+00:00",
+                "stage": "review",
+                "request_id": "22278ca7999db274f7ef2ae05ab2a8ac5cb514f4f012bbc9592bfa40f974096e",
+                "call": 2
+              },
+              {
+                "event_type": "model_request_failed",
+                "timestamp": "2026-11-03T13:49:15.393763+00:00",
+                "stage": "review",
+                "request_id": "22278ca7999db274f7ef2ae05ab2a8ac5cb514f4f012bbc9592bfa40f974096e",
+                "model": "account-default-unavailable",
+                "usage": {
+                  "thought_tokens": 0,
+                  "prompt_tokens": 0,
+                  "candidate_tokens": 0,
+                  "total_tokens": 0,
+                  "cached_content_token_count": 0
+                },
+                "retries": 0,
+                "error": "Local Codex requires server enablement, an installed Codex CLI, a discoverable or explicitly selected model, and `codex login` using ChatGPT. API-key fallback is disabled."
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T13:49:15.394238+00:00",
+                "stage": "investigate_verify_reasoning",
+                "request_id": "c2b6d5dc1030e635be9a28c52c1bd1644523193be0081b2c29578dd08ffdafbf",
+                "call": 3
+              },
+              {
+                "event_type": "model_request_failed",
+                "timestamp": "2026-11-03T13:49:15.394286+00:00",
+                "stage": "investigate_verify_reasoning",
+                "request_id": "c2b6d5dc1030e635be9a28c52c1bd1644523193be0081b2c29578dd08ffdafbf",
+                "model": "account-default-unavailable",
+                "usage": {
+                  "thought_tokens": 0,
+                  "prompt_tokens": 0,
+                  "candidate_tokens": 0,
+                  "total_tokens": 0,
+                  "cached_content_token_count": 0
+                },
+                "retries": 0,
+                "error": "Local Codex requires server enablement, an installed Codex CLI, a discoverable or explicitly selected model, and `codex login` using ChatGPT. API-key fallback is disabled."
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T13:49:15.395155+00:00",
+                "stage": "challenge_1",
+                "request_id": "2b8b739064ae6618f4bbdad8dbcd0c23fb0bd05aa236bc6a494eda1905d2c2e5",
+                "call": 4
+              },
+              {
+                "event_type": "model_request_failed",
+                "timestamp": "2026-11-03T13:49:15.395301+00:00",
+                "stage": "challenge_1",
+                "request_id": "2b8b739064ae6618f4bbdad8dbcd0c23fb0bd05aa236bc6a494eda1905d2c2e5",
+                "model": "account-default-unavailable",
+                "usage": {
+                  "thought_tokens": 0,
+                  "prompt_tokens": 0,
+                  "candidate_tokens": 0,
+                  "total_tokens": 0,
+                  "cached_content_token_count": 0
+                },
+                "retries": 0,
+                "error": "Local Codex requires server enablement, an installed Codex CLI, a discoverable or explicitly selected model, and `codex login` using ChatGPT. API-key fallback is disabled."
+              }
+            ]
+          }
+        },
+        "usage": {
+          "thought_tokens": 0,
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-03T13:49:15.060505+00:00",
+        "completed_at": "2026-11-03T13:49:15.395563+00:00"
+      },
+      "findings": [
+        {
+          "id": "abcc5a91-38b8-4300-8dad-45f577e0c488",
+          "run_id": "8b6f64e7-9ac9-49f6-8106-b1cf35ebd99a",
+          "stable_fingerprint": "d65d108abe987f8e5d96df5b",
+          "category": "bug",
+          "rule_id": "ruff:B006",
+          "cwe_id": null,
+          "title": "B006: Do not use mutable data structures for argument defaults",
+          "explanation": "Do not use mutable data structures for argument defaults",
+          "user_impact": "The cited rule identifies a potential correctness defect; inspect its trigger and affected callers.",
+          "severity": "medium",
+          "primary_location": {
+            "path": "src/module.py",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": "f2f9fab1369f284cd2ff91652eaf1e191d43d795",
+            "snippet": null
+          },
+          "related_locations": [],
+          "change_relation": "introduced",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "93a18fc8-21f2-44a4-bf09-19dc936f19dc",
+              "kind": "static_analysis",
+              "tool_or_profile": "ruff",
+              "input_revision": "f2f9fab1369f284cd2ff91652eaf1e191d43d795",
+              "command": [
+                "/Users/koushikk/Documents/Hackathons/Neural Strom/.venv/bin/ruff",
+                "check",
+                "--output-format=json",
+                "--isolated",
+                "--ignore-noqa",
+                "--no-respect-gitignore",
+                "--select",
+                "E,F,B",
+                "."
+              ],
+              "exit_code": 1,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "Do not use mutable data structures for argument defaults",
+              "duration_ms": 0,
+              "created_at": "2026-11-03T13:49:15.156263+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "ruff"
+          ],
+          "assumptions": [],
+          "limitations": [
+            "Verification was omitted or unavailable within the run budget"
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "insufficient_evidence",
+          "verification_assessment": {},
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Replace with `None`; initialize within function"
+        }
+      ]
+    }
+  ]
+}

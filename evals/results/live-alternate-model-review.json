@@ -1,0 +1,447 @@
+{
+  "run": {
+    "id": "e6b7d1f2-05a1-4981-8bf1-50d3b1030a1a",
+    "owner_session": "anonymous",
+    "input_mode": "compare",
+    "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-b7l4m98h",
+    "review_mode": "compare",
+    "review_depth": "quick",
+    "pr_number": null,
+    "pr_title": null,
+    "base_sha": "969ba2daf85d2ed9789b18bb867d17524d92abf4",
+    "head_sha": "07192bb14d8e5e0df2feb7367dcdb32218bdcb41",
+    "merge_base_sha": null,
+    "config_version": "1.0.0",
+    "provider": "gemini",
+    "model_id": "gemini-3.8-flash",
+    "status": "partial",
+    "stage_statuses": {
+      "ingestion": "succeeded",
+      "static_analysis": "succeeded",
+      "graph_indexing": "succeeded",
+      "gemini_review": "succeeded",
+      "challenge": "failed",
+      "validation": "succeeded"
+    },
+    "findings_count": {
+      "total": 2,
+      "security": 0,
+      "bug": 2,
+      "style": 0
+    },
+    "coverage": {
+      "run_config": {
+        "version": "3",
+        "models": {
+          "review": "gemini-3.8-flash",
+          "patch": "gemini-3.8-flash",
+          "verify_reasoning": "gemini-3.8-flash"
+        },
+        "strategy": "verified",
+        "model": "gemini-3.8-flash",
+        "thinking": "low",
+        "max_attempts": 1,
+        "max_model_calls": 8,
+        "max_tool_calls": 24,
+        "deadline_seconds": 180,
+        "investigation_rounds": 1
+      },
+      "resumed_from": "3f01b343-6323-42ca-80c1-cbcba777adea",
+      "target": {
+        "mode": "compare",
+        "depth": "quick",
+        "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-b7l4m98h",
+        "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-b7l4m98h",
+        "comparison": "exact base to head",
+        "base_sha": "969ba2daf85d2ed9789b18bb867d17524d92abf4",
+        "head_sha": "07192bb14d8e5e0df2feb7367dcdb32218bdcb41",
+        "revision_label": "07192bb14d8e5e0df2feb7367dcdb32218bdcb41",
+        "run_config": {
+          "version": "3",
+          "models": {
+            "review": "gemini-3.8-flash",
+            "patch": "gemini-3.8-flash",
+            "verify_reasoning": "gemini-3.8-flash"
+          },
+          "strategy": "verified",
+          "model": "gemini-3.8-flash",
+          "thinking": "low",
+          "max_attempts": 1,
+          "max_model_calls": 8,
+          "max_tool_calls": 24,
+          "deadline_seconds": 180,
+          "investigation_rounds": 1
+        }
+      },
+      "snapshot_digest": "5879ee9ac8ee41c8bb5160a1c159aab15cb89004676675f3d9306e866bdee2cf",
+      "total_files": 1,
+      "source_files": [
+        "src/module.py"
+      ],
+      "unsupported_files": [],
+      "scope_note": "Full snapshot checks with base/head change context",
+      "repository_policy_source": "base_snapshot",
+      "repository_policy": {
+        "exclude": [],
+        "focus": [],
+        "verification_profile": null
+      },
+      "excluded_files": [],
+      "python_files": 1,
+      "static_tools": {
+        "ruff": {
+          "tool": "ruff",
+          "version": "0.17.3",
+          "status": "executed",
+          "count": 1,
+          "error": null
+        },
+        "bandit": {
+          "tool": "bandit",
+          "version": "1.9.4",
+          "status": "executed",
+          "count": 0,
+          "error": null
+        }
+      },
+      "baseline_static_tools": {
+        "ruff": {
+          "tool": "ruff",
+          "version": "0.17.3",
+          "status": "executed",
+          "count": 0,
+          "error": null
+        },
+        "bandit": {
+          "tool": "bandit",
+          "version": "1.9.4",
+          "status": "executed",
+          "count": 0,
+          "error": null
+        }
+      },
+      "javascript": {
+        "status": "skipped",
+        "reason": "No JavaScript/TypeScript files"
+      },
+      "test_gaps": [
+        {
+          "path": "src/module.py",
+          "status": "no_matching_test_found",
+          "suggestion": "Exercise changed behavior in src/module.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+        }
+      ],
+      "changed_files": [
+        "src/module.py"
+      ],
+      "diff": "diff --git a/src/module.py b/src/module.py\n--- a/src/module.py\n+++ b/src/module.py\n@@ -1,4 +1,3 @@\n-def collect(item, items=None):\n-    items = [] if items is None else items\n+def collect(item, items=[]):\n     items.append(item)\n     return items\n",
+      "language_index": {},
+      "python_index_errors": {},
+      "graph_nodes": 1,
+      "graph_edges": 0,
+      "context": {
+        "selected": [
+          "src/module.py"
+        ],
+        "omitted": [],
+        "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+      },
+      "repository_map": {
+        "snapshot": "e45e218d4837f66f5191220ed17b63cf0e51b253f48c4f4434373c208f7620c9",
+        "files": [
+          "src/module.py"
+        ],
+        "symbols": [
+          {
+            "id": "src/module.py:1:collect",
+            "name": "collect",
+            "path": "src/module.py",
+            "start": 1,
+            "end": 3
+          }
+        ],
+        "changed_symbols": [
+          {
+            "id": "src/module.py:1:collect",
+            "name": "collect",
+            "path": "src/module.py",
+            "start": 1,
+            "end": 3
+          }
+        ],
+        "deleted_symbols": [],
+        "references": [],
+        "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+      },
+      "impact": {
+        "changes": [
+          {
+            "symbol": {
+              "id": "src/module.py:1:collect",
+              "name": "collect",
+              "path": "src/module.py",
+              "start": 1,
+              "end": 3
+            },
+            "callers": [],
+            "test_hints": []
+          }
+        ],
+        "deleted_symbols": [],
+        "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+      },
+      "model_review_error": null,
+      "review_summary": "The PR replaces the idiomatic `items=None` pattern with a mutable default argument `items=[]` in `collect()`. This introduces a high-severity bug where list mutations persist across multiple calls to `collect()`.",
+      "challenge_error": "Gemini generation failed: 504 DEADLINE_EXCEEDED. {'error': {'code': 504, 'message': 'Deadline expired before operation could complete.', 'status': 'DEADLINE_EXCEEDED'}}",
+      "verification_coverage": {
+        "evidence_counts": {
+          "source_supported": 0,
+          "refuted": 0,
+          "insufficient_evidence": 2
+        },
+        "requested": 2,
+        "assessed": 0,
+        "unassessed_ids": [
+          "6d27f588-8978-4d06-b6da-af4bed3c5a56",
+          "5c4c50c6-03a4-484b-a442-7569ed89809b"
+        ],
+        "batches": 1,
+        "errors": [
+          "Gemini generation failed: 504 DEADLINE_EXCEEDED. {'error': {'code': 504, 'message': 'Deadline expired before operation could complete.', 'status': 'DEADLINE_EXCEEDED'}}"
+        ],
+        "complete": false
+      },
+      "investigation": {
+        "model_calls": 4,
+        "tool_calls": 0,
+        "trace": [
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-01T10:11:46.599768+00:00",
+            "stage": "investigate_review",
+            "request_id": "b2053059f6a35ecc29eafb79b4755eca8898a1fcca55eb41492c1d3a25746526",
+            "call": 1
+          },
+          {
+            "event_type": "model_request_failed",
+            "timestamp": "2026-11-01T10:11:53.083141+00:00",
+            "stage": "investigate_review",
+            "request_id": "cached_content_token_count",
+            "model": "gemini-3.8-flash",
+            "usage": {
+              "prompt_tokens": 0,
+              "candidate_tokens": 0,
+              "total_tokens": 0,
+              "cached_content_token_count": 0
+            },
+            "retries": 0,
+            "error": "Gemini generation failed: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+          },
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-01T10:11:53.085714+00:00",
+            "stage": "review",
+            "request_id": "00d9ced1619497c3870e92883d5b4411c8f019ed955770268e28c28012348765",
+            "call": 2
+          },
+          {
+            "event_type": "model_request_completed",
+            "timestamp": "2026-11-01T10:12:04.997326+00:00",
+            "stage": "review",
+            "request_id": "cached_content_token_count",
+            "model": "gemini-3.8-flash",
+            "usage": {
+              "prompt_tokens": 661,
+              "candidate_tokens": 393,
+              "total_tokens": 1054,
+              "cached_content_token_count": 0
+            },
+            "retries": 0,
+            "error": ""
+          },
+          {
+            "event_type": "checkpoint_saved",
+            "timestamp": "2026-11-01T10:12:04.998966+00:00",
+            "stage": "review",
+            "key": "cached_content_token_count"
+          },
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-01T10:12:05.000835+00:00",
+            "stage": "investigate_verify_reasoning",
+            "request_id": "af97e4b49b56046efe5ee4891bfd91064273056a6619a9cee65dc0039c25901b",
+            "call": 3
+          },
+          {
+            "event_type": "model_request_failed",
+            "timestamp": "2026-11-01T10:12:48.577808+00:00",
+            "stage": "investigate_verify_reasoning",
+            "request_id": "cached_content_token_count",
+            "model": "gemini-3.8-flash",
+            "usage": {
+              "prompt_tokens": 0,
+              "candidate_tokens": 0,
+              "total_tokens": 0,
+              "cached_content_token_count": 0
+            },
+            "retries": 0,
+            "error": "Gemini generation failed: 504 DEADLINE_EXCEEDED. {'error': {'code': 504, 'message': 'Deadline expired before operation could complete.', 'status': 'DEADLINE_EXCEEDED'}}"
+          },
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-01T10:12:48.579959+00:00",
+            "stage": "challenge_1",
+            "request_id": "99ae1ab0f28a8f67f87a05be7aff59933c00b0ef898e5f60cf17408657d03a2c",
+            "call": 4
+          },
+          {
+            "event_type": "model_request_failed",
+            "timestamp": "2026-11-01T10:13:32.153367+00:00",
+            "stage": "challenge_1",
+            "request_id": "cached_content_token_count",
+            "model": "gemini-3.8-flash",
+            "usage": {
+              "prompt_tokens": 0,
+              "candidate_tokens": 0,
+              "total_tokens": 0,
+              "cached_content_token_count": 0
+            },
+            "retries": 0,
+            "error": "Gemini generation failed: 504 DEADLINE_EXCEEDED. {'error': {'code': 504, 'message': 'Deadline expired before operation could complete.', 'status': 'DEADLINE_EXCEEDED'}}"
+          }
+        ]
+      }
+    },
+    "usage": {
+      "prompt_tokens": 661,
+      "candidate_tokens": 393,
+      "total_tokens": 1054,
+      "cached_content_token_count": 0,
+      "cost_estimated_usd": null
+    },
+    "artifacts": [],
+    "errors": [],
+    "started_at": "2026-11-01T10:11:46.387104+00:00",
+    "completed_at": "2026-11-01T10:13:32.153805+00:00"
+  },
+  "findings": [
+    {
+      "id": "6d27f588-8978-4d06-b6da-af4bed3c5a56",
+      "run_id": "e6b7d1f2-05a1-4981-8bf1-50d3b1030a1a",
+      "stable_fingerprint": "449b18715bfea8ceb4ecbf7b",
+      "category": "bug",
+      "rule_id": "proofline:python/mutable-default-argument",
+      "cwe_id": null,
+      "title": "Mutable default argument retains state across function invocations",
+      "explanation": "The default argument `items=[]` is evaluated once when the function is defined rather than upon each invocation. Because `items.append(item)` mutates this list in place, subsequent invocations relying on the default parameter share and accumulate values across calls.",
+      "user_impact": "Callers invoking `collect(item)` without passing `items` will receive a list containing items from previous invocations, causing state leakage and incorrect results.",
+      "severity": "high",
+      "primary_location": {
+        "path": "src/module.py",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "07192bb14d8e5e0df2feb7367dcdb32218bdcb41",
+        "snippet": "def collect(item, items=[]):"
+      },
+      "related_locations": [],
+      "change_relation": "changed_context",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "031e01d9-e6c9-4c70-8739-8a7fd1f11302",
+          "kind": "gemini_review",
+          "tool_or_profile": "gemini-3.8-flash",
+          "input_revision": "07192bb14d8e5e0df2feb7367dcdb32218bdcb41",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Calling `collect(item)` multiple times without specifying the `items` argument.",
+          "duration_ms": 0,
+          "created_at": "2026-11-01T10:12:04.999164+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "gemini_review"
+      ],
+      "assumptions": [
+        "Callers expect each default call to `collect(x)` to operate independently without mutating global state."
+      ],
+      "limitations": [
+        "Verification was omitted or unavailable within the run budget"
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "insufficient_evidence",
+      "verification_assessment": {},
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Revert to using `None` as the default argument value and instantiate a new list within the function body if `items is None`."
+    },
+    {
+      "id": "5c4c50c6-03a4-484b-a442-7569ed89809b",
+      "run_id": "e6b7d1f2-05a1-4981-8bf1-50d3b1030a1a",
+      "stable_fingerprint": "4d1793cc73a08b0c25a65db6",
+      "category": "bug",
+      "rule_id": "ruff:B006",
+      "cwe_id": null,
+      "title": "B006: Do not use mutable data structures for argument defaults",
+      "explanation": "Do not use mutable data structures for argument defaults",
+      "user_impact": "Style/lint conformance issue or non-security bug detected by static rule.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "src/module.py",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "07192bb14d8e5e0df2feb7367dcdb32218bdcb41",
+        "snippet": null
+      },
+      "related_locations": [],
+      "change_relation": "introduced",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "c1001773-0c78-48f5-8594-03f2f2c5f188",
+          "kind": "static_analysis",
+          "tool_or_profile": "ruff",
+          "input_revision": "07192bb14d8e5e0df2feb7367dcdb32218bdcb41",
+          "command": [
+            "/Users/koushikk/Documents/Hackathons/Neural Strom/.venv/bin/ruff",
+            "check",
+            "--output-format=json",
+            "--isolated",
+            "--select",
+            "E,F,B",
+            "."
+          ],
+          "exit_code": 1,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Do not use mutable data structures for argument defaults",
+          "duration_ms": 0,
+          "created_at": "2026-11-01T10:11:46.422421+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "ruff"
+      ],
+      "assumptions": [],
+      "limitations": [
+        "Verification was omitted or unavailable within the run budget"
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "static_match",
+      "evidence_status": "insufficient_evidence",
+      "verification_assessment": {},
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Replace with `None`; initialize within function"
+    }
+  ]
+}

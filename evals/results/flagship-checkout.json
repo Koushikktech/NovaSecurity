@@ -1,0 +1,839 @@
+{
+  "purpose": "One authored checkout change reviewed, repaired by the model and checked against the same trusted oracle; saved evidence, not live replay or accuracy benchmark",
+  "run": {
+    "id": "64af85b9-2b49-4b03-aaf7-302600a0f5fb",
+    "owner_session": "anonymous",
+    "input_mode": "compare",
+    "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-checkout-b5_ae5zt/repo",
+    "review_mode": "compare",
+    "review_depth": "quick",
+    "pr_number": null,
+    "pr_title": null,
+    "base_sha": "80cad0b341b1e9309a23c62400f352cbf08c47c8",
+    "head_sha": "19c035c651e2526b53d433842839b38d1a68f131",
+    "merge_base_sha": null,
+    "config_version": "1.0.0",
+    "provider": "codex_cli",
+    "model_id": "gpt-5.6-sol",
+    "status": "completed",
+    "stage_statuses": {
+      "ingestion": "succeeded",
+      "static_analysis": "succeeded",
+      "graph_indexing": "succeeded",
+      "gemini_review": "succeeded",
+      "challenge": "succeeded",
+      "validation": "succeeded"
+    },
+    "findings_count": {
+      "total": 2,
+      "security": 0,
+      "bug": 2,
+      "style": 0
+    },
+    "coverage": {
+      "identity_version": 2,
+      "run_config": {
+        "version": "5",
+        "provider": "codex_cli",
+        "codex_reasoning": "high",
+        "api_mode": "auto",
+        "models": {
+          "review": "gpt-5.6-sol",
+          "patch": "gpt-5.6-sol",
+          "verify_reasoning": "gpt-5.6-sol"
+        },
+        "strategy": "verified",
+        "model": "gpt-5.6-sol",
+        "thinking": "default",
+        "max_attempts": 1,
+        "max_model_calls": 4,
+        "max_tool_calls": 24,
+        "deadline_seconds": 600,
+        "investigation_rounds": 1
+      },
+      "target": {
+        "mode": "compare",
+        "depth": "quick",
+        "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-checkout-b5_ae5zt/repo",
+        "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-checkout-b5_ae5zt/repo",
+        "comparison": "exact base to head",
+        "source_exclusions": [],
+        "base_sha": "80cad0b341b1e9309a23c62400f352cbf08c47c8",
+        "head_sha": "19c035c651e2526b53d433842839b38d1a68f131",
+        "revision_label": "19c035c651e2526b53d433842839b38d1a68f131",
+        "run_config": {
+          "version": "5",
+          "provider": "codex_cli",
+          "codex_reasoning": "high",
+          "api_mode": "auto",
+          "models": {
+            "review": "gpt-5.6-sol",
+            "patch": "gpt-5.6-sol",
+            "verify_reasoning": "gpt-5.6-sol"
+          },
+          "strategy": "verified",
+          "model": "gpt-5.6-sol",
+          "thinking": "default",
+          "max_attempts": 1,
+          "max_model_calls": 4,
+          "max_tool_calls": 24,
+          "deadline_seconds": 600,
+          "investigation_rounds": 1
+        }
+      },
+      "source_exclusions": [],
+      "snapshot_digest": "6c4881b092e458ac02022a83cf5a054cf362fb3afac124cb5ab63ab35d6a2c53",
+      "total_files": 4,
+      "source_files": [
+        "shop/__init__.py",
+        "shop/checkout.py",
+        "shop/pricing.py"
+      ],
+      "unsupported_files": [
+        ".proofline.yml"
+      ],
+      "scope_note": "Full snapshot checks with base/head change context",
+      "repository_policy_source": "base_snapshot",
+      "repository_policy": {
+        "exclude": [],
+        "focus": [],
+        "verification_profile": "checkout_contract"
+      },
+      "excluded_files": [],
+      "python_files": 3,
+      "static_tools": {
+        "ruff": {
+          "tool": "ruff",
+          "version": "0.17.3",
+          "status": "executed",
+          "count": 0,
+          "error": null
+        },
+        "bandit": {
+          "tool": "bandit",
+          "version": "1.9.4",
+          "status": "executed",
+          "count": 0,
+          "error": null
+        }
+      },
+      "baseline_static_tools": {
+        "ruff": {
+          "tool": "ruff",
+          "version": "0.17.3",
+          "status": "executed",
+          "count": 0,
+          "error": null
+        },
+        "bandit": {
+          "tool": "bandit",
+          "version": "1.9.4",
+          "status": "executed",
+          "count": 0,
+          "error": null
+        }
+      },
+      "javascript": {
+        "status": "skipped",
+        "reason": "No JavaScript/TypeScript files"
+      },
+      "test_gaps": [
+        {
+          "path": "shop/pricing.py",
+          "status": "no_matching_test_found",
+          "suggestion": "Exercise changed behavior in shop/pricing.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+        }
+      ],
+      "changed_files": [
+        "shop/pricing.py"
+      ],
+      "diff": "diff --git a/shop/pricing.py b/shop/pricing.py\n--- a/shop/pricing.py\n+++ b/shop/pricing.py\n@@ -1,2 +1,2 @@\n-def quote_total(subtotal_cents, discount_cents=0):\n+def quote_total(subtotal_cents, discount_cents):\n     return subtotal_cents - discount_cents\n",
+      "language_index": {},
+      "python_index_errors": {},
+      "graph_nodes": 2,
+      "graph_edges": 1,
+      "context": {
+        "selected": [
+          "shop/pricing.py",
+          "shop/checkout.py"
+        ],
+        "omitted": [],
+        "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+      },
+      "repository_map": {
+        "snapshot": "4f222f84da743f5c1c6b9ba199d4f63e0511fcbb6f0a68bd57cdb8ecb853f94f",
+        "files": [
+          ".proofline.yml",
+          "shop/__init__.py",
+          "shop/checkout.py",
+          "shop/pricing.py"
+        ],
+        "symbols": [
+          {
+            "id": "shop/checkout.py:3:place_order",
+            "name": "place_order",
+            "path": "shop/checkout.py",
+            "start": 3,
+            "end": 6
+          },
+          {
+            "id": "shop/pricing.py:1:quote_total",
+            "name": "quote_total",
+            "path": "shop/pricing.py",
+            "start": 1,
+            "end": 2
+          }
+        ],
+        "changed_symbols": [
+          {
+            "id": "shop/pricing.py:1:quote_total",
+            "name": "quote_total",
+            "path": "shop/pricing.py",
+            "start": 1,
+            "end": 2
+          }
+        ],
+        "deleted_symbols": [],
+        "references": [
+          {
+            "path": "shop/checkout.py",
+            "line": 3,
+            "name": "quote_total",
+            "target_path": "shop/pricing.py",
+            "target_line": 1,
+            "relationship": "resolved_python_call",
+            "caller_symbol": "shop/checkout.py::place_order",
+            "target_symbol": "shop/pricing.py::quote_total"
+          }
+        ],
+        "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+      },
+      "impact": {
+        "changes": [
+          {
+            "symbol": {
+              "id": "shop/pricing.py:1:quote_total",
+              "name": "quote_total",
+              "path": "shop/pricing.py",
+              "start": 1,
+              "end": 2
+            },
+            "callers": [
+              {
+                "path": "shop/checkout.py",
+                "line": 3,
+                "name": "quote_total",
+                "target_path": "shop/pricing.py",
+                "target_line": 1,
+                "relationship": "resolved_python_call",
+                "caller_symbol": "shop/checkout.py::place_order",
+                "target_symbol": "shop/pricing.py::quote_total"
+              }
+            ],
+            "test_hints": []
+          }
+        ],
+        "deleted_symbols": [],
+        "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+      },
+      "model_review_error": null,
+      "review_summary": "The change makes `discount_cents` required, breaking the supplied checkout caller's existing one-argument invocation. As shown, order placement raises `TypeError` before returning a confirmation.",
+      "verification_coverage": {
+        "evidence_counts": {
+          "source_supported": 2,
+          "refuted": 0,
+          "insufficient_evidence": 0
+        },
+        "requested": 2,
+        "assessed": 2,
+        "unassessed_ids": [],
+        "batches": 1,
+        "errors": [],
+        "complete": true
+      },
+      "validation_rejections": [],
+      "investigation": {
+        "model_calls": 4,
+        "tool_calls": 4,
+        "trace": [
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-03T16:43:54.110128+00:00",
+            "stage": "investigate_review",
+            "request_id": "44009d61269144215682b2ad4544993c5b9b5a28149b822fd79f8eb2d65d94bc",
+            "call": 1
+          },
+          {
+            "event_type": "model_request_completed",
+            "timestamp": "2026-11-03T16:44:02.776801+00:00",
+            "stage": "investigate_review",
+            "request_id": "44009d61269144215682b2ad4544993c5b9b5a28149b822fd79f8eb2d65d94bc",
+            "model": "gpt-5.6-sol",
+            "usage": {
+              "thought_tokens": 133,
+              "prompt_tokens": 12176,
+              "candidate_tokens": 153,
+              "total_tokens": 12329,
+              "cached_content_token_count": 10752
+            },
+            "retries": 0,
+            "error": ""
+          },
+          {
+            "event_type": "checkpoint_saved",
+            "timestamp": "2026-11-03T16:44:02.777907+00:00",
+            "stage": "investigate_review",
+            "key": "44009d61269144215682b2ad4544993c5b9b5a28149b822fd79f8eb2d65d94bc"
+          },
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-03T16:44:02.781988+00:00",
+            "stage": "review",
+            "request_id": "62ffe7e244c062d6d25c7a1652bb3c65227c23805a5a5e77aef5e8e6248eb69d",
+            "call": 2
+          },
+          {
+            "event_type": "model_request_completed",
+            "timestamp": "2026-11-03T16:44:14.198588+00:00",
+            "stage": "review",
+            "request_id": "62ffe7e244c062d6d25c7a1652bb3c65227c23805a5a5e77aef5e8e6248eb69d",
+            "model": "gpt-5.6-sol",
+            "usage": {
+              "thought_tokens": 65,
+              "prompt_tokens": 12137,
+              "candidate_tokens": 433,
+              "total_tokens": 12570,
+              "cached_content_token_count": 11008
+            },
+            "retries": 0,
+            "error": ""
+          },
+          {
+            "event_type": "checkpoint_saved",
+            "timestamp": "2026-11-03T16:44:14.199986+00:00",
+            "stage": "review",
+            "key": "62ffe7e244c062d6d25c7a1652bb3c65227c23805a5a5e77aef5e8e6248eb69d"
+          },
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-03T16:44:14.202096+00:00",
+            "stage": "investigate_verify_reasoning",
+            "request_id": "639d7e3e02dca32119721f036d980669615546d50c7ea9ed1cad75b9edc2fa75",
+            "call": 3
+          },
+          {
+            "event_type": "model_request_completed",
+            "timestamp": "2026-11-03T16:44:21.645059+00:00",
+            "stage": "investigate_verify_reasoning",
+            "request_id": "639d7e3e02dca32119721f036d980669615546d50c7ea9ed1cad75b9edc2fa75",
+            "model": "gpt-5.6-sol",
+            "usage": {
+              "thought_tokens": 107,
+              "prompt_tokens": 11957,
+              "candidate_tokens": 226,
+              "total_tokens": 12183,
+              "cached_content_token_count": 10752
+            },
+            "retries": 0,
+            "error": ""
+          },
+          {
+            "event_type": "checkpoint_saved",
+            "timestamp": "2026-11-03T16:44:21.646298+00:00",
+            "stage": "investigate_verify_reasoning",
+            "key": "639d7e3e02dca32119721f036d980669615546d50c7ea9ed1cad75b9edc2fa75"
+          },
+          {
+            "event_type": "tool_started",
+            "timestamp": "2026-11-03T16:44:21.646378+00:00",
+            "tool": {
+              "name": "get_diff",
+              "query": "",
+              "path": "shop/pricing.py",
+              "start_line": 1,
+              "end_line": 2
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_completed",
+            "timestamp": "2026-11-03T16:44:21.646524+00:00",
+            "observation": {
+              "snapshot": "4f222f84da743f5c1c6b9ba199d4f63e0511fcbb6f0a68bd57cdb8ecb853f94f",
+              "tool": {
+                "name": "get_diff",
+                "query": "",
+                "path": "shop/pricing.py",
+                "start_line": 1,
+                "end_line": 2
+              },
+              "output": "{\"diff\": \"diff --git a/shop/pricing.py b/shop/pricing.py\\n--- a/shop/pricing.py\\n+++ b/shop/pricing.py\\n@@ -1,2 +1,2 @@\\n-def quote_total(subtotal_cents, discount_cents=0):\\n+def quote_total(subtotal_cents, discount_cents):\\n     return subtotal_cents - discount_cents\\n\"}"
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_started",
+            "timestamp": "2026-11-03T16:44:21.647039+00:00",
+            "tool": {
+              "name": "find_references",
+              "query": "quote_total",
+              "path": "shop/pricing.py",
+              "start_line": 1,
+              "end_line": 2
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_completed",
+            "timestamp": "2026-11-03T16:44:21.647152+00:00",
+            "observation": {
+              "snapshot": "4f222f84da743f5c1c6b9ba199d4f63e0511fcbb6f0a68bd57cdb8ecb853f94f",
+              "tool": {
+                "name": "find_references",
+                "query": "quote_total",
+                "path": "shop/pricing.py",
+                "start_line": 1,
+                "end_line": 2
+              },
+              "output": "{\"references\": [{\"path\": \"shop/checkout.py\", \"line\": 3, \"name\": \"quote_total\", \"target_path\": \"shop/pricing.py\", \"target_line\": 1, \"relationship\": \"resolved_python_call\", \"caller_symbol\": \"shop/checkout.py::place_order\", \"target_symbol\": \"shop/pricing.py::quote_total\"}]}"
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_started",
+            "timestamp": "2026-11-03T16:44:21.647178+00:00",
+            "tool": {
+              "name": "find_related_tests",
+              "query": "quote_total",
+              "path": "",
+              "start_line": 1,
+              "end_line": 1
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_completed",
+            "timestamp": "2026-11-03T16:44:21.647208+00:00",
+            "observation": {
+              "snapshot": "4f222f84da743f5c1c6b9ba199d4f63e0511fcbb6f0a68bd57cdb8ecb853f94f",
+              "tool": {
+                "name": "find_related_tests",
+                "query": "quote_total",
+                "path": "",
+                "start_line": 1,
+                "end_line": 1
+              },
+              "output": "{\"paths\": []}"
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_started",
+            "timestamp": "2026-11-03T16:44:21.647226+00:00",
+            "tool": {
+              "name": "find_related_tests",
+              "query": "place_order",
+              "path": "",
+              "start_line": 1,
+              "end_line": 1
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_completed",
+            "timestamp": "2026-11-03T16:44:21.647244+00:00",
+            "observation": {
+              "snapshot": "4f222f84da743f5c1c6b9ba199d4f63e0511fcbb6f0a68bd57cdb8ecb853f94f",
+              "tool": {
+                "name": "find_related_tests",
+                "query": "place_order",
+                "path": "",
+                "start_line": 1,
+                "end_line": 1
+              },
+              "output": "{\"paths\": []}"
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-03T16:44:21.649608+00:00",
+            "stage": "challenge_1",
+            "request_id": "b145585be459abbddd458a8ef27c71fdea73db1c123bda83a70531bf371c7a67",
+            "call": 4
+          },
+          {
+            "event_type": "model_request_completed",
+            "timestamp": "2026-11-03T16:44:36.815020+00:00",
+            "stage": "challenge_1",
+            "request_id": "b145585be459abbddd458a8ef27c71fdea73db1c123bda83a70531bf371c7a67",
+            "model": "gpt-5.6-sol",
+            "usage": {
+              "thought_tokens": 205,
+              "prompt_tokens": 12415,
+              "candidate_tokens": 657,
+              "total_tokens": 13072,
+              "cached_content_token_count": 10880
+            },
+            "retries": 0,
+            "error": ""
+          },
+          {
+            "event_type": "checkpoint_saved",
+            "timestamp": "2026-11-03T16:44:36.816444+00:00",
+            "stage": "challenge_1",
+            "key": "b145585be459abbddd458a8ef27c71fdea73db1c123bda83a70531bf371c7a67"
+          }
+        ]
+      }
+    },
+    "usage": {
+      "thought_tokens": 510,
+      "prompt_tokens": 48685,
+      "candidate_tokens": 1469,
+      "total_tokens": 50154,
+      "cached_content_token_count": 43392,
+      "cost_estimated_usd": null
+    },
+    "artifacts": [],
+    "errors": [],
+    "started_at": "2026-11-03T16:43:53.826367+00:00",
+    "completed_at": "2026-11-03T16:44:36.817090+00:00"
+  },
+  "findings": [
+    {
+      "id": "70923f50-3dd3-4824-b954-7fe36dda23b3",
+      "run_id": "64af85b9-2b49-4b03-aaf7-302600a0f5fb",
+      "stable_fingerprint": "42c9cc92a15fa9ae4456d9bf",
+      "category": "bug",
+      "rule_id": "proofline:python.backward-incompatible-required-argument",
+      "cwe_id": null,
+      "title": "Required discount argument breaks checkout",
+      "explanation": "Removing the default value makes `discount_cents` mandatory, but the supplied caller still invokes `quote_total(subtotal_cents)` with one argument. Python raises `TypeError` before the function body runs; no guard in `quote_total` or `place_order` handles that exception.",
+      "user_impact": "Every `place_order` call that reaches line 5 fails instead of returning a confirmed order, including carts that should receive no discount.",
+      "severity": "high",
+      "primary_location": {
+        "path": "shop/pricing.py",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "19c035c651e2526b53d433842839b38d1a68f131",
+        "snippet": "def quote_total(subtotal_cents, discount_cents):"
+      },
+      "related_locations": [],
+      "change_relation": "changed_context",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "5a75af6e-1460-408b-9bf7-5dc19124513b",
+          "kind": "codex_cli_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "19c035c651e2526b53d433842839b38d1a68f131",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Call `place_order(cart)` with any cart for which subtotal calculation completes, causing `quote_total(subtotal_cents)` to execute without `discount_cents`.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T16:44:14.200085+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "codex_cli_review",
+        "codex_cli_challenge"
+      ],
+      "assumptions": [
+        "`shop.checkout.place_order` is an active caller and should continue supporting orders without an explicit discount."
+      ],
+      "limitations": [
+        "The supplied context identifies no matching test, but this is a retrieval gap rather than proof that coverage is absent."
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "source_supported",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "shop/pricing.py",
+            "start_line": 1,
+            "quote": "def quote_total(subtotal_cents, discount_cents):"
+          },
+          {
+            "path": "shop/checkout.py",
+            "start_line": 3,
+            "quote": "def place_order(cart):\n    subtotal_cents = sum(item[\"price_cents\"] * item[\"quantity\"] for item in cart)\n    total_cents = quote_total(subtotal_cents)\n    return {\"status\": \"confirmed\", \"total_cents\": total_cents}"
+          }
+        ],
+        "unresolved_assumptions": [],
+        "rule_id": "proofline:python.backward-incompatible-required-argument",
+        "path": "shop/pricing.py",
+        "start_line": 1,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The diff shows that `discount_cents` previously defaulted to `0` and is now required. `place_order` still calls `quote_total` with only `subtotal_cents`. Under Python's argument binding, this raises `TypeError` before `quote_total` executes. The supplied `place_order` contains no exception handling, so it cannot return its confirmation object on this path."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Restore `discount_cents=0`, or update every caller to pass an explicit discount (for this caller, `quote_total(subtotal_cents, 0)`). Add a focused test covering the intended no-discount API contract."
+    },
+    {
+      "id": "3523f6ea-c698-40c3-9841-55afb78b8865",
+      "run_id": "64af85b9-2b49-4b03-aaf7-302600a0f5fb",
+      "stable_fingerprint": "7f6e1649cf74baa336b53761",
+      "category": "bug",
+      "rule_id": "python:changed-signature",
+      "cwe_id": null,
+      "title": "Call to shop.pricing.quote_total is missing required arguments ['discount_cents'] after this PR changes its signature.",
+      "explanation": "Call to shop.pricing.quote_total is missing required arguments ['discount_cents'] after this PR changes its signature.",
+      "user_impact": "Existing callers may raise an argument error when the changed interface is used.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "shop/checkout.py",
+        "start_line": 5,
+        "end_line": 5,
+        "side": "head",
+        "commit_sha": "19c035c651e2526b53d433842839b38d1a68f131",
+        "snippet": null
+      },
+      "related_locations": [
+        {
+          "path": "shop/pricing.py",
+          "lines": [
+            1
+          ],
+          "qualified_symbol": "shop.pricing.quote_total",
+          "relationship": "callee",
+          "snippet": null
+        }
+      ],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "5cb80683-7f31-4aab-8df9-b6c980b48c20",
+          "kind": "static_analysis",
+          "tool_or_profile": "python:changed-signature",
+          "input_revision": "19c035c651e2526b53d433842839b38d1a68f131",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Call to shop.pricing.quote_total is missing required arguments ['discount_cents'] after this PR changes its signature.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T16:43:54.104906+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "proofline-language",
+        "codex_cli_challenge"
+      ],
+      "assumptions": [],
+      "limitations": [],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "source_supported",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "shop/checkout.py",
+            "start_line": 5,
+            "quote": "total_cents = quote_total(subtotal_cents)"
+          },
+          {
+            "path": "shop/pricing.py",
+            "start_line": 1,
+            "quote": "def quote_total(subtotal_cents, discount_cents):\n    return subtotal_cents - discount_cents"
+          }
+        ],
+        "unresolved_assumptions": [],
+        "rule_id": "python:changed-signature",
+        "path": "shop/checkout.py",
+        "start_line": 5,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The resolved imported function requires two positional arguments, while the call at line 5 supplies one. Python therefore raises `TypeError` during argument binding whenever execution reaches this call. No wrapper, variadic parameter, or default in the supplied source satisfies the missing `discount_cents` argument."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Update the caller to supply the new arguments, or preserve compatibility with a default in the callee."
+    }
+  ],
+  "patch": {
+    "id": "13b084bb-61e1-4154-a40b-c05b2b3e8500",
+    "finding_id": "3523f6ea-c698-40c3-9841-55afb78b8865",
+    "run_id": "64af85b9-2b49-4b03-aaf7-302600a0f5fb",
+    "branch_name": "proofline/fix/398bb8a2",
+    "status": "checks_passed",
+    "edits": [
+      {
+        "path": "shop/checkout.py",
+        "old_content": "    total_cents = quote_total(subtotal_cents)",
+        "replacement": "    total_cents = quote_total(subtotal_cents, discount_cents=0)",
+        "rationale": "Supplies the newly required argument explicitly while preserving place_order's existing no-discount behavior and public contract."
+      }
+    ],
+    "diff": "--- a/shop/checkout.py\n+++ b/shop/checkout.py\n@@ -2,5 +2,5 @@\n \n def place_order(cart):\n     subtotal_cents = sum(item[\"price_cents\"] * item[\"quantity\"] for item in cart)\n-    total_cents = quote_total(subtotal_cents)\n+    total_cents = quote_total(subtotal_cents, discount_cents=0)\n     return {\"status\": \"confirmed\", \"total_cents\": total_cents}\n",
+    "checks": [
+      {
+        "check_name": "base",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "--name",
+          "proofline-5db1faabf3c34aeaab374e98dfd4fb4e",
+          "--network=none",
+          "--read-only",
+          "--cap-drop=ALL",
+          "--security-opt=no-new-privileges",
+          "--user=501:20",
+          "--log-driver=none",
+          "--ulimit=fsize=2097152:2097152",
+          "--memory=256m",
+          "--cpus=1",
+          "--pids-limit=64",
+          "--tmpfs",
+          "/tmp:rw,size=32m",
+          "-e",
+          "PYTHONPATH=/work",
+          "-e",
+          "PYTHONDONTWRITEBYTECODE=1",
+          "-v",
+          "/Users/koushikk/Documents/Hackathons/Neural Strom/NovaSecurity/backend/data/workspaces/64af85b9-2b49-4b03-aaf7-302600a0f5fb/base:/work:ro",
+          "-v",
+          "/Users/koushikk/Documents/Hackathons/Neural Strom/NovaSecurity/fixtures/flagship/oracle:/oracle:ro",
+          "-v",
+          "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-results-g6a9ztms:/results:rw",
+          "-w",
+          "/work",
+          "proofline-verification@sha256:da69f7765cf7c83a251b3568f835f760e04735eee9bd87e213ab82af8e9576ff",
+          "python",
+          "-m",
+          "pytest",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=/results/report.xml",
+          "/oracle/test_checkout.py"
+        ],
+        "exit_code": 0,
+        "duration_ms": 422,
+        "status": "passed",
+        "stdout_snippet": "============================= test session starts ==============================\nplatform linux -- Python 3.12.16, pytest-8.3.5, pluggy-1.7.0\nrootdir: /oracle\ncollected 2 items\n\n../oracle/test_checkout.py ..                                            [100%]\n\n------------------- generated xml file: /results/report.xml --------------------\n============================== 2 passed in 0.01s ===============================\n",
+        "stderr_snippet": ""
+      },
+      {
+        "check_name": "before",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "--name",
+          "proofline-a21d359c687c47c88e2ae50bc5cc130e",
+          "--network=none",
+          "--read-only",
+          "--cap-drop=ALL",
+          "--security-opt=no-new-privileges",
+          "--user=501:20",
+          "--log-driver=none",
+          "--ulimit=fsize=2097152:2097152",
+          "--memory=256m",
+          "--cpus=1",
+          "--pids-limit=64",
+          "--tmpfs",
+          "/tmp:rw,size=32m",
+          "-e",
+          "PYTHONPATH=/work",
+          "-e",
+          "PYTHONDONTWRITEBYTECODE=1",
+          "-v",
+          "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-verify-kusqkr11/work:/work:ro",
+          "-v",
+          "/Users/koushikk/Documents/Hackathons/Neural Strom/NovaSecurity/fixtures/flagship/oracle:/oracle:ro",
+          "-v",
+          "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-results-jgroj95q:/results:rw",
+          "-w",
+          "/work",
+          "proofline-verification@sha256:da69f7765cf7c83a251b3568f835f760e04735eee9bd87e213ab82af8e9576ff",
+          "python",
+          "-m",
+          "pytest",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=/results/report.xml",
+          "/oracle/test_checkout.py"
+        ],
+        "exit_code": 1,
+        "duration_ms": 239,
+        "status": "failed",
+        "stdout_snippet": "============================= test session starts ==============================\nplatform linux -- Python 3.12.16, pytest-8.3.5, pluggy-1.7.0\nrootdir: /oracle\ncollected 2 items\n\n../oracle/test_checkout.py F.                                            [100%]\n\n=================================== FAILURES ===================================\n_________________________ test_checkout_without_coupon _________________________\n\n    def test_checkout_without_coupon():\n        try:\n            result = place_order([{\"price_cents\": 1299, \"quantity\": 1}])\n        except Exception as error:\n            result = {\"error\": type(error).__name__}\n>       assert result == {\"status\": \"confirmed\", \"total_cents\": 1299}\nE       AssertionError: assert {'error': 'TypeError'} == {'status': 'c..._cents': 1299}\nE         \nE         Left contains 1 more item:\nE         {'error': 'TypeError'}\nE         Right contains 2 more items:\nE         {'status': 'confirmed', 'total_cents': 1299}\nE         Use -v to get more diff\n\n/oracle/test_checkout.py:10: AssertionError\n------------------- generated xml file: /results/report.xml --------------------\n=========================== short test summary info ============================\nFAILED ../oracle/test_checkout.py::test_checkout_without_coupon - AssertionEr...\n========================= 1 failed, 1 passed in 0.01s ==========================\n",
+        "stderr_snippet": ""
+      },
+      {
+        "check_name": "after",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "--name",
+          "proofline-8c293702ca3f411cac3ed04506fd73ec",
+          "--network=none",
+          "--read-only",
+          "--cap-drop=ALL",
+          "--security-opt=no-new-privileges",
+          "--user=501:20",
+          "--log-driver=none",
+          "--ulimit=fsize=2097152:2097152",
+          "--memory=256m",
+          "--cpus=1",
+          "--pids-limit=64",
+          "--tmpfs",
+          "/tmp:rw,size=32m",
+          "-e",
+          "PYTHONPATH=/work",
+          "-e",
+          "PYTHONDONTWRITEBYTECODE=1",
+          "-v",
+          "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-verify-kusqkr11/work:/work:ro",
+          "-v",
+          "/Users/koushikk/Documents/Hackathons/Neural Strom/NovaSecurity/fixtures/flagship/oracle:/oracle:ro",
+          "-v",
+          "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-results-2fvasm4h:/results:rw",
+          "-w",
+          "/work",
+          "proofline-verification@sha256:da69f7765cf7c83a251b3568f835f760e04735eee9bd87e213ab82af8e9576ff",
+          "python",
+          "-m",
+          "pytest",
+          "-p",
+          "no:cacheprovider",
+          "--junitxml=/results/report.xml",
+          "/oracle/test_checkout.py"
+        ],
+        "exit_code": 0,
+        "duration_ms": 236,
+        "status": "passed",
+        "stdout_snippet": "============================= test session starts ==============================\nplatform linux -- Python 3.12.16, pytest-8.3.5, pluggy-1.7.0\nrootdir: /oracle\ncollected 2 items\n\n../oracle/test_checkout.py ..                                            [100%]\n\n------------------- generated xml file: /results/report.xml --------------------\n============================== 2 passed in 0.01s ===============================\n",
+        "stderr_snippet": ""
+      }
+    ],
+    "before_test_passed": false,
+    "after_test_passed": true,
+    "happy_path_passed": true,
+    "published_pr_url": null,
+    "created_at": "2026-11-03T16:47:04.401374+00:00"
+  },
+  "verification": {
+    "success": true,
+    "message": "Independent regression assertion failed before and passed after; happy path passed",
+    "profile": "checkout_contract",
+    "image": "proofline-verification@sha256:da69f7765cf7c83a251b3568f835f760e04735eee9bd87e213ab82af8e9576ff"
+  }
+}

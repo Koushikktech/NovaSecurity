@@ -1,0 +1,28 @@
+{
+  "tp": 1,
+  "duplicate_comments": 0,
+  "cases": 1,
+  "review_statuses": {
+    "completed": 1
+  },
+  "fp": 0,
+  "fn": 0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "precision_95_wilson": [
+    0.20654329147389294,
+    1
+  ],
+  "recall_95_wilson": [
+    0.20654329147389294,
+    1
+  ],
+  "clean_change_false_positive_rate": null,
+  "localization_within_two_lines": 1.0,
+  "limitations": "Authored synthetic corpus; inspect reviewer provenance, not presumed independent. Cases within families are correlated. Intervals are descriptive.",
+  "label_validation": {
+    "relationship": "ai_assisted_builder",
+    "cases": 36
+  },
+  "purpose": "Known-case recovery/regression retest; not an untouched heldout estimate"
+}

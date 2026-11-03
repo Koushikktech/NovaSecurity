@@ -1,0 +1,134 @@
+[
+  {
+    "case_id": "dev_sql_vuln_01",
+    "split": "dev",
+    "category": "security",
+    "rule_id": "CWE-89",
+    "expected_positive": true,
+    "file_path": "repositories/expenses.py",
+    "accepted_lines": [16, 17, 18, 19, 20],
+    "code_snippet": "cursor.execute(f\"SELECT * FROM expenses WHERE user = '{user}' AND description LIKE '%{query}%'\")",
+    "description": "SQL injection via f-string interpolation into sqlite3 query"
+  },
+  {
+    "case_id": "dev_sql_safe_01",
+    "split": "dev",
+    "category": "security",
+    "rule_id": "CWE-89",
+    "expected_positive": false,
+    "file_path": "repositories/safe_expenses.py",
+    "accepted_lines": [15, 16],
+    "code_snippet": "cursor.execute('SELECT * FROM expenses WHERE user = ? AND description LIKE ?', (user, query))",
+    "description": "Safe parameterized SQL query with query binding tuple"
+  },
+  {
+    "case_id": "dev_cmd_vuln_01",
+    "split": "dev",
+    "category": "security",
+    "rule_id": "CWE-78",
+    "expected_positive": true,
+    "file_path": "services/compress.py",
+    "accepted_lines": [8, 9],
+    "code_snippet": "os.system(f'tar -czf {out_file} {user_input}')",
+    "description": "Command injection via formatted string passed to os.system"
+  },
+  {
+    "case_id": "dev_cmd_safe_01",
+    "split": "dev",
+    "category": "security",
+    "rule_id": "CWE-78",
+    "expected_positive": false,
+    "file_path": "services/safe_compress.py",
+    "accepted_lines": [8, 9],
+    "code_snippet": "subprocess.run(['tar', '-czf', out_file, safe_arg], check=True)",
+    "description": "Safe command invocation using argument list without shell"
+  },
+  {
+    "case_id": "dev_path_vuln_01",
+    "split": "dev",
+    "category": "security",
+    "rule_id": "CWE-22",
+    "expected_positive": true,
+    "file_path": "routes/download.py",
+    "accepted_lines": [12],
+    "code_snippet": "open('/var/data/' + user_filename, 'rb')",
+    "description": "Path traversal via unvalidated filename concatenation"
+  },
+  {
+    "case_id": "dev_path_safe_01",
+    "split": "dev",
+    "category": "security",
+    "rule_id": "CWE-22",
+    "expected_positive": false,
+    "file_path": "routes/safe_download.py",
+    "accepted_lines": [12, 13],
+    "code_snippet": "safe_name = os.path.basename(user_filename)\nopen(os.path.join(SAFE_DIR, safe_name), 'rb')",
+    "description": "Safe path resolution constrained by os.path.basename"
+  },
+  {
+    "case_id": "dev_bug_mutable_01",
+    "split": "dev",
+    "category": "bug",
+    "rule_id": "B006",
+    "expected_positive": true,
+    "file_path": "services/search.py",
+    "accepted_lines": [10, 11],
+    "code_snippet": "def search(user, query, tags=[]):",
+    "description": "Mutable default list parameter accumulating state across requests"
+  },
+  {
+    "case_id": "dev_bug_mutable_safe_01",
+    "split": "dev",
+    "category": "bug",
+    "rule_id": "B006",
+    "expected_positive": false,
+    "file_path": "services/safe_search.py",
+    "accepted_lines": [10, 11, 12],
+    "code_snippet": "def search(user, query, tags=None):\n    if tags is None:\n        tags = []",
+    "description": "Safe default parameter using None sentinel"
+  },
+  {
+    "case_id": "dev_style_unused_01",
+    "split": "dev",
+    "category": "style",
+    "rule_id": "F401",
+    "expected_positive": true,
+    "file_path": "routes/search.py",
+    "accepted_lines": [3],
+    "code_snippet": "import os",
+    "description": "Unused import in route handler module"
+  },
+  {
+    "case_id": "dev_style_clean_01",
+    "split": "dev",
+    "category": "style",
+    "rule_id": "F401",
+    "expected_positive": false,
+    "file_path": "routes/clean_search.py",
+    "accepted_lines": [3],
+    "code_snippet": "import json\nreturn json.dumps(res)",
+    "description": "Used import properly called in code"
+  },
+  {
+    "case_id": "dev_bug_off_by_one_01",
+    "split": "dev",
+    "category": "bug",
+    "rule_id": "BUG-OBO",
+    "expected_positive": true,
+    "file_path": "utils/pagination.py",
+    "accepted_lines": [14],
+    "code_snippet": "return items[offset : offset + page_size + 1]",
+    "description": "Off-by-one error returning extra item on pagination slice"
+  },
+  {
+    "case_id": "dev_bug_off_by_one_safe_01",
+    "split": "dev",
+    "category": "bug",
+    "rule_id": "BUG-OBO",
+    "expected_positive": false,
+    "file_path": "utils/safe_pagination.py",
+    "accepted_lines": [14],
+    "code_snippet": "return items[offset : offset + page_size]",
+    "description": "Exact slice boundary matching page_size"
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "source_sha256": "6f97e4a9e6f0b578429fd8d21590e8bd986452b6148385b1952a64182c1242f6",
+  "verdict_count": 36,
+  "missing_evidence_blind_ids": [
+    "case-001",
+    "case-003",
+    "case-006",
+    "case-008",
+    "case-011",
+    "case-012",
+    "case-013",
+    "case-014",
+    "case-015",
+    "case-016",
+    "case-018",
+    "case-021",
+    "case-028",
+    "case-035"
+  ],
+  "reviewer_relationship": "not_confirmed",
+  "quality_scoring_ready": false
+}

@@ -1,0 +1,600 @@
+{
+  "version": "authored-review-v1",
+  "provenance": "Self-authored; family split; not independently annotated. No model tuning on heldout permitted after freezing.",
+  "cases": [
+    {
+      "id": "mutable-default-bug",
+      "split": "development",
+      "files": {
+        "src/module.py": "def collect(item, items=[]):\n    items.append(item)\n    return items\n"
+      },
+      "base_files": {
+        "src/module.py": "def collect(item, items=None):\n    items = [] if items is None else items\n    items.append(item)\n    return items\n"
+      },
+      "expected_issues": [
+        {
+          "id": "mutable-default",
+          "path": "src/module.py",
+          "line": 1,
+          "description": "Calls share mutable default state"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Calls share mutable default state"
+    },
+    {
+      "id": "mutable-default-clean",
+      "split": "development",
+      "files": {
+        "src/module.py": "def collect(item, items=None):\n    items = [] if items is None else items\n    items.append(item)\n    return items\n"
+      },
+      "base_files": {
+        "src/module.py": "def collect(item, items=None):\n    items = [] if items is None else items\n    items.append(item)\n    return items\n"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "async-batch-bug",
+      "split": "development",
+      "files": {
+        "src/module.js": "export async function save(items) { items.forEach(async i => await i.save()); }"
+      },
+      "base_files": {
+        "src/module.js": "export async function save(items) { await Promise.all(items.map(i => i.save())); }"
+      },
+      "expected_issues": [
+        {
+          "id": "async-batch",
+          "path": "src/module.js",
+          "line": 1,
+          "description": "Completion does not await saves"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Completion does not await saves"
+    },
+    {
+      "id": "async-batch-clean",
+      "split": "development",
+      "files": {
+        "src/module.js": "export async function save(items) { await Promise.all(items.map(i => i.save())); }"
+      },
+      "base_files": {
+        "src/module.js": "export async function save(items) { await Promise.all(items.map(i => i.save())); }"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "argument-contract-bug",
+      "split": "development",
+      "files": {
+        "src/module.ts": "export function load(id: number, page: number) { return id; }\nload(1);"
+      },
+      "base_files": {
+        "src/module.ts": "export function load(id: number, page = 1) { return id; }\nload(1);"
+      },
+      "expected_issues": [
+        {
+          "id": "argument-contract",
+          "path": "src/module.ts",
+          "line": 2,
+          "description": "Caller lacks required argument"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Caller lacks required argument"
+    },
+    {
+      "id": "argument-contract-clean",
+      "split": "development",
+      "files": {
+        "src/module.ts": "export function load(id: number, page = 1) { return id; }\nload(1);"
+      },
+      "base_files": {
+        "src/module.ts": "export function load(id: number, page = 1) { return id; }\nload(1);"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "sql-format-bug",
+      "split": "development",
+      "files": {
+        "src/module.py": "def search(cursor, name):\n    return cursor.execute(f\"SELECT * FROM users WHERE name='{name}'\")\n"
+      },
+      "base_files": {
+        "src/module.py": "def search(cursor, name):\n    return cursor.execute('SELECT * FROM users WHERE name=?', (name,))\n"
+      },
+      "expected_issues": [
+        {
+          "id": "sql-format",
+          "path": "src/module.py",
+          "line": 2,
+          "description": "Untrusted name changes SQL structure"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Untrusted name changes SQL structure"
+    },
+    {
+      "id": "sql-format-clean",
+      "split": "development",
+      "files": {
+        "src/module.py": "def search(cursor, name):\n    return cursor.execute('SELECT * FROM users WHERE name=?', (name,))\n"
+      },
+      "base_files": {
+        "src/module.py": "def search(cursor, name):\n    return cursor.execute('SELECT * FROM users WHERE name=?', (name,))\n"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "return-contract-bug",
+      "split": "development",
+      "files": {
+        "src/module.ts": "export function count(): number { return 'none'; }"
+      },
+      "base_files": {
+        "src/module.ts": "export function count(): number { return 0; }"
+      },
+      "expected_issues": [
+        {
+          "id": "return-contract",
+          "path": "src/module.ts",
+          "line": 1,
+          "description": "Declared numeric API returns a string"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Declared numeric API returns a string"
+    },
+    {
+      "id": "return-contract-clean",
+      "split": "development",
+      "files": {
+        "src/module.ts": "export function count(): number { return 0; }"
+      },
+      "base_files": {
+        "src/module.ts": "export function count(): number { return 0; }"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "shell-format-bug",
+      "split": "development",
+      "files": {
+        "src/module.py": "import subprocess\ndef run(name):\n    return subprocess.run(f'echo {name}', shell=True)\n"
+      },
+      "base_files": {
+        "src/module.py": "import subprocess\ndef run(name):\n    return subprocess.run(['echo', name], check=True)\n"
+      },
+      "expected_issues": [
+        {
+          "id": "shell-format",
+          "path": "src/module.py",
+          "line": 3,
+          "description": "Shell interprets untrusted metacharacters"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Shell interprets untrusted metacharacters"
+    },
+    {
+      "id": "shell-format-clean",
+      "split": "development",
+      "files": {
+        "src/module.py": "import subprocess\ndef run(name):\n    return subprocess.run(['echo', name], check=True)\n"
+      },
+      "base_files": {
+        "src/module.py": "import subprocess\ndef run(name):\n    return subprocess.run(['echo', name], check=True)\n"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "empty-list-bug",
+      "split": "heldout",
+      "files": {
+        "src/module.py": "def first(items):\n    return items[0]\n"
+      },
+      "base_files": {
+        "src/module.py": "def first(items):\n    return items[0] if items else None\n"
+      },
+      "expected_issues": [
+        {
+          "id": "empty-list",
+          "path": "src/module.py",
+          "line": 2,
+          "description": "Empty input raises instead of returning None"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Empty input raises instead of returning None"
+    },
+    {
+      "id": "empty-list-clean",
+      "split": "heldout",
+      "files": {
+        "src/module.py": "def first(items):\n    return items[0] if items else None\n"
+      },
+      "base_files": {
+        "src/module.py": "def first(items):\n    return items[0] if items else None\n"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "zero-total-bug",
+      "split": "heldout",
+      "files": {
+        "src/module.ts": "export function average(items: number[]): number { return items.reduce((a,b)=>a+b,0) / items.length; }"
+      },
+      "base_files": {
+        "src/module.ts": "export function average(items: number[]): number { return items.length ? items.reduce((a,b)=>a+b,0)/items.length : 0; }"
+      },
+      "expected_issues": [
+        {
+          "id": "zero-total",
+          "path": "src/module.ts",
+          "line": 1,
+          "description": "Empty input returns NaN instead of zero"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Empty input returns NaN instead of zero"
+    },
+    {
+      "id": "zero-total-clean",
+      "split": "heldout",
+      "files": {
+        "src/module.ts": "export function average(items: number[]): number { return items.length ? items.reduce((a,b)=>a+b,0)/items.length : 0; }"
+      },
+      "base_files": {
+        "src/module.ts": "export function average(items: number[]): number { return items.length ? items.reduce((a,b)=>a+b,0)/items.length : 0; }"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "sort-return-bug",
+      "split": "heldout",
+      "files": {
+        "src/module.py": "def sorted_items(items):\n    return items.sort()\n"
+      },
+      "base_files": {
+        "src/module.py": "def sorted_items(items):\n    return sorted(items)\n"
+      },
+      "expected_issues": [
+        {
+          "id": "sort-return",
+          "path": "src/module.py",
+          "line": 2,
+          "description": "API returns None instead of sorted collection"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "API returns None instead of sorted collection"
+    },
+    {
+      "id": "sort-return-clean",
+      "split": "heldout",
+      "files": {
+        "src/module.py": "def sorted_items(items):\n    return sorted(items)\n"
+      },
+      "base_files": {
+        "src/module.py": "def sorted_items(items):\n    return sorted(items)\n"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "missing-await-bug",
+      "split": "heldout",
+      "files": {
+        "src/module.js": "export async function load(fetcher) { const response = fetcher(); return response.json(); }"
+      },
+      "base_files": {
+        "src/module.js": "export async function load(fetcher) { const response = await fetcher(); return response.json(); }"
+      },
+      "expected_issues": [
+        {
+          "id": "missing-await",
+          "path": "src/module.js",
+          "line": 1,
+          "description": "Attempts json on promise"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Attempts json on promise"
+    },
+    {
+      "id": "missing-await-clean",
+      "split": "heldout",
+      "files": {
+        "src/module.js": "export async function load(fetcher) { const response = await fetcher(); return response.json(); }"
+      },
+      "base_files": {
+        "src/module.js": "export async function load(fetcher) { const response = await fetcher(); return response.json(); }"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "null-input-bug",
+      "split": "heldout",
+      "files": {
+        "src/module.ts": "export function label(value: string | null): string { return value.toUpperCase(); }"
+      },
+      "base_files": {
+        "src/module.ts": "export function label(value: string | null): string { return value?.toUpperCase() ?? ''; }"
+      },
+      "expected_issues": [
+        {
+          "id": "null-input",
+          "path": "src/module.ts",
+          "line": 1,
+          "description": "Nullable input dereferenced without guard"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Nullable input dereferenced without guard"
+    },
+    {
+      "id": "null-input-clean",
+      "split": "heldout",
+      "files": {
+        "src/module.ts": "export function label(value: string | null): string { return value?.toUpperCase() ?? ''; }"
+      },
+      "base_files": {
+        "src/module.ts": "export function label(value: string | null): string { return value?.toUpperCase() ?? ''; }"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "boolean-string-bug",
+      "split": "heldout",
+      "files": {
+        "src/module.py": "def enabled(value):\n    return bool(value)\n"
+      },
+      "base_files": {
+        "src/module.py": "def enabled(value):\n    return value.lower() in {'true', '1'}\n"
+      },
+      "expected_issues": [
+        {
+          "id": "boolean-string",
+          "path": "src/module.py",
+          "line": 2,
+          "description": "String false is interpreted as enabled"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "String false is interpreted as enabled"
+    },
+    {
+      "id": "boolean-string-clean",
+      "split": "heldout",
+      "files": {
+        "src/module.py": "def enabled(value):\n    return value.lower() in {'true', '1'}\n"
+      },
+      "base_files": {
+        "src/module.py": "def enabled(value):\n    return value.lower() in {'true', '1'}\n"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "slice-boundary-bug",
+      "split": "heldout",
+      "files": {
+        "src/module.js": "export function page(items, start, size) { return items.slice(start, size); }"
+      },
+      "base_files": {
+        "src/module.js": "export function page(items, start, size) { return items.slice(start, start + size); }"
+      },
+      "expected_issues": [
+        {
+          "id": "slice-boundary",
+          "path": "src/module.js",
+          "line": 1,
+          "description": "Nonzero start produces wrong page bounds"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Nonzero start produces wrong page bounds"
+    },
+    {
+      "id": "slice-boundary-clean",
+      "split": "heldout",
+      "files": {
+        "src/module.js": "export function page(items, start, size) { return items.slice(start, start + size); }"
+      },
+      "base_files": {
+        "src/module.js": "export function page(items, start, size) { return items.slice(start, start + size); }"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "falsy-default-bug",
+      "split": "heldout",
+      "files": {
+        "src/module.ts": "export function timeout(value: number | undefined): number { return value || 30; }"
+      },
+      "base_files": {
+        "src/module.ts": "export function timeout(value: number | undefined): number { return value ?? 30; }"
+      },
+      "expected_issues": [
+        {
+          "id": "falsy-default",
+          "path": "src/module.ts",
+          "line": 1,
+          "description": "Explicit zero timeout is overwritten"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Explicit zero timeout is overwritten"
+    },
+    {
+      "id": "falsy-default-clean",
+      "split": "heldout",
+      "files": {
+        "src/module.ts": "export function timeout(value: number | undefined): number { return value ?? 30; }"
+      },
+      "base_files": {
+        "src/module.ts": "export function timeout(value: number | undefined): number { return value ?? 30; }"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "dict-delete-bug",
+      "split": "heldout",
+      "files": {
+        "src/module.py": "def prune(values):\n    for key in values:\n        if values[key] is None:\n            del values[key]\n"
+      },
+      "base_files": {
+        "src/module.py": "def prune(values):\n    for key in list(values):\n        if values[key] is None:\n            del values[key]\n"
+      },
+      "expected_issues": [
+        {
+          "id": "dict-delete",
+          "path": "src/module.py",
+          "line": 4,
+          "description": "Dictionary changes size during iteration"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Dictionary changes size during iteration"
+    },
+    {
+      "id": "dict-delete-clean",
+      "split": "heldout",
+      "files": {
+        "src/module.py": "def prune(values):\n    for key in list(values):\n        if values[key] is None:\n            del values[key]\n"
+      },
+      "base_files": {
+        "src/module.py": "def prune(values):\n    for key in list(values):\n        if values[key] is None:\n            del values[key]\n"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "reject-propagation-bug",
+      "split": "heldout",
+      "files": {
+        "src/module.js": "export function save(task) { task().catch(() => {}); }"
+      },
+      "base_files": {
+        "src/module.js": "export function save(task) { return task(); }"
+      },
+      "expected_issues": [
+        {
+          "id": "reject-propagation",
+          "path": "src/module.js",
+          "line": 1,
+          "description": "Caller cannot observe completion or rejection"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Caller cannot observe completion or rejection"
+    },
+    {
+      "id": "reject-propagation-clean",
+      "split": "heldout",
+      "files": {
+        "src/module.js": "export function save(task) { return task(); }"
+      },
+      "base_files": {
+        "src/module.js": "export function save(task) { return task(); }"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "assignment-contract-bug",
+      "split": "heldout",
+      "files": {
+        "src/module.ts": "export const retries: number = 'three';"
+      },
+      "base_files": {
+        "src/module.ts": "export const retries: number = 3;"
+      },
+      "expected_issues": [
+        {
+          "id": "assignment-contract",
+          "path": "src/module.ts",
+          "line": 1,
+          "description": "Configuration value has incompatible type"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Configuration value has incompatible type"
+    },
+    {
+      "id": "assignment-contract-clean",
+      "split": "heldout",
+      "files": {
+        "src/module.ts": "export const retries: number = 3;"
+      },
+      "base_files": {
+        "src/module.ts": "export const retries: number = 3;"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    },
+    {
+      "id": "precision-money-bug",
+      "split": "heldout",
+      "files": {
+        "src/module.py": "def cents(value):\n    return int(value * 100)\n"
+      },
+      "base_files": {
+        "src/module.py": "from decimal import Decimal\ndef cents(value):\n    return int(Decimal(str(value)) * 100)\n"
+      },
+      "expected_issues": [
+        {
+          "id": "precision-money",
+          "path": "src/module.py",
+          "line": 2,
+          "description": "Binary floating point truncates monetary cents"
+        }
+      ],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Binary floating point truncates monetary cents"
+    },
+    {
+      "id": "precision-money-clean",
+      "split": "heldout",
+      "files": {
+        "src/module.py": "from decimal import Decimal\ndef cents(value):\n    return int(Decimal(str(value)) * 100)\n"
+      },
+      "base_files": {
+        "src/module.py": "from decimal import Decimal\ndef cents(value):\n    return int(Decimal(str(value)) * 100)\n"
+      },
+      "expected_issues": [],
+      "annotation_status": "author_labelled_requires_independent_review",
+      "requirements": "Preserve the documented safe behavior; do not invent issues."
+    }
+  ]
+}

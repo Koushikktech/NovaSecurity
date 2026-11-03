@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "error": null,
+  "model": "gpt-5.6-sol",
+  "usage": {
+    "thought_tokens": 0,
+    "prompt_tokens": 11368,
+    "candidate_tokens": 21,
+    "total_tokens": 11389,
+    "cached_content_token_count": 11008,
+    "cost_estimated_usd": null
+  }
+}

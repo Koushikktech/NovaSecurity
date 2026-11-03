@@ -1,0 +1,38 @@
+[
+  {
+    "tool_retrieval": {
+      "observations": 0,
+      "errors": 0,
+      "empty_collections": 0
+    },
+    "recorded_model_requests": 0,
+    "file": "evals/results/audit-static-heldout.json",
+    "variant": "static",
+    "cases": 24,
+    "statuses": {
+      "completed": 24
+    },
+    "median_seconds": 0.16458672949374886,
+    "p95_seconds": 0.8760607500007609,
+    "tokens": 0,
+    "quality": "pending explicit label alignment and finding adjudication"
+  },
+  {
+    "tool_retrieval": {
+      "observations": 6,
+      "errors": 0,
+      "empty_collections": 2
+    },
+    "recorded_model_requests": 4,
+    "file": "evals/results/audit-live-preflight.json",
+    "variant": "verified",
+    "cases": 1,
+    "statuses": {
+      "completed": 1
+    },
+    "median_seconds": 32.94384354200156,
+    "p95_seconds": 32.94384354200156,
+    "tokens": 49368,
+    "quality": "pending explicit label alignment and finding adjudication"
+  }
+]

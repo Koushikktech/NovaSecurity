@@ -1,0 +1,58 @@
+{
+  "success": false,
+  "error": "Native Codex tool activity was rejected; only Proofline's bounded tools are allowed",
+  "event_shapes": [
+    {
+      "type": "thread.started",
+      "item_type": null,
+      "keys": [
+        "type",
+        "thread_id"
+      ],
+      "usage": null
+    },
+    {
+      "type": "item.completed",
+      "item_type": "error",
+      "keys": [
+        "type",
+        "item"
+      ],
+      "usage": null
+    },
+    {
+      "type": "turn.started",
+      "item_type": null,
+      "keys": [
+        "type"
+      ],
+      "usage": null
+    },
+    {
+      "type": "error",
+      "item_type": null,
+      "keys": [
+        "type",
+        "message"
+      ],
+      "usage": null
+    },
+    {
+      "type": "turn.failed",
+      "item_type": null,
+      "keys": [
+        "type",
+        "error"
+      ],
+      "usage": null
+    }
+  ],
+  "usage": {
+    "thought_tokens": 0,
+    "prompt_tokens": 0,
+    "candidate_tokens": 0,
+    "total_tokens": 0,
+    "cached_content_token_count": 0,
+    "cost_estimated_usd": null
+  }
+}

@@ -1,0 +1,51 @@
+name: Proofline static pull request review
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out trusted reviewer from base revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: engine
+          persist-credentials: false
+      - name: Check out review subject
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          path: subject
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Prepare trusted analyzer dependencies
+        run: |
+          test -f engine/backend/cli.py
+          pip install --require-hashes -r engine/backend/requirements.txt
+          npm --prefix engine/frontend ci --ignore-scripts
+      - name: Review immutable base and head without provider secrets
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          GEMINI_API_KEY: ''
+          PROOFLINE_GITHUB_PUBLISH_ENABLED: 'false'
+          PROOFLINE_EXECUTION_ENABLED: 'false'
+        run: |
+          python engine/backend/cli.py review --repo "$GITHUB_WORKSPACE/subject" --base "$BASE_SHA" --head "$HEAD_SHA" --static-only --format markdown > proofline-report.md
+      - name: Retain review report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: proofline-static-review
+          path: proofline-report.md
+          if-no-files-found: warn

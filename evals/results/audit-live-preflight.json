@@ -1,0 +1,726 @@
+{
+  "configuration": {
+    "provider": "codex_cli",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "max_calls": 4,
+    "deadline": 600,
+    "attempts": 1
+  },
+  "corpus_hash": "b9d4be93d28266423cf3fd3ce11b0283a8d95a90976b39fc382811d8a46c7f33",
+  "variant": "verified",
+  "split": "development",
+  "quality_metrics": "not_computed_without_adjudication",
+  "results": [
+    {
+      "case_id": "mutable-default-bug",
+      "variant": "verified",
+      "elapsed_seconds": 32.94384354200156,
+      "run": {
+        "id": "53028dd6-48a0-43ec-8b38-951c18baf6af",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-g0ixn_de",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "ebf61b7cd4e5d322748d96c29ee5c1c5ba165da5",
+        "head_sha": "44068afc6a36c851e0eb7b4089c0c18b8b197317",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "codex_cli",
+        "model_id": "gpt-5.6-sol",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "succeeded",
+          "challenge": "succeeded",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 2,
+          "security": 0,
+          "bug": 2,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "5",
+            "provider": "codex_cli",
+            "codex_reasoning": "high",
+            "api_mode": "auto",
+            "models": {
+              "review": "gpt-5.6-sol",
+              "patch": "gpt-5.6-sol",
+              "verify_reasoning": "gpt-5.6-sol"
+            },
+            "strategy": "verified",
+            "model": "gpt-5.6-sol",
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 4,
+            "max_tool_calls": 24,
+            "deadline_seconds": 600,
+            "investigation_rounds": 1
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-g0ixn_de",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-g0ixn_de",
+            "comparison": "exact base to head",
+            "source_exclusions": [],
+            "base_sha": "ebf61b7cd4e5d322748d96c29ee5c1c5ba165da5",
+            "head_sha": "44068afc6a36c851e0eb7b4089c0c18b8b197317",
+            "revision_label": "44068afc6a36c851e0eb7b4089c0c18b8b197317",
+            "run_config": {
+              "version": "5",
+              "provider": "codex_cli",
+              "codex_reasoning": "high",
+              "api_mode": "auto",
+              "models": {
+                "review": "gpt-5.6-sol",
+                "patch": "gpt-5.6-sol",
+                "verify_reasoning": "gpt-5.6-sol"
+              },
+              "strategy": "verified",
+              "model": "gpt-5.6-sol",
+              "thinking": "low",
+              "max_attempts": 1,
+              "max_model_calls": 4,
+              "max_tool_calls": 24,
+              "deadline_seconds": 600,
+              "investigation_rounds": 1
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "eaa0d141a987fa309e9b8685cb0b90cbc7288b618ada0b2611a55ecb489d1fe2",
+          "total_files": 1,
+          "source_files": [
+            "src/module.py"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "repository_policy_source": "base_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 1,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 1,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "8b6f64e7-9ac9-49f6-8106-b1cf35ebd99a"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "8b6f64e7-9ac9-49f6-8106-b1cf35ebd99a"
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "8b6f64e7-9ac9-49f6-8106-b1cf35ebd99a"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "8b6f64e7-9ac9-49f6-8106-b1cf35ebd99a"
+            }
+          },
+          "javascript": {
+            "status": "skipped",
+            "reason": "No JavaScript/TypeScript files"
+          },
+          "test_gaps": [
+            {
+              "path": "src/module.py",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in src/module.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [
+            "src/module.py"
+          ],
+          "diff": "diff --git a/src/module.py b/src/module.py\n--- a/src/module.py\n+++ b/src/module.py\n@@ -1,4 +1,3 @@\n-def collect(item, items=None):\n-    items = [] if items is None else items\n+def collect(item, items=[]):\n     items.append(item)\n     return items\n",
+          "language_index": {},
+          "python_index_errors": {},
+          "graph_nodes": 1,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.py"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "e45e218d4837f66f5191220ed17b63cf0e51b253f48c4f4434373c208f7620c9",
+            "files": [
+              "src/module.py"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.py:1:collect",
+                "name": "collect",
+                "path": "src/module.py",
+                "start": 1,
+                "end": 3
+              }
+            ],
+            "changed_symbols": [
+              {
+                "id": "src/module.py:1:collect",
+                "name": "collect",
+                "path": "src/module.py",
+                "start": 1,
+                "end": 3
+              }
+            ],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [
+              {
+                "symbol": {
+                  "id": "src/module.py:1:collect",
+                  "name": "collect",
+                  "path": "src/module.py",
+                  "start": 1,
+                  "end": 3
+                },
+                "callers": [],
+                "test_hints": []
+              }
+            ],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "model_review_error": null,
+          "review_summary": "The change replaces per-call list allocation with a mutable default argument. Explicitly supplied lists still behave as before, but calls omitting `items` now share and accumulate state across invocations. No matching tests or external callers were supplied.",
+          "verification_coverage": {
+            "evidence_counts": {
+              "source_supported": 2,
+              "refuted": 0,
+              "insufficient_evidence": 0
+            },
+            "requested": 2,
+            "assessed": 2,
+            "unassessed_ids": [],
+            "batches": 1,
+            "errors": [],
+            "complete": true
+          },
+          "investigation": {
+            "model_calls": 4,
+            "tool_calls": 6,
+            "trace": [
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T13:50:52.786633+00:00",
+                "stage": "investigate_review",
+                "request_id": "c12fd1dbb3b10fad1438b2e020ceceebb4891d002a0b2e6e241dd4cfaa49d203",
+                "call": 1
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T13:50:59.274174+00:00",
+                "stage": "investigate_review",
+                "request_id": "c12fd1dbb3b10fad1438b2e020ceceebb4891d002a0b2e6e241dd4cfaa49d203",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 102,
+                  "prompt_tokens": 11801,
+                  "candidate_tokens": 175,
+                  "total_tokens": 11976,
+                  "cached_content_token_count": 0
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T13:50:59.275883+00:00",
+                "stage": "investigate_review",
+                "key": "c12fd1dbb3b10fad1438b2e020ceceebb4891d002a0b2e6e241dd4cfaa49d203"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T13:50:59.275959+00:00",
+                "tool": {
+                  "name": "find_references",
+                  "query": "collect",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 3
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T13:50:59.276137+00:00",
+                "observation": {
+                  "snapshot": "e45e218d4837f66f5191220ed17b63cf0e51b253f48c4f4434373c208f7620c9",
+                  "tool": {
+                    "name": "find_references",
+                    "query": "collect",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 3
+                  },
+                  "output": "{\"matches\": [{\"path\": \"src/module.py\", \"line\": 1, \"text\": \"def collect(item, items=[]):\", \"relationship\": \"lexical_hint\"}]}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T13:50:59.276599+00:00",
+                "tool": {
+                  "name": "find_related_tests",
+                  "query": "collect",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 3
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T13:50:59.276624+00:00",
+                "observation": {
+                  "snapshot": "e45e218d4837f66f5191220ed17b63cf0e51b253f48c4f4434373c208f7620c9",
+                  "tool": {
+                    "name": "find_related_tests",
+                    "query": "collect",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 3
+                  },
+                  "output": "{\"paths\": []}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T13:50:59.280164+00:00",
+                "stage": "review",
+                "request_id": "789db559bd252e5ae3b9b58396879ce2ebab0833038e91c6db57f091a1f6764a",
+                "call": 2
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T13:51:07.456832+00:00",
+                "stage": "review",
+                "request_id": "789db559bd252e5ae3b9b58396879ce2ebab0833038e91c6db57f091a1f6764a",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 0,
+                  "prompt_tokens": 12127,
+                  "candidate_tokens": 343,
+                  "total_tokens": 12470,
+                  "cached_content_token_count": 0
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T13:51:07.458083+00:00",
+                "stage": "review",
+                "key": "789db559bd252e5ae3b9b58396879ce2ebab0833038e91c6db57f091a1f6764a"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T13:51:07.460097+00:00",
+                "stage": "investigate_verify_reasoning",
+                "request_id": "95b834c16d819db73f1d369ceffbbc2dd1d0cfae51d4238884ca738a75d826a9",
+                "call": 3
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T13:51:14.145127+00:00",
+                "stage": "investigate_verify_reasoning",
+                "request_id": "95b834c16d819db73f1d369ceffbbc2dd1d0cfae51d4238884ca738a75d826a9",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 92,
+                  "prompt_tokens": 11733,
+                  "candidate_tokens": 229,
+                  "total_tokens": 11962,
+                  "cached_content_token_count": 0
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T13:51:14.146848+00:00",
+                "stage": "investigate_verify_reasoning",
+                "key": "95b834c16d819db73f1d369ceffbbc2dd1d0cfae51d4238884ca738a75d826a9"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T13:51:14.146924+00:00",
+                "tool": {
+                  "name": "get_diff",
+                  "query": "src/module.py",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 3
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T13:51:14.147055+00:00",
+                "observation": {
+                  "snapshot": "e45e218d4837f66f5191220ed17b63cf0e51b253f48c4f4434373c208f7620c9",
+                  "tool": {
+                    "name": "get_diff",
+                    "query": "src/module.py",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 3
+                  },
+                  "output": "{\"diff\": \"diff --git a/src/module.py b/src/module.py\\n--- a/src/module.py\\n+++ b/src/module.py\\n@@ -1,4 +1,3 @@\\n-def collect(item, items=None):\\n-    items = [] if items is None else items\\n+def collect(item, items=[]):\\n     items.append(item)\\n     return items\\n\"}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T13:51:14.147108+00:00",
+                "tool": {
+                  "name": "get_symbol",
+                  "query": "src/module.py:1:collect",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 3
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T13:51:14.147171+00:00",
+                "observation": {
+                  "snapshot": "e45e218d4837f66f5191220ed17b63cf0e51b253f48c4f4434373c208f7620c9",
+                  "tool": {
+                    "name": "get_symbol",
+                    "query": "src/module.py:1:collect",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 3
+                  },
+                  "output": "{\"symbols\": [{\"id\": \"src/module.py:1:collect\", \"name\": \"collect\", \"path\": \"src/module.py\", \"start\": 1, \"end\": 3}], \"match_type\": \"exact_symbol\"}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T13:51:14.147190+00:00",
+                "tool": {
+                  "name": "find_references",
+                  "query": "src/module.py:1:collect",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 3
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T13:51:14.147269+00:00",
+                "observation": {
+                  "snapshot": "e45e218d4837f66f5191220ed17b63cf0e51b253f48c4f4434373c208f7620c9",
+                  "tool": {
+                    "name": "find_references",
+                    "query": "src/module.py:1:collect",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 3
+                  },
+                  "output": "{\"matches\": [{\"path\": \"src/module.py\", \"line\": 1, \"text\": \"def collect(item, items=[]):\", \"relationship\": \"lexical_hint\"}]}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T13:51:14.147286+00:00",
+                "tool": {
+                  "name": "find_related_tests",
+                  "query": "collect",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 3
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T13:51:14.147306+00:00",
+                "observation": {
+                  "snapshot": "e45e218d4837f66f5191220ed17b63cf0e51b253f48c4f4434373c208f7620c9",
+                  "tool": {
+                    "name": "find_related_tests",
+                    "query": "collect",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 3
+                  },
+                  "output": "{\"paths\": []}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T13:51:14.149942+00:00",
+                "stage": "challenge_1",
+                "request_id": "fd4abf89ef0424202e0e4ce813c8d11af56231f52f57042b46eed7bae4ea595a",
+                "call": 4
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T13:51:25.663704+00:00",
+                "stage": "challenge_1",
+                "request_id": "fd4abf89ef0424202e0e4ce813c8d11af56231f52f57042b46eed7bae4ea595a",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 206,
+                  "prompt_tokens": 12341,
+                  "candidate_tokens": 619,
+                  "total_tokens": 12960,
+                  "cached_content_token_count": 0
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T13:51:25.665335+00:00",
+                "stage": "challenge_1",
+                "key": "fd4abf89ef0424202e0e4ce813c8d11af56231f52f57042b46eed7bae4ea595a"
+              }
+            ]
+          }
+        },
+        "usage": {
+          "thought_tokens": 400,
+          "prompt_tokens": 48002,
+          "candidate_tokens": 1366,
+          "total_tokens": 49368,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-03T13:50:52.722471+00:00",
+        "completed_at": "2026-11-03T13:51:25.666069+00:00"
+      },
+      "findings": [
+        {
+          "id": "d381937c-e3b9-4787-9316-80d27f422ef6",
+          "run_id": "53028dd6-48a0-43ec-8b38-951c18baf6af",
+          "stable_fingerprint": "d65d108abe987f8e5d96df5b",
+          "category": "bug",
+          "rule_id": "ruff:B006",
+          "cwe_id": null,
+          "title": "B006: Do not use mutable data structures for argument defaults",
+          "explanation": "Do not use mutable data structures for argument defaults",
+          "user_impact": "The cited rule identifies a potential correctness defect; inspect its trigger and affected callers.",
+          "severity": "medium",
+          "primary_location": {
+            "path": "src/module.py",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": "44068afc6a36c851e0eb7b4089c0c18b8b197317",
+            "snippet": null
+          },
+          "related_locations": [],
+          "change_relation": "introduced",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "0ff0dde4-d2b4-41f3-9232-533702d4729d",
+              "kind": "cached_static_analysis",
+              "tool_or_profile": "ruff",
+              "input_revision": "44068afc6a36c851e0eb7b4089c0c18b8b197317",
+              "command": [
+                "/Users/koushikk/Documents/Hackathons/Neural Strom/.venv/bin/ruff",
+                "check",
+                "--output-format=json",
+                "--isolated",
+                "--ignore-noqa",
+                "--no-respect-gitignore",
+                "--select",
+                "E,F,B",
+                "."
+              ],
+              "exit_code": 1,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "Do not use mutable data structures for argument defaults",
+              "duration_ms": 0,
+              "created_at": "2026-11-03T13:49:15.156263+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "ruff",
+            "codex_cli_challenge"
+          ],
+          "assumptions": [],
+          "limitations": [],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "contextual_assessment",
+          "evidence_status": "source_supported",
+          "verification_assessment": {
+            "evidence_status": "source_supported",
+            "citations": [
+              {
+                "path": "src/module.py",
+                "start_line": 1,
+                "quote": "def collect(item, items=[]):"
+              },
+              {
+                "path": "src/module.py",
+                "start_line": 2,
+                "quote": "    items.append(item)"
+              },
+              {
+                "path": "src/module.py",
+                "start_line": 3,
+                "quote": "    return items"
+              }
+            ],
+            "unresolved_assumptions": [],
+            "rule_id": "ruff:B006",
+            "path": "src/module.py",
+            "start_line": 1,
+            "is_valid": true,
+            "confidence_assessment": "confirmed",
+            "counter_evidence": null,
+            "explanation": "The default value is a mutable list created when the function definition is evaluated. Calls that omit `items` therefore receive the same list, and line 2 mutates that shared object before line 3 returns it. This directly violates B006."
+          },
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Replace with `None`; initialize within function"
+        },
+        {
+          "id": "6d3f621b-03b5-4c8c-b76b-626122f9756c",
+          "run_id": "53028dd6-48a0-43ec-8b38-951c18baf6af",
+          "stable_fingerprint": "22b65b03f7471036c8db0588",
+          "category": "bug",
+          "rule_id": "proofline:PY-MUTABLE-DEFAULT",
+          "cwe_id": null,
+          "title": "Default calls share accumulated state",
+          "explanation": "The new default list is created once when the function is defined. Because line 2 mutates it, successive calls that omit `items` reuse the same list; for example, `collect('a')` followed by `collect('b')` returns a list containing both values on the second call. The previous `None` sentinel created a fresh list for every omitted argument.",
+          "user_impact": "Independent calls can leak and accumulate values across requests or operations, producing incorrect results and retaining objects unexpectedly.",
+          "severity": "medium",
+          "primary_location": {
+            "path": "src/module.py",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": "44068afc6a36c851e0eb7b4089c0c18b8b197317",
+            "snippet": "def collect(item, items=[]):"
+          },
+          "related_locations": [],
+          "change_relation": "changed_context",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "6657b14d-56f0-43e5-9e8b-110d2999f4d4",
+              "kind": "codex_cli_review",
+              "tool_or_profile": "gpt-5.6-sol",
+              "input_revision": "44068afc6a36c851e0eb7b4089c0c18b8b197317",
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "Call `collect` more than once without passing `items`.",
+              "duration_ms": 0,
+              "created_at": "2026-11-03T13:51:07.458178+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "codex_cli_review",
+            "codex_cli_challenge"
+          ],
+          "assumptions": [
+            "Calls that omit `items` are intended to produce independent lists, as established by the removed sentinel implementation.",
+            "Whether persistent accumulation across calls was intentionally introduced is not documented in the supplied scope."
+          ],
+          "limitations": [
+            "No callers or matching tests were supplied, so the frequency of omitted-argument calls is unknown."
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "contextual_assessment",
+          "evidence_status": "source_supported",
+          "verification_assessment": {
+            "evidence_status": "source_supported",
+            "citations": [
+              {
+                "path": "src/module.py",
+                "start_line": 1,
+                "quote": "def collect(item, items=[]):"
+              },
+              {
+                "path": "src/module.py",
+                "start_line": 2,
+                "quote": "    items.append(item)"
+              },
+              {
+                "path": "src/module.py",
+                "start_line": 3,
+                "quote": "    return items"
+              }
+            ],
+            "unresolved_assumptions": [
+              "Whether persistent accumulation across calls was intentionally introduced is not documented in the supplied scope."
+            ],
+            "rule_id": "proofline:PY-MUTABLE-DEFAULT",
+            "path": "src/module.py",
+            "start_line": 1,
+            "is_valid": true,
+            "confidence_assessment": "confirmed",
+            "counter_evidence": null,
+            "explanation": "For any caller omitting `items`, Python reuses the list stored in the function default. `collect('a')` appends to that object and returns `['a']`; a subsequent `collect('b')` appends to the same object and returns `['a', 'b']`. The supplied diff also shows that the prior `None` sentinel initialized a new list for each omitted argument, so the change introduced shared state across defaulted calls."
+          },
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Restore a non-mutable sentinel default, such as `def collect(item, items=None):` followed by `items = [] if items is None else items`, then append as before."
+        }
+      ]
+    }
+  ]
+}

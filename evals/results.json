@@ -1,0 +1,133 @@
+{
+  "summary": {
+    "timestamp": "2026-10-31T10:23:41.692700+00:00",
+    "manifest": "holdout.json",
+    "total_cases": 12,
+    "true_positives": 4,
+    "false_positives": 0,
+    "true_negatives": 6,
+    "false_negatives": 2,
+    "precision": 1.0,
+    "recall": 0.6667,
+    "f1_score": 0.8,
+    "false_positive_rate": 0.0,
+    "by_category": {
+      "security": {
+        "cases": 6,
+        "precision": 1.0,
+        "recall": 0.6667,
+        "f1": 0.8
+      },
+      "bug": {
+        "cases": 4,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6667
+      },
+      "style": {
+        "cases": 2,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    }
+  },
+  "details": [
+    {
+      "case_id": "holdout_sql_vuln_02",
+      "category": "security",
+      "expected": true,
+      "predicted": true,
+      "match": true,
+      "description": "SQL injection via raw string concatenation with +"
+    },
+    {
+      "case_id": "holdout_sql_safe_02",
+      "category": "security",
+      "expected": false,
+      "predicted": false,
+      "match": true,
+      "description": "Safe SQL query with DB-API %s parameter substitution"
+    },
+    {
+      "case_id": "holdout_cmd_vuln_02",
+      "category": "security",
+      "expected": true,
+      "predicted": true,
+      "match": true,
+      "description": "Command injection via shell=True with formatted command"
+    },
+    {
+      "case_id": "holdout_cmd_safe_02",
+      "category": "security",
+      "expected": false,
+      "predicted": false,
+      "match": true,
+      "description": "Safe argument vector execution with shell=False"
+    },
+    {
+      "case_id": "holdout_path_vuln_02",
+      "category": "security",
+      "expected": true,
+      "predicted": false,
+      "match": false,
+      "description": "Path traversal allowing writing outside uploads folder"
+    },
+    {
+      "case_id": "holdout_path_safe_02",
+      "category": "security",
+      "expected": false,
+      "predicted": false,
+      "match": true,
+      "description": "Safe path constrained by strict UUID type casting"
+    },
+    {
+      "case_id": "holdout_bug_mutable_dict_02",
+      "category": "bug",
+      "expected": true,
+      "predicted": false,
+      "match": false,
+      "description": "Mutable default dictionary parameter accumulating across calls"
+    },
+    {
+      "case_id": "holdout_bug_mutable_dict_safe_02",
+      "category": "bug",
+      "expected": false,
+      "predicted": false,
+      "match": true,
+      "description": "Safe dictionary initialization inside function body"
+    },
+    {
+      "case_id": "holdout_style_wildcard_02",
+      "category": "style",
+      "expected": true,
+      "predicted": true,
+      "match": true,
+      "description": "Wildcard import polluting namespace"
+    },
+    {
+      "case_id": "holdout_style_explicit_02",
+      "category": "style",
+      "expected": false,
+      "predicted": false,
+      "match": true,
+      "description": "Explicit clean imports"
+    },
+    {
+      "case_id": "holdout_bug_resource_leak_02",
+      "category": "bug",
+      "expected": true,
+      "predicted": true,
+      "match": true,
+      "description": "File handle opened without context manager or close"
+    },
+    {
+      "case_id": "holdout_bug_resource_leak_safe_02",
+      "category": "bug",
+      "expected": false,
+      "predicted": false,
+      "match": true,
+      "description": "Proper context manager ensuring resource release"
+    }
+  ]
+}

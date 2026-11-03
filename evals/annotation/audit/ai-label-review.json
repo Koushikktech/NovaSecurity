@@ -1,0 +1,294 @@
+{
+  "corpus_hash": "b9d4be93d28266423cf3fd3ce11b0283a8d95a90976b39fc382811d8a46c7f33",
+  "reviewer_relationship": "ai_assisted_builder",
+  "cases": [
+    {
+      "case_id": "boolean-string-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "enabled('false') becomes True because a nonempty Python string is truthy; the base returns False. src/module.py:2. This is a change from the baseline string-parsing behavior.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "boolean-string"
+      ]
+    },
+    {
+      "case_id": "slice-boundary-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: page([0,1,2,3],2,2) returns [] because size is used as the absolute end index; the base returns [2,3]. src/module.js:1.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "zero-total-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "average([]) computes 0/0 and returns NaN; the base explicitly returns 0 for empty input. src/module.ts:1.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "zero-total"
+      ]
+    },
+    {
+      "case_id": "return-contract-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: count declares a numeric return but returns the string 'none', violating the explicit TypeScript type and changing the runtime value from 0 to text. src/module.ts:1.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "boolean-string-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: enabled('false') becomes True because a nonempty Python string is truthy; the base returns False. src/module.py:2. This is a change from the baseline string-parsing behavior.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "mutable-default-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Two collect calls without items share the default list: collect(1), collect(2) returns [1,2] on the second call, whereas the base creates a fresh list. src/module.py:1-3.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "mutable-default"
+      ]
+    },
+    {
+      "case_id": "reject-propagation-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: save now returns undefined and suppresses rejection of a task promise, whereas the base returns that promise to the caller. src/module.js:1. Loss of return/propagation is established relative to the base; no external persistence contract is assumed.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "sql-format-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "With a name containing SQL syntax such as x' OR '1'='1, interpolation changes the query structure; the base sends the name as a bound parameter. src/module.py:2. Exploitability depends on attacker control of name and the cursor dialect; unsafe query construction is visible.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "sql-format"
+      ]
+    },
+    {
+      "case_id": "empty-list-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: first([]) raises IndexError after removal of the empty-list guard; the base returns None. src/module.py:2.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "zero-total-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: average([]) computes 0/0 and returns NaN; the base explicitly returns 0 for empty input. src/module.ts:1.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "reject-propagation-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "save now returns undefined and suppresses rejection of a task promise, whereas the base returns that promise to the caller. src/module.js:1. Loss of return/propagation is established relative to the base; no external persistence contract is assumed.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "reject-propagation"
+      ]
+    },
+    {
+      "case_id": "falsy-default-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "timeout(0) returns 30 after replacing ?? with ||; the base preserves 0. src/module.ts:1. This demonstrates a behavioral change for an admitted numeric input; external requirements could choose to forbid zero but no such restriction is declared.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "falsy-default"
+      ]
+    },
+    {
+      "case_id": "empty-list-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "first([]) raises IndexError after removal of the empty-list guard; the base returns None. src/module.py:2.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "empty-list"
+      ]
+    },
+    {
+      "case_id": "null-input-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "label(null) calls toUpperCase on null and throws; the base returns the empty string. The declared string|null argument explicitly admits this input. src/module.ts:1.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "null-input"
+      ]
+    },
+    {
+      "case_id": "return-contract-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "count declares a numeric return but returns the string 'none', violating the explicit TypeScript type and changing the runtime value from 0 to text. src/module.ts:1.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "return-contract"
+      ]
+    },
+    {
+      "case_id": "assignment-contract-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "retries is explicitly typed number but assigned string 'three', violating TypeScript assignment compatibility and changing its runtime type. src/module.ts:1.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "assignment-contract"
+      ]
+    },
+    {
+      "case_id": "mutable-default-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: Two collect calls without items share the default list: collect(1), collect(2) returns [1,2] on the second call, whereas the base creates a fresh list. src/module.py:1-3.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "async-batch-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "When i.save() is pending, forEach ignores the callback promises and the enclosing async save resolves before those operations finish. The base awaits Promise.all. src/module.js:1; assumes the supplied save methods return promises as in the base.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "async-batch"
+      ]
+    },
+    {
+      "case_id": "argument-contract-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "load(1) remains present after page changes from an optional default to a required number parameter, violating the TypeScript call signature. The unused parameter does not itself prove a JavaScript runtime exception. src/module.ts:1-2.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "argument-contract"
+      ]
+    },
+    {
+      "case_id": "sql-format-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: With a name containing SQL syntax such as x' OR '1'='1, interpolation changes the query structure; the base sends the name as a bound parameter. src/module.py:2. Exploitability depends on attacker control of name and the cursor dialect; unsafe query construction is visible.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "precision-money-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "For numeric input 0.29, int(value*100) truncates the binary float product 28.999999999999996 to 28; the base Decimal(str(value))*100 returns 29. src/module.py:2. This establishes a baseline regression for that concrete float, not all monetary requirements.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "precision-money"
+      ]
+    },
+    {
+      "case_id": "dict-delete-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "prune({'a':None}) deletes a dictionary key while iterating that dictionary and raises RuntimeError on iteration advancement. The base iterates a list of keys and completes. src/module.py:2-4.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "dict-delete"
+      ]
+    },
+    {
+      "case_id": "precision-money-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: For numeric input 0.29, int(value*100) truncates the binary float product 28.999999999999996 to 28; the base Decimal(str(value))*100 returns 29. src/module.py:2. This establishes a baseline regression for that concrete float, not all monetary requirements.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "missing-await-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "For a fetcher returning a Promise of a response, response is the Promise and lacks json(); load rejects with TypeError. The base awaits the response before invoking json. src/module.js:1.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "missing-await"
+      ]
+    },
+    {
+      "case_id": "falsy-default-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: timeout(0) returns 30 after replacing ?? with ||; the base preserves 0. src/module.ts:1. This demonstrates a behavioral change for an admitted numeric input; external requirements could choose to forbid zero but no such restriction is declared.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "null-input-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: label(null) calls toUpperCase on null and throws; the base returns the empty string. The declared string|null argument explicitly admits this input. src/module.ts:1.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "async-batch-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: When i.save() is pending, forEach ignores the callback promises and the enclosing async save resolves before those operations finish. The base awaits Promise.all. src/module.js:1; assumes the supplied save methods return promises as in the base.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "sort-return-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "sorted_items([2,1]) returns None because list.sort mutates its receiver and returns None. The base returns [1,2] without mutating the input. src/module.py:2.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "sort-return"
+      ]
+    },
+    {
+      "case_id": "slice-boundary-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "page([0,1,2,3],2,2) returns [] because size is used as the absolute end index; the base returns [2,3]. src/module.js:1.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "slice-boundary"
+      ]
+    },
+    {
+      "case_id": "assignment-contract-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: retries is explicitly typed number but assigned string 'three', violating TypeScript assignment compatibility and changing its runtime type. src/module.ts:1.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "shell-format-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: run interpolates name into a shell command with shell=True; a name containing shell metacharacters changes the command, unlike the base argument list. src/module.py:3. Exploitability assumes attacker control of name; no command was executed for this review.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "missing-await-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: For a fetcher returning a Promise of a response, response is the Promise and lacks json(); load rejects with TypeError. The base awaits the response before invoking json. src/module.js:1.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "sort-return-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: sorted_items([2,1]) returns None because list.sort mutates its receiver and returns None. The base returns [1,2] without mutating the input. src/module.py:2.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "argument-contract-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: load(1) remains present after page changes from an optional default to a required number parameter, violating the TypeScript call signature. The unused parameter does not itself prove a JavaScript runtime exception. src/module.ts:1-2.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    },
+    {
+      "case_id": "shell-format-bug",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "run interpolates name into a shell command with shell=True; a name containing shell metacharacters changes the command, unlike the base argument list. src/module.py:3. Exploitability assumes attacker control of name; no command was executed for this review.",
+      "decision": "confirmed",
+      "aligned_issue_ids": [
+        "shell-format"
+      ]
+    },
+    {
+      "case_id": "dict-delete-clean",
+      "reviewer": "Codex AI (implementing assistant; not independent human)",
+      "evidence": "Base and changed snapshots are identical. No introduced regression in this controlled change; this is not proof of absence of every possible defect. Baseline behavior: prune({'a':None}) deletes a dictionary key while iterating that dictionary and raises RuntimeError on iteration advancement. The base iterates a list of keys and completes. src/module.py:2-4.",
+      "decision": "confirmed",
+      "aligned_issue_ids": []
+    }
+  ]
+}

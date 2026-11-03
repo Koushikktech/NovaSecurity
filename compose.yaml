@@ -1,0 +1,39 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports: ["127.0.0.1:${PROOFLINE_API_PORT:-8000}:8000"]
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      PROOFLINE_GEMINI_REVIEW_MODEL: ${PROOFLINE_GEMINI_REVIEW_MODEL:-}
+      PROOFLINE_DATABASE_URL: sqlite:////app/data/proofline.db
+      PROOFLINE_WORKSPACE_DIR: /app/data/workspaces
+      PROOFLINE_ARTIFACT_DIR: /app/data/artifacts
+      PROOFLINE_ALLOWED_ORIGINS: ${PROOFLINE_ALLOWED_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+      PROOFLINE_GEMINI_API_MODE: ${PROOFLINE_GEMINI_API_MODE:-auto}
+      PROOFLINE_OPERATOR_TOKEN: ${PROOFLINE_OPERATOR_TOKEN:?Set an operator token for container access}
+      PROOFLINE_EXECUTION_ENABLED: "false"
+    volumes: ["proofline_data:/app/data"]
+    read_only: true
+    tmpfs: ["/tmp:rw,size=256m"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 256
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8000}
+    ports: ["127.0.0.1:${PROOFLINE_UI_PORT:-3000}:3000"]
+    depends_on:
+      backend:
+        condition: service_healthy
+    read_only: true
+    tmpfs: ["/tmp:rw,size=32m", "/app/.next/cache:rw,uid=1000,gid=1000,size=64m"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 128
+volumes:
+  proofline_data:

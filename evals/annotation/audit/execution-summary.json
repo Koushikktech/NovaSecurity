@@ -1,0 +1,57 @@
+[
+  {
+    "tool_retrieval": {
+      "observations": 0,
+      "errors": 0,
+      "empty_collections": 0
+    },
+    "recorded_model_requests": 0,
+    "file": "evals/results/audit-static-heldout.json",
+    "variant": "static",
+    "cases": 24,
+    "statuses": {
+      "completed": 24
+    },
+    "median_seconds": 0.16458672949374886,
+    "p95_seconds": 0.8760607500007609,
+    "tokens": 0,
+    "quality": "pending explicit label alignment and finding adjudication"
+  },
+  {
+    "tool_retrieval": {
+      "observations": 0,
+      "errors": 0,
+      "empty_collections": 0
+    },
+    "recorded_model_requests": 24,
+    "file": "evals/results/audit-diff-heldout.json",
+    "variant": "diff",
+    "cases": 24,
+    "statuses": {
+      "completed": 24
+    },
+    "median_seconds": 8.011016666503565,
+    "p95_seconds": 17.107160334009677,
+    "tokens": 285657,
+    "quality": "pending explicit label alignment and finding adjudication"
+  },
+  {
+    "tool_retrieval": {
+      "observations": 80,
+      "errors": 1,
+      "empty_collections": 23
+    },
+    "recorded_model_requests": 70,
+    "file": "evals/results/audit-verified-heldout.json",
+    "variant": "verified",
+    "cases": 24,
+    "statuses": {
+      "completed": 18,
+      "partial": 6
+    },
+    "median_seconds": 17.113792999996804,
+    "p95_seconds": 42.19797054199444,
+    "tokens": 681681,
+    "quality": "pending explicit label alignment and finding adjudication"
+  }
+]

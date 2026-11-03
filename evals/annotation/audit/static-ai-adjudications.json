@@ -1,0 +1,14 @@
+[
+  {
+    "finding_id": "3a556f6e-5412-4e95-82c4-78fed0c8ea0e",
+    "issue_id": "null-input",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "label(null) calls toUpperCase on null and throws; the base returns the empty string. The declared string|null argument explicitly admits this input. src/module.ts:1. This comment identifies null-input. Additional comments about that same expected issue count as duplicate noise."
+  },
+  {
+    "finding_id": "8e3544ea-8d83-4612-9952-f0d5878e555c",
+    "issue_id": "assignment-contract",
+    "reviewer": "Codex AI implementing assistant (not independent human)",
+    "reason": "retries is explicitly typed number but assigned string 'three', violating TypeScript assignment compatibility and changing its runtime type. src/module.ts:1. This comment identifies assignment-contract. Additional comments about that same expected issue count as duplicate noise."
+  }
+]

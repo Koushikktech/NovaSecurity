@@ -17,6 +17,7 @@ const allowedDevOrigins = parseDevOrigins(
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  distDir: process.env.PROOFLINE_NEXT_DIST_DIR || ".next",
   poweredByHeader: false,
   ...(allowedDevOrigins.length > 0 ? { allowedDevOrigins } : {}),
   async headers() {

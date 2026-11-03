@@ -1,0 +1,2859 @@
+{
+  "dataset": "controlled-pipeline-v2",
+  "scope": "Supported-rule detection through actual ingestion/static/language/citation pipeline; ten development integration cases",
+  "mode": "static-only; contextual stage unavailable",
+  "counts": {
+    "tp": 5,
+    "fp": 0,
+    "tn": 5,
+    "fn": 0
+  },
+  "precision": 1.0,
+  "recall": 1.0,
+  "cases": [
+    {
+      "id": "python-shell-injection",
+      "expected": true,
+      "matched": true,
+      "status": "partial",
+      "duration_seconds": 0.111,
+      "run": {
+        "id": "9cf53529-56a9-432c-a14d-5f2ce67ecd59",
+        "owner_session": "anonymous",
+        "input_mode": "repo",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-8qm23fup",
+        "review_mode": "project",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": null,
+        "head_sha": null,
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "partial",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "failed",
+          "challenge": "failed",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 2,
+          "security": 2,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "4",
+            "api_mode": "auto",
+            "models": {},
+            "strategy": "verified",
+            "model": null,
+            "thinking": "default",
+            "max_attempts": 3,
+            "max_model_calls": 12,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "project",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-8qm23fup",
+            "input": "evaluation",
+            "comparison": "snapshot",
+            "source_exclusions": [],
+            "head_sha": null,
+            "base_sha": null,
+            "snapshot_id": "adcda868249720867dc64bca608ce4bf00d4b00e510ff7ed63d9dbac56354644",
+            "revision_label": "Local files (including uncommitted changes)",
+            "run_config": {
+              "version": "4",
+              "api_mode": "auto",
+              "models": {},
+              "strategy": "verified",
+              "model": null,
+              "thinking": "default",
+              "max_attempts": 3,
+              "max_model_calls": 12,
+              "max_tool_calls": 24,
+              "deadline_seconds": 180,
+              "investigation_rounds": 3
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "5f9e4b4e2e25da25de3480c0d405f7d6f06550005a515b2dbdf9ec7fe160b89e",
+          "total_files": 1,
+          "source_files": [
+            "app.py"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Whole snapshot static checks; bounded model review",
+          "repository_policy_source": "reviewed_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 1,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 2,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "skipped",
+            "reason": "No JavaScript/TypeScript files"
+          },
+          "test_gaps": [
+            {
+              "path": "app.py",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in app.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {},
+          "python_index_errors": {},
+          "graph_nodes": 1,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "app.py"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "9f8f8fdbd4b2711e88bac4983404907c4d81a2b684eb55e7098cd2a165418f78",
+            "files": [
+              "app.py"
+            ],
+            "symbols": [
+              {
+                "id": "app.py:2:run",
+                "name": "run",
+                "path": "app.py",
+                "start": 2,
+                "end": 3
+              }
+            ],
+            "changed_symbols": [],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "project_review": {
+            "depth": "quick",
+            "batches": 1,
+            "reviewed_files": [],
+            "omitted_files": [
+              "app.py"
+            ],
+            "supported_files": 1,
+            "limitations": "Model inspected bounded source batches; no guarantee of exhaustive repository reasoning"
+          },
+          "model_review_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "review_summary": "Static-only review: model analysis unavailable",
+          "challenge_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "verification_coverage": {
+            "evidence_counts": {
+              "source_supported": 0,
+              "refuted": 0,
+              "insufficient_evidence": 2
+            },
+            "requested": 2,
+            "assessed": 0,
+            "unassessed_ids": [
+              "f04cfc97-e960-414c-8611-219a72902482",
+              "0b53c721-6dc0-47ad-8ecd-33914ea6b8cc"
+            ],
+            "batches": 1,
+            "errors": [
+              "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available"
+            ],
+            "complete": false
+          },
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "thought_tokens": 0,
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T11:14:02.332210+00:00",
+        "completed_at": "2026-11-01T11:14:02.442933+00:00"
+      },
+      "findings": [
+        {
+          "id": "f04cfc97-e960-414c-8611-219a72902482",
+          "run_id": "9cf53529-56a9-432c-a14d-5f2ce67ecd59",
+          "stable_fingerprint": "4559fcb5ac2944b711c7a62f",
+          "category": "security",
+          "rule_id": "bandit:B602",
+          "cwe_id": "CWE-78",
+          "title": "Subprocess popen with shell equals true: subprocess call with shell=True identified, security issue.",
+          "explanation": "subprocess call with shell=True identified, security issue.",
+          "user_impact": "Security risk flagged by Bandit static security analyzer: subprocess_popen_with_shell_equals_true",
+          "severity": "high",
+          "primary_location": {
+            "path": "app.py",
+            "start_line": 3,
+            "end_line": 3,
+            "side": "head",
+            "commit_sha": null,
+            "snippet": "2 def run(value):\n3     subprocess.run(value, shell=True)\n"
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "3751612d-2650-4927-87bd-da4b1f0cb1a6",
+              "kind": "static_analysis",
+              "tool_or_profile": "bandit",
+              "input_revision": null,
+              "command": [
+                "/Users/koushikk/Documents/Hackathons/Neural Strom/.venv/bin/bandit",
+                "-f",
+                "json",
+                "-q",
+                "--ini",
+                "/Users/koushikk/Documents/Hackathons/Neural Strom/NovaSecurity/backend/analysis/bandit.ini",
+                "--ignore-nosec",
+                "-r",
+                "."
+              ],
+              "exit_code": 1,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "2 def run(value):\n3     subprocess.run(value, shell=True)",
+              "duration_ms": 0,
+              "created_at": "2026-11-01T11:14:02.439174+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "bandit"
+          ],
+          "assumptions": [],
+          "limitations": [
+            "Verification was omitted or unavailable within the run budget"
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "insufficient_evidence",
+          "verification_assessment": {},
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Review security implications for subprocess_popen_with_shell_equals_true (https://bandit.readthedocs.io/en/1.9.4/plugins/b602_subprocess_popen_with_shell_equals_true.html)"
+        },
+        {
+          "id": "0b53c721-6dc0-47ad-8ecd-33914ea6b8cc",
+          "run_id": "9cf53529-56a9-432c-a14d-5f2ce67ecd59",
+          "stable_fingerprint": "cbdae42913f2d646e0923801",
+          "category": "security",
+          "rule_id": "bandit:B404",
+          "cwe_id": "CWE-78",
+          "title": "Blacklist: Consider possible security implications associated with the subprocess module.",
+          "explanation": "Consider possible security implications associated with the subprocess module.",
+          "user_impact": "Security risk flagged by Bandit static security analyzer: blacklist",
+          "severity": "low",
+          "primary_location": {
+            "path": "app.py",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": null,
+            "snippet": "1 import subprocess\n2 def run(value):\n3     subprocess.run(value, shell=True)\n"
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "a7550c3f-13a7-4336-a232-a77653940767",
+              "kind": "static_analysis",
+              "tool_or_profile": "bandit",
+              "input_revision": null,
+              "command": [
+                "/Users/koushikk/Documents/Hackathons/Neural Strom/.venv/bin/bandit",
+                "-f",
+                "json",
+                "-q",
+                "--ini",
+                "/Users/koushikk/Documents/Hackathons/Neural Strom/NovaSecurity/backend/analysis/bandit.ini",
+                "--ignore-nosec",
+                "-r",
+                "."
+              ],
+              "exit_code": 1,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "1 import subprocess\n2 def run(value):\n3     subprocess.run(value, shell=True)",
+              "duration_ms": 0,
+              "created_at": "2026-11-01T11:14:02.439047+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "bandit"
+          ],
+          "assumptions": [],
+          "limitations": [
+            "Verification was omitted or unavailable within the run budget"
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "insufficient_evidence",
+          "verification_assessment": {},
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Review security implications for blacklist (https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b404-import-subprocess)"
+        }
+      ]
+    },
+    {
+      "id": "python-safe-argv",
+      "expected": false,
+      "matched": false,
+      "status": "partial",
+      "duration_seconds": 0.093,
+      "run": {
+        "id": "10f11e02-c7e6-48df-98cd-fd66f5c8ad4b",
+        "owner_session": "anonymous",
+        "input_mode": "repo",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-qsmjc8st",
+        "review_mode": "project",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": null,
+        "head_sha": null,
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "partial",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "failed",
+          "challenge": "failed",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 3,
+          "security": 3,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "4",
+            "api_mode": "auto",
+            "models": {},
+            "strategy": "verified",
+            "model": null,
+            "thinking": "default",
+            "max_attempts": 3,
+            "max_model_calls": 12,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "project",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-qsmjc8st",
+            "input": "evaluation",
+            "comparison": "snapshot",
+            "source_exclusions": [],
+            "head_sha": null,
+            "base_sha": null,
+            "snapshot_id": "cfb3aa564b2117a0841f749760e60bf272859cddef561ce194a3eccfb41a33bb",
+            "revision_label": "Local files (including uncommitted changes)",
+            "run_config": {
+              "version": "4",
+              "api_mode": "auto",
+              "models": {},
+              "strategy": "verified",
+              "model": null,
+              "thinking": "default",
+              "max_attempts": 3,
+              "max_model_calls": 12,
+              "max_tool_calls": 24,
+              "deadline_seconds": 180,
+              "investigation_rounds": 3
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "5aaac99ede6a738bab863c4b3cfef2360c842b982079f10942bc2eee05c337c5",
+          "total_files": 1,
+          "source_files": [
+            "app.py"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Whole snapshot static checks; bounded model review",
+          "repository_policy_source": "reviewed_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 1,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 3,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "skipped",
+            "reason": "No JavaScript/TypeScript files"
+          },
+          "test_gaps": [
+            {
+              "path": "app.py",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in app.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {},
+          "python_index_errors": {},
+          "graph_nodes": 1,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "app.py"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "9304551ef535e07f33ab4efc00602d2cabee2d9b7eff44ec3171f0f052152f1c",
+            "files": [
+              "app.py"
+            ],
+            "symbols": [
+              {
+                "id": "app.py:2:run",
+                "name": "run",
+                "path": "app.py",
+                "start": 2,
+                "end": 3
+              }
+            ],
+            "changed_symbols": [],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "project_review": {
+            "depth": "quick",
+            "batches": 1,
+            "reviewed_files": [],
+            "omitted_files": [
+              "app.py"
+            ],
+            "supported_files": 1,
+            "limitations": "Model inspected bounded source batches; no guarantee of exhaustive repository reasoning"
+          },
+          "model_review_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "review_summary": "Static-only review: model analysis unavailable",
+          "challenge_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "verification_coverage": {
+            "evidence_counts": {
+              "source_supported": 0,
+              "refuted": 0,
+              "insufficient_evidence": 3
+            },
+            "requested": 3,
+            "assessed": 0,
+            "unassessed_ids": [
+              "27e4bc6d-045b-465e-b8d2-fa43031be15b",
+              "5664a597-acaa-40d6-ab29-53433b1b3c25",
+              "a3f6aa55-2ab5-45a3-b39a-88d405b1f1e0"
+            ],
+            "batches": 1,
+            "errors": [
+              "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available"
+            ],
+            "complete": false
+          },
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "thought_tokens": 0,
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T11:14:02.443438+00:00",
+        "completed_at": "2026-11-01T11:14:02.535951+00:00"
+      },
+      "findings": [
+        {
+          "id": "27e4bc6d-045b-465e-b8d2-fa43031be15b",
+          "run_id": "10f11e02-c7e6-48df-98cd-fd66f5c8ad4b",
+          "stable_fingerprint": "cbdae42913f2d646e0923801",
+          "category": "security",
+          "rule_id": "bandit:B404",
+          "cwe_id": "CWE-78",
+          "title": "Blacklist: Consider possible security implications associated with the subprocess module.",
+          "explanation": "Consider possible security implications associated with the subprocess module.",
+          "user_impact": "Security risk flagged by Bandit static security analyzer: blacklist",
+          "severity": "low",
+          "primary_location": {
+            "path": "app.py",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": null,
+            "snippet": "1 import subprocess\n2 def run(value):\n3     subprocess.run(['printf', '%s', value], shell=False)\n"
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "226b0b06-9482-486e-81fe-85285d93b56c",
+              "kind": "static_analysis",
+              "tool_or_profile": "bandit",
+              "input_revision": null,
+              "command": [
+                "/Users/koushikk/Documents/Hackathons/Neural Strom/.venv/bin/bandit",
+                "-f",
+                "json",
+                "-q",
+                "--ini",
+                "/Users/koushikk/Documents/Hackathons/Neural Strom/NovaSecurity/backend/analysis/bandit.ini",
+                "--ignore-nosec",
+                "-r",
+                "."
+              ],
+              "exit_code": 1,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "1 import subprocess\n2 def run(value):\n3     subprocess.run(['printf', '%s', value], shell=False)",
+              "duration_ms": 0,
+              "created_at": "2026-11-01T11:14:02.532372+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "bandit"
+          ],
+          "assumptions": [],
+          "limitations": [
+            "Verification was omitted or unavailable within the run budget"
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "insufficient_evidence",
+          "verification_assessment": {},
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Review security implications for blacklist (https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b404-import-subprocess)"
+        },
+        {
+          "id": "5664a597-acaa-40d6-ab29-53433b1b3c25",
+          "run_id": "10f11e02-c7e6-48df-98cd-fd66f5c8ad4b",
+          "stable_fingerprint": "e7a4552b770121392831b944",
+          "category": "security",
+          "rule_id": "bandit:B607",
+          "cwe_id": "CWE-78",
+          "title": "Start process with partial path: Starting a process with a partial executable path",
+          "explanation": "Starting a process with a partial executable path",
+          "user_impact": "Security risk flagged by Bandit static security analyzer: start_process_with_partial_path",
+          "severity": "low",
+          "primary_location": {
+            "path": "app.py",
+            "start_line": 3,
+            "end_line": 3,
+            "side": "head",
+            "commit_sha": null,
+            "snippet": "2 def run(value):\n3     subprocess.run(['printf', '%s', value], shell=False)\n"
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "a8787ddf-db11-42ba-a858-ce365eb1ddcd",
+              "kind": "static_analysis",
+              "tool_or_profile": "bandit",
+              "input_revision": null,
+              "command": [
+                "/Users/koushikk/Documents/Hackathons/Neural Strom/.venv/bin/bandit",
+                "-f",
+                "json",
+                "-q",
+                "--ini",
+                "/Users/koushikk/Documents/Hackathons/Neural Strom/NovaSecurity/backend/analysis/bandit.ini",
+                "--ignore-nosec",
+                "-r",
+                "."
+              ],
+              "exit_code": 1,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "2 def run(value):\n3     subprocess.run(['printf', '%s', value], shell=False)",
+              "duration_ms": 0,
+              "created_at": "2026-11-01T11:14:02.532509+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "bandit"
+          ],
+          "assumptions": [],
+          "limitations": [
+            "Verification was omitted or unavailable within the run budget"
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "insufficient_evidence",
+          "verification_assessment": {},
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Review security implications for start_process_with_partial_path (https://bandit.readthedocs.io/en/1.9.4/plugins/b607_start_process_with_partial_path.html)"
+        },
+        {
+          "id": "a3f6aa55-2ab5-45a3-b39a-88d405b1f1e0",
+          "run_id": "10f11e02-c7e6-48df-98cd-fd66f5c8ad4b",
+          "stable_fingerprint": "8929fd8d557ec38b4da824c3",
+          "category": "security",
+          "rule_id": "bandit:B603",
+          "cwe_id": "CWE-78",
+          "title": "Subprocess without shell equals true: subprocess call - check for execution of untrusted input.",
+          "explanation": "subprocess call - check for execution of untrusted input.",
+          "user_impact": "Security risk flagged by Bandit static security analyzer: subprocess_without_shell_equals_true",
+          "severity": "low",
+          "primary_location": {
+            "path": "app.py",
+            "start_line": 3,
+            "end_line": 3,
+            "side": "head",
+            "commit_sha": null,
+            "snippet": "2 def run(value):\n3     subprocess.run(['printf', '%s', value], shell=False)\n"
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "af861923-e4c0-42ff-b235-8693e735382f",
+              "kind": "static_analysis",
+              "tool_or_profile": "bandit",
+              "input_revision": null,
+              "command": [
+                "/Users/koushikk/Documents/Hackathons/Neural Strom/.venv/bin/bandit",
+                "-f",
+                "json",
+                "-q",
+                "--ini",
+                "/Users/koushikk/Documents/Hackathons/Neural Strom/NovaSecurity/backend/analysis/bandit.ini",
+                "--ignore-nosec",
+                "-r",
+                "."
+              ],
+              "exit_code": 1,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "2 def run(value):\n3     subprocess.run(['printf', '%s', value], shell=False)",
+              "duration_ms": 0,
+              "created_at": "2026-11-01T11:14:02.532580+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "bandit"
+          ],
+          "assumptions": [],
+          "limitations": [
+            "Verification was omitted or unavailable within the run budget"
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "insufficient_evidence",
+          "verification_assessment": {},
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Review security implications for subprocess_without_shell_equals_true (https://bandit.readthedocs.io/en/1.9.4/plugins/b603_subprocess_without_shell_equals_true.html)"
+        }
+      ]
+    },
+    {
+      "id": "python-mutable",
+      "expected": true,
+      "matched": true,
+      "status": "partial",
+      "duration_seconds": 0.003,
+      "run": {
+        "id": "4c5f0e61-af90-47c0-a1a5-2d2eb4d8e32d",
+        "owner_session": "anonymous",
+        "input_mode": "repo",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-2jdxqtja",
+        "review_mode": "project",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": null,
+        "head_sha": null,
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "partial",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "failed",
+          "challenge": "failed",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 1,
+          "security": 0,
+          "bug": 1,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "4",
+            "api_mode": "auto",
+            "models": {},
+            "strategy": "verified",
+            "model": null,
+            "thinking": "default",
+            "max_attempts": 3,
+            "max_model_calls": 12,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "project",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-2jdxqtja",
+            "input": "evaluation",
+            "comparison": "snapshot",
+            "source_exclusions": [],
+            "head_sha": null,
+            "base_sha": null,
+            "snapshot_id": "3fc82c4f80ab48b1cc94fe7bc77fbc37c97ca1f4918ebf96fa23918a9e4ae348",
+            "revision_label": "Local files (including uncommitted changes)",
+            "run_config": {
+              "version": "4",
+              "api_mode": "auto",
+              "models": {},
+              "strategy": "verified",
+              "model": null,
+              "thinking": "default",
+              "max_attempts": 3,
+              "max_model_calls": 12,
+              "max_tool_calls": 24,
+              "deadline_seconds": 180,
+              "investigation_rounds": 3
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "10506bbd85afee48fbf4838b4e769a05dbf58c3584fb99d00ad1553a07d34f39",
+          "total_files": 1,
+          "source_files": [
+            "app.py"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Whole snapshot static checks; bounded model review",
+          "repository_policy_source": "reviewed_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 1,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 1,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "7cfed676-3189-4222-8bbc-cc0ec6227773"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "7cfed676-3189-4222-8bbc-cc0ec6227773"
+            }
+          },
+          "javascript": {
+            "status": "skipped",
+            "reason": "No JavaScript/TypeScript files"
+          },
+          "test_gaps": [
+            {
+              "path": "app.py",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in app.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {},
+          "python_index_errors": {},
+          "graph_nodes": 1,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "app.py"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "750005e07e7eef91e9a85726d4fbcb7caea0933960631955be7987d2845015b7",
+            "files": [
+              "app.py"
+            ],
+            "symbols": [
+              {
+                "id": "app.py:1:collect",
+                "name": "collect",
+                "path": "app.py",
+                "start": 1,
+                "end": 3
+              }
+            ],
+            "changed_symbols": [],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "project_review": {
+            "depth": "quick",
+            "batches": 1,
+            "reviewed_files": [],
+            "omitted_files": [
+              "app.py"
+            ],
+            "supported_files": 1,
+            "limitations": "Model inspected bounded source batches; no guarantee of exhaustive repository reasoning"
+          },
+          "model_review_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "review_summary": "Static-only review: model analysis unavailable",
+          "challenge_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "verification_coverage": {
+            "evidence_counts": {
+              "source_supported": 0,
+              "refuted": 0,
+              "insufficient_evidence": 1
+            },
+            "requested": 1,
+            "assessed": 0,
+            "unassessed_ids": [
+              "c6bb7fad-709f-49b4-b2e2-7885fda87467"
+            ],
+            "batches": 1,
+            "errors": [
+              "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available"
+            ],
+            "complete": false
+          },
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "thought_tokens": 0,
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T11:14:02.536484+00:00",
+        "completed_at": "2026-11-01T11:14:02.539285+00:00"
+      },
+      "findings": [
+        {
+          "id": "c6bb7fad-709f-49b4-b2e2-7885fda87467",
+          "run_id": "4c5f0e61-af90-47c0-a1a5-2d2eb4d8e32d",
+          "stable_fingerprint": "7b00bcb4877b34e0f1040d1c",
+          "category": "bug",
+          "rule_id": "ruff:B006",
+          "cwe_id": null,
+          "title": "B006: Do not use mutable data structures for argument defaults",
+          "explanation": "Do not use mutable data structures for argument defaults",
+          "user_impact": "The cited rule identifies a potential correctness defect; inspect its trigger and affected callers.",
+          "severity": "medium",
+          "primary_location": {
+            "path": "app.py",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": null,
+            "snippet": null
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "041ff8db-9745-4bc1-b05e-8019703084dd",
+              "kind": "cached_static_analysis",
+              "tool_or_profile": "ruff",
+              "input_revision": null,
+              "command": [
+                "/Users/koushikk/Documents/Hackathons/Neural Strom/.venv/bin/ruff",
+                "check",
+                "--output-format=json",
+                "--isolated",
+                "--ignore-noqa",
+                "--no-respect-gitignore",
+                "--select",
+                "E,F,B",
+                "."
+              ],
+              "exit_code": 1,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "Do not use mutable data structures for argument defaults",
+              "duration_ms": 0,
+              "created_at": "2026-11-01T11:09:07.127104+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "ruff"
+          ],
+          "assumptions": [],
+          "limitations": [
+            "Verification was omitted or unavailable within the run budget"
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "insufficient_evidence",
+          "verification_assessment": {},
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Replace with `None`; initialize within function"
+        }
+      ]
+    },
+    {
+      "id": "python-safe-default",
+      "expected": false,
+      "matched": false,
+      "status": "partial",
+      "duration_seconds": 0.096,
+      "run": {
+        "id": "7f25136d-cbc0-46bf-be23-a6b370a080bd",
+        "owner_session": "anonymous",
+        "input_mode": "repo",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-7bjvwtje",
+        "review_mode": "project",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": null,
+        "head_sha": null,
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "partial",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "failed",
+          "challenge": "succeeded",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 0,
+          "security": 0,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "4",
+            "api_mode": "auto",
+            "models": {},
+            "strategy": "verified",
+            "model": null,
+            "thinking": "default",
+            "max_attempts": 3,
+            "max_model_calls": 12,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "project",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-7bjvwtje",
+            "input": "evaluation",
+            "comparison": "snapshot",
+            "source_exclusions": [],
+            "head_sha": null,
+            "base_sha": null,
+            "snapshot_id": "9acf938a8f8be2179cca5456ae6e08350379fa6a35cd611ef0481fcccdc44862",
+            "revision_label": "Local files (including uncommitted changes)",
+            "run_config": {
+              "version": "4",
+              "api_mode": "auto",
+              "models": {},
+              "strategy": "verified",
+              "model": null,
+              "thinking": "default",
+              "max_attempts": 3,
+              "max_model_calls": 12,
+              "max_tool_calls": 24,
+              "deadline_seconds": 180,
+              "investigation_rounds": 3
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "db21f0a34e7865b94d497c233c28a56ad040d4d0952b70ee8135a86186048cc3",
+          "total_files": 1,
+          "source_files": [
+            "app.py"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Whole snapshot static checks; bounded model review",
+          "repository_policy_source": "reviewed_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 1,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "skipped",
+            "reason": "No JavaScript/TypeScript files"
+          },
+          "test_gaps": [
+            {
+              "path": "app.py",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in app.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {},
+          "python_index_errors": {},
+          "graph_nodes": 1,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "app.py"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "a4a098aeeca5a3f3c82dc65db7482049e7054fe3d30e87416e95f671d31ec866",
+            "files": [
+              "app.py"
+            ],
+            "symbols": [
+              {
+                "id": "app.py:1:collect",
+                "name": "collect",
+                "path": "app.py",
+                "start": 1,
+                "end": 4
+              }
+            ],
+            "changed_symbols": [],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "project_review": {
+            "depth": "quick",
+            "batches": 1,
+            "reviewed_files": [],
+            "omitted_files": [
+              "app.py"
+            ],
+            "supported_files": 1,
+            "limitations": "Model inspected bounded source batches; no guarantee of exhaustive repository reasoning"
+          },
+          "model_review_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "review_summary": "Static-only review: model analysis unavailable",
+          "verification_coverage": {
+            "complete": true,
+            "requested": 0,
+            "assessed": 0,
+            "unassessed_ids": [],
+            "errors": []
+          },
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "thought_tokens": 0,
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T11:14:02.539666+00:00",
+        "completed_at": "2026-11-01T11:14:02.635977+00:00"
+      },
+      "findings": []
+    },
+    {
+      "id": "typescript-async",
+      "expected": true,
+      "matched": true,
+      "status": "partial",
+      "duration_seconds": 0.338,
+      "run": {
+        "id": "c75b3905-ee2d-4538-81b2-d0113635c390",
+        "owner_session": "anonymous",
+        "input_mode": "repo",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-oo__eq_2",
+        "review_mode": "project",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": null,
+        "head_sha": null,
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "partial",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "failed",
+          "challenge": "failed",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 1,
+          "security": 0,
+          "bug": 1,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "4",
+            "api_mode": "auto",
+            "models": {},
+            "strategy": "verified",
+            "model": null,
+            "thinking": "default",
+            "max_attempts": 3,
+            "max_model_calls": 12,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "project",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-oo__eq_2",
+            "input": "evaluation",
+            "comparison": "snapshot",
+            "source_exclusions": [],
+            "head_sha": null,
+            "base_sha": null,
+            "snapshot_id": "325b602eaa1b9358489cd99f8735bc81a1b07ade6132e34db8c6ab5950461927",
+            "revision_label": "Local files (including uncommitted changes)",
+            "run_config": {
+              "version": "4",
+              "api_mode": "auto",
+              "models": {},
+              "strategy": "verified",
+              "model": null,
+              "thinking": "default",
+              "max_attempts": 3,
+              "max_model_calls": 12,
+              "max_tool_calls": 24,
+              "deadline_seconds": 180,
+              "investigation_rounds": 3
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "8954b231c9fcf8e294b9ccc5b61d5a065c3c34e773998445bf70a89b293e06a4",
+          "total_files": 1,
+          "source_files": [
+            "batch.ts"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Whole snapshot static checks; bounded model review",
+          "repository_policy_source": "reviewed_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [
+            {
+              "path": "batch.ts",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in batch.ts, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {
+            "batch.ts": {
+              "path": "batch.ts",
+              "symbols": [
+                {
+                  "name": "save",
+                  "line": 1,
+                  "end": 1,
+                  "parameters": [
+                    {
+                      "name": "urls",
+                      "required": true
+                    }
+                  ],
+                  "exported": true
+                }
+              ],
+              "imports": [],
+              "bindings": [],
+              "calls": [
+                {
+                  "name": "fetch",
+                  "line": 1,
+                  "arguments": 1,
+                  "spread": false
+                }
+              ],
+              "resolved_references": [],
+              "findings": [
+                {
+                  "rule": "js:async-foreach",
+                  "category": "bug",
+                  "line": 1,
+                  "message": "forEach discards promises returned by async callbacks. Await Promise.all with map, or use an awaited for\u2026of loop when completion order matters."
+                }
+              ]
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "batch.ts"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "04f13bdc9c9bd8f4a4ebdfbcae0f116d5eabe254ca551b2a825d5e07a9886eec",
+            "files": [
+              "batch.ts"
+            ],
+            "symbols": [
+              {
+                "id": "batch.ts:1:save",
+                "name": "save",
+                "path": "batch.ts",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "changed_symbols": [],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "project_review": {
+            "depth": "quick",
+            "batches": 1,
+            "reviewed_files": [],
+            "omitted_files": [
+              "batch.ts"
+            ],
+            "supported_files": 1,
+            "limitations": "Model inspected bounded source batches; no guarantee of exhaustive repository reasoning"
+          },
+          "model_review_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "review_summary": "Static-only review: model analysis unavailable",
+          "challenge_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "verification_coverage": {
+            "evidence_counts": {
+              "source_supported": 0,
+              "refuted": 0,
+              "insufficient_evidence": 1
+            },
+            "requested": 1,
+            "assessed": 0,
+            "unassessed_ids": [
+              "075509b8-9f15-4629-9167-602fd5f2c24b"
+            ],
+            "batches": 1,
+            "errors": [
+              "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available"
+            ],
+            "complete": false
+          },
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "thought_tokens": 0,
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T11:14:02.636546+00:00",
+        "completed_at": "2026-11-01T11:14:02.974389+00:00"
+      },
+      "findings": [
+        {
+          "id": "075509b8-9f15-4629-9167-602fd5f2c24b",
+          "run_id": "c75b3905-ee2d-4538-81b2-d0113635c390",
+          "stable_fingerprint": "80b69531d5d841c491ed5db9",
+          "category": "bug",
+          "rule_id": "js:async-foreach",
+          "cwe_id": null,
+          "title": "forEach discards promises returned by async callbacks",
+          "explanation": "forEach discards promises returned by async callbacks. Await Promise.all with map, or use an awaited for\u2026of loop when completion order matters.",
+          "user_impact": "The async function can finish before the operations complete, so failures and completion are not propagated.",
+          "severity": "medium",
+          "primary_location": {
+            "path": "batch.ts",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": null,
+            "snippet": null
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "f8d4cef2-f8cd-404b-aa2f-55e88a509f8e",
+              "kind": "static_analysis",
+              "tool_or_profile": "js:async-foreach",
+              "input_revision": null,
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "forEach discards promises returned by async callbacks. Await Promise.all with map, or use an awaited for\u2026of loop when completion order matters.",
+              "duration_ms": 0,
+              "created_at": "2026-11-01T11:14:02.974040+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "proofline-language"
+          ],
+          "assumptions": [],
+          "limitations": [
+            "Verification was omitted or unavailable within the run budget"
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "insufficient_evidence",
+          "verification_assessment": {},
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Use await Promise.all(items.map(async ...)) or an awaited for\u2026of loop, depending on ordering requirements."
+        }
+      ]
+    },
+    {
+      "id": "typescript-awaited",
+      "expected": false,
+      "matched": false,
+      "status": "partial",
+      "duration_seconds": 0.354,
+      "run": {
+        "id": "dbe37bff-a27e-44c8-9144-5df5e2507b8a",
+        "owner_session": "anonymous",
+        "input_mode": "repo",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-2s9c1pbd",
+        "review_mode": "project",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": null,
+        "head_sha": null,
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "partial",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "failed",
+          "challenge": "succeeded",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 0,
+          "security": 0,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "4",
+            "api_mode": "auto",
+            "models": {},
+            "strategy": "verified",
+            "model": null,
+            "thinking": "default",
+            "max_attempts": 3,
+            "max_model_calls": 12,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "project",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-2s9c1pbd",
+            "input": "evaluation",
+            "comparison": "snapshot",
+            "source_exclusions": [],
+            "head_sha": null,
+            "base_sha": null,
+            "snapshot_id": "5de6483b9d627fde061e635f80516a10d9cde277d409d7d67cd90e2998b93000",
+            "revision_label": "Local files (including uncommitted changes)",
+            "run_config": {
+              "version": "4",
+              "api_mode": "auto",
+              "models": {},
+              "strategy": "verified",
+              "model": null,
+              "thinking": "default",
+              "max_attempts": 3,
+              "max_model_calls": 12,
+              "max_tool_calls": 24,
+              "deadline_seconds": 180,
+              "investigation_rounds": 3
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "9b8084c275be381fe74a5d4bd077008a025fc4b493690f4d2c512ccb338f817c",
+          "total_files": 1,
+          "source_files": [
+            "batch.ts"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Whole snapshot static checks; bounded model review",
+          "repository_policy_source": "reviewed_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [
+            {
+              "path": "batch.ts",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in batch.ts, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {
+            "batch.ts": {
+              "path": "batch.ts",
+              "symbols": [
+                {
+                  "name": "save",
+                  "line": 1,
+                  "end": 1,
+                  "parameters": [
+                    {
+                      "name": "urls",
+                      "required": true
+                    }
+                  ],
+                  "exported": true
+                }
+              ],
+              "imports": [],
+              "bindings": [],
+              "calls": [
+                {
+                  "name": "fetch",
+                  "line": 1,
+                  "arguments": 1,
+                  "spread": false
+                }
+              ],
+              "resolved_references": [],
+              "findings": []
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "batch.ts"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "4e0b32befa9488a1235fbc9f44994af03c7baccc1fc681f2ab6f17c4226f8b73",
+            "files": [
+              "batch.ts"
+            ],
+            "symbols": [
+              {
+                "id": "batch.ts:1:save",
+                "name": "save",
+                "path": "batch.ts",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "changed_symbols": [],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "project_review": {
+            "depth": "quick",
+            "batches": 1,
+            "reviewed_files": [],
+            "omitted_files": [
+              "batch.ts"
+            ],
+            "supported_files": 1,
+            "limitations": "Model inspected bounded source batches; no guarantee of exhaustive repository reasoning"
+          },
+          "model_review_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "review_summary": "Static-only review: model analysis unavailable",
+          "verification_coverage": {
+            "complete": true,
+            "requested": 0,
+            "assessed": 0,
+            "unassessed_ids": [],
+            "errors": []
+          },
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "thought_tokens": 0,
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T11:14:02.974962+00:00",
+        "completed_at": "2026-11-01T11:14:03.329208+00:00"
+      },
+      "findings": []
+    },
+    {
+      "id": "javascript-async",
+      "expected": true,
+      "matched": true,
+      "status": "partial",
+      "duration_seconds": 0.303,
+      "run": {
+        "id": "8f0150eb-6426-4bab-bb3a-f30cb7c6acc8",
+        "owner_session": "anonymous",
+        "input_mode": "repo",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-k18w_u1a",
+        "review_mode": "project",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": null,
+        "head_sha": null,
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "partial",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "failed",
+          "challenge": "failed",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 1,
+          "security": 0,
+          "bug": 1,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "4",
+            "api_mode": "auto",
+            "models": {},
+            "strategy": "verified",
+            "model": null,
+            "thinking": "default",
+            "max_attempts": 3,
+            "max_model_calls": 12,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "project",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-k18w_u1a",
+            "input": "evaluation",
+            "comparison": "snapshot",
+            "source_exclusions": [],
+            "head_sha": null,
+            "base_sha": null,
+            "snapshot_id": "8ac24d23ab150615dfd88d06fa23593ba1ffbcd87122980a7c22630884dedc46",
+            "revision_label": "Local files (including uncommitted changes)",
+            "run_config": {
+              "version": "4",
+              "api_mode": "auto",
+              "models": {},
+              "strategy": "verified",
+              "model": null,
+              "thinking": "default",
+              "max_attempts": 3,
+              "max_model_calls": 12,
+              "max_tool_calls": 24,
+              "deadline_seconds": 180,
+              "investigation_rounds": 3
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "adf6dcd32e502bbd58599fffe7ae1d9ad5b30d961b8f0cd667a52683e48970a0",
+          "total_files": 1,
+          "source_files": [
+            "batch.js"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Whole snapshot static checks; bounded model review",
+          "repository_policy_source": "reviewed_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [
+            {
+              "path": "batch.js",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in batch.js, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {
+            "batch.js": {
+              "path": "batch.js",
+              "symbols": [
+                {
+                  "name": "save",
+                  "line": 1,
+                  "end": 1,
+                  "parameters": [
+                    {
+                      "name": "urls",
+                      "required": true
+                    }
+                  ],
+                  "exported": true
+                }
+              ],
+              "imports": [],
+              "bindings": [],
+              "calls": [
+                {
+                  "name": "fetch",
+                  "line": 1,
+                  "arguments": 1,
+                  "spread": false
+                }
+              ],
+              "resolved_references": [],
+              "findings": [
+                {
+                  "rule": "js:async-foreach",
+                  "category": "bug",
+                  "line": 1,
+                  "message": "forEach discards promises returned by async callbacks. Await Promise.all with map, or use an awaited for\u2026of loop when completion order matters."
+                }
+              ]
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "batch.js"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "04e1170343b485358ecc1c20d37a1d5b2c83d7442316630bb846283b678e433b",
+            "files": [
+              "batch.js"
+            ],
+            "symbols": [
+              {
+                "id": "batch.js:1:save",
+                "name": "save",
+                "path": "batch.js",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "changed_symbols": [],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "project_review": {
+            "depth": "quick",
+            "batches": 1,
+            "reviewed_files": [],
+            "omitted_files": [
+              "batch.js"
+            ],
+            "supported_files": 1,
+            "limitations": "Model inspected bounded source batches; no guarantee of exhaustive repository reasoning"
+          },
+          "model_review_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "review_summary": "Static-only review: model analysis unavailable",
+          "challenge_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "verification_coverage": {
+            "evidence_counts": {
+              "source_supported": 0,
+              "refuted": 0,
+              "insufficient_evidence": 1
+            },
+            "requested": 1,
+            "assessed": 0,
+            "unassessed_ids": [
+              "ad0af084-3aae-421b-a5ca-a514427179c2"
+            ],
+            "batches": 1,
+            "errors": [
+              "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available"
+            ],
+            "complete": false
+          },
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "thought_tokens": 0,
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T11:14:03.330778+00:00",
+        "completed_at": "2026-11-01T11:14:03.633881+00:00"
+      },
+      "findings": [
+        {
+          "id": "ad0af084-3aae-421b-a5ca-a514427179c2",
+          "run_id": "8f0150eb-6426-4bab-bb3a-f30cb7c6acc8",
+          "stable_fingerprint": "f592f6848dbc06c29a772a14",
+          "category": "bug",
+          "rule_id": "js:async-foreach",
+          "cwe_id": null,
+          "title": "forEach discards promises returned by async callbacks",
+          "explanation": "forEach discards promises returned by async callbacks. Await Promise.all with map, or use an awaited for\u2026of loop when completion order matters.",
+          "user_impact": "The async function can finish before the operations complete, so failures and completion are not propagated.",
+          "severity": "medium",
+          "primary_location": {
+            "path": "batch.js",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": null,
+            "snippet": null
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "a4bbe38b-f75b-45c4-adbb-60db57fdff53",
+              "kind": "static_analysis",
+              "tool_or_profile": "js:async-foreach",
+              "input_revision": null,
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "forEach discards promises returned by async callbacks. Await Promise.all with map, or use an awaited for\u2026of loop when completion order matters.",
+              "duration_ms": 0,
+              "created_at": "2026-11-01T11:14:03.633539+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "proofline-language"
+          ],
+          "assumptions": [],
+          "limitations": [
+            "Verification was omitted or unavailable within the run budget"
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "insufficient_evidence",
+          "verification_assessment": {},
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Use await Promise.all(items.map(async ...)) or an awaited for\u2026of loop, depending on ordering requirements."
+        }
+      ]
+    },
+    {
+      "id": "javascript-awaited",
+      "expected": false,
+      "matched": false,
+      "status": "partial",
+      "duration_seconds": 0.304,
+      "run": {
+        "id": "08bce8d2-bf00-4a60-b043-26c1a106e210",
+        "owner_session": "anonymous",
+        "input_mode": "repo",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-75c7xyyc",
+        "review_mode": "project",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": null,
+        "head_sha": null,
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "partial",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "failed",
+          "challenge": "succeeded",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 0,
+          "security": 0,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "4",
+            "api_mode": "auto",
+            "models": {},
+            "strategy": "verified",
+            "model": null,
+            "thinking": "default",
+            "max_attempts": 3,
+            "max_model_calls": 12,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "project",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-75c7xyyc",
+            "input": "evaluation",
+            "comparison": "snapshot",
+            "source_exclusions": [],
+            "head_sha": null,
+            "base_sha": null,
+            "snapshot_id": "6c30650a0f12999719a5502fc69e8fdca5fe6a8e838681f0d8fe718123af617a",
+            "revision_label": "Local files (including uncommitted changes)",
+            "run_config": {
+              "version": "4",
+              "api_mode": "auto",
+              "models": {},
+              "strategy": "verified",
+              "model": null,
+              "thinking": "default",
+              "max_attempts": 3,
+              "max_model_calls": 12,
+              "max_tool_calls": 24,
+              "deadline_seconds": 180,
+              "investigation_rounds": 3
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "323a34e056847bafec847845eecc4535aad0287f51818a06327e7a3a2314dc50",
+          "total_files": 1,
+          "source_files": [
+            "batch.js"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Whole snapshot static checks; bounded model review",
+          "repository_policy_source": "reviewed_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [
+            {
+              "path": "batch.js",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in batch.js, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {
+            "batch.js": {
+              "path": "batch.js",
+              "symbols": [
+                {
+                  "name": "save",
+                  "line": 1,
+                  "end": 1,
+                  "parameters": [
+                    {
+                      "name": "urls",
+                      "required": true
+                    }
+                  ],
+                  "exported": true
+                }
+              ],
+              "imports": [],
+              "bindings": [],
+              "calls": [
+                {
+                  "name": "fetch",
+                  "line": 1,
+                  "arguments": 1,
+                  "spread": false
+                }
+              ],
+              "resolved_references": [],
+              "findings": []
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "batch.js"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "5d4ba0d7695d0cb649a3ae538a0a8e6de8fb96328ff33f0f3930225048b757c5",
+            "files": [
+              "batch.js"
+            ],
+            "symbols": [
+              {
+                "id": "batch.js:1:save",
+                "name": "save",
+                "path": "batch.js",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "changed_symbols": [],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "project_review": {
+            "depth": "quick",
+            "batches": 1,
+            "reviewed_files": [],
+            "omitted_files": [
+              "batch.js"
+            ],
+            "supported_files": 1,
+            "limitations": "Model inspected bounded source batches; no guarantee of exhaustive repository reasoning"
+          },
+          "model_review_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "review_summary": "Static-only review: model analysis unavailable",
+          "verification_coverage": {
+            "complete": true,
+            "requested": 0,
+            "assessed": 0,
+            "unassessed_ids": [],
+            "errors": []
+          },
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "thought_tokens": 0,
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T11:14:03.634558+00:00",
+        "completed_at": "2026-11-01T11:14:03.938493+00:00"
+      },
+      "findings": []
+    },
+    {
+      "id": "tsx-syntax",
+      "expected": false,
+      "matched": false,
+      "status": "partial",
+      "duration_seconds": 0.307,
+      "run": {
+        "id": "51ef2437-7738-4320-96cb-51ee5e96b368",
+        "owner_session": "anonymous",
+        "input_mode": "repo",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-kgnyfryj",
+        "review_mode": "project",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": null,
+        "head_sha": null,
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "partial",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "failed",
+          "challenge": "succeeded",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 0,
+          "security": 0,
+          "bug": 0,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "4",
+            "api_mode": "auto",
+            "models": {},
+            "strategy": "verified",
+            "model": null,
+            "thinking": "default",
+            "max_attempts": 3,
+            "max_model_calls": 12,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "project",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-kgnyfryj",
+            "input": "evaluation",
+            "comparison": "snapshot",
+            "source_exclusions": [],
+            "head_sha": null,
+            "base_sha": null,
+            "snapshot_id": "3766db16b2d60ccc965305e991cea22e1823800fa2e6d252bf9f21c026ae1478",
+            "revision_label": "Local files (including uncommitted changes)",
+            "run_config": {
+              "version": "4",
+              "api_mode": "auto",
+              "models": {},
+              "strategy": "verified",
+              "model": null,
+              "thinking": "default",
+              "max_attempts": 3,
+              "max_model_calls": 12,
+              "max_tool_calls": 24,
+              "deadline_seconds": 180,
+              "investigation_rounds": 3
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "be64635e8b52284e2affd86fbee3253f54ebaef05cbffe62704d244d87776810",
+          "total_files": 1,
+          "source_files": [
+            "view.tsx"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Whole snapshot static checks; bounded model review",
+          "repository_policy_source": "reviewed_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [
+            {
+              "path": "view.tsx",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in view.tsx, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {
+            "view.tsx": {
+              "path": "view.tsx",
+              "symbols": [
+                {
+                  "name": "View",
+                  "line": 1,
+                  "end": 1,
+                  "parameters": [],
+                  "exported": false
+                }
+              ],
+              "imports": [],
+              "bindings": [],
+              "calls": [],
+              "resolved_references": [],
+              "findings": []
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "view.tsx"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "7015d9c6dae28e840734734fa1913b9e326f6c0243b320c2c9bd620a46f8f888",
+            "files": [
+              "view.tsx"
+            ],
+            "symbols": [
+              {
+                "id": "view.tsx:1:View",
+                "name": "View",
+                "path": "view.tsx",
+                "start": 1,
+                "end": 1
+              }
+            ],
+            "changed_symbols": [],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "project_review": {
+            "depth": "quick",
+            "batches": 1,
+            "reviewed_files": [],
+            "omitted_files": [
+              "view.tsx"
+            ],
+            "supported_files": 1,
+            "limitations": "Model inspected bounded source batches; no guarantee of exhaustive repository reasoning"
+          },
+          "model_review_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "review_summary": "Static-only review: model analysis unavailable",
+          "verification_coverage": {
+            "complete": true,
+            "requested": 0,
+            "assessed": 0,
+            "unassessed_ids": [],
+            "errors": []
+          },
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "thought_tokens": 0,
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T11:14:03.939129+00:00",
+        "completed_at": "2026-11-01T11:14:04.246282+00:00"
+      },
+      "findings": []
+    },
+    {
+      "id": "typescript-syntax",
+      "expected": true,
+      "matched": true,
+      "status": "partial",
+      "duration_seconds": 0.308,
+      "run": {
+        "id": "fb032beb-f6d7-49bc-bb95-39ae55382a74",
+        "owner_session": "anonymous",
+        "input_mode": "repo",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-fuf3jk38",
+        "review_mode": "project",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": null,
+        "head_sha": null,
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "UnavailableProvider",
+        "model_id": "gemini-3.6-flash",
+        "status": "partial",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "failed",
+          "challenge": "failed",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 1,
+          "security": 0,
+          "bug": 1,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "4",
+            "api_mode": "auto",
+            "models": {},
+            "strategy": "verified",
+            "model": null,
+            "thinking": "default",
+            "max_attempts": 3,
+            "max_model_calls": 12,
+            "max_tool_calls": 24,
+            "deadline_seconds": 180,
+            "investigation_rounds": 3
+          },
+          "target": {
+            "mode": "project",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-eval-fuf3jk38",
+            "input": "evaluation",
+            "comparison": "snapshot",
+            "source_exclusions": [],
+            "head_sha": null,
+            "base_sha": null,
+            "snapshot_id": "b246961e0d07feb78e510e25e894ab747b9a57a0a405cea3185b7b144f80f595",
+            "revision_label": "Local files (including uncommitted changes)",
+            "run_config": {
+              "version": "4",
+              "api_mode": "auto",
+              "models": {},
+              "strategy": "verified",
+              "model": null,
+              "thinking": "default",
+              "max_attempts": 3,
+              "max_model_calls": 12,
+              "max_tool_calls": 24,
+              "deadline_seconds": 180,
+              "investigation_rounds": 3
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "c719500762ebbc9a21b7a35ed3adca951ca65bec85bc97cfed083cef6b6504dc",
+          "total_files": 1,
+          "source_files": [
+            "app.ts"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Whole snapshot static checks; bounded model review",
+          "repository_policy_source": "reviewed_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 0,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null
+            }
+          },
+          "javascript": {
+            "status": "executed",
+            "tool": "typescript-parser",
+            "files": 1,
+            "capabilities": [
+              "syntax",
+              "selected_semantic_diagnostics",
+              "compiler_references",
+              "tsconfig_paths"
+            ],
+            "limitations": [
+              "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+            ]
+          },
+          "test_gaps": [
+            {
+              "path": "app.ts",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in app.ts, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [],
+          "diff": "",
+          "language_index": {
+            "app.ts": {
+              "path": "app.ts",
+              "symbols": [],
+              "imports": [],
+              "bindings": [],
+              "calls": [],
+              "resolved_references": [],
+              "findings": [
+                {
+                  "rule": "js:syntax",
+                  "category": "bug",
+                  "line": 1,
+                  "message": "Type expected."
+                },
+                {
+                  "rule": "js:syntax",
+                  "category": "bug",
+                  "line": 1,
+                  "message": "Expression expected."
+                }
+              ]
+            }
+          },
+          "python_index_errors": {},
+          "graph_nodes": 0,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "app.ts"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "ebdd72e0547ce10ff571fb80eceb5e0d02c376d23f06f02af6be900517f1dbdb",
+            "files": [
+              "app.ts"
+            ],
+            "symbols": [],
+            "changed_symbols": [],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "project_review": {
+            "depth": "quick",
+            "batches": 1,
+            "reviewed_files": [],
+            "omitted_files": [
+              "app.ts"
+            ],
+            "supported_files": 1,
+            "limitations": "Model inspected bounded source batches; no guarantee of exhaustive repository reasoning"
+          },
+          "model_review_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "review_summary": "Static-only review: model analysis unavailable",
+          "challenge_error": "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available",
+          "verification_coverage": {
+            "evidence_counts": {
+              "source_supported": 0,
+              "refuted": 0,
+              "insufficient_evidence": 2
+            },
+            "requested": 2,
+            "assessed": 0,
+            "unassessed_ids": [
+              "353eaa14-0bf7-4a2e-a863-eede0a4bbbc1",
+              "e2b3f1cb-09c5-4edd-b3b8-b503e6fde7fe"
+            ],
+            "batches": 1,
+            "errors": [
+              "Configure GEMINI_API_KEY and a supported model for contextual review; static results remain available"
+            ],
+            "complete": false
+          },
+          "investigation": {
+            "model_calls": 0,
+            "tool_calls": 0,
+            "trace": []
+          }
+        },
+        "usage": {
+          "thought_tokens": 0,
+          "prompt_tokens": 0,
+          "candidate_tokens": 0,
+          "total_tokens": 0,
+          "cached_content_token_count": 0,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-01T11:14:04.248019+00:00",
+        "completed_at": "2026-11-01T11:14:04.556269+00:00"
+      },
+      "findings": [
+        {
+          "id": "353eaa14-0bf7-4a2e-a863-eede0a4bbbc1",
+          "run_id": "fb032beb-f6d7-49bc-bb95-39ae55382a74",
+          "stable_fingerprint": "e4424aa353909cbac1dae6b6",
+          "category": "bug",
+          "rule_id": "js:syntax",
+          "cwe_id": null,
+          "title": "Type expected.",
+          "explanation": "Type expected.",
+          "user_impact": "The parser or static rule identifies a concrete syntax or style problem.",
+          "severity": "medium",
+          "primary_location": {
+            "path": "app.ts",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": null,
+            "snippet": null
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "4f083c70-b17d-4d32-8b4c-cafab348a838",
+              "kind": "static_analysis",
+              "tool_or_profile": "js:syntax",
+              "input_revision": null,
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "Type expected.",
+              "duration_ms": 0,
+              "created_at": "2026-11-01T11:14:04.555873+00:00"
+            },
+            {
+              "id": "069e2f90-933f-4585-9626-2eac14ae276d",
+              "kind": "static_analysis",
+              "tool_or_profile": "js:syntax",
+              "input_revision": null,
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "Expression expected.",
+              "duration_ms": 0,
+              "created_at": "2026-11-01T11:14:04.555901+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "proofline-language"
+          ],
+          "assumptions": [],
+          "limitations": [
+            "Verification was omitted or unavailable within the run budget"
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "insufficient_evidence",
+          "verification_assessment": {
+            "merged_signals": [
+              {
+                "rule_id": "js:syntax",
+                "sources": [
+                  "proofline-language"
+                ],
+                "evidence_status": "insufficient_evidence"
+              },
+              {
+                "rule_id": "js:syntax",
+                "sources": [
+                  "proofline-language"
+                ],
+                "evidence_status": "insufficient_evidence",
+                "assessment": {}
+              }
+            ]
+          },
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Inspect the cited syntax or style rule."
+        }
+      ]
+    }
+  ]
+}

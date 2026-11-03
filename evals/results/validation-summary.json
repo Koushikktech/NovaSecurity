@@ -1,0 +1,56 @@
+{
+  "client_date": "2026-11-01",
+  "backend_regression_tests": {
+    "passed": 170,
+    "skipped": 1,
+    "scope": "Regression checks, not model accuracy"
+  },
+  "backend_lint": "passed",
+  "frontend_typecheck": "passed",
+  "frontend_eslint": "passed",
+  "frontend_production_build": "passed",
+  "mocked_browser_checks": [
+    "GitHub picker/mobile",
+    "impact/evidence/repair/profile/resume/mobile",
+    "blinded packet save/export/mobile",
+    "stale response, transient reconnect, saved running review, URL reload and auth recovery"
+  ],
+  "real_docker_checks": [
+    "python differential",
+    "javascript differential",
+    "typescript differential",
+    "operator-loaded custom profile"
+  ],
+  "live_provider": "Classic structured output and some review/tool calls succeeded. Interactions completed a live review stage; investigation/challenge timed out. Full independent verification remains unproven.",
+  "completion": "not_achieved",
+  "pending": [
+    "independent annotations and adjudication",
+    "full live ablations and challenge",
+    "GitHub authorization/private access",
+    "authorized publication and Actions validation"
+  ],
+  "gemini_api_modes": [
+    "auto",
+    "generate_content",
+    "interactions"
+  ],
+  "frontend_framework": "Next.js 16.4.3",
+  "local_container_stack": "passed: clean locked build, protected API, CORS, three static languages, source-pinned resume, non-root/private env and restart persistence",
+  "actual_api_recovery": "passed: running-process interruption, persisted completed report, bounded queue and 20 warm repeated reviews",
+  "production_dependency_advisories": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "development_dependency_caveat": "16 moderate dependency-chain reports from the minimatch advisory; documented separately",
+  "local_codex_cli": {
+    "status": "passed real transport and four-invocation review/challenge",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "auth": "native ChatGPT subscription login",
+    "benchmark_accuracy": "not established"
+  }
+}

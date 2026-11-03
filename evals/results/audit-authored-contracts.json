@@ -1,0 +1,347 @@
+{
+  "purpose": "Explicit baseline-contract checks on inspected authored snippets, not independent human labels or production accuracy",
+  "corpus_hash": "b9d4be93d28266423cf3fd3ce11b0283a8d95a90976b39fc382811d8a46c7f33",
+  "checks": [
+    {
+      "case": "empty-list-bug",
+      "side": "base",
+      "family": "empty-list",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "empty-list-bug",
+      "side": "changed",
+      "family": "empty-list",
+      "passed": false,
+      "error": "IndexError: list index out of range",
+      "expected_pass": false
+    },
+    {
+      "case": "empty-list-clean",
+      "side": "base",
+      "family": "empty-list",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "empty-list-clean",
+      "side": "changed",
+      "family": "empty-list",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "sort-return-bug",
+      "side": "base",
+      "family": "sort-return",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "sort-return-bug",
+      "side": "changed",
+      "family": "sort-return",
+      "passed": false,
+      "expected_pass": false
+    },
+    {
+      "case": "sort-return-clean",
+      "side": "base",
+      "family": "sort-return",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "sort-return-clean",
+      "side": "changed",
+      "family": "sort-return",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "boolean-string-bug",
+      "side": "base",
+      "family": "boolean-string",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "boolean-string-bug",
+      "side": "changed",
+      "family": "boolean-string",
+      "passed": false,
+      "expected_pass": false
+    },
+    {
+      "case": "boolean-string-clean",
+      "side": "base",
+      "family": "boolean-string",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "boolean-string-clean",
+      "side": "changed",
+      "family": "boolean-string",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "dict-delete-bug",
+      "side": "base",
+      "family": "dict-delete",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "dict-delete-bug",
+      "side": "changed",
+      "family": "dict-delete",
+      "passed": false,
+      "error": "RuntimeError: dictionary changed size during iteration",
+      "expected_pass": false
+    },
+    {
+      "case": "dict-delete-clean",
+      "side": "base",
+      "family": "dict-delete",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "dict-delete-clean",
+      "side": "changed",
+      "family": "dict-delete",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "precision-money-bug",
+      "side": "base",
+      "family": "precision-money",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "precision-money-bug",
+      "side": "changed",
+      "family": "precision-money",
+      "passed": false,
+      "expected_pass": false
+    },
+    {
+      "case": "precision-money-clean",
+      "side": "base",
+      "family": "precision-money",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "precision-money-clean",
+      "side": "changed",
+      "family": "precision-money",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "zero-total-bug",
+      "side": "base",
+      "family": "zero-total",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "zero-total-bug",
+      "side": "changed",
+      "family": "zero-total",
+      "passed": false,
+      "expected_pass": false
+    },
+    {
+      "case": "zero-total-clean",
+      "side": "base",
+      "family": "zero-total",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "zero-total-clean",
+      "side": "changed",
+      "family": "zero-total",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "missing-await-bug",
+      "side": "base",
+      "family": "missing-await",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "missing-await-bug",
+      "side": "changed",
+      "family": "missing-await",
+      "passed": false,
+      "error": "TypeError: response.json is not a function",
+      "expected_pass": false
+    },
+    {
+      "case": "missing-await-clean",
+      "side": "base",
+      "family": "missing-await",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "missing-await-clean",
+      "side": "changed",
+      "family": "missing-await",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "null-input-bug",
+      "side": "base",
+      "family": "null-input",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "null-input-bug",
+      "side": "changed",
+      "family": "null-input",
+      "passed": false,
+      "error": "TypeError: Cannot read properties of null (reading 'toUpperCase')",
+      "expected_pass": false
+    },
+    {
+      "case": "null-input-clean",
+      "side": "base",
+      "family": "null-input",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "null-input-clean",
+      "side": "changed",
+      "family": "null-input",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "slice-boundary-bug",
+      "side": "base",
+      "family": "slice-boundary",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "slice-boundary-bug",
+      "side": "changed",
+      "family": "slice-boundary",
+      "passed": false,
+      "expected_pass": false
+    },
+    {
+      "case": "slice-boundary-clean",
+      "side": "base",
+      "family": "slice-boundary",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "slice-boundary-clean",
+      "side": "changed",
+      "family": "slice-boundary",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "falsy-default-bug",
+      "side": "base",
+      "family": "falsy-default",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "falsy-default-bug",
+      "side": "changed",
+      "family": "falsy-default",
+      "passed": false,
+      "expected_pass": false
+    },
+    {
+      "case": "falsy-default-clean",
+      "side": "base",
+      "family": "falsy-default",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "falsy-default-clean",
+      "side": "changed",
+      "family": "falsy-default",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "reject-propagation-bug",
+      "side": "base",
+      "family": "reject-propagation",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "reject-propagation-bug",
+      "side": "changed",
+      "family": "reject-propagation",
+      "passed": false,
+      "expected_pass": false
+    },
+    {
+      "case": "reject-propagation-clean",
+      "side": "base",
+      "family": "reject-propagation",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "reject-propagation-clean",
+      "side": "changed",
+      "family": "reject-propagation",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "assignment-contract-bug",
+      "side": "base",
+      "family": "assignment-contract",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "assignment-contract-bug",
+      "side": "changed",
+      "family": "assignment-contract",
+      "passed": false,
+      "expected_pass": false
+    },
+    {
+      "case": "assignment-contract-clean",
+      "side": "base",
+      "family": "assignment-contract",
+      "passed": true,
+      "expected_pass": true
+    },
+    {
+      "case": "assignment-contract-clean",
+      "side": "changed",
+      "family": "assignment-contract",
+      "passed": true,
+      "expected_pass": true
+    }
+  ],
+  "all_expected_outcomes": true
+}

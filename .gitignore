@@ -29,6 +29,11 @@ out/
 # Temp workspaces
 temp/
 backend/temp/
+backend/data/workspaces/
+backend/data/artifacts/
+backend/data/*.db
+backend/data/*.db-shm
+backend/data/*.db-wal
 
 # Logs & caches
 *.log
@@ -41,3 +46,12 @@ __pycache__/
 *.tsbuildinfo
 .pytest_cache/
 .mypy_cache/
+
+# Isolated browser verification build
+frontend/.next-mode-check/
+
+# All isolated Next.js verification builds
+frontend/.next-*/
+
+# Reproducible renderer caches (keep source, captures and final MP4)
+.hyperframes/

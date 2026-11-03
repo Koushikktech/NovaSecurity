@@ -1,0 +1,10 @@
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const ts=require('typescript');
+const fs=require('node:fs');
+const result=ts.transpileModule(fs.readFileSync('/work/contract.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022},reportDiagnostics:true});
+if(result.diagnostics?.some(d=>d.category===ts.DiagnosticCategory.Error))throw Error('TypeScript transpilation failed');
+fs.writeFileSync('/tmp/contract.cjs',result.outputText);
+const {total}=require('/tmp/contract.cjs');
+test('test_regression',()=>assert.equal(total([]),0));
+test('test_happy',()=>assert.equal(total([2,3]),5));

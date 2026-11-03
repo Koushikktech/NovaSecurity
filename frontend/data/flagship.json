@@ -1,0 +1,300 @@
+{
+  "run": {
+    "status": "completed",
+    "base_sha": "80cad0b341b1e9309a23c62400f352cbf08c47c8",
+    "head_sha": "19c035c651e2526b53d433842839b38d1a68f131",
+    "stage_statuses": {
+      "ingestion": "succeeded",
+      "static_analysis": "succeeded",
+      "graph_indexing": "succeeded",
+      "gemini_review": "succeeded",
+      "challenge": "succeeded",
+      "validation": "succeeded"
+    },
+    "coverage": {
+      "impact": {
+        "changes": [
+          {
+            "symbol": {
+              "id": "shop/pricing.py:1:quote_total",
+              "name": "quote_total",
+              "path": "shop/pricing.py",
+              "start": 1,
+              "end": 2
+            },
+            "callers": [
+              {
+                "path": "shop/checkout.py",
+                "line": 3,
+                "name": "quote_total",
+                "target_path": "shop/pricing.py",
+                "target_line": 1,
+                "relationship": "resolved_python_call",
+                "caller_symbol": "shop/checkout.py::place_order",
+                "target_symbol": "shop/pricing.py::quote_total"
+              }
+            ],
+            "test_hints": []
+          }
+        ],
+        "deleted_symbols": [],
+        "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+      },
+      "verification_coverage": {
+        "evidence_counts": {
+          "source_supported": 2,
+          "refuted": 0,
+          "insufficient_evidence": 0
+        },
+        "requested": 2,
+        "assessed": 2,
+        "unassessed_ids": [],
+        "batches": 1,
+        "errors": [],
+        "complete": true
+      },
+      "source_files": [
+        "shop/__init__.py",
+        "shop/checkout.py",
+        "shop/pricing.py"
+      ],
+      "diff": "diff --git a/shop/pricing.py b/shop/pricing.py\n--- a/shop/pricing.py\n+++ b/shop/pricing.py\n@@ -1,2 +1,2 @@\n-def quote_total(subtotal_cents, discount_cents=0):\n+def quote_total(subtotal_cents, discount_cents):\n     return subtotal_cents - discount_cents\n",
+      "investigation": {
+        "model_calls": 4,
+        "tool_calls": 4
+      }
+    }
+  },
+  "findings": [
+    {
+      "id": "70923f50-3dd3-4824-b954-7fe36dda23b3",
+      "run_id": "64af85b9-2b49-4b03-aaf7-302600a0f5fb",
+      "stable_fingerprint": "42c9cc92a15fa9ae4456d9bf",
+      "category": "bug",
+      "rule_id": "proofline:python.backward-incompatible-required-argument",
+      "cwe_id": null,
+      "title": "Required discount argument breaks checkout",
+      "explanation": "Removing the default value makes `discount_cents` mandatory, but the supplied caller still invokes `quote_total(subtotal_cents)` with one argument. Python raises `TypeError` before the function body runs; no guard in `quote_total` or `place_order` handles that exception.",
+      "user_impact": "Every `place_order` call that reaches line 5 fails instead of returning a confirmed order, including carts that should receive no discount.",
+      "severity": "high",
+      "primary_location": {
+        "path": "shop/pricing.py",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "19c035c651e2526b53d433842839b38d1a68f131",
+        "snippet": "def quote_total(subtotal_cents, discount_cents):"
+      },
+      "related_locations": [],
+      "change_relation": "changed_context",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "5a75af6e-1460-408b-9bf7-5dc19124513b",
+          "kind": "codex_cli_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "19c035c651e2526b53d433842839b38d1a68f131",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Call `place_order(cart)` with any cart for which subtotal calculation completes, causing `quote_total(subtotal_cents)` to execute without `discount_cents`.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T16:44:14.200085+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "codex_cli_review",
+        "codex_cli_challenge"
+      ],
+      "assumptions": [
+        "`shop.checkout.place_order` is an active caller and should continue supporting orders without an explicit discount."
+      ],
+      "limitations": [
+        "The supplied context identifies no matching test, but this is a retrieval gap rather than proof that coverage is absent."
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "source_supported",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "shop/pricing.py",
+            "start_line": 1,
+            "quote": "def quote_total(subtotal_cents, discount_cents):"
+          },
+          {
+            "path": "shop/checkout.py",
+            "start_line": 3,
+            "quote": "def place_order(cart):\n    subtotal_cents = sum(item[\"price_cents\"] * item[\"quantity\"] for item in cart)\n    total_cents = quote_total(subtotal_cents)\n    return {\"status\": \"confirmed\", \"total_cents\": total_cents}"
+          }
+        ],
+        "unresolved_assumptions": [],
+        "rule_id": "proofline:python.backward-incompatible-required-argument",
+        "path": "shop/pricing.py",
+        "start_line": 1,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The diff shows that `discount_cents` previously defaulted to `0` and is now required. `place_order` still calls `quote_total` with only `subtotal_cents`. Under Python's argument binding, this raises `TypeError` before `quote_total` executes. The supplied `place_order` contains no exception handling, so it cannot return its confirmation object on this path."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Restore `discount_cents=0`, or update every caller to pass an explicit discount (for this caller, `quote_total(subtotal_cents, 0)`). Add a focused test covering the intended no-discount API contract."
+    },
+    {
+      "id": "3523f6ea-c698-40c3-9841-55afb78b8865",
+      "run_id": "64af85b9-2b49-4b03-aaf7-302600a0f5fb",
+      "stable_fingerprint": "7f6e1649cf74baa336b53761",
+      "category": "bug",
+      "rule_id": "python:changed-signature",
+      "cwe_id": null,
+      "title": "Call to shop.pricing.quote_total is missing required arguments ['discount_cents'] after this PR changes its signature.",
+      "explanation": "Call to shop.pricing.quote_total is missing required arguments ['discount_cents'] after this PR changes its signature.",
+      "user_impact": "Existing callers may raise an argument error when the changed interface is used.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "shop/checkout.py",
+        "start_line": 5,
+        "end_line": 5,
+        "side": "head",
+        "commit_sha": "19c035c651e2526b53d433842839b38d1a68f131",
+        "snippet": null
+      },
+      "related_locations": [
+        {
+          "path": "shop/pricing.py",
+          "lines": [
+            1
+          ],
+          "qualified_symbol": "shop.pricing.quote_total",
+          "relationship": "callee",
+          "snippet": null
+        }
+      ],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "5cb80683-7f31-4aab-8df9-b6c980b48c20",
+          "kind": "static_analysis",
+          "tool_or_profile": "python:changed-signature",
+          "input_revision": "19c035c651e2526b53d433842839b38d1a68f131",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Call to shop.pricing.quote_total is missing required arguments ['discount_cents'] after this PR changes its signature.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T16:43:54.104906+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "proofline-language",
+        "codex_cli_challenge"
+      ],
+      "assumptions": [],
+      "limitations": [],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "source_supported",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "shop/checkout.py",
+            "start_line": 5,
+            "quote": "total_cents = quote_total(subtotal_cents)"
+          },
+          {
+            "path": "shop/pricing.py",
+            "start_line": 1,
+            "quote": "def quote_total(subtotal_cents, discount_cents):\n    return subtotal_cents - discount_cents"
+          }
+        ],
+        "unresolved_assumptions": [],
+        "rule_id": "python:changed-signature",
+        "path": "shop/checkout.py",
+        "start_line": 5,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The resolved imported function requires two positional arguments, while the call at line 5 supplies one. Python therefore raises `TypeError` during argument binding whenever execution reaches this call. No wrapper, variadic parameter, or default in the supplied source satisfies the missing `discount_cents` argument."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Update the caller to supply the new arguments, or preserve compatibility with a default in the callee."
+    }
+  ],
+  "sources": {
+    "shop/__init__.py": "",
+    "shop/checkout.py": "from shop.pricing import quote_total\n\ndef place_order(cart):\n    subtotal_cents = sum(item[\"price_cents\"] * item[\"quantity\"] for item in cart)\n    total_cents = quote_total(subtotal_cents)\n    return {\"status\": \"confirmed\", \"total_cents\": total_cents}\n",
+    "shop/pricing.py": "def quote_total(subtotal_cents, discount_cents):\n    return subtotal_cents - discount_cents\n"
+  },
+  "base_sources": {
+    "shop/__init__.py": "",
+    "shop/checkout.py": "from shop.pricing import quote_total\n\ndef place_order(cart):\n    subtotal_cents = sum(item[\"price_cents\"] * item[\"quantity\"] for item in cart)\n    total_cents = quote_total(subtotal_cents)\n    return {\"status\": \"confirmed\", \"total_cents\": total_cents}\n",
+    "shop/pricing.py": "def quote_total(subtotal_cents, discount_cents=0):\n    return subtotal_cents - discount_cents\n"
+  },
+  "patch": {
+    "id": "13b084bb-61e1-4154-a40b-c05b2b3e8500",
+    "status": "checks_passed",
+    "diff": "--- a/shop/checkout.py\n+++ b/shop/checkout.py\n@@ -2,5 +2,5 @@\n \n def place_order(cart):\n     subtotal_cents = sum(item[\"price_cents\"] * item[\"quantity\"] for item in cart)\n-    total_cents = quote_total(subtotal_cents)\n+    total_cents = quote_total(subtotal_cents, discount_cents=0)\n     return {\"status\": \"confirmed\", \"total_cents\": total_cents}\n",
+    "edits": [
+      {
+        "path": "shop/checkout.py",
+        "old_content": "    total_cents = quote_total(subtotal_cents)",
+        "replacement": "    total_cents = quote_total(subtotal_cents, discount_cents=0)",
+        "rationale": "Supplies the newly required argument explicitly while preserving place_order's existing no-discount behavior and public contract."
+      }
+    ]
+  },
+  "verification": {
+    "success": true,
+    "message": "Independent regression assertion failed before and passed after; happy path passed",
+    "profile": "checkout_contract",
+    "image": "proofline-verification@sha256:da69f7765cf7c83a251b3568f835f760e04735eee9bd87e213ab82af8e9576ff"
+  },
+  "execution": [
+    {
+      "language": "python",
+      "success": true,
+      "checks": [
+        {
+          "name": "base",
+          "status": "passed",
+          "duration_ms": 422
+        },
+        {
+          "name": "before",
+          "status": "failed",
+          "duration_ms": 239
+        },
+        {
+          "name": "after",
+          "status": "passed",
+          "duration_ms": 236
+        }
+      ],
+      "versions": [
+        {
+          "path": "shop/pricing.py",
+          "content": "def quote_total(subtotal_cents, discount_cents=0):\n    return subtotal_cents - discount_cents\n"
+        },
+        {
+          "path": "shop/pricing.py",
+          "content": "def quote_total(subtotal_cents, discount_cents):\n    return subtotal_cents - discount_cents\n"
+        },
+        {
+          "path": "shop/checkout.py",
+          "content": "from shop.pricing import quote_total\n\ndef place_order(cart):\n    subtotal_cents = sum(item[\"price_cents\"] * item[\"quantity\"] for item in cart)\n    total_cents = quote_total(subtotal_cents, discount_cents=0)\n    return {\"status\": \"confirmed\", \"total_cents\": total_cents}\n"
+        }
+      ]
+    }
+  ]
+}

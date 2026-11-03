@@ -1,0 +1,134 @@
+[
+  {
+    "case_id": "holdout_sql_vuln_02",
+    "split": "holdout",
+    "category": "security",
+    "rule_id": "CWE-89",
+    "expected_positive": true,
+    "file_path": "api/products.py",
+    "accepted_lines": [22, 23],
+    "code_snippet": "query = \"SELECT * FROM products WHERE category = '\" + cat + \"'\"\ncursor.execute(query)",
+    "description": "SQL injection via raw string concatenation with +"
+  },
+  {
+    "case_id": "holdout_sql_safe_02",
+    "split": "holdout",
+    "category": "security",
+    "rule_id": "CWE-89",
+    "expected_positive": false,
+    "file_path": "api/safe_products.py",
+    "accepted_lines": [22, 23],
+    "code_snippet": "cursor.execute(\"SELECT * FROM products WHERE category = %s\", (cat,))",
+    "description": "Safe SQL query with DB-API %s parameter substitution"
+  },
+  {
+    "case_id": "holdout_cmd_vuln_02",
+    "split": "holdout",
+    "category": "security",
+    "rule_id": "CWE-78",
+    "expected_positive": true,
+    "file_path": "workers/pdf_gen.py",
+    "accepted_lines": [30, 31],
+    "code_snippet": "subprocess.Popen(f\"wkhtmltopdf {url} {output}\", shell=True)",
+    "description": "Command injection via shell=True with formatted command"
+  },
+  {
+    "case_id": "holdout_cmd_safe_02",
+    "split": "holdout",
+    "category": "security",
+    "rule_id": "CWE-78",
+    "expected_positive": false,
+    "file_path": "workers/safe_pdf_gen.py",
+    "accepted_lines": [30, 31],
+    "code_snippet": "subprocess.Popen(['wkhtmltopdf', url, output], shell=False)",
+    "description": "Safe argument vector execution with shell=False"
+  },
+  {
+    "case_id": "holdout_path_vuln_02",
+    "split": "holdout",
+    "category": "security",
+    "rule_id": "CWE-22",
+    "expected_positive": true,
+    "file_path": "handlers/avatar.py",
+    "accepted_lines": [18],
+    "code_snippet": "with open(f\"uploads/{username}.png\", 'wb') as f:",
+    "description": "Path traversal allowing writing outside uploads folder"
+  },
+  {
+    "case_id": "holdout_path_safe_02",
+    "split": "holdout",
+    "category": "security",
+    "rule_id": "CWE-22",
+    "expected_positive": false,
+    "file_path": "handlers/safe_avatar.py",
+    "accepted_lines": [18, 19],
+    "code_snippet": "safe_uid = uuid.UUID(username)\nwith open(f\"uploads/{safe_uid}.png\", 'wb') as f:",
+    "description": "Safe path constrained by strict UUID type casting"
+  },
+  {
+    "case_id": "holdout_bug_mutable_dict_02",
+    "split": "holdout",
+    "category": "bug",
+    "rule_id": "B006",
+    "expected_positive": true,
+    "file_path": "client/http.py",
+    "accepted_lines": [12],
+    "code_snippet": "def get(url, headers={}):",
+    "description": "Mutable default dictionary parameter accumulating across calls"
+  },
+  {
+    "case_id": "holdout_bug_mutable_dict_safe_02",
+    "split": "holdout",
+    "category": "bug",
+    "rule_id": "B006",
+    "expected_positive": false,
+    "file_path": "client/safe_http.py",
+    "accepted_lines": [12, 13, 14],
+    "code_snippet": "def get(url, headers=None):\n    headers = headers or {}",
+    "description": "Safe dictionary initialization inside function body"
+  },
+  {
+    "case_id": "holdout_style_wildcard_02",
+    "split": "holdout",
+    "category": "style",
+    "rule_id": "F403",
+    "expected_positive": true,
+    "file_path": "models/all.py",
+    "accepted_lines": [1],
+    "code_snippet": "from models.submodels import *",
+    "description": "Wildcard import polluting namespace"
+  },
+  {
+    "case_id": "holdout_style_explicit_02",
+    "split": "holdout",
+    "category": "style",
+    "rule_id": "F403",
+    "expected_positive": false,
+    "file_path": "models/safe_all.py",
+    "accepted_lines": [1],
+    "code_snippet": "from models.submodels import User, Account",
+    "description": "Explicit clean imports"
+  },
+  {
+    "case_id": "holdout_bug_resource_leak_02",
+    "split": "holdout",
+    "category": "bug",
+    "rule_id": "BUG-LEAK",
+    "expected_positive": true,
+    "file_path": "services/logger.py",
+    "accepted_lines": [25],
+    "code_snippet": "f = open(log_path, 'a')\nf.write(msg)",
+    "description": "File handle opened without context manager or close"
+  },
+  {
+    "case_id": "holdout_bug_resource_leak_safe_02",
+    "split": "holdout",
+    "category": "bug",
+    "rule_id": "BUG-LEAK",
+    "expected_positive": false,
+    "file_path": "services/safe_logger.py",
+    "accepted_lines": [25, 26],
+    "code_snippet": "with open(log_path, 'a') as f:\n    f.write(msg)",
+    "description": "Proper context manager ensuring resource release"
+  }
+]

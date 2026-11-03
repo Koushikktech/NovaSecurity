@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "CVE-2024-49766",
+      "repository": "https://github.com/pallets/werkzeug",
+      "fixed_sha": "2767bcb10a7dd1c297d812cc5e6d11a474c1f092",
+      "vulnerable_sha": "50cfeebcb0727e18cc52ffbeb125f4a66551179b",
+      "fix_commit": "https://github.com/pallets/werkzeug/commit/2767bcb10a7dd1c297d812cc5e6d11a474c1f092",
+      "advisory": "https://github.com/pallets/werkzeug/security/advisories/GHSA-f9vj-2wh5-fj8j",
+      "expected_paths": [
+        "src/werkzeug/security.py"
+      ],
+      "environment": "Only vulnerable on Windows with Python < 3.11; do not claim Linux reproduction",
+      "labels": "Vendor advisory and upstream patch; all additional findings need adjudication",
+      "benchmark_mode": "Review vulnerable snapshot and fixed control separately; do not present a fix diff as a newly introduced vulnerability"
+    },
+    {
+      "id": "CVE-2024-35195",
+      "repository": "https://github.com/psf/requests",
+      "fixed_sha": "a58d7f2ffb4d00b46dca2d70a3932a0b37e22fac",
+      "vulnerable_sha": "eea3bbf9ac635f465ee6c9903dc57c677952dafd",
+      "fix_commit": "https://github.com/psf/requests/commit/a58d7f2ffb4d00b46dca2d70a3932a0b37e22fac",
+      "advisory": "https://github.com/psf/requests/security/advisories/GHSA-9wx4-h78v-vm56",
+      "expected_paths": [
+        "src/requests/adapters.py",
+        "requests/adapters.py"
+      ],
+      "environment": "Session reuses an origin connection after initial verify=False",
+      "labels": "Vendor advisory and upstream patch; all additional findings need adjudication",
+      "benchmark_mode": "Review vulnerable snapshot and fixed control separately; do not present a fix diff as a newly introduced vulnerability"
+    }
+  ]
+}

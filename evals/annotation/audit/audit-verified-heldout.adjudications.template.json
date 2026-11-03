@@ -1,0 +1,1134 @@
+[
+  {
+    "finding_id": "62ba93a1-2d43-4ce0-971f-642349ff3820",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "empty-list-bug",
+    "finding": {
+      "id": "62ba93a1-2d43-4ce0-971f-642349ff3820",
+      "run_id": "1734352d-2975-4369-9331-f9a1bf4342f7",
+      "stable_fingerprint": "052f346a1afb65ce86a8049e",
+      "category": "bug",
+      "rule_id": "proofline:python-api-empty-input-regression",
+      "cwe_id": null,
+      "title": "Preserve the empty-input return contract",
+      "explanation": "The previous guard explicitly returned `None` for any falsy input. Removing it makes `first([])` evaluate `items[0]`, which raises `IndexError` instead of returning `None`. No supplied caller evidence establishes that this API-contract change is intentional.",
+      "user_impact": "Code that relies on `first([])` returning `None` can now fail at runtime with an uncaught `IndexError`.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "src/module.py",
+        "start_line": 2,
+        "end_line": 2,
+        "side": "head",
+        "commit_sha": "a8527aeab597f71f4657fcdad2c6b60074863c97",
+        "snippet": "return items[0]"
+      },
+      "related_locations": [],
+      "change_relation": "changed_context",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "97865493-558b-463c-81e7-9a0e5bbc98d4",
+          "kind": "codex_cli_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "a8527aeab597f71f4657fcdad2c6b60074863c97",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Call `first` with an empty indexable collection such as `[]` or `()`.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T13:56:28.757583+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "codex_cli_review"
+      ],
+      "assumptions": [
+        "The prior behavior for empty collections was part of the function's expected contract; the supplied context contains no evidence that the breaking change is intentional.",
+        "The reviewed change is not accompanied by an intentional API-contract change outside the supplied scope.",
+        "Callers may pass empty or otherwise falsy inputs, as the previous implementation explicitly supported."
+      ],
+      "limitations": [
+        "No callers or matching tests were found in the supplied context, so downstream impact cannot be localized.",
+        "The old truthiness check also returned `None` for custom falsy containers that might still support index 0; restoring it preserves prior behavior exactly.",
+        "Verifier supplied no valid source quotation; conclusion remains unestablished"
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "insufficient_evidence",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "src/module.py",
+            "start_line": 2,
+            "quote": "-    return items[0] if items else None\n+    return items[0]"
+          },
+          {
+            "path": "src/module.py",
+            "start_line": 2,
+            "quote": "return items[0]"
+          }
+        ],
+        "unresolved_assumptions": [
+          "The reviewed change is not accompanied by an intentional API-contract change outside the supplied scope.",
+          "Callers may pass empty or otherwise falsy inputs, as the previous implementation explicitly supported."
+        ],
+        "rule_id": "proofline:python-api-empty-input-regression",
+        "path": "src/module.py",
+        "start_line": 2,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The diff concretely removes the falsy-input guard. Under the previous implementation, first([]) returned None because an empty list is falsy. The new implementation unconditionally evaluates items[0], which raises IndexError for an empty list. It also changes behavior for other previously accepted falsy values, such as None, though the resulting exception may differ. No supplied guard, caller constraint, test, or documented contract indicates that empty inputs are now prohibited or that the behavior change is intentional."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Restore the empty-input guard, for example `return items[0] if items else None`. If raising is intentional, document the changed contract and add a focused test asserting the exception."
+    }
+  },
+  {
+    "finding_id": "866a56e9-679e-479c-aa69-47cf96957ca2",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "zero-total-bug",
+    "finding": {
+      "id": "866a56e9-679e-479c-aa69-47cf96957ca2",
+      "run_id": "0a6715b1-9054-4887-837c-b85e51feff7b",
+      "stable_fingerprint": "e91c08c243e683dee5210400",
+      "category": "bug",
+      "rule_id": "proofline:empty-input-contract-regression",
+      "cwe_id": null,
+      "title": "Preserve the defined result for an empty array",
+      "explanation": "The removed length guard changes `average([])` from `0` to `NaN`: `reduce(..., 0)` returns `0`, then the code divides by `items.length`, which is zero. This is a concrete API behavior regression from the previous implementation. The supplied reference search found no callers, so whether external consumers rely on the prior result remains unresolved.",
+      "user_impact": "Callers passing an empty collection can receive `NaN`, which may propagate through calculations or serialization instead of the prior numeric fallback of `0`.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "src/module.ts",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "7007d52e92841d0174f18a27e265547d6408f111",
+        "snippet": "export function average(items: number[]): number { return items.reduce((a,b)=>a+b,0) / items.length; }"
+      },
+      "related_locations": [],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "f982d1db-d56a-4d80-84d1-97237a92b96e",
+          "kind": "codex_cli_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "7007d52e92841d0174f18a27e265547d6408f111",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Call `average` with an empty array.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T13:57:15.894655+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "codex_cli_review"
+      ],
+      "assumptions": [
+        "The previous implementation's `0` result for empty input is part of the behavior to preserve unless an intentional contract change is documented.",
+        "Whether external consumers rely on average([]) returning 0 cannot be established from the supplied scope."
+      ],
+      "limitations": [
+        "No matching tests or external references were supplied; the retrieval gap does not prove that coverage or consumers do not exist.",
+        "Verifier supplied no valid source quotation; conclusion remains unestablished"
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "insufficient_evidence",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "src/module.ts",
+            "start_line": 1,
+            "quote": "export function average(items: number[]): number { return items.reduce((a,b)=>a+b,0) / items.length; }"
+          },
+          {
+            "path": "src/module.ts",
+            "start_line": 1,
+            "quote": "export function average(items: number[]): number { return items.length ? items.reduce((a,b)=>a+b,0)/items.length : 0; }"
+          }
+        ],
+        "unresolved_assumptions": [
+          "Whether external consumers rely on average([]) returning 0 cannot be established from the supplied scope."
+        ],
+        "rule_id": "proofline:empty-input-contract-regression",
+        "path": "src/module.ts",
+        "start_line": 1,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The diff removes the explicit empty-array branch that returned 0. In the new implementation, average([]) calls reduce with an initial value of 0, so reduction succeeds with 0; items.length is also 0, and JavaScript evaluates 0 / 0 as NaN. Thus the observable result concretely changes from 0 to NaN. No supplied guard or supported-contract evidence prevents an empty array from reaching this exported function."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Restore the empty-input guard, for example `return items.length ? items.reduce((a, b) => a + b, 0) / items.length : 0;`, or explicitly reject empty input if intentionally changing the API and update callers/tests accordingly."
+    }
+  },
+  {
+    "finding_id": "df492a66-95ee-4dd2-8344-89a9d10ac1ad",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "sort-return-bug",
+    "finding": {
+      "id": "df492a66-95ee-4dd2-8344-89a9d10ac1ad",
+      "run_id": "11ce2bea-db30-4e3e-9881-23c4662a9314",
+      "stable_fingerprint": "c3a8995a94f9596a64570eeb",
+      "category": "bug",
+      "rule_id": "proofline:PY-SORT-INPLACE-RETURN",
+      "cwe_id": null,
+      "title": "The function now returns `None` and mutates the caller's list",
+      "explanation": "`list.sort()` sorts in place and returns `None`, whereas the previous `sorted(items)` returned a newly sorted list without changing the input. On every successful list call, both the return-value and mutation contracts therefore change.",
+      "user_impact": "Callers that use the result receive `None`, potentially causing downstream failures, while callers retaining the input observe an unexpected reordering.",
+      "severity": "high",
+      "primary_location": {
+        "path": "src/module.py",
+        "start_line": 2,
+        "end_line": 2,
+        "side": "head",
+        "commit_sha": "b2f4b6e977440c9285b922dfd38c774d7f37792a",
+        "snippet": "return items.sort()"
+      },
+      "related_locations": [],
+      "change_relation": "changed_context",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "e5b15e84-0bb8-4a7b-a456-3a3f3af179af",
+          "kind": "codex_cli_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "b2f4b6e977440c9285b922dfd38c774d7f37792a",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Call `sorted_items()` with any list whose elements can be ordered, including an empty list.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T13:58:10.170832+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "codex_cli_review"
+      ],
+      "assumptions": [
+        "The prior implementation defines the intended public behavior because no caller or specification establishing a deliberate contract change was supplied.",
+        "The relevant input is a normal Python list or another object whose sort() follows the built-in list contract.",
+        "The function is expected to preserve its previous return and non-mutation behavior; no callers or tests were supplied to establish whether the contract change was intentional."
+      ],
+      "limitations": [
+        "No matching tests or external callers were supplied, so the exact downstream failures cannot be identified.",
+        "Verifier supplied no valid source quotation; conclusion remains unestablished"
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "insufficient_evidence",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "src/module.py",
+            "start_line": 2,
+            "quote": "return items.sort()"
+          },
+          {
+            "path": "src/module.py",
+            "start_line": 2,
+            "quote": "-    return sorted(items)\n+    return items.sort()"
+          }
+        ],
+        "unresolved_assumptions": [
+          "The relevant input is a normal Python list or another object whose sort() follows the built-in list contract.",
+          "The function is expected to preserve its previous return and non-mutation behavior; no callers or tests were supplied to establish whether the contract change was intentional."
+        ],
+        "rule_id": "proofline:PY-SORT-INPLACE-RETURN",
+        "path": "src/module.py",
+        "start_line": 2,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The diff directly replaces sorted(items) with items.sort(). For a built-in list, sort() mutates that same list and returns None, while sorted(items) constructs and returns a new sorted list without mutating the input. Thus a successful ordinary-list call now has both a different return value and a new caller-visible mutation. The absence of identified callers or tests does not disprove this concrete contract change."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Restore `return sorted(items)`. If in-place sorting is intentional, rename/document the API, explicitly return the intended value, and update all affected callers."
+    }
+  },
+  {
+    "finding_id": "f176e91e-abab-4a70-ac04-909bb46e6b1e",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "sort-return-bug",
+    "finding": {
+      "id": "f176e91e-abab-4a70-ac04-909bb46e6b1e",
+      "run_id": "11ce2bea-db30-4e3e-9881-23c4662a9314",
+      "stable_fingerprint": "62cb652b823f36de8b1e6314",
+      "category": "bug",
+      "rule_id": "proofline:PY-ITERABLE-COMPATIBILITY",
+      "cwe_id": null,
+      "title": "Non-list iterables are no longer accepted",
+      "explanation": "The built-in `sorted()` accepts arbitrary iterables, but the replacement requires an object exposing a compatible `.sort()` method. Inputs such as tuples, generators, sets, and dictionary views now fail before producing a result.",
+      "user_impact": "Previously valid inputs raise `AttributeError`, breaking the function's input compatibility.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "src/module.py",
+        "start_line": 2,
+        "end_line": 2,
+        "side": "head",
+        "commit_sha": "b2f4b6e977440c9285b922dfd38c774d7f37792a",
+        "snippet": "return items.sort()"
+      },
+      "related_locations": [],
+      "change_relation": "changed_context",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "a3edd12d-55a7-45c2-9d3f-14d002083a81",
+          "kind": "codex_cli_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "b2f4b6e977440c9285b922dfd38c774d7f37792a",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Pass a sortable iterable without a `.sort()` method, such as `sorted_items((2, 1))` or a generator.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T13:58:10.170935+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "codex_cli_review"
+      ],
+      "assumptions": [
+        "No supplied type contract restricts `items` to mutable lists.",
+        "The function's supported input contract previously included the general iterables accepted by sorted().",
+        "No unseen wrapper, validation, or type restriction guarantees that every caller passes an object with a compatible sort() method."
+      ],
+      "limitations": [
+        "The supplied context contains no callers or annotations showing which iterable types are used in production.",
+        "Verifier supplied no valid source quotation; conclusion remains unestablished"
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "insufficient_evidence",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "src/module.py",
+            "start_line": 2,
+            "quote": "return items.sort()"
+          },
+          {
+            "path": "src/module.py",
+            "start_line": 2,
+            "quote": "-    return sorted(items)\n+    return items.sort()"
+          }
+        ],
+        "unresolved_assumptions": [
+          "The function's supported input contract previously included the general iterables accepted by sorted().",
+          "No unseen wrapper, validation, or type restriction guarantees that every caller passes an object with a compatible sort() method."
+        ],
+        "rule_id": "proofline:PY-ITERABLE-COMPATIBILITY",
+        "path": "src/module.py",
+        "start_line": 2,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The previous implementation passed items to sorted(), whose input contract accepts arbitrary iterables. The new implementation performs attribute lookup for sort and invokes it. Standard iterable types such as tuple, set, generator, and dictionary view do not expose a compatible sort() method, so they raise AttributeError instead of returning sorted results. No supplied guard or caller evidence restricts inputs to sortable objects."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Use `return sorted(items)` to preserve support for general iterables."
+    }
+  },
+  {
+    "finding_id": "c6a8f479-f453-4b90-8b71-f52be2ba606b",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "missing-await-bug",
+    "finding": {
+      "id": "c6a8f479-f453-4b90-8b71-f52be2ba606b",
+      "run_id": "c0a85b81-158f-4e4a-8447-827582facf0f",
+      "stable_fingerprint": "96e34e16efac99e7a2097c69",
+      "category": "bug",
+      "rule_id": "proofline:async-response-not-awaited",
+      "cwe_id": null,
+      "title": "Await the fetcher before calling `json()`",
+      "explanation": "The change removes `await` from `fetcher()`, so for the normal asynchronous fetch contract `response` is a Promise rather than the resolved response object. Promises do not provide the response's `json()` method. The enclosing `async` function still converts the resulting synchronous exception into a rejected Promise, but it no longer parses successful asynchronous responses.",
+      "user_impact": "Calls using an async fetcher, including standard fetch-like implementations, reject with a `TypeError` such as `response.json is not a function` instead of returning parsed JSON.",
+      "severity": "high",
+      "primary_location": {
+        "path": "src/module.js",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "595662c92f16dd090ddd96b9226c77ba378b8686",
+        "snippet": "export async function load(fetcher) { const response = fetcher(); return response.json(); }"
+      },
+      "related_locations": [],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "1cbfc2fe-4347-44c5-bad5-b1102643b244",
+          "kind": "codex_cli_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "595662c92f16dd090ddd96b9226c77ba378b8686",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "`fetcher()` returns a Promise or other thenable that resolves to an object with a `json()` method.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T13:59:08.319957+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "codex_cli_review",
+        "codex_cli_challenge"
+      ],
+      "assumptions": [
+        "`fetcher` follows the standard asynchronous fetch-style contract evidenced by the previous explicit `await`.",
+        "No supplied caller evidence establishes that all fetchers now return response objects synchronously.",
+        "The supplied scope does not include callers or an explicit fetcher interface, so it is assumed that supported fetchers may follow the standard asynchronous fetch contract and return a Promise resolving to an object with json()."
+      ],
+      "limitations": [
+        "No matching tests or external callers were supplied, so the exact affected call sites and existing coverage cannot be established."
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "source_supported",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "src/module.js",
+            "start_line": 1,
+            "quote": "export async function load(fetcher) { const response = fetcher(); return response.json(); }"
+          }
+        ],
+        "unresolved_assumptions": [
+          "The supplied scope does not include callers or an explicit fetcher interface, so it is assumed that supported fetchers may follow the standard asynchronous fetch contract and return a Promise resolving to an object with json()."
+        ],
+        "rule_id": "proofline:async-response-not-awaited",
+        "path": "src/module.js",
+        "start_line": 1,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The function invokes fetcher() without awaiting its result and immediately accesses response.json(). When fetcher is asynchronous, response is the returned Promise, and a standard Promise has no json method. That property access therefore throws synchronously inside load; because load is async, callers receive a rejected Promise instead of the parsed response. The supplied diff directly shows that the previous implementation awaited fetcher(), so this change introduces the failure for asynchronous fetchers."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Restore `const response = await fetcher();`. Add a focused regression test with an async fetcher resolving to a response whose `json()` returns parsed data."
+    }
+  },
+  {
+    "finding_id": "edf7a18d-86bf-41da-a9df-dc2f202a14b5",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "null-input-bug",
+    "finding": {
+      "id": "edf7a18d-86bf-41da-a9df-dc2f202a14b5",
+      "run_id": "0f5b906f-5fda-4bc0-9854-07c102211325",
+      "stable_fingerprint": "f23643975126510af5e7e6ba",
+      "category": "bug",
+      "rule_id": "proofline:null-input-runtime-error",
+      "cwe_id": null,
+      "title": "Preserve the declared null-input behavior",
+      "explanation": "The parameter still explicitly accepts `null`, but the null guard was removed. Previously, optional chaining plus `?? ''` returned an empty string for `null`; the new direct dereference throws a `TypeError`. No supplied caller evidence establishes that null is impossible.",
+      "user_impact": "Any consumer passing an allowed `null` value will fail at runtime instead of receiving an empty label.",
+      "severity": "high",
+      "primary_location": {
+        "path": "src/module.ts",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "b7a31f01196eb024b1200db63dfac90b6ec86690",
+        "snippet": "export function label(value: string | null): string { return value.toUpperCase(); }"
+      },
+      "related_locations": [],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "4fa56a68-c64a-4d0b-b600-5eff2bece18f",
+          "kind": "codex_cli_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "b7a31f01196eb024b1200db63dfac90b6ec86690",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Call `label(null)`.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T14:00:06.343034+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "codex_cli_review",
+        "codex_cli_challenge"
+      ],
+      "assumptions": [
+        "The existing `string | null` annotation and prior implementation represent the intended public contract."
+      ],
+      "limitations": [
+        "No external callers or matching tests were supplied, so the number of affected consumers cannot be established.",
+        "The test retrieval gap is not proof that coverage is absent."
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "source_supported",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "src/module.ts",
+            "start_line": 1,
+            "quote": "export function label(value: string | null): string { return value.toUpperCase(); }"
+          }
+        ],
+        "unresolved_assumptions": [],
+        "rule_id": "proofline:null-input-runtime-error",
+        "path": "src/module.ts",
+        "start_line": 1,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The exported interface explicitly permits null, but the implementation immediately dereferences value. Calling label(null) therefore attempts to access toUpperCase on null and throws a TypeError instead of returning a string. The supplied diff also shows that the prior optional-chaining and nullish-coalescing behavior returned an empty string for null, so this change concretely removes that behavior."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Restore the guard, for example `return value?.toUpperCase() ?? '';`. If throwing is intentional, remove `null` from the parameter type and update the API contract and affected callers."
+    }
+  },
+  {
+    "finding_id": "4bb1f46e-b832-432c-b867-f93e73eb7a5b",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "null-input-bug",
+    "finding": {
+      "id": "4bb1f46e-b832-432c-b867-f93e73eb7a5b",
+      "run_id": "0f5b906f-5fda-4bc0-9854-07c102211325",
+      "stable_fingerprint": "5ca616d05c0b32f94b402d3d",
+      "category": "bug",
+      "rule_id": "js:type-18047",
+      "cwe_id": null,
+      "title": "'value' is possibly 'null'.",
+      "explanation": "'value' is possibly 'null'.",
+      "user_impact": "The parser or static rule identifies a concrete syntax or style problem.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "src/module.ts",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "b7a31f01196eb024b1200db63dfac90b6ec86690",
+        "snippet": null
+      },
+      "related_locations": [],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "bd5ebb85-5e22-4e3e-aced-473cff0a42c6",
+          "kind": "static_analysis",
+          "tool_or_profile": "js:type-18047",
+          "input_revision": "b7a31f01196eb024b1200db63dfac90b6ec86690",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "'value' is possibly 'null'.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T13:59:44.253135+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "proofline-language",
+        "codex_cli_challenge"
+      ],
+      "assumptions": [
+        "Whether TypeScript strictNullChecks is enabled, which determines whether compiler diagnostic TS18047 is emitted; the underlying unsafe null dereference exists regardless."
+      ],
+      "limitations": [],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "source_supported",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "src/module.ts",
+            "start_line": 1,
+            "quote": "export function label(value: string | null): string { return value.toUpperCase(); }"
+          }
+        ],
+        "unresolved_assumptions": [
+          "Whether TypeScript strictNullChecks is enabled, which determines whether compiler diagnostic TS18047 is emitted; the underlying unsafe null dereference exists regardless."
+        ],
+        "rule_id": "js:type-18047",
+        "path": "src/module.ts",
+        "start_line": 1,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The declared parameter type is the union string | null, and no guard or narrowing occurs before value.toUpperCase() is evaluated. Thus value remains possibly null at the dereference, matching the reported type issue and corresponding runtime risk."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Inspect the cited syntax or style rule."
+    }
+  },
+  {
+    "finding_id": "63cde6db-370e-4685-93a3-799223155d61",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "boolean-string-bug",
+    "finding": {
+      "id": "63cde6db-370e-4685-93a3-799223155d61",
+      "run_id": "0d06ef45-a727-41f3-a132-0124f0aa440f",
+      "stable_fingerprint": "1269c7553d8362f3c011cbef",
+      "category": "bug",
+      "rule_id": "proofline:python-string-boolean-coercion",
+      "cwe_id": null,
+      "title": "Non-empty false-like strings are now enabled",
+      "explanation": "Python evaluates every non-empty string as truthy. The changed implementation therefore returns `True` for inputs such as `\"false\"`, `\"0\"`, `\"no\"`, and arbitrary invalid text, whereas the previous implementation returned `True` only when the lowercased value was `\"true\"` or `\"1\"`. Empty strings remain false, so that guard does not prevent this regression.",
+      "user_impact": "Configuration or request values intended to disable a feature can instead enable it. The supplied context has no callers, so the specific affected feature is unresolved.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "src/module.py",
+        "start_line": 2,
+        "end_line": 2,
+        "side": "head",
+        "commit_sha": "a7a95fba9da41a1cde3f514e7983b4142bdcbc01",
+        "snippet": "return bool(value)"
+      },
+      "related_locations": [],
+      "change_relation": "changed_context",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "939ccc6e-1cf9-4c6f-ac58-1c7b4b53df7c",
+          "kind": "codex_cli_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "a7a95fba9da41a1cde3f514e7983b4142bdcbc01",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Call `enabled` with any non-empty string other than a case variant of `\"true\"` or the exact string `\"1\"`; for example, `enabled(\"false\")` or `enabled(\"0\")`.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T14:01:00.609876+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "codex_cli_review",
+        "codex_cli_challenge"
+      ],
+      "assumptions": [
+        "The previous accepted-value behavior is part of the function's contract because no contrary specification was supplied.",
+        "String inputs remain expected despite the absence of discovered callers.",
+        "The supplied scope does not establish whether callers pass strings or whether this function is externally reachable.",
+        "No caller or test evidence establishes the intended behavior for non-string values."
+      ],
+      "limitations": [
+        "No matching tests or external callers were supplied, so the downstream consequence and intended treatment of non-string values cannot be established."
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "source_supported",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "src/module.py",
+            "start_line": 1,
+            "quote": "def enabled(value):"
+          },
+          {
+            "path": "src/module.py",
+            "start_line": 2,
+            "quote": "    return bool(value)"
+          }
+        ],
+        "unresolved_assumptions": [
+          "The supplied scope does not establish whether callers pass strings or whether this function is externally reachable.",
+          "No caller or test evidence establishes the intended behavior for non-string values."
+        ],
+        "rule_id": "proofline:python-string-boolean-coercion",
+        "path": "src/module.py",
+        "start_line": 2,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The implementation applies Python's general truth-value conversion directly to value. Consequently, every non-empty string\u2014including \"false\", \"0\", \"no\", and arbitrary invalid text\u2014returns True, while only an empty string returns False. The supplied diff shows that this replaced an allowlist check against the lowercased strings \"true\" and \"1\", so the claimed string-coercion regression is concretely supported. Caller reachability and the accepted input contract are not supplied, but they do not negate the demonstrated behavior of the changed function."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Preserve explicit parsing, for example `return value.lower() in {\"true\", \"1\"}`. If non-string support is required, define and validate the accepted input types and values rather than relying on general truthiness."
+    }
+  },
+  {
+    "finding_id": "02f8f5bb-faab-4807-8625-2c8a08532a8b",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "slice-boundary-bug",
+    "finding": {
+      "id": "02f8f5bb-faab-4807-8625-2c8a08532a8b",
+      "run_id": "8e4957ab-8de3-446e-8826-19934d16c391",
+      "stable_fingerprint": "37dc7f1af388a8da42e28564",
+      "category": "bug",
+      "rule_id": "proofline:incorrect-slice-end-index",
+      "cwe_id": null,
+      "title": "Pagination treats `size` as an absolute end index",
+      "explanation": "The previous implementation passed `start + size` as the exclusive end of `slice`, so `size` represented the requested page length. The changed code passes `size` directly. For example, `page(items, 10, 5)` now calls `items.slice(10, 5)` and returns an empty array instead of five items. More generally, positive `start` values return too few items whenever `size > start`, and no items whenever `size <= start`. Empty inputs remain unaffected, but they do not guard nonzero offsets.",
+      "user_impact": "Pages after the initial offset can be truncated or empty, causing records to disappear from paginated results.",
+      "severity": "high",
+      "primary_location": {
+        "path": "src/module.js",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "cdd82d0f2073aa8b8487656018ebcd36980ec18f",
+        "snippet": "export function page(items, start, size) { return items.slice(start, size); }"
+      },
+      "related_locations": [],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "89b770d9-c81b-4e69-9b2b-1349602eef82",
+          "kind": "codex_cli_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "cdd82d0f2073aa8b8487656018ebcd36980ec18f",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Call `page` with a positive `start` while relying on `size` as the number of items to return, as established by the prior implementation; for example, `page([0,1,2,3,4], 2, 2)`.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T14:01:55.763966+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "codex_cli_review"
+      ],
+      "assumptions": [
+        "The established API contract is that `size` is a page length, based on the removed `start + size` calculation and the function name.",
+        "No supplied caller evidence establishes an intentional contract change from page length to absolute end index."
+      ],
+      "limitations": [
+        "No matching callers or tests were supplied beyond the function itself, so downstream impact and current test coverage cannot be enumerated.",
+        "Verifier supplied no valid source quotation; conclusion remains unestablished"
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "insufficient_evidence",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "src/module.js",
+            "start_line": 1,
+            "quote": "export function page(items, start, size) { return items.slice(start, size); }"
+          },
+          {
+            "path": "src/module.js",
+            "start_line": 1,
+            "quote": "-export function page(items, start, size) { return items.slice(start, start + size); }+export function page(items, start, size) { return items.slice(start, size); }"
+          }
+        ],
+        "unresolved_assumptions": [],
+        "rule_id": "proofline:incorrect-slice-end-index",
+        "path": "src/module.js",
+        "start_line": 1,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The current implementation passes `size` directly as Array.prototype.slice's exclusive end index. The supplied diff establishes that the prior implementation used `start + size`, treating `size` as a count. Therefore, with `start = 10` and `size = 5`, the current code evaluates `items.slice(10, 5)` and returns an empty array; when `size > start`, it returns only `size - start` elements rather than `size`. No guard or alternate control flow in the supplied function corrects this behavior."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Restore the exclusive end calculation: `items.slice(start, start + size)`. Add a focused regression test with a nonzero `start`, since first-page and empty-input cases would not expose this defect."
+    }
+  },
+  {
+    "finding_id": "b95e9271-1650-4cbe-8846-ba8f7fa75a3d",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "falsy-default-bug",
+    "finding": {
+      "id": "b95e9271-1650-4cbe-8846-ba8f7fa75a3d",
+      "run_id": "42034f64-542f-4c39-882b-673649634134",
+      "stable_fingerprint": "548875b8221aaa549222d707",
+      "category": "bug",
+      "rule_id": "proofline:typescript/defaulting/falsy-zero",
+      "cwe_id": null,
+      "title": "Preserve an explicit zero timeout",
+      "explanation": "Replacing nullish coalescing with logical OR changes the function's contract for `0`: `0 ?? 30` returns `0`, while `0 || 30` returns `30`. The declared input type permits zero, and no supplied guard excludes it. This can silently enable a 30-unit timeout when a caller explicitly requests zero.",
+      "user_impact": "Calls such as `timeout(0)` now return `30` instead of `0`, potentially delaying an operation or changing timeout-disable/immediate-timeout behavior.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "src/module.ts",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "ea2c12414619cd62404c7d4d96da93ae9e45e697",
+        "snippet": "export function timeout(value: number | undefined): number { return value || 30; }"
+      },
+      "related_locations": [],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "463e4ee4-5e95-4671-bcec-2324bd34fc40",
+          "kind": "codex_cli_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "ea2c12414619cd62404c7d4d96da93ae9e45e697",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "A caller passes the valid numeric value `0`.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T14:02:46.296222+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "codex_cli_review"
+      ],
+      "assumptions": [
+        "Zero is a meaningful explicit timeout because the public signature accepts every `number` and the supplied context contains no validation requiring a positive value.",
+        "The supplied scope does not show whether this returned number ultimately controls a real timeout or what unit it uses; only the observable return-value regression is established."
+      ],
+      "limitations": [
+        "No external callers or matching tests were supplied, so the downstream meaning and units of the timeout cannot be established.",
+        "Verifier supplied no valid source quotation; conclusion remains unestablished"
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "insufficient_evidence",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "src/module.ts",
+            "start_line": 1,
+            "quote": "export function timeout(value: number | undefined): number { return value || 30; }"
+          },
+          {
+            "path": "src/module.ts",
+            "start_line": 1,
+            "quote": "-export function timeout(value: number | undefined): number { return value ?? 30; }\n+export function timeout(value: number | undefined): number { return value || 30; }"
+          }
+        ],
+        "unresolved_assumptions": [
+          "The supplied scope does not show whether this returned number ultimately controls a real timeout or what unit it uses; only the observable return-value regression is established."
+        ],
+        "rule_id": "proofline:typescript/defaulting/falsy-zero",
+        "path": "src/module.ts",
+        "start_line": 1,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The exported function accepts any number, including 0, with no guard excluding it. For timeout(0), logical OR treats 0 as falsy and returns 30. The supplied diff establishes that the prior nullish-coalescing implementation returned 0 because only null or undefined selected the default. Thus the change concretely alters the function's return contract for an explicitly supplied zero. No caller or test is present to establish the downstream timeout effect, but that does not negate the source-proven return-value regression."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Restore `return value ?? 30;` so only `undefined` receives the default, and add a focused test asserting `timeout(0) === 0` alongside the undefined and ordinary positive-value cases."
+    }
+  },
+  {
+    "finding_id": "502ee189-61c9-439f-b5ed-230de007c0ed",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "reject-propagation-bug",
+    "finding": {
+      "id": "502ee189-61c9-439f-b5ed-230de007c0ed",
+      "run_id": "12080db0-cf8c-4b78-aa57-cb12167e3d1d",
+      "stable_fingerprint": "347d9ba1d2fb51d18b21143c",
+      "category": "bug",
+      "rule_id": "proofline:js-api-return-contract",
+      "cwe_id": null,
+      "title": "Return the task result from `save`",
+      "explanation": "The previous implementation returned `task()` directly, but the changed function always returns `undefined`. This breaks the exported function's observable contract: awaiting `save(...)` no longer waits for the task, and promise chaining on its result no longer works.",
+      "user_impact": "Callers can proceed before the save finishes, observe stale state, or fail with a `TypeError` when calling promise methods on the returned value.",
+      "severity": "high",
+      "primary_location": {
+        "path": "src/module.js",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "1407d9b8efb5298e304df24235dff0b3f47dc658",
+        "snippet": "export function save(task) { task().catch(() => {}); }"
+      },
+      "related_locations": [],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "80173699-b865-4979-a135-6fe38d3c0f37",
+          "kind": "codex_cli_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "1407d9b8efb5298e304df24235dff0b3f47dc658",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "A caller awaits `save(task)`, returns it from another async operation, or chains a promise method from its result.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T14:04:49.841186+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "codex_cli_review"
+      ],
+      "assumptions": [
+        "The prior implementation's returned task result is part of the exported API contract."
+      ],
+      "limitations": [
+        "No external callers were supplied; the impact follows from the directly observable API change.",
+        "Verification was omitted or unavailable within the run budget"
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "insufficient_evidence",
+      "verification_assessment": {},
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Return the task result, preferably `return task();`, preserving completion and rejection propagation."
+    }
+  },
+  {
+    "finding_id": "fbb992c4-d08b-4d18-b92c-fb23a9bc4ba2",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "reject-propagation-bug",
+    "finding": {
+      "id": "fbb992c4-d08b-4d18-b92c-fb23a9bc4ba2",
+      "run_id": "12080db0-cf8c-4b78-aa57-cb12167e3d1d",
+      "stable_fingerprint": "75195115ade266f619dc0d59",
+      "category": "bug",
+      "rule_id": "proofline:js-swallowed-rejection",
+      "cwe_id": "CWE-390",
+      "title": "Do not silently discard task failures",
+      "explanation": "The empty rejection handler converts every rejected task promise into an unobservable failure. Previously, the rejection was returned to the caller and could be handled through `await` or `.catch`.",
+      "user_impact": "A failed save can appear successful, preventing callers from reporting the error, retrying, or rolling back dependent work.",
+      "severity": "high",
+      "primary_location": {
+        "path": "src/module.js",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "1407d9b8efb5298e304df24235dff0b3f47dc658",
+        "snippet": "export function save(task) { task().catch(() => {}); }"
+      },
+      "related_locations": [],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "7805e65d-aaa3-498a-beaa-a78f41a5ea69",
+          "kind": "codex_cli_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "1407d9b8efb5298e304df24235dff0b3f47dc658",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "`task()` returns a promise that rejects.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T14:04:49.841632+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "codex_cli_review"
+      ],
+      "assumptions": [
+        "Task rejection represents a save failure that callers may need to observe."
+      ],
+      "limitations": [
+        "No documented requirement to intentionally implement fire-and-forget behavior was supplied.",
+        "Verification was omitted or unavailable within the run budget"
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "insufficient_evidence",
+      "verification_assessment": {},
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Remove the empty handler and return `task()`. If rejection must be observed locally, log or transform it and rethrow so callers retain failure visibility."
+    }
+  },
+  {
+    "finding_id": "56597cdd-6869-4369-9250-95b47f374327",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "reject-propagation-bug",
+    "finding": {
+      "id": "56597cdd-6869-4369-9250-95b47f374327",
+      "run_id": "12080db0-cf8c-4b78-aa57-cb12167e3d1d",
+      "stable_fingerprint": "2560eb6e33965a382e6856f3",
+      "category": "bug",
+      "rule_id": "proofline:js-unconditional-catch-call",
+      "cwe_id": null,
+      "title": "Preserve support for synchronous task results",
+      "explanation": "The new unconditional `.catch(...)` call requires `task()` to return a promise-like object. The previous implementation accepted and returned any value, so a synchronous task returning a normal value now causes a `TypeError`.",
+      "user_impact": "Previously valid synchronous callbacks can execute successfully and then make `save` throw because their result has no `catch` method.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "src/module.js",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "1407d9b8efb5298e304df24235dff0b3f47dc658",
+        "snippet": "export function save(task) { task().catch(() => {}); }"
+      },
+      "related_locations": [],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "49fc8504-049f-4ae4-b296-2157023bada0",
+          "kind": "codex_cli_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "1407d9b8efb5298e304df24235dff0b3f47dc658",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "`task()` returns `undefined`, a primitive, or any object without a callable `catch` property.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T14:04:49.841693+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "codex_cli_review"
+      ],
+      "assumptions": [
+        "The unrestricted `task` parameter and prior implementation allowed synchronous callbacks."
+      ],
+      "limitations": [
+        "No type declarations or API documentation were supplied to establish an existing promise-only constraint.",
+        "Verification was omitted or unavailable within the run budget"
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "insufficient_evidence",
+      "verification_assessment": {},
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Use `return task()` to preserve the original behavior. If `save` is intentionally becoming async-only, validate the result and document that breaking contract explicitly."
+    }
+  },
+  {
+    "finding_id": "c42b96a5-d274-4b88-9fa9-29861c4edde5",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "assignment-contract-bug",
+    "finding": {
+      "id": "c42b96a5-d274-4b88-9fa9-29861c4edde5",
+      "run_id": "6ad7808d-83f3-483a-9b50-ae036b3bd8dc",
+      "stable_fingerprint": "98a462ab122383ced3956d95",
+      "category": "bug",
+      "rule_id": "js:type-2322",
+      "cwe_id": null,
+      "title": "Type 'string' is not assignable to type 'number'.",
+      "explanation": "Type 'string' is not assignable to type 'number'.",
+      "user_impact": "The parser or static rule identifies a concrete syntax or style problem.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "src/module.ts",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "824d6276e1af43883da352e00592c89b4ad0a914",
+        "snippet": null
+      },
+      "related_locations": [],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "cda0edcc-da8d-4931-ba73-5cd56fd4bc4c",
+          "kind": "static_analysis",
+          "tool_or_profile": "js:type-2322",
+          "input_revision": "824d6276e1af43883da352e00592c89b4ad0a914",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Type 'string' is not assignable to type 'number'.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T14:05:11.430143+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "proofline-language"
+      ],
+      "assumptions": [],
+      "limitations": [
+        "Verification was omitted or unavailable within the run budget"
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "static_match",
+      "evidence_status": "insufficient_evidence",
+      "verification_assessment": {},
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Inspect the cited syntax or style rule."
+    }
+  }
+]

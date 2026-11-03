@@ -1,0 +1,18 @@
+{
+  "scope": "Local locked-dependency containers, non-root read-only runtime, authored static fixtures; no hosted release or live model/GitHub claims",
+  "passed": true,
+  "unauthenticated_access": "rejected",
+  "cors": "passed",
+  "frontend_http": "passed",
+  "static_languages": [
+    "js:async-foreach",
+    "js:type-2322",
+    "ruff:B006"
+  ],
+  "partial_without_model": true,
+  "terminal_stream_closed": true,
+  "sealed_resume": true,
+  "nonroot_and_no_source_env": true,
+  "restart_preserved_report": true,
+  "duration_seconds": 2.36
+}

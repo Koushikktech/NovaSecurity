@@ -1,0 +1,940 @@
+{
+  "purpose": "Real CLI subscription pipeline on authored code, not independently adjudicated accuracy",
+  "run": {
+    "id": "8b4bb0fd-30f5-462a-91ac-7eca9a7b8743",
+    "owner_session": "anonymous",
+    "input_mode": "compare",
+    "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-codex-demo-yp4v38d_/repo",
+    "review_mode": "compare",
+    "review_depth": "quick",
+    "pr_number": null,
+    "pr_title": null,
+    "base_sha": "ddfe948bb83283c11b7a0a6e295d910084c073f4",
+    "head_sha": "4cefdf0bd078154d2f5d5bf3c128cd1c8fc3b2b4",
+    "merge_base_sha": null,
+    "config_version": "1.0.0",
+    "provider": "codex_cli",
+    "model_id": "gpt-5.6-sol",
+    "status": "completed",
+    "stage_statuses": {
+      "ingestion": "succeeded",
+      "static_analysis": "succeeded",
+      "graph_indexing": "succeeded",
+      "gemini_review": "succeeded",
+      "challenge": "succeeded",
+      "validation": "succeeded"
+    },
+    "findings_count": {
+      "total": 3,
+      "security": 0,
+      "bug": 3,
+      "style": 0
+    },
+    "coverage": {
+      "identity_version": 2,
+      "run_config": {
+        "version": "5",
+        "provider": "codex_cli",
+        "codex_reasoning": "high",
+        "api_mode": "auto",
+        "models": {
+          "review": "gpt-5.6-sol",
+          "patch": "gpt-5.6-sol",
+          "verify_reasoning": "gpt-5.6-sol"
+        },
+        "strategy": "verified",
+        "model": null,
+        "thinking": "default",
+        "max_attempts": 1,
+        "max_model_calls": 4,
+        "max_tool_calls": 24,
+        "deadline_seconds": 600,
+        "investigation_rounds": 1
+      },
+      "target": {
+        "mode": "compare",
+        "depth": "quick",
+        "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-codex-demo-yp4v38d_/repo",
+        "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-codex-demo-yp4v38d_/repo",
+        "comparison": "exact base to head",
+        "source_exclusions": [],
+        "base_sha": "ddfe948bb83283c11b7a0a6e295d910084c073f4",
+        "head_sha": "4cefdf0bd078154d2f5d5bf3c128cd1c8fc3b2b4",
+        "revision_label": "4cefdf0bd078154d2f5d5bf3c128cd1c8fc3b2b4",
+        "run_config": {
+          "version": "5",
+          "provider": "codex_cli",
+          "codex_reasoning": "high",
+          "api_mode": "auto",
+          "models": {
+            "review": "gpt-5.6-sol",
+            "patch": "gpt-5.6-sol",
+            "verify_reasoning": "gpt-5.6-sol"
+          },
+          "strategy": "verified",
+          "model": null,
+          "thinking": "default",
+          "max_attempts": 1,
+          "max_model_calls": 4,
+          "max_tool_calls": 24,
+          "deadline_seconds": 600,
+          "investigation_rounds": 1
+        }
+      },
+      "source_exclusions": [],
+      "snapshot_digest": "3cbbdab27bddbfcdc2f716d874561bd00b61d93ab00b60bff478ed2e6c92215a",
+      "total_files": 3,
+      "source_files": [
+        "batch.ts",
+        "caller.py",
+        "service.py"
+      ],
+      "unsupported_files": [],
+      "scope_note": "Full snapshot checks with base/head change context",
+      "repository_policy_source": "base_snapshot",
+      "repository_policy": {
+        "exclude": [],
+        "focus": [],
+        "verification_profile": null
+      },
+      "excluded_files": [],
+      "python_files": 2,
+      "static_tools": {
+        "ruff": {
+          "tool": "ruff",
+          "version": "0.17.3",
+          "status": "executed",
+          "count": 0,
+          "error": null,
+          "cache_reused": true,
+          "original_run_id": "94a4a816-0cc0-4623-b855-7c0bc91dbbb2"
+        },
+        "bandit": {
+          "tool": "bandit",
+          "version": "1.9.4",
+          "status": "executed",
+          "count": 0,
+          "error": null,
+          "cache_reused": true,
+          "original_run_id": "94a4a816-0cc0-4623-b855-7c0bc91dbbb2"
+        }
+      },
+      "baseline_static_tools": {
+        "ruff": {
+          "tool": "ruff",
+          "version": "0.17.3",
+          "status": "executed",
+          "count": 0,
+          "error": null,
+          "cache_reused": true,
+          "original_run_id": "94a4a816-0cc0-4623-b855-7c0bc91dbbb2"
+        },
+        "bandit": {
+          "tool": "bandit",
+          "version": "1.9.4",
+          "status": "executed",
+          "count": 0,
+          "error": null,
+          "cache_reused": true,
+          "original_run_id": "94a4a816-0cc0-4623-b855-7c0bc91dbbb2"
+        }
+      },
+      "javascript": {
+        "status": "executed",
+        "tool": "typescript-parser",
+        "files": 1,
+        "capabilities": [
+          "syntax",
+          "selected_semantic_diagnostics",
+          "compiler_references",
+          "tsconfig_paths"
+        ],
+        "limitations": [
+          "Snapshot-local module resolution; external dependency declarations absent unless included; selected diagnostic codes only"
+        ]
+      },
+      "test_gaps": [
+        {
+          "path": "service.py",
+          "status": "no_matching_test_found",
+          "suggestion": "Exercise changed behavior in service.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+        },
+        {
+          "path": "batch.ts",
+          "status": "no_matching_test_found",
+          "suggestion": "Exercise changed behavior in batch.ts, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+        }
+      ],
+      "changed_files": [
+        "batch.ts",
+        "service.py"
+      ],
+      "diff": "diff --git a/batch.ts b/batch.ts\n--- a/batch.ts\n+++ b/batch.ts\n@@ -1,3 +1,5 @@\n export async function saveAll(urls: string[]) {\n-  for (const url of urls) await fetch(url);\n+  urls.forEach(async url => {\n+    await fetch(url);\n+  });\n }\ndiff --git a/service.py b/service.py\n--- a/service.py\n+++ b/service.py\n@@ -1,2 +1,2 @@\n-def load_page(page):\n-    return {\"page\": page}\n+def load_page(page, page_size):\n+    return {\"page\": page, \"size\": page_size}\n",
+      "language_index": {
+        "batch.ts": {
+          "path": "batch.ts",
+          "symbols": [
+            {
+              "name": "saveAll",
+              "line": 1,
+              "end": 5,
+              "parameters": [
+                {
+                  "name": "urls",
+                  "required": true
+                }
+              ],
+              "exported": true
+            }
+          ],
+          "imports": [],
+          "bindings": [],
+          "calls": [
+            {
+              "name": "fetch",
+              "line": 3,
+              "arguments": 1,
+              "spread": false
+            }
+          ],
+          "resolved_references": [],
+          "findings": [
+            {
+              "rule": "js:async-foreach",
+              "category": "bug",
+              "line": 2,
+              "message": "forEach discards promises returned by async callbacks. Await Promise.all with map, or use an awaited for\u2026of loop when completion order matters."
+            }
+          ]
+        }
+      },
+      "python_index_errors": {},
+      "graph_nodes": 2,
+      "graph_edges": 1,
+      "context": {
+        "selected": [
+          "batch.ts",
+          "service.py",
+          "caller.py"
+        ],
+        "omitted": [],
+        "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+      },
+      "repository_map": {
+        "snapshot": "e02e5864a6f1c293667fe64ae26af7813bbffdb5672187b74a6537995f68a9f8",
+        "files": [
+          "batch.ts",
+          "caller.py",
+          "service.py"
+        ],
+        "symbols": [
+          {
+            "id": "caller.py:3:list_orders",
+            "name": "list_orders",
+            "path": "caller.py",
+            "start": 3,
+            "end": 4
+          },
+          {
+            "id": "service.py:1:load_page",
+            "name": "load_page",
+            "path": "service.py",
+            "start": 1,
+            "end": 2
+          },
+          {
+            "id": "batch.ts:1:saveAll",
+            "name": "saveAll",
+            "path": "batch.ts",
+            "start": 1,
+            "end": 5
+          }
+        ],
+        "changed_symbols": [
+          {
+            "id": "service.py:1:load_page",
+            "name": "load_page",
+            "path": "service.py",
+            "start": 1,
+            "end": 2
+          },
+          {
+            "id": "batch.ts:1:saveAll",
+            "name": "saveAll",
+            "path": "batch.ts",
+            "start": 1,
+            "end": 5
+          }
+        ],
+        "deleted_symbols": [],
+        "references": [
+          {
+            "path": "caller.py",
+            "line": 3,
+            "name": "load_page",
+            "target_path": "service.py",
+            "target_line": 1,
+            "relationship": "resolved_python_call",
+            "caller_symbol": "caller.py::list_orders",
+            "target_symbol": "service.py::load_page"
+          }
+        ],
+        "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+      },
+      "impact": {
+        "changes": [
+          {
+            "symbol": {
+              "id": "service.py:1:load_page",
+              "name": "load_page",
+              "path": "service.py",
+              "start": 1,
+              "end": 2
+            },
+            "callers": [
+              {
+                "path": "caller.py",
+                "line": 3,
+                "name": "load_page",
+                "target_path": "service.py",
+                "target_line": 1,
+                "relationship": "resolved_python_call",
+                "caller_symbol": "caller.py::list_orders",
+                "target_symbol": "service.py::load_page"
+              }
+            ],
+            "test_hints": []
+          },
+          {
+            "symbol": {
+              "id": "batch.ts:1:saveAll",
+              "name": "saveAll",
+              "path": "batch.ts",
+              "start": 1,
+              "end": 5
+            },
+            "callers": [],
+            "test_hints": []
+          }
+        ],
+        "deleted_symbols": [],
+        "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+      },
+      "model_review_error": null,
+      "review_summary": "The changes introduce two breaking behavioral regressions: `saveAll` no longer waits for requests or propagates their failures, and `load_page` adds a required argument without updating the supplied caller. No matching tests were retrieved, but that retrieval gap alone does not establish missing coverage.",
+      "verification_coverage": {
+        "evidence_counts": {
+          "source_supported": 4,
+          "refuted": 0,
+          "insufficient_evidence": 0
+        },
+        "requested": 4,
+        "assessed": 4,
+        "unassessed_ids": [],
+        "batches": 1,
+        "errors": [],
+        "complete": true
+      },
+      "investigation": {
+        "model_calls": 4,
+        "tool_calls": 5,
+        "trace": [
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-02T14:16:19.016221+00:00",
+            "stage": "investigate_review",
+            "request_id": "69c7c5598e9a08300fcfeb084064fae154d0b4e39a14ac2c664443e79a7b8a43",
+            "call": 1
+          },
+          {
+            "event_type": "model_request_completed",
+            "timestamp": "2026-11-02T14:16:31.609299+00:00",
+            "stage": "investigate_review",
+            "request_id": "69c7c5598e9a08300fcfeb084064fae154d0b4e39a14ac2c664443e79a7b8a43",
+            "model": "gpt-5.6-sol",
+            "usage": {
+              "thought_tokens": 331,
+              "prompt_tokens": 12165,
+              "candidate_tokens": 351,
+              "total_tokens": 12516,
+              "cached_content_token_count": 0
+            },
+            "retries": 0,
+            "error": ""
+          },
+          {
+            "event_type": "checkpoint_saved",
+            "timestamp": "2026-11-02T14:16:31.612810+00:00",
+            "stage": "investigate_review",
+            "key": "69c7c5598e9a08300fcfeb084064fae154d0b4e39a14ac2c664443e79a7b8a43"
+          },
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-02T14:16:31.615840+00:00",
+            "stage": "review",
+            "request_id": "c0a83982ca9eff64b5e86133ab41c51e795eab1bdab3cf18e29291e01387c456",
+            "call": 2
+          },
+          {
+            "event_type": "model_request_completed",
+            "timestamp": "2026-11-02T14:16:47.508701+00:00",
+            "stage": "review",
+            "request_id": "c0a83982ca9eff64b5e86133ab41c51e795eab1bdab3cf18e29291e01387c456",
+            "model": "gpt-5.6-sol",
+            "usage": {
+              "thought_tokens": 75,
+              "prompt_tokens": 12180,
+              "candidate_tokens": 738,
+              "total_tokens": 12918,
+              "cached_content_token_count": 0
+            },
+            "retries": 0,
+            "error": ""
+          },
+          {
+            "event_type": "checkpoint_saved",
+            "timestamp": "2026-11-02T14:16:47.510072+00:00",
+            "stage": "review",
+            "key": "c0a83982ca9eff64b5e86133ab41c51e795eab1bdab3cf18e29291e01387c456"
+          },
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-02T14:16:47.513614+00:00",
+            "stage": "investigate_verify_reasoning",
+            "request_id": "564d220ed9b69bcde5b5918e63168fdafd56cb19eedd60d41363ce05965017f2",
+            "call": 3
+          },
+          {
+            "event_type": "model_request_completed",
+            "timestamp": "2026-11-02T14:17:01.195177+00:00",
+            "stage": "investigate_verify_reasoning",
+            "request_id": "564d220ed9b69bcde5b5918e63168fdafd56cb19eedd60d41363ce05965017f2",
+            "model": "gpt-5.6-sol",
+            "usage": {
+              "thought_tokens": 95,
+              "prompt_tokens": 12125,
+              "candidate_tokens": 337,
+              "total_tokens": 12462,
+              "cached_content_token_count": 0
+            },
+            "retries": 0,
+            "error": ""
+          },
+          {
+            "event_type": "checkpoint_saved",
+            "timestamp": "2026-11-02T14:17:01.196167+00:00",
+            "stage": "investigate_verify_reasoning",
+            "key": "564d220ed9b69bcde5b5918e63168fdafd56cb19eedd60d41363ce05965017f2"
+          },
+          {
+            "event_type": "tool_started",
+            "timestamp": "2026-11-02T14:17:01.196230+00:00",
+            "tool": {
+              "name": "get_diff",
+              "query": "Verify the exact before/after changes to saveAll and load_page, including whether saveAll previously used an awaited for...of loop and whether page_size became newly required.",
+              "path": "",
+              "start_line": 1,
+              "end_line": 20
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_completed",
+            "timestamp": "2026-11-02T14:17:01.196393+00:00",
+            "observation": {
+              "snapshot": "e02e5864a6f1c293667fe64ae26af7813bbffdb5672187b74a6537995f68a9f8",
+              "tool": {
+                "name": "get_diff",
+                "query": "Verify the exact before/after changes to saveAll and load_page, including whether saveAll previously used an awaited for...of loop and whether page_size became newly required.",
+                "path": "",
+                "start_line": 1,
+                "end_line": 20
+              },
+              "output": "{\"diff\": \"diff --git a/batch.ts b/batch.ts\\n--- a/batch.ts\\n+++ b/batch.ts\\n@@ -1,3 +1,5 @@\\n export async function saveAll(urls: string[]) {\\n-  for (const url of urls) await fetch(url);\\n+  urls.forEach(async url => {\\n+    await fetch(url);\\n+  });\\n }\\ndiff --git a/service.py b/service.py\\n--- a/service.py\\n+++ b/service.py\\n@@ -1,2 +1,2 @@\\n-def load_page(page):\\n-    return {\\\"page\\\": page}\\n+def load_page(page, page_size):\\n+    return {\\\"page\\\": page, \\\"size\\\": page_size}\\n\"}"
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_started",
+            "timestamp": "2026-11-02T14:17:01.196500+00:00",
+            "tool": {
+              "name": "find_references",
+              "query": "Find all callers and imports of load_page and saveAll; distinguish lexical hints from resolved call sites where possible.",
+              "path": "service.py",
+              "start_line": 1,
+              "end_line": 2
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_completed",
+            "timestamp": "2026-11-02T14:17:01.196537+00:00",
+            "observation": {
+              "snapshot": "e02e5864a6f1c293667fe64ae26af7813bbffdb5672187b74a6537995f68a9f8",
+              "tool": {
+                "name": "find_references",
+                "query": "Find all callers and imports of load_page and saveAll; distinguish lexical hints from resolved call sites where possible.",
+                "path": "service.py",
+                "start_line": 1,
+                "end_line": 2
+              },
+              "output": "{\"matches\": []}"
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_started",
+            "timestamp": "2026-11-02T14:17:01.196562+00:00",
+            "tool": {
+              "name": "find_references",
+              "query": "Find all callers of saveAll and any code that awaits or handles rejection from it.",
+              "path": "batch.ts",
+              "start_line": 1,
+              "end_line": 5
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_completed",
+            "timestamp": "2026-11-02T14:17:01.196587+00:00",
+            "observation": {
+              "snapshot": "e02e5864a6f1c293667fe64ae26af7813bbffdb5672187b74a6537995f68a9f8",
+              "tool": {
+                "name": "find_references",
+                "query": "Find all callers of saveAll and any code that awaits or handles rejection from it.",
+                "path": "batch.ts",
+                "start_line": 1,
+                "end_line": 5
+              },
+              "output": "{\"matches\": []}"
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_started",
+            "timestamp": "2026-11-02T14:17:01.196604+00:00",
+            "tool": {
+              "name": "find_related_tests",
+              "query": "Find tests covering saveAll completion/rejection behavior and load_page/list_orders argument compatibility.",
+              "path": "batch.ts",
+              "start_line": 1,
+              "end_line": 5
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_completed",
+            "timestamp": "2026-11-02T14:17:01.196625+00:00",
+            "observation": {
+              "snapshot": "e02e5864a6f1c293667fe64ae26af7813bbffdb5672187b74a6537995f68a9f8",
+              "tool": {
+                "name": "find_related_tests",
+                "query": "Find tests covering saveAll completion/rejection behavior and load_page/list_orders argument compatibility.",
+                "path": "batch.ts",
+                "start_line": 1,
+                "end_line": 5
+              },
+              "output": "{\"paths\": []}"
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_started",
+            "timestamp": "2026-11-02T14:17:01.196645+00:00",
+            "tool": {
+              "name": "find_related_tests",
+              "query": "Find tests covering load_page and list_orders, especially invocation arity and page_size defaults.",
+              "path": "service.py",
+              "start_line": 1,
+              "end_line": 2
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_completed",
+            "timestamp": "2026-11-02T14:17:01.196665+00:00",
+            "observation": {
+              "snapshot": "e02e5864a6f1c293667fe64ae26af7813bbffdb5672187b74a6537995f68a9f8",
+              "tool": {
+                "name": "find_related_tests",
+                "query": "Find tests covering load_page and list_orders, especially invocation arity and page_size defaults.",
+                "path": "service.py",
+                "start_line": 1,
+                "end_line": 2
+              },
+              "output": "{\"paths\": []}"
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-02T14:17:01.199364+00:00",
+            "stage": "challenge_1",
+            "request_id": "9e5347a893019d920873f634425afc5f3be89365338addd7a4b42cbc8ecac64c",
+            "call": 4
+          },
+          {
+            "event_type": "model_request_completed",
+            "timestamp": "2026-11-02T14:17:25.740335+00:00",
+            "stage": "challenge_1",
+            "request_id": "9e5347a893019d920873f634425afc5f3be89365338addd7a4b42cbc8ecac64c",
+            "model": "gpt-5.6-sol",
+            "usage": {
+              "thought_tokens": 421,
+              "prompt_tokens": 12822,
+              "candidate_tokens": 1145,
+              "total_tokens": 13967,
+              "cached_content_token_count": 0
+            },
+            "retries": 0,
+            "error": ""
+          },
+          {
+            "event_type": "checkpoint_saved",
+            "timestamp": "2026-11-02T14:17:25.741881+00:00",
+            "stage": "challenge_1",
+            "key": "9e5347a893019d920873f634425afc5f3be89365338addd7a4b42cbc8ecac64c"
+          }
+        ]
+      }
+    },
+    "usage": {
+      "thought_tokens": 922,
+      "prompt_tokens": 49292,
+      "candidate_tokens": 2571,
+      "total_tokens": 51863,
+      "cached_content_token_count": 0,
+      "cost_estimated_usd": null
+    },
+    "artifacts": [],
+    "errors": [],
+    "started_at": "2026-11-02T14:16:18.945332+00:00",
+    "completed_at": "2026-11-02T14:17:25.742716+00:00"
+  },
+  "findings": [
+    {
+      "id": "3ab37ae4-70eb-4430-ae6a-f8cb50d85d17",
+      "run_id": "8b4bb0fd-30f5-462a-91ac-7eca9a7b8743",
+      "stable_fingerprint": "bd3c338d7ad5da1221e67474",
+      "category": "bug",
+      "rule_id": "proofline:required-parameter-breaks-caller",
+      "cwe_id": null,
+      "title": "New required `page_size` parameter breaks the existing caller",
+      "explanation": "`load_page` now requires two positional arguments, but `list_orders` still invokes it with only `page`. Python raises `TypeError` before the function body executes, so the returned dictionary is never produced.",
+      "user_impact": "Calling `list_orders()` fails at runtime instead of returning order pagination data.",
+      "severity": "high",
+      "primary_location": {
+        "path": "service.py",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "4cefdf0bd078154d2f5d5bf3c128cd1c8fc3b2b4",
+        "snippet": "def load_page(page, page_size):"
+      },
+      "related_locations": [],
+      "change_relation": "changed_context",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "7c567596-e7a9-441b-bfb6-b113d65a1382",
+          "kind": "gemini_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "4cefdf0bd078154d2f5d5bf3c128cd1c8fc3b2b4",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Invoke `caller.list_orders()`, which executes `load_page(1)` without the newly required second argument.",
+          "duration_ms": 0,
+          "created_at": "2026-11-02T14:16:47.510329+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "gemini_review",
+        "gemini_challenge"
+      ],
+      "assumptions": [
+        "`caller.py::list_orders` remains an active caller in the reviewed project."
+      ],
+      "limitations": [
+        "The supplied context does not specify the intended page-size value, so it cannot establish whether caller migration or a default is the correct API design."
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "source_supported",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "service.py",
+            "start_line": 1,
+            "quote": "def load_page(page, page_size):"
+          },
+          {
+            "path": "caller.py",
+            "start_line": 4,
+            "quote": "return load_page(1)"
+          },
+          {
+            "path": "service.py",
+            "start_line": 2,
+            "quote": "return {\"page\": page, \"size\": page_size}"
+          }
+        ],
+        "unresolved_assumptions": [],
+        "rule_id": "proofline:required-parameter-breaks-caller",
+        "path": "service.py",
+        "start_line": 1,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "load_page declares page_size as a required positional parameter with no default, while list_orders passes only one argument. Under Python's call binding rules, this raises TypeError before load_page executes, so the dictionary is not returned. The supplied diff confirms page_size was newly added."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Update the caller to pass an appropriate page size, or provide a backward-compatible default such as `def load_page(page, page_size=...)` if existing one-argument calls must remain valid."
+    },
+    {
+      "id": "49282a8c-9242-422f-961c-4d6c81c6a852",
+      "run_id": "8b4bb0fd-30f5-462a-91ac-7eca9a7b8743",
+      "stable_fingerprint": "55a53470b851b20cbdc92035",
+      "category": "bug",
+      "rule_id": "js:async-foreach",
+      "cwe_id": null,
+      "title": "forEach discards promises returned by async callbacks",
+      "explanation": "forEach discards promises returned by async callbacks. Await Promise.all with map, or use an awaited for\u2026of loop when completion order matters.",
+      "user_impact": "The async function can finish before the operations complete, so failures and completion are not propagated.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "batch.ts",
+        "start_line": 2,
+        "end_line": 2,
+        "side": "head",
+        "commit_sha": "4cefdf0bd078154d2f5d5bf3c128cd1c8fc3b2b4",
+        "snippet": null
+      },
+      "related_locations": [],
+      "change_relation": "changed_context",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "09edf84c-8fbf-4b17-85b1-fc7b6b48f870",
+          "kind": "static_analysis",
+          "tool_or_profile": "js:async-foreach",
+          "input_revision": "4cefdf0bd078154d2f5d5bf3c128cd1c8fc3b2b4",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "forEach discards promises returned by async callbacks. Await Promise.all with map, or use an awaited for\u2026of loop when completion order matters.",
+          "duration_ms": 0,
+          "created_at": "2026-11-02T14:16:19.012713+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "proofline-language",
+        "gemini_challenge"
+      ],
+      "assumptions": [],
+      "limitations": [],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "source_supported",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "batch.ts",
+            "start_line": 2,
+            "quote": "urls.forEach(async url => {"
+          },
+          {
+            "path": "batch.ts",
+            "start_line": 3,
+            "quote": "await fetch(url);"
+          },
+          {
+            "path": "batch.ts",
+            "start_line": 5,
+            "quote": "}"
+          }
+        ],
+        "unresolved_assumptions": [],
+        "rule_id": "js:async-foreach",
+        "path": "batch.ts",
+        "start_line": 2,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The async callback returns a promise for each fetch, but forEach ignores callback return values. No Promise.all or awaited loop connects those promises to saveAll, so callers cannot await completion or receive fetch failures through saveAll."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Use await Promise.all(items.map(async ...)) or an awaited for\u2026of loop, depending on ordering requirements."
+    },
+    {
+      "id": "ffee45be-7cc7-4dba-a803-066cb641d49e",
+      "run_id": "8b4bb0fd-30f5-462a-91ac-7eca9a7b8743",
+      "stable_fingerprint": "b4781e8d15516239323513ea",
+      "category": "bug",
+      "rule_id": "python:changed-signature",
+      "cwe_id": null,
+      "title": "Call to service.load_page is missing required arguments ['page_size'] after this PR changes its signature.",
+      "explanation": "Call to service.load_page is missing required arguments ['page_size'] after this PR changes its signature.",
+      "user_impact": "Existing callers may raise an argument error when the changed interface is used.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "caller.py",
+        "start_line": 4,
+        "end_line": 4,
+        "side": "head",
+        "commit_sha": "4cefdf0bd078154d2f5d5bf3c128cd1c8fc3b2b4",
+        "snippet": null
+      },
+      "related_locations": [
+        {
+          "path": "service.py",
+          "lines": [
+            1
+          ],
+          "qualified_symbol": "service.load_page",
+          "relationship": "callee",
+          "snippet": null
+        }
+      ],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "c0d2fb0b-5042-419a-b9bb-3a0caf368a74",
+          "kind": "static_analysis",
+          "tool_or_profile": "python:changed-signature",
+          "input_revision": "4cefdf0bd078154d2f5d5bf3c128cd1c8fc3b2b4",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Call to service.load_page is missing required arguments ['page_size'] after this PR changes its signature.",
+          "duration_ms": 0,
+          "created_at": "2026-11-02T14:16:19.012861+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "proofline-language",
+        "gemini_challenge"
+      ],
+      "assumptions": [],
+      "limitations": [],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "source_supported",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "caller.py",
+            "start_line": 1,
+            "quote": "from service import load_page"
+          },
+          {
+            "path": "caller.py",
+            "start_line": 4,
+            "quote": "return load_page(1)"
+          },
+          {
+            "path": "service.py",
+            "start_line": 1,
+            "quote": "def load_page(page, page_size):"
+          }
+        ],
+        "unresolved_assumptions": [],
+        "rule_id": "python:changed-signature",
+        "path": "caller.py",
+        "start_line": 4,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "caller.py imports service.load_page directly and calls it with one positional argument. The function now requires both page and page_size, with no default or variadic parameter, so this call necessarily raises TypeError for the missing page_size argument. The supplied diff confirms this requirement was introduced by the change."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Update the caller to supply the new arguments, or preserve compatibility with a default in the callee."
+    }
+  ],
+  "cli_activity": [
+    {
+      "provider": "codex_cli",
+      "api_mode": "codex_cli",
+      "model": "gpt-5.6-sol",
+      "role": "review",
+      "attempt": 1,
+      "state": "requesting"
+    },
+    {
+      "provider": "codex_cli",
+      "api_mode": "codex_cli",
+      "model": "gpt-5.6-sol",
+      "role": "review",
+      "attempt": 1,
+      "state": "succeeded",
+      "warning": "Code Mode is unavailable because code-mode host is disabled. Code mode will fail closed; enable `features.code_mode_host` and install `codex-code-mode-host`."
+    },
+    {
+      "provider": "codex_cli",
+      "api_mode": "codex_cli",
+      "model": "gpt-5.6-sol",
+      "role": "review",
+      "attempt": 1,
+      "state": "requesting"
+    },
+    {
+      "provider": "codex_cli",
+      "api_mode": "codex_cli",
+      "model": "gpt-5.6-sol",
+      "role": "review",
+      "attempt": 1,
+      "state": "succeeded",
+      "warning": "Code Mode is unavailable because code-mode host is disabled. Code mode will fail closed; enable `features.code_mode_host` and install `codex-code-mode-host`."
+    },
+    {
+      "provider": "codex_cli",
+      "api_mode": "codex_cli",
+      "model": "gpt-5.6-sol",
+      "role": "verify_reasoning",
+      "attempt": 1,
+      "state": "requesting"
+    },
+    {
+      "provider": "codex_cli",
+      "api_mode": "codex_cli",
+      "model": "gpt-5.6-sol",
+      "role": "verify_reasoning",
+      "attempt": 1,
+      "state": "succeeded",
+      "warning": "Code Mode is unavailable because code-mode host is disabled. Code mode will fail closed; enable `features.code_mode_host` and install `codex-code-mode-host`."
+    },
+    {
+      "provider": "codex_cli",
+      "api_mode": "codex_cli",
+      "model": "gpt-5.6-sol",
+      "role": "verify_reasoning",
+      "attempt": 1,
+      "state": "requesting"
+    },
+    {
+      "provider": "codex_cli",
+      "api_mode": "codex_cli",
+      "model": "gpt-5.6-sol",
+      "role": "verify_reasoning",
+      "attempt": 1,
+      "state": "succeeded",
+      "warning": "Code Mode is unavailable because code-mode host is disabled. Code mode will fail closed; enable `features.code_mode_host` and install `codex-code-mode-host`."
+    }
+  ]
+}

@@ -1,0 +1,420 @@
+{
+  "corpus_hash": "b9d4be93d28266423cf3fd3ce11b0283a8d95a90976b39fc382811d8a46c7f33",
+  "reviewer_relationship": "",
+  "cases": [
+    {
+      "case_id": "mutable-default-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "mutable-default",
+          "path": "src/module.py",
+          "line": 1,
+          "description": "Calls share mutable default state"
+        }
+      ]
+    },
+    {
+      "case_id": "mutable-default-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "async-batch-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "async-batch",
+          "path": "src/module.js",
+          "line": 1,
+          "description": "Completion does not await saves"
+        }
+      ]
+    },
+    {
+      "case_id": "async-batch-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "argument-contract-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "argument-contract",
+          "path": "src/module.ts",
+          "line": 2,
+          "description": "Caller lacks required argument"
+        }
+      ]
+    },
+    {
+      "case_id": "argument-contract-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "sql-format-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "sql-format",
+          "path": "src/module.py",
+          "line": 2,
+          "description": "Untrusted name changes SQL structure"
+        }
+      ]
+    },
+    {
+      "case_id": "sql-format-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "return-contract-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "return-contract",
+          "path": "src/module.ts",
+          "line": 1,
+          "description": "Declared numeric API returns a string"
+        }
+      ]
+    },
+    {
+      "case_id": "return-contract-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "shell-format-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "shell-format",
+          "path": "src/module.py",
+          "line": 3,
+          "description": "Shell interprets untrusted metacharacters"
+        }
+      ]
+    },
+    {
+      "case_id": "shell-format-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "empty-list-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "empty-list",
+          "path": "src/module.py",
+          "line": 2,
+          "description": "Empty input raises instead of returning None"
+        }
+      ]
+    },
+    {
+      "case_id": "empty-list-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "zero-total-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "zero-total",
+          "path": "src/module.ts",
+          "line": 1,
+          "description": "Empty input returns NaN instead of zero"
+        }
+      ]
+    },
+    {
+      "case_id": "zero-total-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "sort-return-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "sort-return",
+          "path": "src/module.py",
+          "line": 2,
+          "description": "API returns None instead of sorted collection"
+        }
+      ]
+    },
+    {
+      "case_id": "sort-return-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "missing-await-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "missing-await",
+          "path": "src/module.js",
+          "line": 1,
+          "description": "Attempts json on promise"
+        }
+      ]
+    },
+    {
+      "case_id": "missing-await-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "null-input-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "null-input",
+          "path": "src/module.ts",
+          "line": 1,
+          "description": "Nullable input dereferenced without guard"
+        }
+      ]
+    },
+    {
+      "case_id": "null-input-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "boolean-string-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "boolean-string",
+          "path": "src/module.py",
+          "line": 2,
+          "description": "String false is interpreted as enabled"
+        }
+      ]
+    },
+    {
+      "case_id": "boolean-string-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "slice-boundary-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "slice-boundary",
+          "path": "src/module.js",
+          "line": 1,
+          "description": "Nonzero start produces wrong page bounds"
+        }
+      ]
+    },
+    {
+      "case_id": "slice-boundary-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "falsy-default-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "falsy-default",
+          "path": "src/module.ts",
+          "line": 1,
+          "description": "Explicit zero timeout is overwritten"
+        }
+      ]
+    },
+    {
+      "case_id": "falsy-default-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "dict-delete-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "dict-delete",
+          "path": "src/module.py",
+          "line": 4,
+          "description": "Dictionary changes size during iteration"
+        }
+      ]
+    },
+    {
+      "case_id": "dict-delete-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "reject-propagation-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "reject-propagation",
+          "path": "src/module.js",
+          "line": 1,
+          "description": "Caller cannot observe completion or rejection"
+        }
+      ]
+    },
+    {
+      "case_id": "reject-propagation-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "assignment-contract-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "assignment-contract",
+          "path": "src/module.ts",
+          "line": 1,
+          "description": "Configuration value has incompatible type"
+        }
+      ]
+    },
+    {
+      "case_id": "assignment-contract-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    },
+    {
+      "case_id": "precision-money-bug",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": [
+        {
+          "id": "precision-money",
+          "path": "src/module.py",
+          "line": 2,
+          "description": "Binary floating point truncates monetary cents"
+        }
+      ]
+    },
+    {
+      "case_id": "precision-money-clean",
+      "reviewer": "",
+      "evidence": "",
+      "decision": "",
+      "aligned_issue_ids": [],
+      "expected_issues_for_alignment": []
+    }
+  ]
+}

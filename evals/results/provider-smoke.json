@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "model": "gemini-3.6-flash",
+  "attempts": 1,
+  "tokens": 25,
+  "data": {
+    "tools": [],
+    "ready": true
+  },
+  "error": ""
+}

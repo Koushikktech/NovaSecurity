@@ -1,0 +1,37 @@
+{
+  "corpus_hash": "b9d4be93d28266423cf3fd3ce11b0283a8d95a90976b39fc382811d8a46c7f33",
+  "code_hashes": {
+    "backend/providers/__init__.py": "a0e12e89298ee70fcc15815d2a3804c85c22094d9312d26ab27fee3eaa944bb8",
+    "backend/providers/base.py": "c500d2dc2ce5cc3c966246b167d35cee3b0ec86970f9e6c52d063087f8deebeb",
+    "backend/providers/codex_cli.py": "4feb4cfb20ab9cb287aa179ecdffa92dcdc6365c48f1a20e297a0623c97490c8",
+    "backend/providers/fake.py": "4e5737058194b342ff2421004d1d580f576f9f769aa52d054a49885fff48e17e",
+    "backend/providers/gemini.py": "dd621101d2991c3443063eb0e37d0dede40757c833ae9b8ac2b4f5ca5e8daa1e",
+    "backend/providers/interactions_adapter.py": "736c88f64466aaecbbb148d2e689042943bf0c308a282c408c41835dfc987197",
+    "backend/providers/unavailable.py": "dd9e191ae77734f774b793076abbb8057a26eedcf443b60a19a9ca3c8752afef",
+    "backend/review/__init__.py": "b0c072357dc6c240570ba250b608505494a309a56edc2dbb838888689f6b553a",
+    "backend/review/dedup.py": "622749f69bba7e04db43b946fb3b3bbb607d10aafe3e5518a5600b392623b47c",
+    "backend/review/harness.py": "e93226b569e7013f1524c915dbee5ac8c59aab8de4a4dab3ed73de16aab7b0e2",
+    "backend/review/lifecycle.py": "c909b60b116c756d8940a5e11127f16a36f4ba598e1e9b0643704a251735e776",
+    "backend/review/orchestrator.py": "790184e3cfb177ff7eda05284922ddf9e8d1b948aa0e6484485739be27ad93cd",
+    "backend/review/policy.py": "9344133dd7b679e6a5b28872b5a004247e62ce5b48d2090c839a81d815c9909f",
+    "backend/review/prompts.py": "9d7ae334a89647c8ddb6503768c08769313ceb16aa94043372181b27daae736a",
+    "backend/review/scope.py": "e9904223b03da11cd1435987b62248867d47f708942776aec21ce6fd191d7c33",
+    "backend/review/snapshots.py": "b5fc288453e1ab34fbabd3395df5389ab812ce1aac26210dff05c9c909431891",
+    "backend/review/verifier.py": "d5ebaa5237ed4cdd69f9a626b0e5688c119a10c7519a3f64d9d892526b76df5e",
+    "evals/review_benchmark.py": "4192e94040f6db8d853a90b654c4f3c6a0ef9c17002a93d81c003e07f663e252"
+  },
+  "split": "heldout",
+  "variants": [
+    "static",
+    "diff",
+    "verified"
+  ],
+  "cases_per_variant": 24,
+  "provider": "codex_cli",
+  "model": "gpt-5.6-sol",
+  "reasoning": "high",
+  "max_model_calls": 4,
+  "max_attempts": 1,
+  "deadline_seconds": 600,
+  "policy": "One recorded run per case. Retain failures and partials. Resume skips recorded cases. No prompt tuning on these outcomes. No accuracy without explicit label/finding judgments."
+}

@@ -1,0 +1,245 @@
+{
+  "purpose": "Deterministic replay of consolidation on the original saved review; no new model inference",
+  "source": "evals/results/codex-cli-review.json",
+  "before_comments": 3,
+  "after_issues": 2,
+  "findings": [
+    {
+      "id": "49282a8c-9242-422f-961c-4d6c81c6a852",
+      "run_id": "8b4bb0fd-30f5-462a-91ac-7eca9a7b8743",
+      "stable_fingerprint": "55a53470b851b20cbdc92035",
+      "category": "bug",
+      "rule_id": "js:async-foreach",
+      "cwe_id": null,
+      "title": "forEach discards promises returned by async callbacks",
+      "explanation": "forEach discards promises returned by async callbacks. Await Promise.all with map, or use an awaited for\u2026of loop when completion order matters.",
+      "user_impact": "The async function can finish before the operations complete, so failures and completion are not propagated.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "batch.ts",
+        "start_line": 2,
+        "end_line": 2,
+        "side": "head",
+        "commit_sha": "4cefdf0bd078154d2f5d5bf3c128cd1c8fc3b2b4",
+        "snippet": null
+      },
+      "related_locations": [],
+      "change_relation": "changed_context",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "09edf84c-8fbf-4b17-85b1-fc7b6b48f870",
+          "kind": "static_analysis",
+          "tool_or_profile": "js:async-foreach",
+          "input_revision": "4cefdf0bd078154d2f5d5bf3c128cd1c8fc3b2b4",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "forEach discards promises returned by async callbacks. Await Promise.all with map, or use an awaited for\u2026of loop when completion order matters.",
+          "duration_ms": 0,
+          "created_at": "2026-11-02T14:16:19.012713+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "proofline-language",
+        "gemini_challenge"
+      ],
+      "assumptions": [],
+      "limitations": [],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "source_supported",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "batch.ts",
+            "start_line": 2,
+            "quote": "urls.forEach(async url => {"
+          },
+          {
+            "path": "batch.ts",
+            "start_line": 3,
+            "quote": "await fetch(url);"
+          },
+          {
+            "path": "batch.ts",
+            "start_line": 5,
+            "quote": "}"
+          }
+        ],
+        "unresolved_assumptions": [],
+        "rule_id": "js:async-foreach",
+        "path": "batch.ts",
+        "start_line": 2,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "The async callback returns a promise for each fetch, but forEach ignores callback return values. No Promise.all or awaited loop connects those promises to saveAll, so callers cannot await completion or receive fetch failures through saveAll."
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Use await Promise.all(items.map(async ...)) or an awaited for\u2026of loop, depending on ordering requirements."
+    },
+    {
+      "id": "ffee45be-7cc7-4dba-a803-066cb641d49e",
+      "run_id": "8b4bb0fd-30f5-462a-91ac-7eca9a7b8743",
+      "stable_fingerprint": "b4781e8d15516239323513ea",
+      "category": "bug",
+      "rule_id": "python:changed-signature",
+      "cwe_id": null,
+      "title": "Call to service.load_page is missing required arguments ['page_size'] after this PR changes its signature.",
+      "explanation": "Call to service.load_page is missing required arguments ['page_size'] after this PR changes its signature.\nContextual assessment: `load_page` now requires two positional arguments, but `list_orders` still invokes it with only `page`. Python raises `TypeError` before the function body executes, so the returned dictionary is never produced.",
+      "user_impact": "Calling `list_orders()` fails at runtime instead of returning order pagination data.",
+      "severity": "high",
+      "primary_location": {
+        "path": "caller.py",
+        "start_line": 4,
+        "end_line": 4,
+        "side": "head",
+        "commit_sha": "4cefdf0bd078154d2f5d5bf3c128cd1c8fc3b2b4",
+        "snippet": null
+      },
+      "related_locations": [
+        {
+          "path": "service.py",
+          "lines": [
+            1
+          ],
+          "qualified_symbol": "service.load_page",
+          "relationship": "callee",
+          "snippet": null
+        }
+      ],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "c0d2fb0b-5042-419a-b9bb-3a0caf368a74",
+          "kind": "static_analysis",
+          "tool_or_profile": "python:changed-signature",
+          "input_revision": "4cefdf0bd078154d2f5d5bf3c128cd1c8fc3b2b4",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Call to service.load_page is missing required arguments ['page_size'] after this PR changes its signature.",
+          "duration_ms": 0,
+          "created_at": "2026-11-02T14:16:19.012861+00:00"
+        },
+        {
+          "id": "7c567596-e7a9-441b-bfb6-b113d65a1382",
+          "kind": "gemini_review",
+          "tool_or_profile": "gpt-5.6-sol",
+          "input_revision": "4cefdf0bd078154d2f5d5bf3c128cd1c8fc3b2b4",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Invoke `caller.list_orders()`, which executes `load_page(1)` without the newly required second argument.",
+          "duration_ms": 0,
+          "created_at": "2026-11-02T14:16:47.510329+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "proofline-language",
+        "gemini_challenge",
+        "gemini_review"
+      ],
+      "assumptions": [
+        "`caller.py::list_orders` remains an active caller in the reviewed project."
+      ],
+      "limitations": [
+        "The supplied context does not specify the intended page-size value, so it cannot establish whether caller migration or a default is the correct API design."
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "source_supported",
+      "verification_assessment": {
+        "evidence_status": "source_supported",
+        "citations": [
+          {
+            "path": "caller.py",
+            "start_line": 1,
+            "quote": "from service import load_page"
+          },
+          {
+            "path": "caller.py",
+            "start_line": 4,
+            "quote": "return load_page(1)"
+          },
+          {
+            "path": "service.py",
+            "start_line": 1,
+            "quote": "def load_page(page, page_size):"
+          }
+        ],
+        "unresolved_assumptions": [],
+        "rule_id": "python:changed-signature",
+        "path": "caller.py",
+        "start_line": 4,
+        "is_valid": true,
+        "confidence_assessment": "confirmed",
+        "counter_evidence": null,
+        "explanation": "caller.py imports service.load_page directly and calls it with one positional argument. The function now requires both page and page_size, with no default or variadic parameter, so this call necessarily raises TypeError for the missing page_size argument. The supplied diff confirms this requirement was introduced by the change.",
+        "consolidated_finding_ids": [
+          "3ab37ae4-70eb-4430-ae6a-f8cb50d85d17"
+        ],
+        "merged_signals": [
+          {
+            "rule_id": "python:changed-signature",
+            "sources": [
+              "proofline-language",
+              "gemini_challenge"
+            ],
+            "evidence_status": "source_supported"
+          },
+          {
+            "rule_id": "proofline:required-parameter-breaks-caller",
+            "sources": [
+              "gemini_review",
+              "gemini_challenge"
+            ],
+            "evidence_status": "source_supported",
+            "assessment": {
+              "evidence_status": "source_supported",
+              "citations": [
+                {
+                  "path": "service.py",
+                  "start_line": 1,
+                  "quote": "def load_page(page, page_size):"
+                },
+                {
+                  "path": "caller.py",
+                  "start_line": 4,
+                  "quote": "return load_page(1)"
+                },
+                {
+                  "path": "service.py",
+                  "start_line": 2,
+                  "quote": "return {\"page\": page, \"size\": page_size}"
+                }
+              ],
+              "unresolved_assumptions": [],
+              "rule_id": "proofline:required-parameter-breaks-caller",
+              "path": "service.py",
+              "start_line": 1,
+              "is_valid": true,
+              "confidence_assessment": "confirmed",
+              "counter_evidence": null,
+              "explanation": "load_page declares page_size as a required positional parameter with no default, while list_orders passes only one argument. Under Python's call binding rules, this raises TypeError before load_page executes, so the dictionary is not returned. The supplied diff confirms page_size was newly added."
+            }
+          }
+        ]
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Update the caller to pass an appropriate page size, or provide a backward-compatible default such as `def load_page(page, page_size=...)` if existing one-argument calls must remain valid."
+    }
+  ]
+}

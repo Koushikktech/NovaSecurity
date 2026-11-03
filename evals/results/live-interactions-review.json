@@ -1,0 +1,439 @@
+{
+  "run": {
+    "id": "cdc8e5ab-cf94-4a69-ae20-e4048928d413",
+    "owner_session": "anonymous",
+    "input_mode": "compare",
+    "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-uttbuseu",
+    "review_mode": "compare",
+    "review_depth": "quick",
+    "pr_number": null,
+    "pr_title": null,
+    "base_sha": "8902ec2b39dbf72efe01b76e648ea75820e05ebe",
+    "head_sha": "a58cb58d10714d3c205e3c4569617f2ed76dee69",
+    "merge_base_sha": null,
+    "config_version": "1.0.0",
+    "provider": "gemini",
+    "model_id": "gemini-3.8-flash",
+    "status": "partial",
+    "stage_statuses": {
+      "ingestion": "succeeded",
+      "static_analysis": "succeeded",
+      "graph_indexing": "succeeded",
+      "gemini_review": "succeeded",
+      "challenge": "failed",
+      "validation": "succeeded"
+    },
+    "findings_count": {
+      "total": 1,
+      "security": 0,
+      "bug": 1,
+      "style": 0
+    },
+    "coverage": {
+      "identity_version": 2,
+      "run_config": {
+        "version": "3",
+        "api_mode": "interactions",
+        "models": {
+          "review": "gemini-3.8-flash",
+          "patch": "gemini-3.8-flash",
+          "verify_reasoning": "gemini-3.8-flash"
+        },
+        "strategy": "verified",
+        "model": "gemini-3.8-flash",
+        "thinking": "low",
+        "max_attempts": 1,
+        "max_model_calls": 4,
+        "max_tool_calls": 24,
+        "deadline_seconds": 180,
+        "investigation_rounds": 1
+      },
+      "resumed_from": "9c4eaf2f-737e-4fef-8031-86d36c828c3d",
+      "target": {
+        "mode": "compare",
+        "depth": "quick",
+        "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-uttbuseu",
+        "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-uttbuseu",
+        "comparison": "exact base to head",
+        "base_sha": "8902ec2b39dbf72efe01b76e648ea75820e05ebe",
+        "head_sha": "a58cb58d10714d3c205e3c4569617f2ed76dee69",
+        "revision_label": "a58cb58d10714d3c205e3c4569617f2ed76dee69",
+        "run_config": {
+          "version": "3",
+          "api_mode": "interactions",
+          "models": {
+            "review": "gemini-3.8-flash",
+            "patch": "gemini-3.8-flash",
+            "verify_reasoning": "gemini-3.8-flash"
+          },
+          "strategy": "verified",
+          "model": "gemini-3.8-flash",
+          "thinking": "low",
+          "max_attempts": 1,
+          "max_model_calls": 4,
+          "max_tool_calls": 24,
+          "deadline_seconds": 180,
+          "investigation_rounds": 1
+        }
+      },
+      "snapshot_digest": "91502030dbc6a1d3dc25d8304f000226b64f1bec41264f653412bf67de1c4cbd",
+      "total_files": 1,
+      "source_files": [
+        "src/module.py"
+      ],
+      "unsupported_files": [],
+      "scope_note": "Full snapshot checks with base/head change context",
+      "repository_policy_source": "base_snapshot",
+      "repository_policy": {
+        "exclude": [],
+        "focus": [],
+        "verification_profile": null
+      },
+      "excluded_files": [],
+      "python_files": 1,
+      "static_tools": {
+        "ruff": {
+          "tool": "ruff",
+          "version": "0.17.3",
+          "status": "executed",
+          "count": 1,
+          "error": null,
+          "cache_reused": true,
+          "original_run_id": "e6b7d1f2-05a1-4981-8bf1-50d3b1030a1a"
+        },
+        "bandit": {
+          "tool": "bandit",
+          "version": "1.9.4",
+          "status": "executed",
+          "count": 0,
+          "error": null,
+          "cache_reused": true,
+          "original_run_id": "e6b7d1f2-05a1-4981-8bf1-50d3b1030a1a"
+        }
+      },
+      "baseline_static_tools": {
+        "ruff": {
+          "tool": "ruff",
+          "version": "0.17.3",
+          "status": "executed",
+          "count": 0,
+          "error": null,
+          "cache_reused": true,
+          "original_run_id": "e6b7d1f2-05a1-4981-8bf1-50d3b1030a1a"
+        },
+        "bandit": {
+          "tool": "bandit",
+          "version": "1.9.4",
+          "status": "executed",
+          "count": 0,
+          "error": null,
+          "cache_reused": true,
+          "original_run_id": "e6b7d1f2-05a1-4981-8bf1-50d3b1030a1a"
+        }
+      },
+      "javascript": {
+        "status": "skipped",
+        "reason": "No JavaScript/TypeScript files"
+      },
+      "test_gaps": [
+        {
+          "path": "src/module.py",
+          "status": "no_matching_test_found",
+          "suggestion": "Exercise changed behavior in src/module.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+        }
+      ],
+      "changed_files": [
+        "src/module.py"
+      ],
+      "diff": "diff --git a/src/module.py b/src/module.py\n--- a/src/module.py\n+++ b/src/module.py\n@@ -1,4 +1,3 @@\n-def collect(item, items=None):\n-    items = [] if items is None else items\n+def collect(item, items=[]):\n     items.append(item)\n     return items\n",
+      "language_index": {},
+      "python_index_errors": {},
+      "graph_nodes": 1,
+      "graph_edges": 0,
+      "context": {
+        "selected": [
+          "src/module.py"
+        ],
+        "omitted": [],
+        "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+      },
+      "repository_map": {
+        "snapshot": "e45e218d4837f66f5191220ed17b63cf0e51b253f48c4f4434373c208f7620c9",
+        "files": [
+          "src/module.py"
+        ],
+        "symbols": [
+          {
+            "id": "src/module.py:1:collect",
+            "name": "collect",
+            "path": "src/module.py",
+            "start": 1,
+            "end": 3
+          }
+        ],
+        "changed_symbols": [
+          {
+            "id": "src/module.py:1:collect",
+            "name": "collect",
+            "path": "src/module.py",
+            "start": 1,
+            "end": 3
+          }
+        ],
+        "deleted_symbols": [],
+        "references": [],
+        "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+      },
+      "impact": {
+        "changes": [
+          {
+            "symbol": {
+              "id": "src/module.py:1:collect",
+              "name": "collect",
+              "path": "src/module.py",
+              "start": 1,
+              "end": 3
+            },
+            "callers": [],
+            "test_hints": []
+          }
+        ],
+        "deleted_symbols": [],
+        "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+      },
+      "model_review_error": null,
+      "review_summary": "The PR replaces a safe `items=None` sentinel check with a mutable default argument `items=[]` in `collect()`. This introduces a classic Python bug where the list is shared across calls, retaining accumulated items between calls that omit the `items` argument.",
+      "challenge_error": "Gemini generation failed: Request timed out. This is a client-side timeout. You can increase the timeout by setting the `timeout` argument on your request or in the client http options.",
+      "verification_coverage": {
+        "evidence_counts": {
+          "source_supported": 0,
+          "refuted": 0,
+          "insufficient_evidence": 2
+        },
+        "requested": 2,
+        "assessed": 0,
+        "unassessed_ids": [
+          "4eb2af38-bede-4141-9749-e5ed3e08fb65",
+          "46bc208f-8d68-4b4e-854a-9116c08caf9f"
+        ],
+        "batches": 1,
+        "errors": [
+          "Gemini generation failed: Request timed out. This is a client-side timeout. You can increase the timeout by setting the `timeout` argument on your request or in the client http options."
+        ],
+        "complete": false
+      },
+      "investigation": {
+        "model_calls": 4,
+        "tool_calls": 0,
+        "trace": [
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-01T10:27:06.709291+00:00",
+            "stage": "investigate_review",
+            "request_id": "a1ad6ebc668f971f0033ed536f44861eb8bae34018a35ffe4baeb8d2280812fc",
+            "call": 1
+          },
+          {
+            "event_type": "model_request_failed",
+            "timestamp": "2026-11-01T10:27:52.009386+00:00",
+            "stage": "investigate_review",
+            "request_id": "a1ad6ebc668f971f0033ed536f44861eb8bae34018a35ffe4baeb8d2280812fc",
+            "model": "gemini-3.8-flash",
+            "usage": {
+              "thought_tokens": 0,
+              "prompt_tokens": 0,
+              "candidate_tokens": 0,
+              "total_tokens": 0,
+              "cached_content_token_count": 0
+            },
+            "retries": 0,
+            "error": "Gemini generation failed: Request timed out. This is a client-side timeout. You can increase the timeout by setting the `timeout` argument on your request or in the client http options."
+          },
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-01T10:27:52.013314+00:00",
+            "stage": "review",
+            "request_id": "f27a370a6f2c3411653c403ccdbe2e3393c64956307f3a112663bbe46b9f6614",
+            "call": 2
+          },
+          {
+            "event_type": "model_request_completed",
+            "timestamp": "2026-11-01T10:28:19.581058+00:00",
+            "stage": "review",
+            "request_id": "f27a370a6f2c3411653c403ccdbe2e3393c64956307f3a112663bbe46b9f6614",
+            "model": "gemini-3.8-flash",
+            "usage": {
+              "thought_tokens": 0,
+              "prompt_tokens": 657,
+              "candidate_tokens": 421,
+              "total_tokens": 1078,
+              "cached_content_token_count": 0
+            },
+            "retries": 0,
+            "error": ""
+          },
+          {
+            "event_type": "checkpoint_saved",
+            "timestamp": "2026-11-01T10:28:19.582175+00:00",
+            "stage": "review",
+            "key": "f27a370a6f2c3411653c403ccdbe2e3393c64956307f3a112663bbe46b9f6614"
+          },
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-01T10:28:19.583331+00:00",
+            "stage": "investigate_verify_reasoning",
+            "request_id": "ccaa408b73b5567880d28bf66fc6a08edc61a2f5e3b47ca8b3947d6a0d308aa7",
+            "call": 3
+          },
+          {
+            "event_type": "model_request_failed",
+            "timestamp": "2026-11-01T10:29:04.593438+00:00",
+            "stage": "investigate_verify_reasoning",
+            "request_id": "ccaa408b73b5567880d28bf66fc6a08edc61a2f5e3b47ca8b3947d6a0d308aa7",
+            "model": "gemini-3.8-flash",
+            "usage": {
+              "thought_tokens": 0,
+              "prompt_tokens": 0,
+              "candidate_tokens": 0,
+              "total_tokens": 0,
+              "cached_content_token_count": 0
+            },
+            "retries": 0,
+            "error": "Gemini generation failed: Request timed out. This is a client-side timeout. You can increase the timeout by setting the `timeout` argument on your request or in the client http options."
+          },
+          {
+            "event_type": "model_request_started",
+            "timestamp": "2026-11-01T10:29:04.601832+00:00",
+            "stage": "challenge_1",
+            "request_id": "da57e0ae6f09d3f27390c3d41cb787408d49d4b97d60518300777c974a0c68f2",
+            "call": 4
+          },
+          {
+            "event_type": "model_request_failed",
+            "timestamp": "2026-11-01T10:29:49.744669+00:00",
+            "stage": "challenge_1",
+            "request_id": "da57e0ae6f09d3f27390c3d41cb787408d49d4b97d60518300777c974a0c68f2",
+            "model": "gemini-3.8-flash",
+            "usage": {
+              "thought_tokens": 0,
+              "prompt_tokens": 0,
+              "candidate_tokens": 0,
+              "total_tokens": 0,
+              "cached_content_token_count": 0
+            },
+            "retries": 0,
+            "error": "Gemini generation failed: Request timed out. This is a client-side timeout. You can increase the timeout by setting the `timeout` argument on your request or in the client http options."
+          }
+        ]
+      }
+    },
+    "usage": {
+      "thought_tokens": 0,
+      "prompt_tokens": 657,
+      "candidate_tokens": 421,
+      "total_tokens": 1078,
+      "cached_content_token_count": 0,
+      "cost_estimated_usd": null
+    },
+    "artifacts": [],
+    "errors": [],
+    "started_at": "2026-11-01T10:27:06.703630+00:00",
+    "completed_at": "2026-11-01T10:29:49.745502+00:00"
+  },
+  "findings": [
+    {
+      "id": "46bc208f-8d68-4b4e-854a-9116c08caf9f",
+      "run_id": "cdc8e5ab-cf94-4a69-ae20-e4048928d413",
+      "stable_fingerprint": "d65d108abe987f8e5d96df5b",
+      "category": "bug",
+      "rule_id": "ruff:B006",
+      "cwe_id": null,
+      "title": "B006: Do not use mutable data structures for argument defaults",
+      "explanation": "Do not use mutable data structures for argument defaults\nContextual assessment: The function definition `def collect(item, items=[])` uses a mutable list `[]` as its default argument value. Default argument expressions are evaluated once when the function definition is executed, meaning the same list instance is shared across every call that does not pass an explicit `items` argument.",
+      "user_impact": "Subsequent calls to `collect(x)` without providing `items` will accumulate items across invocations instead of returning a fresh list containing only the current item, causing unintended data leakage and unexpected behavior.",
+      "severity": "high",
+      "primary_location": {
+        "path": "src/module.py",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "a58cb58d10714d3c205e3c4569617f2ed76dee69",
+        "snippet": null
+      },
+      "related_locations": [],
+      "change_relation": "introduced",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "7597e436-b963-42d5-8bf4-7bb3e0f34c62",
+          "kind": "cached_static_analysis",
+          "tool_or_profile": "ruff",
+          "input_revision": "a58cb58d10714d3c205e3c4569617f2ed76dee69",
+          "command": [
+            "/Users/koushikk/Documents/Hackathons/Neural Strom/.venv/bin/ruff",
+            "check",
+            "--output-format=json",
+            "--isolated",
+            "--select",
+            "E,F,B",
+            "."
+          ],
+          "exit_code": 1,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Do not use mutable data structures for argument defaults",
+          "duration_ms": 0,
+          "created_at": "2026-11-01T10:11:46.422421+00:00"
+        },
+        {
+          "id": "03a2d12b-a364-452f-af35-56f023a3a0f7",
+          "kind": "gemini_review",
+          "tool_or_profile": "gemini-3.8-flash",
+          "input_revision": "a58cb58d10714d3c205e3c4569617f2ed76dee69",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Calling `collect(item)` multiple times without specifying the `items` parameter.",
+          "duration_ms": 0,
+          "created_at": "2026-11-01T10:28:19.582266+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "ruff",
+        "gemini_review"
+      ],
+      "assumptions": [],
+      "limitations": [
+        "Verification was omitted or unavailable within the run budget"
+      ],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "static_match",
+      "evidence_status": "insufficient_evidence",
+      "verification_assessment": {
+        "merged_signals": [
+          {
+            "rule_id": "ruff:B006",
+            "sources": [
+              "ruff"
+            ],
+            "evidence_status": "insufficient_evidence"
+          },
+          {
+            "rule_id": "proofline:python/mutable-default-argument",
+            "sources": [
+              "gemini_review"
+            ],
+            "evidence_status": "insufficient_evidence",
+            "assessment": {}
+          }
+        ]
+      },
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Revert to using `items=None` as the default argument value and initialize `items` within the function body if it is `None` (e.g. `items = [] if items is None else items`)."
+    }
+  ]
+}

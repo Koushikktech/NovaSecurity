@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Nova Security Dashboard",
-  description: "AI-powered code security analyzer.",
+  title: "Proofline | Evidence-backed AI Code Review",
+  description:
+    "Review the change. Verify the repair. Context-aware Python, JavaScript and TypeScript code review with Google Gemini.",
 };
 
 export default function RootLayout({

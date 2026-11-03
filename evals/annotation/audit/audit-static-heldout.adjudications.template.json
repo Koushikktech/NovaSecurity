@@ -1,0 +1,120 @@
+[
+  {
+    "finding_id": "3a556f6e-5412-4e95-82c4-78fed0c8ea0e",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "null-input-bug",
+    "finding": {
+      "id": "3a556f6e-5412-4e95-82c4-78fed0c8ea0e",
+      "run_id": "1fb3ffa9-44ae-4d86-9b52-b4773139ee63",
+      "stable_fingerprint": "5ca616d05c0b32f94b402d3d",
+      "category": "bug",
+      "rule_id": "js:type-18047",
+      "cwe_id": null,
+      "title": "'value' is possibly 'null'.",
+      "explanation": "'value' is possibly 'null'.",
+      "user_impact": "The parser or static rule identifies a concrete syntax or style problem.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "src/module.ts",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "203778ef1eb88c6e3bfbc891ac025efd157a7577",
+        "snippet": null
+      },
+      "related_locations": [],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "aefc62c2-80bb-46ee-889e-d7ec5dfeb62c",
+          "kind": "static_analysis",
+          "tool_or_profile": "js:type-18047",
+          "input_revision": "203778ef1eb88c6e3bfbc891ac025efd157a7577",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "'value' is possibly 'null'.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T13:48:58.375250+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "proofline-language"
+      ],
+      "assumptions": [],
+      "limitations": [],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "static_match",
+      "evidence_status": "unassessed",
+      "verification_assessment": {},
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Inspect the cited syntax or style rule."
+    }
+  },
+  {
+    "finding_id": "8e3544ea-8d83-4612-9952-f0d5878e555c",
+    "issue_id": null,
+    "reviewer": "",
+    "reason": "",
+    "case_id": "assignment-contract-bug",
+    "finding": {
+      "id": "8e3544ea-8d83-4612-9952-f0d5878e555c",
+      "run_id": "8e798c08-0c67-4f68-865d-d910f2259553",
+      "stable_fingerprint": "98a462ab122383ced3956d95",
+      "category": "bug",
+      "rule_id": "js:type-2322",
+      "cwe_id": null,
+      "title": "Type 'string' is not assignable to type 'number'.",
+      "explanation": "Type 'string' is not assignable to type 'number'.",
+      "user_impact": "The parser or static rule identifies a concrete syntax or style problem.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "src/module.ts",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "4fd0a6aa1f6712bb937be9ec9c336c4596963036",
+        "snippet": null
+      },
+      "related_locations": [],
+      "change_relation": "unknown",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "2dbc3f78-0c88-4f64-90fa-98a9493121f5",
+          "kind": "static_analysis",
+          "tool_or_profile": "js:type-2322",
+          "input_revision": "4fd0a6aa1f6712bb937be9ec9c336c4596963036",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Type 'string' is not assignable to type 'number'.",
+          "duration_ms": 0,
+          "created_at": "2026-11-03T13:49:03.444678+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "proofline-language"
+      ],
+      "assumptions": [],
+      "limitations": [],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "static_match",
+      "evidence_status": "unassessed",
+      "verification_assessment": {},
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Inspect the cited syntax or style rule."
+    }
+  }
+]

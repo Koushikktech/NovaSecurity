@@ -1,0 +1,8 @@
+[
+  {
+    "finding_id": "e867575a-c6b4-468b-bfc4-30f41103a400",
+    "issue_id": "dict-delete",
+    "reason": "Deleting a None-valued key while iterating a dict raises RuntimeError; iterating list(values) avoids it.",
+    "reviewer": "Codex AI implementing assistant, not independent human"
+  }
+]

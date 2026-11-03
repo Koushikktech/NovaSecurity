@@ -1,0 +1,52 @@
+{
+  "checked_at": "2026-11-01T11:16:07.365328+00:00",
+  "source": "npm registry advisory audit; point-in-time dependency evidence, not whole-system security proof",
+  "framework": {
+    "before": "16.1.6",
+    "after": "16.4.3",
+    "release": "https://github.com/vercel/next.js/releases/tag/v16.4.3"
+  },
+  "production_before": {
+    "info": 0,
+    "low": 0,
+    "moderate": 1,
+    "high": 4,
+    "critical": 1,
+    "total": 6
+  },
+  "production_after": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "all_dependencies_after": {
+    "info": 0,
+    "low": 0,
+    "moderate": 16,
+    "high": 0,
+    "critical": 0,
+    "total": 16
+  },
+  "remaining_advisory": [
+    {
+      "source": 1244012,
+      "name": "minimatch",
+      "dependency": "minimatch",
+      "title": "minimatch has potential denial of service via globparts amplification",
+      "url": "https://github.com/advisories/GHSA-g3hv-75wg-m249",
+      "severity": "moderate",
+      "cwe": [
+        "CWE-405"
+      ],
+      "cvss": {
+        "score": 0,
+        "vectorString": null
+      },
+      "range": "<11.0.1"
+    }
+  ],
+  "remaining_scope": "Development lint dependency chains; no blanket incompatible major-version override applied"
+}

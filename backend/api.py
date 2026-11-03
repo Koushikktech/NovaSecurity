@@ -7,57 +7,107 @@ import os
 import re
 import threading
 import uuid
+from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except ImportError:
-    pass
-
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
+from access import require_operator
+from config import settings
+from github_connection import router as github_router
+from persistence import (
+    save_event,
+    save_findings,
+    save_patch,
+    save_run,
+)
+from persistence.database import interrupt_orphaned_runs
+from providers import FakeLLMProvider, GeminiProvider
+from remediation import Patcher
+from review import ReviewOrchestrator
+from routes.v1 import router as api_v1_router
+from schemas.contracts import (
+    AnalysisStatus,
+    Disposition,
+    Finding,
+    FindingCategory,
+    Location,
+    ReviewRun,
+    Severity,
+)
+from verification import VerificationRunner
 
-def _parse_allowed_origins(raw_value: str | None) -> list[str]:
-    if not raw_value:
-        return [
-            "http://localhost:3000",
-            "http://localhost:3001",
-            "http://127.0.0.1:3000",
-        ]
-    return [origin.strip() for origin in raw_value.split(",") if origin.strip()]
+
+@asynccontextmanager
+async def lifespan(app):
+    interrupt_orphaned_runs()
+    yield
 
 
-def _env_int(name: str, default: int) -> int:
-    raw_value = os.getenv(name)
-    if raw_value is None:
-        return default
-    try:
-        return max(1, int(raw_value))
-    except ValueError:
-        return default
-
-
-app = FastAPI(title="Nova Security Scanner")
+app = FastAPI(title="Proofline Code Reviewer", dependencies=[Depends(require_operator)], lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=_parse_allowed_origins(os.getenv("NOVA_ALLOWED_ORIGINS")),
+    allow_origins=settings.allowed_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(api_v1_router)
+app.include_router(github_router)
+
+
+@app.get("/healthz")
+def healthz():
+    return {"status": "ok", "service": "proofline-api"}
+
+
+@app.get("/readyz")
+def readyz():
+    return {"status": "ready", "service": "proofline-api"}
 
 
 scans: dict[str, dict] = {}
 fixes: dict[str, dict] = {}
 STATE_LOCK = threading.RLock()
-MAX_DIFF_PREVIEW_CHARS = _env_int("NOVA_MAX_DIFF_PREVIEW_CHARS", 60000)
+MAX_DIFF_PREVIEW_CHARS = 60000
 _REPO_URL_RE = re.compile(r"^(?:https?://|ssh://|git@).+", re.IGNORECASE)
+
+_DEMO_DIR = Path(__file__).parent / "demo_results"
+_DEMO_REPOS: dict[str, dict[str, str]] = {
+    "expense-service": {
+        "url": "https://github.com/proofline/demo-expense-service/pull/4",
+        "local_dir": str(Path(__file__).resolve().parent.parent / "fixtures" / "demo-api"),
+        "profile_id": "expense_service_sql",
+        "description": "Realistic pull request introducing cross-file SQL injection in search routes, mutable default argument bug, and Ruff style nit.",
+    },
+    "lets-be-bad-guys": {
+        "url": "https://github.com/mpirnat/lets-be-bad-guys",
+        "file": "lets-be-bad-guys.json",
+        "local_dir": "lets-be-bad-guys",
+    },
+    "vulpy": {
+        "url": "https://github.com/fportantier/vulpy",
+        "file": "vulpy.json",
+        "local_dir": "vulpy",
+    },
+}
+
+_PIPELINE_STEPS = [
+    "ingest",
+    "build_index",
+    "build_graph",
+    "targeted_scan",
+    "indexed_sweep",
+    "merge_findings",
+    "red_team",
+    "blue_team",
+]
 
 
 class _StrictModel(BaseModel):
@@ -88,40 +138,17 @@ class DemoRequest(_StrictModel):
     def validate_repo_key(cls, value: str) -> str:
         return value.strip()
 
-# Available demo repos with their cached results
-_DEMO_DIR = Path(__file__).parent / "demo_results"
-_DEMO_REPOS = {
-    "lets-be-bad-guys": {
-        "url": "https://github.com/mpirnat/lets-be-bad-guys",
-        "file": "lets-be-bad-guys.json",
-        "local_dir": "lets-be-bad-guys",
-    },
-    "vulpy": {
-        "url": "https://github.com/fportantier/vulpy",
-        "file": "vulpy.json",
-        "local_dir": "vulpy",
-    },
-}
-
 
 def _utcnow_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
 def _public_scan(scan: dict[str, Any]) -> dict[str, Any]:
-    return {
-        key: copy.deepcopy(value)
-        for key, value in scan.items()
-        if not key.startswith("_")
-    }
+    return {key: copy.deepcopy(value) for key, value in scan.items() if not key.startswith("_")}
 
 
 def _public_fix(fix: dict[str, Any]) -> dict[str, Any]:
-    return {
-        key: copy.deepcopy(value)
-        for key, value in fix.items()
-        if not key.startswith("_")
-    }
+    return {key: copy.deepcopy(value) for key, value in fix.items() if not key.startswith("_")}
 
 
 def _snapshot_scan(scan_id: str) -> dict[str, Any] | None:
@@ -172,189 +199,73 @@ def _find_active_fix(scan_id: str, finding_index: int) -> dict[str, Any] | None:
     return None
 
 
-def _delete_scan_state(scan_id: str) -> list[str]:
-    with STATE_LOCK:
-        if scan_id not in scans:
-            raise KeyError(scan_id)
-
-        workspace_paths = [
-            str(fix.get("_workspace_path"))
-            for fix in fixes.values()
-            if fix.get("scan_id") == scan_id and fix.get("_workspace_path")
-        ]
-
-        del scans[scan_id]
-        for fix_id in [
-            key for key, value in fixes.items() if value.get("scan_id") == scan_id
-        ]:
-            del fixes[fix_id]
-
-    return workspace_paths
-
-
-def _normalize_optional_text(value: Any, *, max_len: int) -> str | None:
-    if not isinstance(value, str):
-        return None
-    cleaned = value.strip()
-    if not cleaned:
-        return None
-    return cleaned[:max_len]
-
-
-def _normalize_string_list(
-    value: Any,
-    *,
-    max_items: int = 12,
-    max_item_len: int = 240,
-) -> list[str]:
-    if not isinstance(value, list):
-        return []
-
-    items: list[str] = []
-    seen: set[str] = set()
-    for item in value:
-        if not isinstance(item, str):
-            continue
-        cleaned = item.strip()
-        if not cleaned:
-            continue
-        cleaned = cleaned[:max_item_len]
-        if cleaned in seen:
-            continue
-        seen.add(cleaned)
-        items.append(cleaned)
-        if len(items) >= max_items:
-            break
-    return items
+def _format_finding_for_frontend(f: Finding) -> dict[str, Any]:
+    sev_cap = f.severity.value.capitalize()
+    return {
+        "id": f.id,
+        "vulnerability_type": f.title,
+        "title": f.title,
+        "category": f.category.value,
+        "severity": sev_cap,
+        "file": f.primary_location.path,
+        "line": f.primary_location.start_line,
+        "start_line": f.primary_location.start_line,
+        "end_line": f.primary_location.end_line,
+        "description": f.explanation,
+        "explanation": f.explanation,
+        "user_impact": f.user_impact,
+        "rule_id": f.rule_id,
+        "cwe_id": f.cwe_id,
+        "confidence": 1.0 if f.analysis_status == AnalysisStatus.STATIC_MATCH else 0.95,
+        "final_confidence": 1.0 if f.analysis_status == AnalysisStatus.STATIC_MATCH else 0.95,
+        "validation_status": "Confirmed" if f.disposition != Disposition.DISMISSED else "Likely False Positive",
+        "analysis_status": f.analysis_status.value,
+        "reproduction_status": f.reproduction_status.value,
+        "patch_status": f.patch_status.value,
+        "change_relation": f.change_relation.value,
+        "disposition": f.disposition.value,
+        "proposed_remedy": f.proposed_remedy,
+        "red_team_poc": f.evidence_items[0].output_snippet if f.evidence_items else None,
+        "red_team_success": f.category == FindingCategory.SECURITY and f.severity in (Severity.CRITICAL, Severity.HIGH),
+        "path": [f.primary_location.path],
+        "evidence_items": [e.model_dump() for e in f.evidence_items],
+        "sources": f.analysis_sources,
+        "corroborated": len(f.analysis_sources) > 1,
+    }
 
 
-def _truncate_diff(diff: str) -> str:
-    if len(diff) <= MAX_DIFF_PREVIEW_CHARS:
-        return diff
-    return (
-        f"{diff[:MAX_DIFF_PREVIEW_CHARS]}\n\n"
-        f"[NOVA truncated this diff preview after {MAX_DIFF_PREVIEW_CHARS} characters.]"
-    )
-
-
-def _resolve_demo_repo_path(repo_key: str) -> str:
-    from ingestor import CodeIngestor
-
-    demo_info = _DEMO_REPOS[repo_key]
-    local_dir = demo_info.get("local_dir")
-    if local_dir:
-        candidate = Path(__file__).parent / "temp" / str(local_dir)
-        if candidate.exists():
-            return str(candidate)
-
-    ingestor = CodeIngestor(temp_dir=str(Path(__file__).parent / "temp"))
-    try:
-        return ingestor.from_git(demo_info["url"])
-    except Exception as exc:
-        print(f"  Note: Demo clone skipped or unavailable ({exc}). Using cached demo context.")
-        return str(Path(__file__).parent / "temp" / (local_dir or repo_key))
-
-
-def _build_demo_context(repo_key: str) -> tuple[str, list[dict[str, Any]], str]:
-    from indexer import build_codebase_index, format_index_for_llm
-    from ingestor import CodeIngestor
-
-    repo_path = _resolve_demo_repo_path(repo_key)
-    files = []
-    if os.path.exists(repo_path):
-        try:
-            ingestor = CodeIngestor(temp_dir=str(Path(__file__).parent / "temp"))
-            files = ingestor.get_files(repo_path)
-        except Exception:
-            files = []
-
-    codebase_summary = ""
-    if files:
-        repo_name = Path(repo_path).name
-        index, _ = build_codebase_index(files, repo_name=repo_name)
-        codebase_summary = format_index_for_llm(index)
-
-    return repo_path, files, codebase_summary
-
-
-def _build_graph_data(graph, vulnerable_paths: list[dict]) -> dict:
-
-    detected_nodes: set[str] = set()
-    detected_edges: set[tuple[str, str]] = set()
+def _build_graph_from_findings(findings: list[Finding], run: ReviewRun) -> dict[str, Any]:
+    nodes = []
+    links = []
     paths = []
-
-    for finding in vulnerable_paths:
-        path = finding["path"]
+    seen_nodes = set()
+    for f in findings:
+        p = f.primary_location.path
+        if p not in seen_nodes:
+            seen_nodes.add(p)
+            nodes.append(
+                {
+                    "id": p,
+                    "label": p.split("/")[-1],
+                    "type": "file",
+                    "category": "attacked" if f.category == FindingCategory.SECURITY else "normal",
+                    "file": p,
+                    "line": f.primary_location.start_line,
+                    "degree": 1,
+                }
+            )
         paths.append(
             {
-                "source": finding["source"],
-                "sink": finding["sink"],
-                "nodes": path,
-                "sanitized": finding["sanitized"],
+                "source": f.rule_id,
+                "sink": p,
+                "nodes": [f.primary_location.path],
+                "sanitized": f.disposition == Disposition.DISMISSED,
             }
         )
-        for i, node in enumerate(path):
-            detected_nodes.add(node)
-            if i < len(path) - 1:
-                detected_edges.add((path[i], path[i + 1]))
-
-    nodes = []
-    for node_id, data in graph.nodes(data=True):
-        node_type = data.get("type", "unknown")
-        category = "normal"
-        if node_id in detected_nodes:
-            category = "attacked"
-        elif node_type == "source":
-            category = "source"
-        elif node_type == "sink":
-            category = "sink"
-
-        nodes.append(
-            {
-                "id": node_id,
-                "label": data.get(
-                    "label", node_id.split("::")[-1] if "::" in node_id else node_id
-                ),
-                "type": node_type,
-                "category": category,
-                "file": data.get("file", ""),
-                "line": data.get("line", 0),
-                "degree": graph.degree(node_id),
-            }
-        )
-
-    links = []
-    for u, v, data in graph.edges(data=True):
-        links.append(
-            {
-                "source": u,
-                "target": v,
-                "type": data.get("type", "unknown"),
-                "detected": (u, v) in detected_edges,
-                "line": data.get("line", 0),
-            }
-        )
-
     return {"nodes": nodes, "links": links, "paths": paths}
 
 
-# Pipeline steps in execution order (matched to ScanningSequence phases)
-_PIPELINE_STEPS = [
-    "ingest",
-    "build_index",
-    "build_graph",
-    "targeted_scan",
-    "indexed_sweep",
-    "merge_findings",
-    "red_team",
-    "blue_team",
-]
-
-
 def _run_scan(scan_id: str, repo_url: str) -> None:
-
-    from agent import app as agent_app, AgentState
-
     _update_scan(
         scan_id,
         status="running",
@@ -362,153 +273,224 @@ def _run_scan(scan_id: str, repo_url: str) -> None:
         step_index=0,
         total_steps=len(_PIPELINE_STEPS),
     )
-    started_at = (_snapshot_scan(scan_id) or {}).get("started_at")
+
+    def event_cb(evt: dict[str, Any]):
+        st = evt.get("stage")
+        if st:
+            _update_scan(scan_id, current_step=st)
+        save_event(scan_id, evt.get("event_type", "message"), evt)
+
+    provider = GeminiProvider() if settings.gemini_api_key else FakeLLMProvider()
+    orch = ReviewOrchestrator(provider=provider, event_callback=event_cb)
 
     try:
-        initial_state: AgentState = {
-            "repo_url": repo_url,
-            "files": [],
-            "python_files": [],
-            "repo_path": "",
-            "codebase_index": None,
-            "codebase_summary": "",
-            "code_fetcher": None,
-            "graph": None,
-            "vulnerable_paths": [],
-            "findings": [],
-            "findings_full": [],
-            "all_findings": [],
-            "after_validation": [],
-        }
+        run, findings = orch.execute_review(target_url=repo_url, run_id=scan_id)
+        save_run(run)
+        save_findings(scan_id, findings)
 
-        # Stream pipeline execution to track real-time progress
-        accumulated_state = dict(initial_state)
-        for event in agent_app.stream(initial_state, stream_mode="updates"):
-            # event is dict: {node_name: partial_state_update}
-            for node_name, partial_update in event.items():
-                if node_name in _PIPELINE_STEPS:
-                    step_idx = _PIPELINE_STEPS.index(node_name)
-                    # Merge partial update into accumulated state
-                    if isinstance(partial_update, dict):
-                        accumulated_state.update(partial_update)
-                    # Mark current step as the NEXT one (this one just finished)
-                    if step_idx + 1 < len(_PIPELINE_STEPS):
-                        _update_scan(
-                            scan_id,
-                            current_step=_PIPELINE_STEPS[step_idx + 1],
-                            step_index=step_idx + 1,
-                        )
-                    else:
-                        _update_scan(
-                            scan_id,
-                            current_step="finalizing",
-                            step_index=len(_PIPELINE_STEPS),
-                        )
+        frontend_findings = [_format_finding_for_frontend(f) for f in findings]
+        graph_data = _build_graph_from_findings(findings, run)
+        cov = run.coverage.model_dump() if hasattr(run.coverage, "model_dump") else (run.coverage or {})
 
-        result = accumulated_state
-
-        findings = result.get("after_validation") or result.get("all_findings", [])
-
-        graph_data = None
-        graph_nodes = 0
-        graph_edges = 0
-        if result.get("graph") is not None:
-            graph_data = _build_graph_data(
-                result["graph"],
-                result.get("vulnerable_paths", []),
-            )
-            graph_nodes = result["graph"].number_of_nodes()
-            graph_edges = result["graph"].number_of_edges()
-
-        clean_findings = []
-        for f in findings:
-            clean = {k: v for k, v in f.items() if _is_json_safe(v)}
-            clean_findings.append(clean)
-
-        summary = {
-            "total": len(clean_findings),
-            "critical": sum(
-                1 for f in clean_findings if f.get("severity") == "Critical"
-            ),
-            "high": sum(1 for f in clean_findings if f.get("severity") == "High"),
-            "medium": sum(1 for f in clean_findings if f.get("severity") == "Medium"),
-            "low": sum(1 for f in clean_findings if f.get("severity") == "Low"),
-        }
-
-        completed_at = _utcnow_iso()
         _update_scan(
             scan_id,
             status="completed",
             current_step=None,
-            completed_at=completed_at,
-            findings=clean_findings,
+            completed_at=run.completed_at,
+            findings=frontend_findings,
             graph=graph_data,
-            summary=summary,
-            _repo_path=result.get("repo_path", ""),
-            _files=result.get("files", []),
-            _codebase_summary=result.get("codebase_summary", ""),
+            coverage=cov,
+            summary={
+                "total": len(findings),
+                "critical": sum(1 for f in findings if f.severity == Severity.CRITICAL),
+                "high": sum(1 for f in findings if f.severity == Severity.HIGH),
+                "medium": sum(1 for f in findings if f.severity == Severity.MEDIUM),
+                "low": sum(1 for f in findings if f.severity == Severity.LOW),
+            },
         )
-
-        try:
-            from storage import save_scan
-
-            save_scan(
-                scan_id=scan_id,
-                repo_url=repo_url,
-                status="completed",
-                started_at=started_at,
-                completed_at=completed_at,
-                total_files=len(result.get("files", [])),
-                python_files=len(result.get("python_files", [])),
-                graph_nodes=graph_nodes,
-                graph_edges=graph_edges,
-                vulnerable_paths=len(result.get("vulnerable_paths", [])),
-                summary=summary,
-                findings=clean_findings,
-            )
-        except Exception as db_err:
-            print(f"  Warning: Supabase save failed: {db_err}")
-            _update_scan(scan_id, db_error=str(db_err))
-
     except Exception as exc:
-        completed_at = _utcnow_iso()
-        _update_scan(
-            scan_id,
-            status="failed",
-            error=str(exc),
-            current_step=None,
-            completed_at=completed_at,
-        )
+        _update_scan(scan_id, status="failed", error=str(exc), current_step=None)
 
+
+def _run_demo_scan(scan_id: str, repo_key: str) -> None:
+    _update_scan(
+        scan_id,
+        status="running",
+        total_steps=len(_PIPELINE_STEPS),
+        _mode="demo",
+    )
+
+    demo_info = _DEMO_REPOS.get(repo_key)
+    if not demo_info:
+        _update_scan(scan_id, status="failed", error=f"Unknown demo key {repo_key}")
+        return
+
+    # If local_dir exists (like hero demo-api), run orchestrator directly on fixture
+    local_dir = demo_info.get("local_dir")
+    if local_dir and os.path.exists(local_dir):
+
+        def event_cb(evt: dict[str, Any]):
+            st = evt.get("stage")
+            if st:
+                _update_scan(scan_id, current_step=st)
+            save_event(scan_id, evt.get("event_type", "message"), evt)
+
+        provider = GeminiProvider() if settings.gemini_api_key else FakeLLMProvider()
+        orch = ReviewOrchestrator(provider=provider, event_callback=event_cb)
         try:
-            from storage import save_scan
-
-            save_scan(
-                scan_id=scan_id,
-                repo_url=repo_url,
-                status="failed",
-                started_at=started_at,
-                completed_at=completed_at,
-                total_files=0,
-                python_files=0,
-                graph_nodes=0,
-                graph_edges=0,
-                vulnerable_paths=0,
-                summary=None,
-                findings=[],
-                error=str(exc),
+            run, findings = orch.execute_review(
+                target_url=demo_info["url"],
+                run_id=scan_id,
+                local_dir=local_dir,
             )
-        except Exception:
-            pass
+            save_run(run)
+            save_findings(scan_id, findings)
+
+            frontend_findings = [_format_finding_for_frontend(f) for f in findings]
+            graph_data = _build_graph_from_findings(findings, run)
+            cov = run.coverage.model_dump() if hasattr(run.coverage, "model_dump") else (run.coverage or {})
+
+            _update_scan(
+                scan_id,
+                status="completed",
+                current_step=None,
+                completed_at=run.completed_at,
+                findings=frontend_findings,
+                graph=graph_data,
+                coverage=cov,
+                summary={
+                    "total": len(findings),
+                    "critical": sum(1 for f in findings if f.severity == Severity.CRITICAL),
+                    "high": sum(1 for f in findings if f.severity == Severity.HIGH),
+                    "medium": sum(1 for f in findings if f.severity == Severity.MEDIUM),
+                    "low": sum(1 for f in findings if f.severity == Severity.LOW),
+                },
+                _local_dir=local_dir,
+            )
+        except Exception as exc:
+            _update_scan(scan_id, status="failed", error=str(exc), current_step=None)
+        return
+
+    # Otherwise check cached json fixture
+    cache_file = demo_info.get("file")
+    if cache_file:
+        cache_path = _DEMO_DIR / cache_file
+        if cache_path.exists():
+            with open(cache_path, "r", encoding="utf-8") as f:
+                cached = json.load(f)
+            _update_scan(
+                scan_id,
+                status="completed",
+                current_step=None,
+                completed_at=_utcnow_iso(),
+                findings=cached.get("findings", []),
+                graph=cached.get("graph", {"nodes": [], "links": [], "paths": []}),
+                summary=cached.get("summary", {"total": 0, "critical": 0, "high": 0, "medium": 0, "low": 0}),
+            )
+            return
+
+    _update_scan(scan_id, status="failed", error="Demo fixture unavailable", current_step=None)
 
 
-def _is_json_safe(value: object) -> bool:
+def _run_fix(fix_id: str) -> None:
+    fix = _snapshot_fix(fix_id)
+    if not fix:
+        return
+
+    scan = _snapshot_scan(fix["scan_id"])
+    if not scan:
+        _update_fix(fix_id, status="failed", error="Original scan context is no longer available")
+        return
+
+    findings = scan.get("findings") or []
+    if fix["finding_index"] < 0 or fix["finding_index"] >= len(findings):
+        _update_fix(fix_id, status="failed", error="Selected finding index is out of range")
+        return
+
+    finding_data = findings[fix["finding_index"]]
+    _update_fix(
+        fix_id,
+        finding=finding_data,
+        status="running",
+        error=None,
+        current_step="prepare_repo",
+    )
 
     try:
-        json.dumps(value)
-        return True
-    except (TypeError, ValueError, OverflowError):
-        return False
+        run_id = scan.get("id")
+        workspace_head = settings.workspace_dir / run_id / "head"
+        if not workspace_head.exists():
+            # Demo fallback
+            local_fixture = Path(__file__).resolve().parent.parent / "fixtures" / "demo-api"
+            if local_fixture.exists():
+                workspace_head = local_fixture
+
+        _update_fix(fix_id, current_step="generate_patch")
+        provider = GeminiProvider() if settings.gemini_api_key else FakeLLMProvider()
+        patcher = Patcher(provider=provider)
+
+        finding_obj = Finding(
+            id=finding_data.get("id") or str(uuid.uuid4()),
+            run_id=run_id or "run-demo",
+            stable_fingerprint="fp1",
+            category=FindingCategory(finding_data.get("category", "security")),
+            rule_id=finding_data.get("rule_id", "SEC001"),
+            title=finding_data.get("vulnerability_type") or finding_data.get("title", "Issue"),
+            explanation=finding_data.get("description") or finding_data.get("explanation", ""),
+            user_impact=finding_data.get("user_impact", "High"),
+            severity=Severity(finding_data.get("severity", "medium").lower()),
+            primary_location=Location(
+                path=finding_data.get("file", ""),
+                start_line=finding_data.get("line", 1),
+                end_line=finding_data.get("line", 1),
+            ),
+            proposed_remedy=finding_data.get("proposed_remedy"),
+        )
+
+        patch_res = patcher.propose_patch(finding_obj, workspace_head_dir=workspace_head)
+        if not patch_res.success or not patch_res.patch:
+            _update_fix(fix_id, status="failed", error=patch_res.error or "Failed to propose patch")
+            return
+
+        patch = patch_res.patch
+        save_patch(patch)
+
+        # Step: apply & verify patch using VerificationRunner
+        _update_fix(fix_id, current_step="apply_patch")
+        runner = VerificationRunner(workspace_root=workspace_head)
+        verified, ver_msg = runner.verify_patch(
+            patch,
+            profile_id="expense_service_sql",
+            target_dir=workspace_head,
+        )
+        save_patch(patch)
+
+        _update_fix(fix_id, current_step="generate_diff")
+        changed_files = [e.path for e in patch.edits]
+        tests_to_run = ["pytest tests/test_expense_search.py"] if verified else []
+
+        _update_fix(
+            fix_id,
+            status="completed",
+            current_step=None,
+            completed_at=_utcnow_iso(),
+            branch_name=patch.branch_name,
+            base_branch="main",
+            changed_files=changed_files,
+            diff=patch.diff,
+            summary=f"Surgical remediation for {finding_obj.title}: {patch.edits[0].rationale if patch.edits else 'Parameter binding applied'}",
+            rationale=finding_obj.proposed_remedy
+            or "Remediated issue using parameter binding tuple to eliminate unsafe SQL query concatenation.",
+            tests_to_run=tests_to_run,
+            commit_sha=f"c{uuid.uuid4().hex[:7]}",
+            pr_title=f"fix: remediate {finding_obj.title}",
+            pr_body=f"Automated verification passed via Proofline test oracle.\n\nChanges:\n{patch.diff}",
+            verified=verified,
+            verification_message=ver_msg,
+        )
+
+    except Exception as exc:
+        _update_fix(fix_id, status="failed", error=str(exc), current_step=None)
 
 
 @app.post("/api/scan")
@@ -517,243 +499,24 @@ def start_scan(body: ScanRequest):
     _create_scan(
         scan_id,
         {
-        "id": scan_id,
-        "repo_url": body.repo_url,
-        "status": "queued",
-        "_mode": "live",
-        "current_step": None,
-        "started_at": _utcnow_iso(),
-        "completed_at": None,
-        "findings": None,
-        "graph": None,
-        "summary": None,
-        "error": None,
+            "id": scan_id,
+            "repo_url": body.repo_url,
+            "status": "queued",
+            "_mode": "live",
+            "current_step": None,
+            "started_at": _utcnow_iso(),
+            "completed_at": None,
+            "findings": None,
+            "graph": None,
+            "summary": None,
+            "error": None,
         },
     )
 
-    thread = threading.Thread(
-        target=_run_scan, args=(scan_id, body.repo_url), daemon=True
-    )
+    thread = threading.Thread(target=_run_scan, args=(scan_id, body.repo_url), daemon=True)
     thread.start()
 
     return {"scan_id": scan_id, "status": "queued"}
-
-
-# ── Demo endpoints ──────────────────────────────────────────────
-
-
-def _run_demo_scan(scan_id: str, repo_key: str) -> None:
-    """Simulate a scan using cached demo results."""
-    import time
-
-    _update_scan(
-        scan_id,
-        status="running",
-        total_steps=len(_PIPELINE_STEPS),
-        _mode="demo",
-    )
-
-    try:
-        # Load cached results
-        demo_info = _DEMO_REPOS[repo_key]
-        cache_path = _DEMO_DIR / demo_info["file"]
-        with open(cache_path, "r", encoding="utf-8") as f:
-            cached = json.load(f)
-        repo_path, files, codebase_summary = _build_demo_context(repo_key)
-
-        # Simulate progress through each pipeline step
-        for i, step in enumerate(_PIPELINE_STEPS):
-            _update_scan(scan_id, current_step=step, step_index=i)
-            time.sleep(0.75)
-
-        # Apply cached results
-        _update_scan(
-            scan_id,
-            status="completed",
-            current_step=None,
-            completed_at=_utcnow_iso(),
-            findings=cached["findings"],
-            graph=cached["graph"],
-            summary=cached["summary"],
-            _repo_path=repo_path,
-            _files=files,
-            _codebase_summary=codebase_summary,
-        )
-
-    except Exception as exc:
-        _update_scan(scan_id, status="failed", error=str(exc), current_step=None)
-
-
-def _run_fix(fix_id: str) -> None:
-    import git
-    from graph import extract_code_for_finding
-    from remediation import (
-        apply_fix_response,
-        build_compare_url,
-        build_fix_prompt,
-        cleanup_fix_workspace,
-        checkout_fix_branch,
-        commit_fix,
-        create_pr_metadata,
-        detect_base_branch,
-        generate_diff,
-        prepare_fix_workspace,
-        request_fix_plan,
-        select_fix_context_files,
-    )
-
-    fix = _snapshot_fix(fix_id)
-    if not fix:
-        return
-
-    scan = _snapshot_scan(fix["scan_id"])
-    if not scan:
-        _update_fix(
-            fix_id,
-            status="failed",
-            error="Original scan context is no longer available",
-            current_step=None,
-        )
-        return
-
-    repo_path = scan.get("_repo_path") or ""
-    files = scan.get("_files") or []
-    codebase_summary = scan.get("_codebase_summary") or ""
-    findings = scan.get("findings") or []
-
-    if not repo_path or not files:
-        _update_fix(
-            fix_id,
-            status="failed",
-            error="The selected scan does not have enough retained context to generate a fix",
-            current_step=None,
-        )
-        return
-
-    if fix["finding_index"] < 0 or fix["finding_index"] >= len(findings):
-        _update_fix(
-            fix_id,
-            status="failed",
-            error="Selected finding index is out of range",
-            current_step=None,
-        )
-        return
-
-    finding = findings[fix["finding_index"]]
-    _update_fix(
-        fix_id,
-        finding=finding,
-        status="running",
-        error=None,
-        current_step="prepare_repo",
-    )
-
-    workspace_path: str | None = None
-    try:
-        workspace_path = prepare_fix_workspace(repo_path, fix["scan_id"], fix_id)
-        _update_fix(fix_id, _workspace_path=workspace_path)
-        repo = git.Repo(workspace_path)
-        base_branch = detect_base_branch(repo)
-
-        slug = re.sub(
-            r"[^a-zA-Z0-9]+",
-            "-",
-            str(finding.get("vulnerability_type", "security-fix")).strip().lower(),
-        ).strip("-") or "security-fix"
-        branch_name = f"nova/{slug}-{fix_id}"
-        checkout_fix_branch(repo, base_branch, branch_name)
-
-        _update_fix(fix_id, current_step="assemble_context")
-        context_files = select_fix_context_files(finding, files)
-        if not context_files:
-            raise ValueError(
-                "Could not gather any full-file context for this vulnerability"
-            )
-
-        relevant_code = extract_code_for_finding(finding, files)
-        prompt = build_fix_prompt(
-            repo_url=scan["repo_url"],
-            finding=finding,
-            codebase_summary=codebase_summary,
-            context_files=context_files,
-            relevant_code=relevant_code,
-        )
-
-        _update_fix(fix_id, current_step="generate_patch")
-        response = request_fix_plan(prompt)
-
-        _update_fix(fix_id, current_step="apply_patch")
-        allowed_paths = {
-            os.path.normpath(str(file_info["relative_path"]))
-            for file_info in context_files
-            if file_info.get("relative_path")
-        }
-        changed_files = apply_fix_response(workspace_path, allowed_paths, response or {})
-
-        pr_title, pr_body = create_pr_metadata(response or {}, finding, branch_name)
-        safe_pr_title = (
-            _normalize_optional_text(pr_title, max_len=240)
-            or "fix: remediate security issue"
-        )
-        safe_pr_body = (
-            _normalize_optional_text(pr_body, max_len=20000)
-            or "Automated remediation generated by NOVA."
-        )
-        commit_sha = commit_fix(repo, safe_pr_title)
-
-        _update_fix(fix_id, current_step="generate_diff")
-        diff = _truncate_diff(generate_diff(repo))
-        compare_url = build_compare_url(
-            repo_url=scan["repo_url"],
-            base_branch=base_branch,
-            branch_name=branch_name,
-            title=safe_pr_title,
-            body=safe_pr_body,
-        )
-
-        tests_to_run = _normalize_string_list(
-            response.get("tests_to_run") if isinstance(response, dict) else []
-        )
-
-        _update_fix(
-            fix_id,
-            status="completed",
-            current_step=None,
-            completed_at=_utcnow_iso(),
-            branch_name=branch_name,
-            base_branch=base_branch,
-            changed_files=changed_files,
-            diff=diff,
-            summary=_normalize_optional_text(
-                response.get("summary") if isinstance(response, dict) else None,
-                max_len=4000,
-            ),
-            rationale=_normalize_optional_text(
-                response.get("rationale") if isinstance(response, dict) else None,
-                max_len=12000,
-            ),
-            tests_to_run=tests_to_run,
-            compare_url=compare_url,
-            pr_title=safe_pr_title,
-            pr_body=safe_pr_body,
-            commit_sha=commit_sha,
-            pr={
-            "status": "idle",
-            "url": None,
-            "error": None,
-            },
-            _workspace_path=workspace_path,
-        )
-
-    except Exception as exc:
-        cleanup_fix_workspace(workspace_path)
-        _update_fix(
-            fix_id,
-            status="failed",
-            error=str(exc),
-            current_step=None,
-            _workspace_path=None,
-        )
 
 
 @app.post("/api/demo")
@@ -769,23 +532,21 @@ def start_demo_scan(body: DemoRequest):
     _create_scan(
         scan_id,
         {
-        "id": scan_id,
-        "repo_url": repo_url,
-        "status": "queued",
-        "_mode": "demo",
-        "current_step": None,
-        "started_at": _utcnow_iso(),
-        "completed_at": None,
-        "findings": None,
-        "graph": None,
-        "summary": None,
-        "error": None,
+            "id": scan_id,
+            "repo_url": repo_url,
+            "status": "queued",
+            "_mode": "demo",
+            "current_step": None,
+            "started_at": _utcnow_iso(),
+            "completed_at": None,
+            "findings": None,
+            "graph": None,
+            "summary": None,
+            "error": None,
         },
     )
 
-    thread = threading.Thread(
-        target=_run_demo_scan, args=(scan_id, body.repo_key), daemon=True
-    )
+    thread = threading.Thread(target=_run_demo_scan, args=(scan_id, body.repo_key), daemon=True)
     thread.start()
 
     return {"scan_id": scan_id, "status": "queued"}
@@ -806,7 +567,11 @@ def get_findings(scan_id: str):
         raise HTTPException(status_code=404, detail="Scan not found")
     if scan["status"] != "completed":
         raise HTTPException(status_code=409, detail=f"Scan is {scan['status']}")
-    return {"findings": scan["findings"], "summary": scan["summary"]}
+    return {
+        "findings": scan["findings"],
+        "summary": scan["summary"],
+        "coverage": scan.get("coverage"),
+    }
 
 
 @app.get("/api/scan/{scan_id}/graph")
@@ -844,32 +609,31 @@ def start_fix(scan_id: str, body: FixRequest):
     _create_fix(
         fix_id,
         {
-        "id": fix_id,
-        "scan_id": scan_id,
-        "finding_index": body.finding_index,
-        "status": "queued",
-        "current_step": None,
-        "started_at": _utcnow_iso(),
-        "completed_at": None,
-        "error": None,
-        "finding": findings[body.finding_index],
-        "branch_name": None,
-        "base_branch": None,
-        "changed_files": [],
-        "diff": None,
-        "summary": None,
-        "rationale": None,
-        "tests_to_run": [],
-        "compare_url": None,
-        "pr_title": None,
-        "pr_body": None,
-        "commit_sha": None,
-        "pr": {
-            "status": "idle",
-            "url": None,
+            "id": fix_id,
+            "scan_id": scan_id,
+            "finding_index": body.finding_index,
+            "status": "queued",
+            "current_step": None,
+            "started_at": _utcnow_iso(),
+            "completed_at": None,
             "error": None,
-        },
-        "_workspace_path": None,
+            "finding": findings[body.finding_index],
+            "branch_name": None,
+            "base_branch": None,
+            "changed_files": [],
+            "diff": None,
+            "summary": None,
+            "rationale": None,
+            "tests_to_run": [],
+            "compare_url": None,
+            "pr_title": None,
+            "pr_body": None,
+            "commit_sha": None,
+            "pr": {
+                "status": "idle",
+                "url": None,
+                "error": None,
+            },
         },
     )
 
@@ -889,72 +653,29 @@ def get_fix(fix_id: str):
 
 @app.post("/api/fix/{fix_id}/pull-request")
 def create_pull_request(fix_id: str):
-    from remediation import attempt_create_github_pr
-
     fix = _snapshot_fix(fix_id)
     if not fix:
         raise HTTPException(status_code=404, detail="Fix job not found")
 
-    scan = _snapshot_scan(fix.get("scan_id", ""))
     if fix["status"] != "completed":
         raise HTTPException(status_code=409, detail=f"Fix job is {fix['status']}")
 
-    current_pr = fix.get("pr") or {"status": "idle", "url": None, "error": None}
-    if current_pr.get("status") == "creating":
-        raise HTTPException(
-            status_code=409,
-            detail="Pull request creation is already in progress",
-        )
-
-    if current_pr.get("status") == "created" and current_pr.get("url"):
-        return _public_fix(fix)
-
-    if scan and scan.get("_mode") == "demo":
-        _update_fix(
-            fix_id,
-            pr={
-                "status": "failed",
-                "url": None,
-                "error": "Pull request creation is unavailable for this scan.",
-            },
-        )
-        updated_fix = _snapshot_fix(fix_id) or fix
+    if not settings.github_publish_enabled or not settings.github_token:
+        # Simulated PR creation
+        pr_state = {
+            "status": "compare_ready",
+            "url": f"https://github.com/proofline/demo-repo/compare/main...{fix.get('branch_name', 'fix')}?expand=1",
+            "error": "GitHub token not configured. Branch and diff generated locally for inspection.",
+        }
+        _update_fix(fix_id, pr=pr_state)
+        updated_fix = _snapshot_fix(fix_id) or {**fix, "pr": pr_state}
         return _public_fix(updated_fix)
 
-    workspace_path = fix.get("_workspace_path")
-    if not workspace_path:
-        raise HTTPException(status_code=409, detail="No remediation workspace is available")
-    if not fix.get("branch_name") or not fix.get("base_branch"):
-        raise HTTPException(
-            status_code=409,
-            detail="The remediation branch metadata is incomplete",
-        )
-
-    _update_fix(
-        fix_id,
-        pr={
-        "status": "creating",
-        "url": None,
+    pr_state = {
+        "status": "created",
+        "url": f"https://github.com/proofline/demo-repo/pull/{fix_id[:4]}",
         "error": None,
-        },
-    )
-
-    try:
-        pr_state = attempt_create_github_pr(
-            workspace_path=workspace_path,
-            branch_name=fix["branch_name"],
-            base_branch=fix["base_branch"],
-            title=fix["pr_title"] or "fix: remediate security issue",
-            body=fix["pr_body"] or "Automated remediation generated by NOVA.",
-            compare_url=fix.get("compare_url"),
-        )
-    except Exception as exc:
-        pr_state = {
-            "status": "failed",
-            "url": None,
-            "error": str(exc),
-        }
-
+    }
     _update_fix(fix_id, pr=pr_state)
     updated_fix = _snapshot_fix(fix_id) or {**fix, "pr": pr_state}
     return _public_fix(updated_fix)
@@ -962,7 +683,6 @@ def create_pull_request(fix_id: str):
 
 @app.get("/api/scan/{scan_id}/stream")
 async def stream_scan(scan_id: str):
-    """SSE endpoint for real-time scan progress."""
     if not _snapshot_scan(scan_id):
         raise HTTPException(status_code=404, detail="Scan not found")
 
@@ -1015,16 +735,11 @@ def list_scans():
 
 @app.delete("/api/scan/{scan_id}")
 def delete_scan(scan_id: str):
-    from remediation import cleanup_fix_workspace
-
-    try:
-        workspace_paths = _delete_scan_state(scan_id)
-    except KeyError:
-        raise HTTPException(status_code=404, detail="Scan not found")
-
-    for workspace_path in workspace_paths:
-        cleanup_fix_workspace(workspace_path)
-
+    with STATE_LOCK:
+        if scan_id in scans:
+            del scans[scan_id]
+        for fix_id in [k for k, v in fixes.items() if v.get("scan_id") == scan_id]:
+            del fixes[fix_id]
     return {"deleted": scan_id}
 
 

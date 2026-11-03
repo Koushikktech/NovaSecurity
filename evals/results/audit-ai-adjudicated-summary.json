@@ -1,0 +1,93 @@
+[
+  {
+    "tp": 2,
+    "duplicate_comments": 0,
+    "cases": 24,
+    "review_statuses": {
+      "completed": 24
+    },
+    "fp": 0,
+    "fn": 13,
+    "precision": 1.0,
+    "recall": 0.13333333333333333,
+    "precision_95_wilson": [
+      0.34237195288961925,
+      1
+    ],
+    "recall_95_wilson": [
+      0.0373604698913593,
+      0.3788249920651624
+    ],
+    "clean_change_false_positive_rate": 0.0,
+    "localization_within_two_lines": 1.0,
+    "limitations": "Small authored corpus; AI-assisted builder adjudication, not independent human review. Three secondary targets added post-hoc. Same sources and raw predictions in all variants. Quota-affected cases retained. No production accuracy or superiority claim.",
+    "label_validation": {
+      "relationship": "ai_assisted_builder",
+      "cases": 36
+    },
+    "variant": "static",
+    "original_target_count": 12,
+    "original_targets_detected": 2
+  },
+  {
+    "tp": 15,
+    "duplicate_comments": 2,
+    "cases": 24,
+    "review_statuses": {
+      "completed": 24
+    },
+    "fp": 2,
+    "fn": 0,
+    "precision": 0.8823529411764706,
+    "recall": 1.0,
+    "precision_95_wilson": [
+      0.6566315750229009,
+      0.967120919987079
+    ],
+    "recall_95_wilson": [
+      0.7961107336956521,
+      1
+    ],
+    "clean_change_false_positive_rate": 0.0,
+    "localization_within_two_lines": 1.0,
+    "limitations": "Small authored corpus; AI-assisted builder adjudication, not independent human review. Three secondary targets added post-hoc. Same sources and raw predictions in all variants. Quota-affected cases retained. No production accuracy or superiority claim.",
+    "label_validation": {
+      "relationship": "ai_assisted_builder",
+      "cases": 36
+    },
+    "variant": "diff",
+    "original_target_count": 12,
+    "original_targets_detected": 12
+  },
+  {
+    "tp": 12,
+    "duplicate_comments": 2,
+    "cases": 24,
+    "review_statuses": {
+      "partial": 6,
+      "completed": 18
+    },
+    "fp": 2,
+    "fn": 3,
+    "precision": 0.8571428571428571,
+    "recall": 0.8,
+    "precision_95_wilson": [
+      0.600580922361363,
+      0.9599069262620787
+    ],
+    "recall_95_wilson": [
+      0.5481406466534955,
+      0.9295257935638959
+    ],
+    "clean_change_false_positive_rate": 0.0,
+    "localization_within_two_lines": 1.0,
+    "limitations": "Small authored corpus; AI-assisted builder adjudication, not independent human review. Three secondary targets added post-hoc. Same sources and raw predictions in all variants. Quota-affected cases retained. No production accuracy or superiority claim.",
+    "label_validation": {
+      "relationship": "ai_assisted_builder",
+      "cases": 36
+    },
+    "variant": "verified",
+    "original_target_count": 12,
+    "original_targets_detected": 10
+  }
+]

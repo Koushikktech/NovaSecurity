@@ -1,0 +1,200 @@
+{
+  "purpose": "Post-hoc deterministic regression replay; original scored reports unchanged",
+  "rows": [
+    {
+      "case": "null-input-bug",
+      "before_comments": 2,
+      "after_issues": 1,
+      "findings": [
+        {
+          "id": "d113e332-d869-4f69-af5c-f6a761cdca90",
+          "run_id": "f573b84c-f901-4426-b31d-adeb7dac7433",
+          "stable_fingerprint": "5ca616d05c0b32f94b402d3d",
+          "category": "bug",
+          "rule_id": "js:type-18047",
+          "cwe_id": null,
+          "title": "'value' is possibly 'null'.",
+          "explanation": "'value' is possibly 'null'.\nContextual assessment: The function still declares `null` as a valid argument, but the change removes optional chaining and the empty-string fallback. Calling `toUpperCase()` directly on `null` throws a `TypeError`; previously the function returned `''`. The type signature itself is source evidence that this input remains part of the API contract.",
+          "user_impact": "Any caller passing `null` now encounters an uncaught runtime exception instead of receiving a label, potentially interrupting the surrounding request or UI flow.",
+          "severity": "medium",
+          "primary_location": {
+            "path": "src/module.ts",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": "0457c95bbddc07bad92ce237e12e8aea5c6e3b03",
+            "snippet": null
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "4d6e4dc0-c42e-4541-becf-736c70dd372c",
+              "kind": "static_analysis",
+              "tool_or_profile": "js:type-18047",
+              "input_revision": "0457c95bbddc07bad92ce237e12e8aea5c6e3b03",
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "'value' is possibly 'null'.",
+              "duration_ms": 0,
+              "created_at": "2026-11-03T13:53:47.157171+00:00"
+            },
+            {
+              "id": "8415c56b-41a2-4acc-a120-318a2e537383",
+              "kind": "codex_cli_review",
+              "tool_or_profile": "gpt-5.6-sol",
+              "input_revision": "0457c95bbddc07bad92ce237e12e8aea5c6e3b03",
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "`label(null)` is called, as permitted by the exported parameter type.",
+              "duration_ms": 0,
+              "created_at": "2026-11-03T13:53:56.838191+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "proofline-language",
+            "codex_cli_review"
+          ],
+          "assumptions": [],
+          "limitations": [
+            "Only the supplied diff is available, so affected callers and tests cannot be inspected."
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "unassessed",
+          "verification_assessment": {
+            "consolidated_finding_ids": [
+              "86533d82-f37b-43c8-b7e5-7565edc7949a"
+            ],
+            "merged_signals": [
+              {
+                "rule_id": "js:type-18047",
+                "sources": [
+                  "proofline-language"
+                ],
+                "evidence_status": "unassessed"
+              },
+              {
+                "rule_id": "proofline:null-input-runtime-error",
+                "sources": [
+                  "codex_cli_review"
+                ],
+                "evidence_status": "unassessed",
+                "assessment": {}
+              }
+            ]
+          },
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Restore the null guard, for example `return value?.toUpperCase() ?? '';`. If null should instead be rejected, change the parameter type to `string` and update all affected callers as part of the same change."
+        }
+      ]
+    },
+    {
+      "case": "assignment-contract-bug",
+      "before_comments": 2,
+      "after_issues": 1,
+      "findings": [
+        {
+          "id": "4cfb8ffd-988a-4532-8b29-88ef7bf121cf",
+          "run_id": "48fd7236-1a37-47e0-a8dd-72c56507ebf6",
+          "stable_fingerprint": "98a462ab122383ced3956d95",
+          "category": "bug",
+          "rule_id": "js:type-2322",
+          "cwe_id": null,
+          "title": "Type 'string' is not assignable to type 'number'.",
+          "explanation": "Type 'string' is not assignable to type 'number'.\nContextual assessment: The changed declaration retains the `number` annotation but initializes it with the string literal `'three'`. TypeScript rejects this assignment during type checking, so the module cannot compile under normal type-checked builds.",
+          "user_impact": "Builds or checks that compile this module fail with a type error, preventing the changed code from being shipped.",
+          "severity": "high",
+          "primary_location": {
+            "path": "src/module.ts",
+            "start_line": 1,
+            "end_line": 1,
+            "side": "head",
+            "commit_sha": "118840b76e00cd710b3a72f6fdaf63c3faa637ef",
+            "snippet": null
+          },
+          "related_locations": [],
+          "change_relation": "unknown",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "bc850ca4-0e97-4979-ac5a-0805617bdae6",
+              "kind": "static_analysis",
+              "tool_or_profile": "js:type-2322",
+              "input_revision": "118840b76e00cd710b3a72f6fdaf63c3faa637ef",
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "Type 'string' is not assignable to type 'number'.",
+              "duration_ms": 0,
+              "created_at": "2026-11-03T13:55:32.713907+00:00"
+            },
+            {
+              "id": "bcc62dc5-de82-4744-a9db-c9e61c3cf317",
+              "kind": "codex_cli_review",
+              "tool_or_profile": "gpt-5.6-sol",
+              "input_revision": "118840b76e00cd710b3a72f6fdaf63c3faa637ef",
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "Run TypeScript type checking or a build pipeline that performs type checking on `src/module.ts`.",
+              "duration_ms": 0,
+              "created_at": "2026-11-03T13:55:40.782182+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "proofline-language",
+            "codex_cli_review"
+          ],
+          "assumptions": [
+            "The project includes `src/module.ts` in TypeScript type checking.",
+            "No build configuration suppresses this assignment error."
+          ],
+          "limitations": [
+            "Only the supplied one-line diff was available; callers and build configuration were not provided."
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "static_match",
+          "evidence_status": "unassessed",
+          "verification_assessment": {
+            "consolidated_finding_ids": [
+              "7b8559e7-0e2a-4bee-9cab-07ac7fe0a4da"
+            ],
+            "merged_signals": [
+              {
+                "rule_id": "js:type-2322",
+                "sources": [
+                  "proofline-language"
+                ],
+                "evidence_status": "unassessed"
+              },
+              {
+                "rule_id": "proofline:typescript/type-mismatch",
+                "sources": [
+                  "codex_cli_review"
+                ],
+                "evidence_status": "unassessed",
+                "assessment": {}
+              }
+            ]
+          },
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Restore a numeric initializer, for example `export const retries: number = 3;`. If the API is intentionally changing to text, change the declared type and update all affected callers, but the supplied context does not establish that intent."
+        }
+      ]
+    }
+  ]
+}

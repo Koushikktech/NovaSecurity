@@ -1,0 +1,609 @@
+{
+  "configuration": {
+    "provider": "codex_cli",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "max_calls": 4,
+    "deadline": 600,
+    "attempts": 1
+  },
+  "corpus_hash": "bb4bd888d92cf8be48185028d269270bb79e6c4d0cba7932dcfd829f8ec59ef3",
+  "variant": "verified",
+  "split": "heldout",
+  "quality_metrics": "not_computed_without_adjudication",
+  "results": [
+    {
+      "case_id": "dict-delete-bug",
+      "variant": "verified",
+      "elapsed_seconds": 34.69446275000519,
+      "run": {
+        "id": "5d47e811-e2b1-47b8-97b4-04f2537a6031",
+        "owner_session": "anonymous",
+        "input_mode": "compare",
+        "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-v1aq_jjn",
+        "review_mode": "compare",
+        "review_depth": "quick",
+        "pr_number": null,
+        "pr_title": null,
+        "base_sha": "677b73f30e42c868c03d3ad824a79252bb8cd102",
+        "head_sha": "d5094d23f97fa2c4eedebb89998830bdc5c1d788",
+        "merge_base_sha": null,
+        "config_version": "1.0.0",
+        "provider": "codex_cli",
+        "model_id": "gpt-5.6-sol",
+        "status": "completed",
+        "stage_statuses": {
+          "ingestion": "succeeded",
+          "static_analysis": "succeeded",
+          "graph_indexing": "succeeded",
+          "gemini_review": "succeeded",
+          "challenge": "succeeded",
+          "validation": "succeeded"
+        },
+        "findings_count": {
+          "total": 1,
+          "security": 0,
+          "bug": 1,
+          "style": 0
+        },
+        "coverage": {
+          "identity_version": 2,
+          "run_config": {
+            "version": "5",
+            "provider": "codex_cli",
+            "codex_reasoning": "high",
+            "api_mode": "auto",
+            "models": {
+              "review": "gpt-5.6-sol",
+              "patch": "gpt-5.6-sol",
+              "verify_reasoning": "gpt-5.6-sol"
+            },
+            "strategy": "verified",
+            "model": "gpt-5.6-sol",
+            "thinking": "low",
+            "max_attempts": 1,
+            "max_model_calls": 4,
+            "max_tool_calls": 24,
+            "deadline_seconds": 600,
+            "investigation_rounds": 1
+          },
+          "target": {
+            "mode": "compare",
+            "depth": "quick",
+            "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-v1aq_jjn",
+            "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-v1aq_jjn",
+            "comparison": "exact base to head",
+            "source_exclusions": [],
+            "base_sha": "677b73f30e42c868c03d3ad824a79252bb8cd102",
+            "head_sha": "d5094d23f97fa2c4eedebb89998830bdc5c1d788",
+            "revision_label": "d5094d23f97fa2c4eedebb89998830bdc5c1d788",
+            "run_config": {
+              "version": "5",
+              "provider": "codex_cli",
+              "codex_reasoning": "high",
+              "api_mode": "auto",
+              "models": {
+                "review": "gpt-5.6-sol",
+                "patch": "gpt-5.6-sol",
+                "verify_reasoning": "gpt-5.6-sol"
+              },
+              "strategy": "verified",
+              "model": "gpt-5.6-sol",
+              "thinking": "low",
+              "max_attempts": 1,
+              "max_model_calls": 4,
+              "max_tool_calls": 24,
+              "deadline_seconds": 600,
+              "investigation_rounds": 1
+            }
+          },
+          "source_exclusions": [],
+          "snapshot_digest": "69e0a02c5d13a7cb5135e14927ed65ed6eaf9f61ac053beecfcb681d54b29da7",
+          "total_files": 1,
+          "source_files": [
+            "src/module.py"
+          ],
+          "unsupported_files": [],
+          "scope_note": "Full snapshot checks with base/head change context",
+          "repository_policy_source": "base_snapshot",
+          "repository_policy": {
+            "exclude": [],
+            "focus": [],
+            "verification_profile": null
+          },
+          "excluded_files": [],
+          "python_files": 1,
+          "static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "ad482b2a-fe73-4a93-b7bf-dbfd42186a6a"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "ad482b2a-fe73-4a93-b7bf-dbfd42186a6a"
+            }
+          },
+          "baseline_static_tools": {
+            "ruff": {
+              "tool": "ruff",
+              "version": "0.17.3",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "ad482b2a-fe73-4a93-b7bf-dbfd42186a6a"
+            },
+            "bandit": {
+              "tool": "bandit",
+              "version": "1.9.4",
+              "status": "executed",
+              "count": 0,
+              "error": null,
+              "cache_reused": true,
+              "original_run_id": "ad482b2a-fe73-4a93-b7bf-dbfd42186a6a"
+            }
+          },
+          "javascript": {
+            "status": "skipped",
+            "reason": "No JavaScript/TypeScript files"
+          },
+          "test_gaps": [
+            {
+              "path": "src/module.py",
+              "status": "no_matching_test_found",
+              "suggestion": "Exercise changed behavior in src/module.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+            }
+          ],
+          "changed_files": [
+            "src/module.py"
+          ],
+          "diff": "diff --git a/src/module.py b/src/module.py\n--- a/src/module.py\n+++ b/src/module.py\n@@ -1,4 +1,4 @@\n def prune(values):\n-    for key in list(values):\n+    for key in values:\n         if values[key] is None:\n             del values[key]\n",
+          "language_index": {},
+          "python_index_errors": {},
+          "graph_nodes": 1,
+          "graph_edges": 0,
+          "context": {
+            "selected": [
+              "src/module.py"
+            ],
+            "omitted": [],
+            "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+          },
+          "repository_map": {
+            "snapshot": "167d895cf3b27ec2457fc59160908ce70fe565d25e287adf908ce48104c94bc5",
+            "files": [
+              "src/module.py"
+            ],
+            "symbols": [
+              {
+                "id": "src/module.py:1:prune",
+                "name": "prune",
+                "path": "src/module.py",
+                "start": 1,
+                "end": 4
+              }
+            ],
+            "changed_symbols": [
+              {
+                "id": "src/module.py:1:prune",
+                "name": "prune",
+                "path": "src/module.py",
+                "start": 1,
+                "end": 4
+              }
+            ],
+            "deleted_symbols": [],
+            "references": [],
+            "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+          },
+          "impact": {
+            "changes": [
+              {
+                "symbol": {
+                  "id": "src/module.py:1:prune",
+                  "name": "prune",
+                  "path": "src/module.py",
+                  "start": 1,
+                  "end": 4
+                },
+                "callers": [],
+                "test_hints": []
+              }
+            ],
+            "deleted_symbols": [],
+            "limitations": "Resolved caller edges cover supported static relationships. Test matches are lexical hints; absence is not proof of missing tests."
+          },
+          "model_review_error": null,
+          "review_summary": "The sole change introduces a runtime regression: `prune` now mutates a live mapping during iteration. Inputs with no removable entries still complete, but a standard dict containing a `None` value raises and may be only partially pruned.",
+          "verification_coverage": {
+            "evidence_counts": {
+              "source_supported": 1,
+              "refuted": 0,
+              "insufficient_evidence": 0
+            },
+            "requested": 1,
+            "assessed": 1,
+            "unassessed_ids": [],
+            "batches": 1,
+            "errors": [],
+            "complete": true
+          },
+          "investigation": {
+            "model_calls": 4,
+            "tool_calls": 5,
+            "trace": [
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:32:33.579111+00:00",
+                "stage": "investigate_review",
+                "request_id": "a4ef880dcd5d446b585efaf551d476bb4bb423339d00109f3251596db69fab21",
+                "call": 1
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:32:40.876500+00:00",
+                "stage": "investigate_review",
+                "request_id": "a4ef880dcd5d446b585efaf551d476bb4bb423339d00109f3251596db69fab21",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 114,
+                  "prompt_tokens": 11822,
+                  "candidate_tokens": 189,
+                  "total_tokens": 12011,
+                  "cached_content_token_count": 10752
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:32:40.877706+00:00",
+                "stage": "investigate_review",
+                "key": "a4ef880dcd5d446b585efaf551d476bb4bb423339d00109f3251596db69fab21"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:32:40.877757+00:00",
+                "tool": {
+                  "name": "find_related_tests",
+                  "query": "prune",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 4
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:32:40.877830+00:00",
+                "observation": {
+                  "snapshot": "167d895cf3b27ec2457fc59160908ce70fe565d25e287adf908ce48104c94bc5",
+                  "tool": {
+                    "name": "find_related_tests",
+                    "query": "prune",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 4
+                  },
+                  "output": "{\"paths\": []}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:32:40.877957+00:00",
+                "tool": {
+                  "name": "find_references",
+                  "query": "prune",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 4
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:32:40.878043+00:00",
+                "observation": {
+                  "snapshot": "167d895cf3b27ec2457fc59160908ce70fe565d25e287adf908ce48104c94bc5",
+                  "tool": {
+                    "name": "find_references",
+                    "query": "prune",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 4
+                  },
+                  "output": "{\"matches\": [{\"path\": \"src/module.py\", \"line\": 1, \"text\": \"def prune(values):\", \"relationship\": \"lexical_hint\"}]}"
+                },
+                "role": "review"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:32:40.880932+00:00",
+                "stage": "review",
+                "request_id": "4335e99e60f8bdcf26d7d136d96190a04ff54a438d22d05c92c1d25c523b973d",
+                "call": 2
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:32:50.708354+00:00",
+                "stage": "review",
+                "request_id": "4335e99e60f8bdcf26d7d136d96190a04ff54a438d22d05c92c1d25c523b973d",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 0,
+                  "prompt_tokens": 12135,
+                  "candidate_tokens": 398,
+                  "total_tokens": 12533,
+                  "cached_content_token_count": 11008
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:32:50.709807+00:00",
+                "stage": "review",
+                "key": "4335e99e60f8bdcf26d7d136d96190a04ff54a438d22d05c92c1d25c523b973d"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:32:50.712030+00:00",
+                "stage": "investigate_verify_reasoning",
+                "request_id": "a9ab33f0efd4623d4be166d10c6360d404fd73a830decc80a39af7d0113cd8c5",
+                "call": 3
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:32:57.956504+00:00",
+                "stage": "investigate_verify_reasoning",
+                "request_id": "a9ab33f0efd4623d4be166d10c6360d404fd73a830decc80a39af7d0113cd8c5",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 95,
+                  "prompt_tokens": 11643,
+                  "candidate_tokens": 197,
+                  "total_tokens": 11840,
+                  "cached_content_token_count": 0
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:32:57.957993+00:00",
+                "stage": "investigate_verify_reasoning",
+                "key": "a9ab33f0efd4623d4be166d10c6360d404fd73a830decc80a39af7d0113cd8c5"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:32:57.958054+00:00",
+                "tool": {
+                  "name": "get_diff",
+                  "query": "src/module.py",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 4
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:32:57.958177+00:00",
+                "observation": {
+                  "snapshot": "167d895cf3b27ec2457fc59160908ce70fe565d25e287adf908ce48104c94bc5",
+                  "tool": {
+                    "name": "get_diff",
+                    "query": "src/module.py",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 4
+                  },
+                  "output": "{\"diff\": \"diff --git a/src/module.py b/src/module.py\\n--- a/src/module.py\\n+++ b/src/module.py\\n@@ -1,4 +1,4 @@\\n def prune(values):\\n-    for key in list(values):\\n+    for key in values:\\n         if values[key] is None:\\n             del values[key]\\n\"}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:32:57.958218+00:00",
+                "tool": {
+                  "name": "find_references",
+                  "query": "prune",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 4
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:32:57.958312+00:00",
+                "observation": {
+                  "snapshot": "167d895cf3b27ec2457fc59160908ce70fe565d25e287adf908ce48104c94bc5",
+                  "tool": {
+                    "name": "find_references",
+                    "query": "prune",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 4
+                  },
+                  "output": "{\"matches\": [{\"path\": \"src/module.py\", \"line\": 1, \"text\": \"def prune(values):\", \"relationship\": \"lexical_hint\"}]}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_started",
+                "timestamp": "2026-11-03T16:32:57.958328+00:00",
+                "tool": {
+                  "name": "find_related_tests",
+                  "query": "prune",
+                  "path": "src/module.py",
+                  "start_line": 1,
+                  "end_line": 4
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "tool_completed",
+                "timestamp": "2026-11-03T16:32:57.958350+00:00",
+                "observation": {
+                  "snapshot": "167d895cf3b27ec2457fc59160908ce70fe565d25e287adf908ce48104c94bc5",
+                  "tool": {
+                    "name": "find_related_tests",
+                    "query": "prune",
+                    "path": "src/module.py",
+                    "start_line": 1,
+                    "end_line": 4
+                  },
+                  "output": "{\"paths\": []}"
+                },
+                "role": "verify_reasoning"
+              },
+              {
+                "event_type": "model_request_started",
+                "timestamp": "2026-11-03T16:32:57.960732+00:00",
+                "stage": "challenge_1",
+                "request_id": "652a833572e74fb9a8f6d66218bb71ca9c2a1e016379b99fe0b6a8239f01715e",
+                "call": 4
+              },
+              {
+                "event_type": "model_request_completed",
+                "timestamp": "2026-11-03T16:33:08.220976+00:00",
+                "stage": "challenge_1",
+                "request_id": "652a833572e74fb9a8f6d66218bb71ca9c2a1e016379b99fe0b6a8239f01715e",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                  "thought_tokens": 106,
+                  "prompt_tokens": 12087,
+                  "candidate_tokens": 360,
+                  "total_tokens": 12447,
+                  "cached_content_token_count": 0
+                },
+                "retries": 0,
+                "error": ""
+              },
+              {
+                "event_type": "checkpoint_saved",
+                "timestamp": "2026-11-03T16:33:08.222487+00:00",
+                "stage": "challenge_1",
+                "key": "652a833572e74fb9a8f6d66218bb71ca9c2a1e016379b99fe0b6a8239f01715e"
+              }
+            ]
+          }
+        },
+        "usage": {
+          "thought_tokens": 315,
+          "prompt_tokens": 47687,
+          "candidate_tokens": 1144,
+          "total_tokens": 48831,
+          "cached_content_token_count": 21760,
+          "cost_estimated_usd": null
+        },
+        "artifacts": [],
+        "errors": [],
+        "started_at": "2026-11-03T16:32:33.529010+00:00",
+        "completed_at": "2026-11-03T16:33:08.223278+00:00"
+      },
+      "findings": [
+        {
+          "id": "e867575a-c6b4-468b-bfc4-30f41103a400",
+          "run_id": "5d47e811-e2b1-47b8-97b4-04f2537a6031",
+          "stable_fingerprint": "73eb3c4a4f0076ed9ebc7047",
+          "category": "bug",
+          "rule_id": "proofline:PY-MUTATE-MAPPING-DURING-ITERATION",
+          "cwe_id": null,
+          "title": "Deleting entries while iterating raises at runtime",
+          "explanation": "The change replaces iteration over a snapshot of the keys with iteration over the live mapping. For a normal Python dict, deleting a key in the loop changes its size and causes the iterator to raise `RuntimeError: dictionary changed size during iteration`. The prior `list(values)` avoided this by materializing the keys before mutation.",
+          "user_impact": "`prune` fails partway through instead of removing all `None`-valued entries, and the input may be left partially modified.",
+          "severity": "high",
+          "primary_location": {
+            "path": "src/module.py",
+            "start_line": 2,
+            "end_line": 4,
+            "side": "head",
+            "commit_sha": "d5094d23f97fa2c4eedebb89998830bdc5c1d788",
+            "snippet": "for key in values:\n    if values[key] is None:\n        del values[key]"
+          },
+          "related_locations": [],
+          "change_relation": "changed_context",
+          "evidence_refs": [],
+          "evidence_items": [
+            {
+              "id": "639e2128-ef3a-47a5-8893-143825ed4dc7",
+              "kind": "codex_cli_review",
+              "tool_or_profile": "gpt-5.6-sol",
+              "input_revision": "d5094d23f97fa2c4eedebb89998830bdc5c1d788",
+              "command": null,
+              "exit_code": null,
+              "stdout_hash": null,
+              "stderr_hash": null,
+              "output_snippet": "Call `prune` with a mutable dict containing at least one entry whose value is `None`. Empty dictionaries and dictionaries without `None` values do not trigger the failure.",
+              "duration_ms": 0,
+              "created_at": "2026-11-03T16:32:50.709939+00:00"
+            }
+          ],
+          "analysis_sources": [
+            "codex_cli_review",
+            "codex_cli_challenge"
+          ],
+          "assumptions": [
+            "`values` is expected to accept dictionary-like key iteration, lookup, and deletion.",
+            "Standard Python dict behavior is relevant to this API.",
+            "At least one entry has a value of None, so the deletion path executes.",
+            "The caller supplies a normal Python dict, or another mutable mapping whose live iterator rejects size changes."
+          ],
+          "limitations": [
+            "No callers or matching tests were supplied, so the accepted mapping types and externally relied-upon mutation contract are not independently established."
+          ],
+          "disposition": "open",
+          "disposition_reason": null,
+          "analysis_status": "contextual_assessment",
+          "evidence_status": "source_supported",
+          "verification_assessment": {
+            "evidence_status": "source_supported",
+            "citations": [
+              {
+                "path": "src/module.py",
+                "start_line": 2,
+                "quote": "for key in values:"
+              },
+              {
+                "path": "src/module.py",
+                "start_line": 3,
+                "quote": "if values[key] is None:\n            del values[key]"
+              }
+            ],
+            "unresolved_assumptions": [
+              "At least one entry has a value of None, so the deletion path executes.",
+              "The caller supplies a normal Python dict, or another mutable mapping whose live iterator rejects size changes."
+            ],
+            "rule_id": "proofline:PY-MUTATE-MAPPING-DURING-ITERATION",
+            "path": "src/module.py",
+            "start_line": 2,
+            "is_valid": true,
+            "confidence_assessment": "confirmed",
+            "counter_evidence": null,
+            "explanation": "The loop iterates directly over the live mapping. When an encountered value is None, line 4 deletes that key from the same mapping, changing its size while its iterator is active. For a built-in dict, advancing that iterator after the deletion raises RuntimeError: dictionary changed size during iteration. The supplied diff also shows that the previous list(values) snapshot was replaced by live iteration, removing the protection against this failure."
+          },
+          "reproduction_status": "not_attempted",
+          "patch_status": "not_requested",
+          "patch_id": null,
+          "proposed_remedy": "Restore snapshot iteration, for example `for key in list(values):`, before deleting entries. Add a focused test with one or multiple `None` values that verifies completion and the resulting dictionary."
+        }
+      ]
+    }
+  ],
+  "original_corpus_hash": "b9d4be93d28266423cf3fd3ce11b0283a8d95a90976b39fc382811d8a46c7f33",
+  "original_report_sha256": "5efa45edb19815fcaa795834f9861f9be972313b2ee1d9d02ab38c4c4b2c77d2",
+  "purpose": "Known-case recovery/regression retest; not an untouched heldout estimate"
+}

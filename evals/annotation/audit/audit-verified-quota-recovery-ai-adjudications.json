@@ -1,0 +1,38 @@
+[
+  {
+    "finding_id": "bb85378e-5bb8-42d4-99e7-addd1433cc11",
+    "issue_id": "reject-propagation",
+    "reason": "The function no longer returns task(); await save(task) cannot observe completion or rejection.",
+    "reviewer": "Codex AI implementing assistant, not independent human"
+  },
+  {
+    "finding_id": "d15151e2-f276-40c7-8418-a712e68f0b74",
+    "issue_id": "synchronous-task-input",
+    "reason": "For a task returning 7, calling .catch on its return raises TypeError; the base returns 7.",
+    "reviewer": "Codex AI implementing assistant, not independent human"
+  },
+  {
+    "finding_id": "99a0c193-59a8-4eff-9ed3-0bfb5b094227",
+    "issue_id": "assignment-contract",
+    "reason": "The explicitly number-typed initializer is the string three, not a number.",
+    "reviewer": "Codex AI implementing assistant, not independent human"
+  },
+  {
+    "finding_id": "80676b77-7a52-4242-8f22-eabadbfd5d21",
+    "issue_id": "assignment-contract",
+    "reason": "Same string-to-number assignment mismatch; counted as duplicate noise, not a second issue.",
+    "reviewer": "Codex AI implementing assistant, not independent human"
+  },
+  {
+    "finding_id": "c26a00d7-08c7-4abc-8c1d-905bc32e0da2",
+    "issue_id": "precision-money",
+    "reason": "For 0.29, binary multiplication truncates to 28 while Decimal conversion yields 29.",
+    "reviewer": "Codex AI implementing assistant, not independent human"
+  },
+  {
+    "finding_id": "e94b977f-0c63-49d4-b9e6-63805047a810",
+    "issue_id": "numeric-string-input",
+    "reason": "The base accepts 1.23 as a string; string repetition followed by int conversion fails in changed code.",
+    "reviewer": "Codex AI implementing assistant, not independent human"
+  }
+]

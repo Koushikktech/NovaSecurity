@@ -1,0 +1,545 @@
+{
+  "run": {
+    "id": "870716db-c914-49e3-9f04-b00ea8a0a6ba",
+    "owner_session": "anonymous",
+    "input_mode": "compare",
+    "canonical_repo": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-b7l4m98h",
+    "review_mode": "compare",
+    "review_depth": "quick",
+    "pr_number": null,
+    "pr_title": null,
+    "base_sha": "969ba2daf85d2ed9789b18bb867d17524d92abf4",
+    "head_sha": "07192bb14d8e5e0df2feb7367dcdb32218bdcb41",
+    "merge_base_sha": null,
+    "config_version": "1.0.0",
+    "provider": "gemini",
+    "model_id": "gemini-3.6-flash",
+    "status": "partial",
+    "stage_statuses": {
+      "ingestion": "succeeded",
+      "static_analysis": "succeeded",
+      "graph_indexing": "succeeded",
+      "gemini_review": "succeeded",
+      "challenge": "failed",
+      "validation": "succeeded"
+    },
+    "findings_count": {
+      "total": 2,
+      "security": 0,
+      "bug": 2,
+      "style": 0
+    },
+    "coverage": {
+      "run_config": {
+        "version": "3",
+        "models": {
+          "review": "gemini-3.6-flash",
+          "patch": "gemini-3.6-flash",
+          "verify_reasoning": "gemini-3.6-flash"
+        },
+        "strategy": "verified",
+        "model": null,
+        "thinking": "low",
+        "max_attempts": 2,
+        "max_model_calls": 8,
+        "max_tool_calls": 24,
+        "deadline_seconds": 180,
+        "investigation_rounds": 3
+      },
+      "resumed_from": "3f01b343-6323-42ca-80c1-cbcba777adea",
+      "target": {
+        "mode": "compare",
+        "depth": "quick",
+        "repository": "/private/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-b7l4m98h",
+        "input": "/var/folders/zc/n6n55mmj0r3fz3nq08m_q15w0000gn/T/proofline-bench-b7l4m98h",
+        "comparison": "exact base to head",
+        "base_sha": "969ba2daf85d2ed9789b18bb867d17524d92abf4",
+        "head_sha": "07192bb14d8e5e0df2feb7367dcdb32218bdcb41",
+        "revision_label": "07192bb14d8e5e0df2feb7367dcdb32218bdcb41"
+      },
+      "snapshot_digest": "f2100bb0ef27bccbf800c9e5fbc7fe24b43ad5a4c7f68c4de18d8c30a849f1de",
+      "total_files": 1,
+      "source_files": [
+        "src/module.py"
+      ],
+      "unsupported_files": [],
+      "scope_note": "Full snapshot checks with base/head change context",
+      "repository_policy_source": "base_snapshot",
+      "repository_policy": {
+        "exclude": [],
+        "focus": [],
+        "verification_profile": null
+      },
+      "excluded_files": [],
+      "python_files": 1,
+      "static_tools": {
+        "ruff": {
+          "tool": "ruff",
+          "version": "0.17.3",
+          "status": "executed",
+          "count": 1,
+          "error": null
+        },
+        "bandit": {
+          "tool": "bandit",
+          "version": "1.9.4",
+          "status": "executed",
+          "count": 0,
+          "error": null
+        }
+      },
+      "baseline_static_tools": {
+        "ruff": {
+          "tool": "ruff",
+          "version": "0.17.3",
+          "status": "executed",
+          "count": 0,
+          "error": null
+        },
+        "bandit": {
+          "tool": "bandit",
+          "version": "1.9.4",
+          "status": "executed",
+          "count": 0,
+          "error": null
+        }
+      },
+      "javascript": {
+        "status": "skipped",
+        "reason": "No JavaScript/TypeScript files"
+      },
+      "test_gaps": [
+        {
+          "path": "src/module.py",
+          "status": "no_matching_test_found",
+          "suggestion": "Exercise changed behavior in src/module.py, including empty input, error propagation and an ordinary successful call. This is a retrieval gap, not proof of missing coverage."
+        }
+      ],
+      "changed_files": [
+        "src/module.py"
+      ],
+      "diff": "diff --git a/src/module.py b/src/module.py\n--- a/src/module.py\n+++ b/src/module.py\n@@ -1,4 +1,3 @@\n-def collect(item, items=None):\n-    items = [] if items is None else items\n+def collect(item, items=[]):\n     items.append(item)\n     return items\n",
+      "language_index": {},
+      "python_index_errors": {},
+      "graph_nodes": 1,
+      "graph_edges": 0,
+      "context": {
+        "selected": [
+          "src/module.py"
+        ],
+        "omitted": [],
+        "selection": "bounded lexical imports/callers; unresolved relationships are hints"
+      },
+      "repository_map": {
+        "snapshot": "e45e218d4837f66f5191220ed17b63cf0e51b253f48c4f4434373c208f7620c9",
+        "files": [
+          "src/module.py"
+        ],
+        "symbols": [
+          {
+            "id": "src/module.py:1:collect",
+            "name": "collect",
+            "path": "src/module.py",
+            "start": 1,
+            "end": 3
+          }
+        ],
+        "changed_symbols": [
+          {
+            "id": "src/module.py:1:collect",
+            "name": "collect",
+            "path": "src/module.py",
+            "start": 1,
+            "end": 3
+          }
+        ],
+        "references": [],
+        "limitations": "Symbols are parsed; text references are retrieval hints, not resolved call edges"
+      },
+      "model_review_error": null,
+      "review_summary": "The PR introduces a classic Python anti-pattern by substituting a safe `items=None` default parameter check with a mutable default argument `items=[]`, which causes state leak across separate calls.",
+      "challenge_error": "Gemini generation failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.6-flash, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\\nPlease retry in 49.762229842s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '49s'}]}}",
+      "investigation": {
+        "model_calls": 7,
+        "tool_calls": 3,
+        "trace": [
+          {
+            "event_type": "model_request_started",
+            "stage": "investigate_review",
+            "request_id": "de77c4fb95f76060aedd3f74844c82b75ff1f34016d8a593b2002ec95f44e210",
+            "call": 1
+          },
+          {
+            "event_type": "model_request_completed",
+            "stage": "investigate_review",
+            "request_id": "cached_content_token_count",
+            "model": "gemini-3.6-flash",
+            "usage": {
+              "prompt_tokens": 675,
+              "candidate_tokens": 48,
+              "total_tokens": 751,
+              "cached_content_token_count": 0,
+              "cost_estimated_usd": null
+            },
+            "retries": 1,
+            "error": ""
+          },
+          {
+            "event_type": "checkpoint_saved",
+            "stage": "investigate_review",
+            "key": "cached_content_token_count"
+          },
+          {
+            "event_type": "tool_started",
+            "tool": {
+              "name": "find_related_tests",
+              "query": "",
+              "path": "src/module.py",
+              "start_line": 1,
+              "end_line": 100
+            },
+            "role": "review"
+          },
+          {
+            "event_type": "tool_completed",
+            "observation": {
+              "snapshot": "e45e218d4837f66f5191220ed17b63cf0e51b253f48c4f4434373c208f7620c9",
+              "tool": {
+                "name": "find_related_tests",
+                "query": "",
+                "path": "src/module.py",
+                "start_line": 1,
+                "end_line": 100
+              },
+              "output": "{\"paths\": []}"
+            },
+            "role": "review"
+          },
+          {
+            "event_type": "model_request_started",
+            "stage": "investigate_review",
+            "request_id": "937523aa76f6496b8052b164959e89f57e4758b99b6ae2dcbbc4cc0c75c4cf5c",
+            "call": 2
+          },
+          {
+            "event_type": "model_request_completed",
+            "stage": "investigate_review",
+            "request_id": "cached_content_token_count",
+            "model": "gemini-3.6-flash",
+            "usage": {
+              "prompt_tokens": 797,
+              "candidate_tokens": 42,
+              "total_tokens": 985,
+              "cached_content_token_count": 0,
+              "cost_estimated_usd": null
+            },
+            "retries": 0,
+            "error": ""
+          },
+          {
+            "event_type": "checkpoint_saved",
+            "stage": "investigate_review",
+            "key": "cached_content_token_count"
+          },
+          {
+            "event_type": "tool_started",
+            "tool": {
+              "name": "search_code",
+              "query": "collect",
+              "path": "",
+              "start_line": 1,
+              "end_line": 100
+            },
+            "role": "review"
+          },
+          {
+            "event_type": "tool_completed",
+            "observation": {
+              "snapshot": "e45e218d4837f66f5191220ed17b63cf0e51b253f48c4f4434373c208f7620c9",
+              "tool": {
+                "name": "search_code",
+                "query": "collect",
+                "path": "",
+                "start_line": 1,
+                "end_line": 100
+              },
+              "output": "{\"matches\": [{\"path\": \"src/module.py\", \"line\": 1, \"text\": \"def collect(item, items=[]):\", \"relationship\": \"lexical_hint\"}]}"
+            },
+            "role": "review"
+          },
+          {
+            "event_type": "model_request_started",
+            "stage": "investigate_review",
+            "request_id": "58f990db3afcd5d2fa68daca5c8632437f6f855b5eb70ccbbee2616b6fd89985",
+            "call": 3
+          },
+          {
+            "event_type": "model_request_completed",
+            "stage": "investigate_review",
+            "request_id": "cached_content_token_count",
+            "model": "gemini-3.6-flash",
+            "usage": {
+              "prompt_tokens": 952,
+              "candidate_tokens": 15,
+              "total_tokens": 1071,
+              "cached_content_token_count": 0,
+              "cost_estimated_usd": null
+            },
+            "retries": 0,
+            "error": ""
+          },
+          {
+            "event_type": "checkpoint_saved",
+            "stage": "investigate_review",
+            "key": "cached_content_token_count"
+          },
+          {
+            "event_type": "model_request_started",
+            "stage": "review",
+            "request_id": "529295fa1f483ace53a9c17614077497770beda2a9b52cffce3c0aff3eddc757",
+            "call": 4
+          },
+          {
+            "event_type": "model_request_completed",
+            "stage": "review",
+            "request_id": "cached_content_token_count",
+            "model": "gemini-3.6-flash",
+            "usage": {
+              "prompt_tokens": 938,
+              "candidate_tokens": 365,
+              "total_tokens": 1303,
+              "cached_content_token_count": 0,
+              "cost_estimated_usd": null
+            },
+            "retries": 0,
+            "error": ""
+          },
+          {
+            "event_type": "checkpoint_saved",
+            "stage": "review",
+            "key": "cached_content_token_count"
+          },
+          {
+            "event_type": "model_request_started",
+            "stage": "investigate_verify_reasoning",
+            "request_id": "6fba8be11ed54eb833796a3b75622667da63cecd70c7489b7a35d00f9c269099",
+            "call": 5
+          },
+          {
+            "event_type": "model_request_completed",
+            "stage": "investigate_verify_reasoning",
+            "request_id": "cached_content_token_count",
+            "model": "gemini-3.6-flash",
+            "usage": {
+              "prompt_tokens": 447,
+              "candidate_tokens": 66,
+              "total_tokens": 546,
+              "cached_content_token_count": 0,
+              "cost_estimated_usd": null
+            },
+            "retries": 0,
+            "error": ""
+          },
+          {
+            "event_type": "checkpoint_saved",
+            "stage": "investigate_verify_reasoning",
+            "key": "cached_content_token_count"
+          },
+          {
+            "event_type": "tool_started",
+            "tool": {
+              "name": "read_file",
+              "query": "",
+              "path": "src/module.py",
+              "start_line": 1,
+              "end_line": 10
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "tool_completed",
+            "observation": {
+              "snapshot": "e45e218d4837f66f5191220ed17b63cf0e51b253f48c4f4434373c208f7620c9",
+              "tool": {
+                "name": "read_file",
+                "query": "",
+                "path": "src/module.py",
+                "start_line": 1,
+                "end_line": 10
+              },
+              "output": "{\"path\": \"src/module.py\", \"start\": 1, \"text\": \"1: def collect(item, items=[]):\\n2:     items.append(item)\\n3:     return items\"}"
+            },
+            "role": "verify_reasoning"
+          },
+          {
+            "event_type": "model_request_started",
+            "stage": "investigate_verify_reasoning",
+            "request_id": "421bd0a03a18a1455cba60cb36e374677f78cacb7d9739c33d72a4098b19cf29",
+            "call": 6
+          },
+          {
+            "event_type": "model_request_failed",
+            "stage": "investigate_verify_reasoning",
+            "request_id": "cached_content_token_count",
+            "model": "gemini-3.6-flash",
+            "usage": {
+              "prompt_tokens": 0,
+              "candidate_tokens": 0,
+              "total_tokens": 0,
+              "cached_content_token_count": 0,
+              "cost_estimated_usd": null
+            },
+            "retries": 1,
+            "error": "Gemini generation failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.6-flash, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\\nPlease retry in 51.729031777s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.6-flash', 'location': 'global'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '51s'}]}}"
+          },
+          {
+            "event_type": "model_request_started",
+            "stage": "challenge",
+            "request_id": "7127ca59c4d45e861ecb322a560141a4bf6f06fb70d39da103e8b2cd92991de0",
+            "call": 7
+          },
+          {
+            "event_type": "model_request_failed",
+            "stage": "challenge",
+            "request_id": "cached_content_token_count",
+            "model": "gemini-3.6-flash",
+            "usage": {
+              "prompt_tokens": 0,
+              "candidate_tokens": 0,
+              "total_tokens": 0,
+              "cached_content_token_count": 0,
+              "cost_estimated_usd": null
+            },
+            "retries": 1,
+            "error": "Gemini generation failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.6-flash, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\\nPlease retry in 49.762229842s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '49s'}]}}"
+          }
+        ]
+      }
+    },
+    "usage": {
+      "prompt_tokens": 3809,
+      "candidate_tokens": 536,
+      "total_tokens": 4656,
+      "cached_content_token_count": 0,
+      "cost_estimated_usd": null
+    },
+    "artifacts": [],
+    "errors": [],
+    "started_at": "2026-11-01T09:22:51.979591+00:00",
+    "completed_at": "2026-11-01T09:23:10.284912+00:00"
+  },
+  "findings": [
+    {
+      "id": "88b58e91-23de-49a0-abc3-4ccc9987b033",
+      "run_id": "870716db-c914-49e3-9f04-b00ea8a0a6ba",
+      "stable_fingerprint": "bcbb5f405d685b88df332606",
+      "category": "bug",
+      "rule_id": "proofline:mutable-default-argument",
+      "cwe_id": null,
+      "title": "Mutable default argument retains state across calls",
+      "explanation": "In Python, default parameter values are evaluated once when the function definition is executed. Using `items=[]` causes all calls to `collect` that rely on the default argument to share and mutate the same list object across function invocations.",
+      "user_impact": "Subsequent calls to `collect(item)` without providing the `items` argument will unexpectedly return a list containing items accumulated from previous invocations rather than a fresh single-element list.",
+      "severity": "high",
+      "primary_location": {
+        "path": "src/module.py",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "07192bb14d8e5e0df2feb7367dcdb32218bdcb41",
+        "snippet": "def collect(item, items=[]):"
+      },
+      "related_locations": [],
+      "change_relation": "changed_context",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "ff6634a5-2b3e-4a27-8d97-0789ce5e0ede",
+          "kind": "gemini_review",
+          "tool_or_profile": "gemini-3.6-flash",
+          "input_revision": "07192bb14d8e5e0df2feb7367dcdb32218bdcb41",
+          "command": null,
+          "exit_code": null,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Calling `collect(a)` followed by `collect(b)` without passing an explicit `items` argument.",
+          "duration_ms": 0,
+          "created_at": "2026-11-01T09:23:04.364055+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "gemini_review"
+      ],
+      "assumptions": [],
+      "limitations": [],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "contextual_assessment",
+      "evidence_status": "unassessed",
+      "verification_assessment": {},
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Revert to using `items=None` as default and initialize `items = [] if items is None else items` inside the function body."
+    },
+    {
+      "id": "2fabed52-ae6a-40b4-aec0-4d7393ca1325",
+      "run_id": "870716db-c914-49e3-9f04-b00ea8a0a6ba",
+      "stable_fingerprint": "4d1793cc73a08b0c25a65db6",
+      "category": "bug",
+      "rule_id": "ruff:B006",
+      "cwe_id": null,
+      "title": "B006: Do not use mutable data structures for argument defaults",
+      "explanation": "Do not use mutable data structures for argument defaults",
+      "user_impact": "Style/lint conformance issue or non-security bug detected by static rule.",
+      "severity": "medium",
+      "primary_location": {
+        "path": "src/module.py",
+        "start_line": 1,
+        "end_line": 1,
+        "side": "head",
+        "commit_sha": "07192bb14d8e5e0df2feb7367dcdb32218bdcb41",
+        "snippet": null
+      },
+      "related_locations": [],
+      "change_relation": "introduced",
+      "evidence_refs": [],
+      "evidence_items": [
+        {
+          "id": "ce43fc88-a352-487e-9efd-ed58373d3c78",
+          "kind": "static_analysis",
+          "tool_or_profile": "ruff",
+          "input_revision": "07192bb14d8e5e0df2feb7367dcdb32218bdcb41",
+          "command": [
+            "/Users/koushikk/Documents/Hackathons/Neural Strom/.venv/bin/ruff",
+            "check",
+            "--output-format=json",
+            "--isolated",
+            "--select",
+            "E,F,B",
+            "."
+          ],
+          "exit_code": 1,
+          "stdout_hash": null,
+          "stderr_hash": null,
+          "output_snippet": "Do not use mutable data structures for argument defaults",
+          "duration_ms": 0,
+          "created_at": "2026-11-01T09:22:52.015109+00:00"
+        }
+      ],
+      "analysis_sources": [
+        "ruff"
+      ],
+      "assumptions": [],
+      "limitations": [],
+      "disposition": "open",
+      "disposition_reason": null,
+      "analysis_status": "static_match",
+      "evidence_status": "unassessed",
+      "verification_assessment": {},
+      "reproduction_status": "not_attempted",
+      "patch_status": "not_requested",
+      "patch_id": null,
+      "proposed_remedy": "Replace with `None`; initialize within function"
+    }
+  ]
+}
