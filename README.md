@@ -27,7 +27,9 @@ Actual saved checkout run: AI review, a model-generated caller repair, and the s
 
 [Detailed comparison, noise and limitations](docs/audit-results.md) · [Audit fixes and remaining evidence](docs/audit-closure.md) · [Evaluation protocol](evals/README.md). Full raw reports remain available; incomplete results are not relabeled successful.
 
-[Silent walkthrough MP4](videos/checkout-film/checkout-walkthrough.mp4) · [Submission package](docs/submission-package.md) · [Narration guide](docs/final-narration.md)
+[Animated hackathon film](videos/proofline-commercial/proofline-hackathon-music.mp4) · [Narration script](videos/proofline-commercial/NARRATION.md) · [Submission package](docs/submission-package.md)
+
+The 100-second film combines original motion graphics with actual recorded checkout evidence. It includes a quiet, credited music bed; add your narration before uploading. [Music credit and upload description](videos/proofline-commercial/UPLOAD-DESCRIPTION.md).
 
 ## Working workflow
 

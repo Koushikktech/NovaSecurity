@@ -1,0 +1,1 @@
+{"name":"proofline-commercial","private":true,"type":"module","scripts":{"check":"npx --yes hyperframes@0.9.9 check","render":"npx --yes hyperframes@0.9.9 render"}}

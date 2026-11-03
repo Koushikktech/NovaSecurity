@@ -1,4 +1,8 @@
-# Checkout recording walkthrough
+# Hackathon film and app walkthrough
+
+The main film is `videos/proofline-commercial/proofline-hackathon-music.mp4`: 100 seconds, 1920×1080, 30 fps, animated explanations and actual recorded checkout evidence. Narrate using `videos/proofline-commercial/NARRATION.md`. Add the supplied music attribution from `videos/proofline-commercial/UPLOAD-DESCRIPTION.md` to the public upload description. Use `proofline-hackathon-clean.mp4` for a separate audio mix. The first 80 seconds explain the bug, investigation, evidence, patch and protected tests; the final 20 seconds show the app and review scopes.
+
+## In-app walkthrough
 
 Open `/showcase`. It replays the real November 3 end-to-end authored checkout case and uses no inference during replay. The active product is available at `/review`.
 
