@@ -1,0 +1,191 @@
+{
+  "symbols": [
+    {
+      "id": "repositories/expenses.py::ExpenseRepository",
+      "name": "ExpenseRepository",
+      "module": "repositories/expenses.py",
+      "scope_path": [],
+      "kind": "class",
+      "start_line": 5,
+      "end_line": 15,
+      "parameters": [],
+      "docstring": null,
+      "calls": []
+    },
+    {
+      "id": "repositories/expenses.py::ExpenseRepository::__init__",
+      "name": "__init__",
+      "module": "repositories/expenses.py",
+      "scope_path": [
+        "ExpenseRepository"
+      ],
+      "kind": "method",
+      "start_line": 7,
+      "end_line": 8,
+      "parameters": [
+        "self",
+        "db_conn"
+      ],
+      "docstring": null,
+      "calls": []
+    },
+    {
+      "id": "repositories/expenses.py::ExpenseRepository::search_user_expenses",
+      "name": "search_user_expenses",
+      "module": "repositories/expenses.py",
+      "scope_path": [
+        "ExpenseRepository"
+      ],
+      "kind": "method",
+      "start_line": 10,
+      "end_line": 15,
+      "parameters": [
+        "self",
+        "user",
+        "query"
+      ],
+      "docstring": null,
+      "calls": [
+        "self.conn.cursor",
+        "cursor.execute",
+        "cursor.fetchall"
+      ]
+    },
+    {
+      "id": "routes/search.py::handle_search_request",
+      "name": "handle_search_request",
+      "module": "routes/search.py",
+      "scope_path": [],
+      "kind": "function",
+      "start_line": 6,
+      "end_line": 10,
+      "parameters": [
+        "service",
+        "user",
+        "query"
+      ],
+      "docstring": null,
+      "calls": [
+        "service.search",
+        "len"
+      ]
+    },
+    {
+      "id": "services/search.py::SearchService",
+      "name": "SearchService",
+      "module": "services/search.py",
+      "scope_path": [],
+      "kind": "class",
+      "start_line": 5,
+      "end_line": 16,
+      "parameters": [],
+      "docstring": null,
+      "calls": []
+    },
+    {
+      "id": "services/search.py::SearchService::__init__",
+      "name": "__init__",
+      "module": "services/search.py",
+      "scope_path": [
+        "SearchService"
+      ],
+      "kind": "method",
+      "start_line": 7,
+      "end_line": 8,
+      "parameters": [
+        "self",
+        "repo"
+      ],
+      "docstring": null,
+      "calls": []
+    },
+    {
+      "id": "services/search.py::SearchService::search",
+      "name": "search",
+      "module": "services/search.py",
+      "scope_path": [
+        "SearchService"
+      ],
+      "kind": "method",
+      "start_line": 10,
+      "end_line": 16,
+      "parameters": [
+        "self",
+        "user",
+        "query",
+        "tags"
+      ],
+      "docstring": null,
+      "calls": [
+        "list",
+        "tags.append",
+        "self.repo.search_user_expenses",
+        "list"
+      ]
+    }
+  ],
+  "resolved_call_edges": [],
+  "imports": {
+    "__init__.py": [],
+    "repositories/expenses.py": [
+      {
+        "module": "__future__",
+        "imported_name": "annotations",
+        "alias": "annotations"
+      },
+      {
+        "module": "sqlite3",
+        "imported_name": "",
+        "alias": "sqlite3"
+      },
+      {
+        "module": "typing",
+        "imported_name": "Any",
+        "alias": "Any"
+      }
+    ],
+    "repositories/__init__.py": [],
+    "routes/__init__.py": [],
+    "routes/search.py": [
+      {
+        "module": "__future__",
+        "imported_name": "annotations",
+        "alias": "annotations"
+      },
+      {
+        "module": "os",
+        "imported_name": "",
+        "alias": "os"
+      },
+      {
+        "module": "typing",
+        "imported_name": "Any",
+        "alias": "Any"
+      },
+      {
+        "module": "services.search",
+        "imported_name": "SearchService",
+        "alias": "SearchService"
+      }
+    ],
+    "services/__init__.py": [],
+    "services/search.py": [
+      {
+        "module": "__future__",
+        "imported_name": "annotations",
+        "alias": "annotations"
+      },
+      {
+        "module": "typing",
+        "imported_name": "Any",
+        "alias": "Any"
+      },
+      {
+        "module": "repositories.expenses",
+        "imported_name": "ExpenseRepository",
+        "alias": "ExpenseRepository"
+      }
+    ]
+  },
+  "limitation": "Dynamic receiver dispatch is not completely resolved. Film dashed paths are source relationship illustrations, not a recorded taint trace."
+}
